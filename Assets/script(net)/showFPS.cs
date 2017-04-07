@@ -11,6 +11,8 @@ public class showFPS : MonoBehaviour {
 
     void Start()
     {
+        int sbtask = 1;
+        Debug.Log(sbtask);
         if (!m_FPS)
         {
             enabled = false;
