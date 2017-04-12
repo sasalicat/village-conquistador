@@ -39,6 +39,7 @@ public class RoomManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Debug.Log("player type is" + KBEngineApp.app.player().GetType());
         if (account.RoomInitData != null)//第一次进入房间时,同步资料
         {
             Debug.Log("data type is" + (account.RoomInitData).GetType());
@@ -65,6 +66,10 @@ public class RoomManager : MonoBehaviour {
         while (account.RoomChangeList.Count > 0)//如果有从服务器传来的资料更新
         {
             Dictionary<string, object> dataSingle = account.RoomChangeList[0];
+
+            Debug.Log("in while roleRoomId" + (sbyte)dataSingle["roleRoomId"]);
+            Debug.Log("in while roleKind" + (sbyte)dataSingle["roleKind"]);
+
             object nameobj;
             if (dataSingle.TryGetValue("name", out nameobj))
             {

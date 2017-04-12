@@ -46,8 +46,15 @@ public class HallManager : MonoBehaviour {
     }
     public void enterRoom(int roomId)
     {
-        byte rolekind = GameObject.Find("client").GetComponent<dataRegister>().roleList[0].roleKind;
-        ((Account)KBEngine.KBEngineApp.app.player()).baseCall("enterRoomReq",new object[]{roomId,(sbyte)rolekind});
+        dataRegister register = GameObject.Find("client").GetComponent<dataRegister>();
+        byte rolekind = register.roleList[0].roleKind;
+        List<sbyte> temp = register.roleList[0].equipmentIdList;
+        List<object> objList = new List<object>();
+        for (int i = 0; i < temp.Count; i++)
+        {
+            objList.Add(temp[i]);
+        }
+        ((Account)KBEngine.KBEngineApp.app.player()).baseCall("enterRoomReq",new object[]{roomId,(sbyte)rolekind,objList});
         JumpRoomScene();
     }
    

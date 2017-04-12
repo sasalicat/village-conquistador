@@ -8,9 +8,9 @@ public class roomShow : MonoBehaviour {
     public class roomData
     {
         public string name;
-        public string playerNum;
+        public sbyte playerNum;
         public int id;
-        public roomData(int id, string name,string num)
+        public roomData(int id, string name,sbyte num)
         {
             this.id = id;
             this.name = name;
@@ -20,7 +20,7 @@ public class roomShow : MonoBehaviour {
     public GameObject single;
     public GameObject Content;
     public GameObject[] roomList;
-    public bool[] roomLocationPoor;//用於獲得最上方的房間空位
+    public int[] roomLocationPoor;//用於獲得最上方的房間空位,沒有房間的項目的值會是-1,否則是該房間的roomid
     public List<roomData> handleLine = new List<roomData>();
     public dataRegister register;
     public HallManager manager;
@@ -28,36 +28,64 @@ public class roomShow : MonoBehaviour {
 	void Start () {
         register = GameObject.Find("client").GetComponent<dataRegister>();
         roomList = new GameObject[20];
-        roomLocationPoor = new bool[20];
+        roomLocationPoor = new int[20];
+        for(int i = 0; i < 20; i++)
+        {
+            roomLocationPoor[i] = -1;
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
         while (handleLine.Count > 0)
         {
-
-            if (roomList[handleLine[0].id]==null) {
-                Debug.Log("count is" + handleLine.Count + "0`s name is " + handleLine[0].name);
-                AddRoom(handleLine[0].id,handleLine[0].name, handleLine[0].playerNum);
+            roomData firstData= handleLine[0];
+            if (roomList[firstData.id]==null) {
+                Debug.Log("count is" + handleLine.Count + "0`s name is " + firstData.name);
+                if(firstData.playerNum>0)
+                    AddRoom(firstData.id,firstData.name, firstData.playerNum.ToString());
                 
                 
             }
             else
             {
-                UpdateRoom_name(handleLine[0].id, handleLine[0].name);
-                UpdateRoom_personNum(handleLine[0].id, handleLine[0].playerNum);
+                if (firstData.playerNum <= 0)//當人數為0時刪除房間
+                {
+                    Destroy(roomList[firstData.id]);
+                    roomList[firstData.id] = null;
+                    for (int i = 0; i < roomLocationPoor.Length; i++) {
+                        if(roomLocationPoor[i]== firstData.id)
+                        {
+                            roomLocationPoor[i] = -1;
+                        }
+                    }
+
+                }
+                else { 
+                UpdateRoom_name(firstData.id, firstData.name);
+                UpdateRoom_personNum(firstData.id, firstData.playerNum.ToString());
+
+                }
             }
-            handleLine.Remove(handleLine[0]);
+
+            handleLine.Remove(firstData);
         }
 	}
     public void OnAddClick()
     {
         object[] param = new object[1];
         param[0] = "我差不多已經是條鹹魚了";
-        ((Account)(KBEngineApp.app.player())).baseCall("createRoom", new object[] { "我差不多已經是條鹹魚了", register.roleList[0].roleKind });
+        List<sbyte> temp = register.roleList[0].equipmentIdList;
+        List<object> objList = new List<object>();
+        for(int i = 0; i < temp.Count; i++)
+        {
+            objList.Add(temp[i]);
+        }
+
+        ((Account)(KBEngineApp.app.player())).baseCall("createRoom", new object[] { "我差不多已經是條鹹魚了", register.roleList[0].roleKind,objList});
         manager.JumpRoomScene();
     }
-    public void AddRoomReq(int id,string name, string num)
+    public void AddRoomReq(int id,string name, sbyte num)
     {
         handleLine.Add(new roomData(id,name,num));
     }
@@ -66,10 +94,10 @@ public class roomShow : MonoBehaviour {
         int initLocationIndex=-1;
         for(int i = 0; i < 20; i++)//用一個回圈檢索locationpoor找到第一個空位
         {
-            if(roomLocationPoor[i] == false)
+            if(roomLocationPoor[i] == -1)
             {
                 initLocationIndex = i;
-                roomLocationPoor[i] = true;
+                roomLocationPoor[i] = id;
                 break;
             }
 
