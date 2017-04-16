@@ -24,6 +24,7 @@ public class roomShow : MonoBehaviour {
     public List<roomData> handleLine = new List<roomData>();
     public dataRegister register;
     public HallManager manager;
+
 	// Use this for initialization
 	void Start () {
         register = GameObject.Find("client").GetComponent<dataRegister>();

@@ -8,6 +8,7 @@
     {
         public float lastUpdateTime = 0;
         public HallManager hallManager;
+        public RoomManager roomManager;
         public delegate void addRoom(string name, string num);
         public Dictionary<string, object> RoomInitData;//用于初始化房间的列表
         public List<Dictionary<string, object>> RoomChangeList;
@@ -76,6 +77,10 @@
         public void AddARoomInfo(Dictionary<string, object> info)//由于python不能overload的悲剧产物
         {
             this.RoomChangeList.Add(info);
+        }
+        public void changeToWar()
+        {
+            roomManager.change = true;
         }
     }
 }

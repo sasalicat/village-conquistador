@@ -21,10 +21,9 @@ public class RoomManager : MonoBehaviour {
     public Account account;
     private IconStorage storage;
     private sbyte selfRoomId=-1;
-    public bool change=false;
     //public Sprite Icon;
-    // Use this for initialization
-    void Start () {
+	// Use this for initialization
+	void Start () {
         register = GameObject.Find("client").GetComponent<dataRegister>();
         account=((Account)KBEngine.KBEngineApp.app.player());
         for (int i = 0; i < MAX_MEMBER_NUM; i++)
@@ -36,8 +35,7 @@ public class RoomManager : MonoBehaviour {
         }
         //Icon= Resources.Load("a") as Sprite;
         storage = GetComponent<IconStorage>();
-        ((Account)KBEngineApp.app.player()).roomManager = this;
-    }
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -85,17 +83,14 @@ public class RoomManager : MonoBehaviour {
             account.RoomChangeList.RemoveAt(0);
            
         }
-        if (change)
-        {
-            Application.LoadLevel("warfield");
-        }  
+          
         
 		
 	}
     private void updateItem(int index, bool localPlayer, string name,bool ready,sbyte roleKind)
     {//這種方法適用於第一次生成.會setActive(Ture)
         Debug.Log("enter update");
-
+        register.PlayerInWar[(sbyte)data["roleRoomId"]] = new dataRegister.PlayerData((sbyte)data["roleKind"], (List<sbyte>)data["equipmentList"], (string)data["name"], selfRoomId == (sbyte)data["roleRoomId"]);
         if (localPlayer)//此角色為玩家的角色
         {
             ItemYouArray[index].SetActive(true);
