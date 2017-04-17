@@ -4,6 +4,7 @@ using UnityEngine;
 
 public delegate void on_attack();
 public delegate void on_take_damage();
+public delegate void up_press_on();
 public interface Controler
 {
 

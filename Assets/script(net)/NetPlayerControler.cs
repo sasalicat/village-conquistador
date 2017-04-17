@@ -5,17 +5,38 @@ using KBEngine;
 
 public class NetPlayerControler : MonoBehaviour,Controler {
 
-    Entity entity;
+    public Entity entity;
+    private Dictionary<string, KeyCode> keySetting;
+    void Start()
+    {
+        GameObject temp = GameObject.Find("keyTabel");
+        keySetting =temp.GetComponent<KeyRegister>().keySetting;
+    }
     void Update()
     {
         if (entity != null)
         {
-            transform.position = entity.position;
-            Debug.Log("up is"+KeyCode.UpArrow);
-            if (Input.GetKeyDown("w"))
+             entity.position=transform.position;
+            entity.direction = transform.eulerAngles;
+            //Debug.Log("up is"+KeyCode.UpArrow);
+            Vector3 changeV3 = new Vector3(0, 0, 0);
+            if (Input.GetKey(keySetting["up"]))
             {
-                entity.position.y += 1 * Time.deltaTime;
+                changeV3.y += 5 * Time.deltaTime;
             }
+            if (Input.GetKey(keySetting["left"]))
+            {
+                changeV3.x += 5 * Time.deltaTime;
+            }
+            if (Input.GetKey(keySetting["down"]))
+            {
+                changeV3.y -= 5 * Time.deltaTime;
+            }
+            if (Input.GetKey(keySetting["right"]))
+            {
+                changeV3.x -= 5 * Time.deltaTime;
+            }
+            transform.position += changeV3;
         }
 
     }

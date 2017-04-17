@@ -4,7 +4,7 @@ using UnityEngine;
 using KBEngine;
 
 public class NetControler : MonoBehaviour,Controler {
-    Entity entity;
+    public Entity entity;
     void Update()
     {
         if (entity != null)

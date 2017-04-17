@@ -17,7 +17,7 @@ public class NetManager : MonoBehaviour ,Manager {
     void Start () {
      
         KBEngine.Event.registerOut("onEnterWorld", this, "onEnterWorld");
-        KBEngine.Event.registerOut("onEnterSpace", this, "onEnterSpace");
+        //KBEngine.Event.registerOut("onEnterSpace", this, "onEnterSpace");
         objList = new GameObject[6];
         ((Player)KBEngineApp.app.player()).baseCall("onChangeToWar", new object[] { });
 	}
@@ -29,12 +29,23 @@ public class NetManager : MonoBehaviour ,Manager {
     public void onEnterWorld(Entity e)
     {
         Debug.Log("id " + e.id + "on Enter World");
-        Instantiate(roleparfab, e.position, Quaternion.Euler(e.direction));
+        GameObject newone = (GameObject)Instantiate(roleparfab, e.position, Quaternion.Euler(e.direction));
+        if (e.id == KBEngineApp.app.player().id)
+        {
+            NetPlayerControler control = newone.AddComponent<NetPlayerControler>();
+            control.entity = e;
+        }
+        else
+        {
+            NetControler control=newone.AddComponent<NetControler>();
+            control.entity = e;
+        }
     }
     public void onEnterSpace(Entity e)
     {
         Debug.Log("id " + e.id + "on Enter Space");
-        Instantiate(roleparfab, e.position, Quaternion.Euler(e.direction));
+        GameObject newone = (GameObject)Instantiate(roleparfab, e.position, Quaternion.Euler(e.direction));
+        newone.AddComponent<NetPlayerControler>();
     }
     public void PlayerInit(Entity e)
     {
