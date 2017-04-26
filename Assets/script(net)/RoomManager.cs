@@ -60,7 +60,13 @@ public class RoomManager : MonoBehaviour {
                 Debug.Log("ready" + (bool)((sbyte)data["ready"] > 0));
                 Debug.Log("name" + (string)data["name"]);
                 updateItem((sbyte)data["roleRoomId"], selfRoomId == (sbyte)data["roleRoomId"], (string)data["name"], (bool)((sbyte)data["ready"] > 0), (sbyte)data["roleKind"]);
-                
+                List<object> elist = (List<object>)data["equipmentList"];
+                List<sbyte> newlist = new List<sbyte>();
+                for(int index = 0; index < elist.Count; index++)
+                {
+                    newlist.Add((sbyte)elist[index]);
+                }
+                register.PlayerInWar[(sbyte)data["roleRoomId"]] = new dataRegister.PlayerData((sbyte)data["roleKind"],newlist,(string)data["name"],selfRoomId== (sbyte)data["roleRoomId"]);
                 
 
             }
@@ -76,10 +82,34 @@ public class RoomManager : MonoBehaviour {
             object nameobj;
             if (dataSingle.TryGetValue("name", out nameobj))//有新的玩家進入房間
             {
+                List<object> elist = (List<object>)dataSingle["equipmentList"];
+                List<sbyte> newlist = new List<sbyte>();
+                for (int index = 0; index < elist.Count; index++)
+                {
+                    newlist.Add((sbyte)elist[index]);
+                }
+                register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]] = new dataRegister.PlayerData((sbyte)dataSingle["roleKind"], newlist, (string)dataSingle["name"], selfRoomId == (sbyte)dataSingle["roleRoomId"]);
                 updateItem((sbyte)dataSingle["roleRoomId"], selfRoomId == (sbyte)dataSingle["roleRoomId"], (string)nameobj, (bool)((sbyte)dataSingle["ready"] > 0), (sbyte)dataSingle["roleKind"]);
+
             }
             else//改變某個現有玩家的資料
             {
+                if ((sbyte)dataSingle["roleKind"] < 0)
+                {
+                    register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]] = null;
+                }
+                else
+                {
+                    List<object> elist = (List<object>)dataSingle["equipmentList"];
+                    List<sbyte> newlist = new List<sbyte>();
+                    for (int index = 0; index < elist.Count; index++)
+                    {
+                        newlist.Add((sbyte)elist[index]);
+                    }
+                    register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]].role.roleKind = (sbyte)dataSingle["roleRoomId"];
+                    register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]].role.equipmentIdList = newlist;
+
+                }
                 updateItem((sbyte)dataSingle["roleRoomId"], selfRoomId == (sbyte)dataSingle["roleRoomId"], (bool)((sbyte)dataSingle["ready"] > 0), (sbyte)dataSingle["roleKind"]);
             }
             account.RoomChangeList.RemoveAt(0);

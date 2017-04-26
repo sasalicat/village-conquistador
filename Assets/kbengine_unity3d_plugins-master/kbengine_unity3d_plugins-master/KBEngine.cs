@@ -1951,8 +1951,8 @@
 				
 				if(z - System.Math.PI > 0.0)
 					z -= System.Math.PI * 2;
-				
-				bundle.writeFloat((float)x);
+                Dbg.DEBUG_MSG(dirHasChanged + ":in upate player direction is" + x + "," + y + "," + z);
+                bundle.writeFloat((float)x);
 				bundle.writeFloat((float)y);
 				bundle.writeFloat((float)z);
 				bundle.writeUint8((Byte)(playerEntity.isOnGround == true ? 1 : 0));
@@ -1996,7 +1996,8 @@
 					
 					if(z - System.Math.PI > 0.0)
 						z -= System.Math.PI * 2;
-					
+
+                    
 					bundle.writeFloat((float)x);
 					bundle.writeFloat((float)y);
 					bundle.writeFloat((float)z);

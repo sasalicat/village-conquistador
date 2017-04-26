@@ -5,6 +5,7 @@ using UnityEngine;
 public class dataRegister : MonoBehaviour {
     public class PlayerData
     {
+        public int entityId;
         public RoleData role;
         public string name;
         public bool islocal;//標記是不是本機玩家
@@ -24,6 +25,5 @@ public class dataRegister : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 }

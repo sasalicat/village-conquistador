@@ -5,6 +5,7 @@ using KBEngine;
 
 public class NetControler : MonoBehaviour,Controler {
     public Entity entity;
+
     void Update()
     {
         if (entity != null)

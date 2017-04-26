@@ -9,7 +9,7 @@ public class movement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //KBEngine.Event.registerOut("set_position", this, "set_position");
-        KBEngine.Event.registerOut("updatePosition", this, "updatePosition");
+       // KBEngine.Event.registerOut("updatePosition", this, "updatePosition");
         timeRecord = new Dictionary<int, float>();
        
 

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface Manager{
      GameObject[] getGameObjectList();
-
+    int getMaxNum();
 }
