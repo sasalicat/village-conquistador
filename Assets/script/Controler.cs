@@ -52,4 +52,5 @@ public interface Controler
     _on_keyleft_ing get_on_keyleft_ing();
     _on_keyleft_up get_on_keyleft_up();
 
+
 }

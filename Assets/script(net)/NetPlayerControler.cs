@@ -6,9 +6,17 @@ using KBEngine;
 public class NetPlayerControler : MonoBehaviour,Controler {
     public const float UPDATE_Z_INTERVAL = 0.1f;
     public Entity entity;
+    public sbyte roomNo;
     private int lastZ=0;
     private float timeInterval = 0;
     private Dictionary<string, KeyCode> keySetting;
+    private AnimatorTable action;
+    private bool upIng=false;
+    private bool leftIng = false;
+    private bool downIng= false;
+    private bool rightIng = false;
+    private Player player;
+
     _on_left_down on_left_down;
     _on_right_down on_right_down;
     _on_middle_down on_middle_down;
@@ -114,10 +122,16 @@ public class NetPlayerControler : MonoBehaviour,Controler {
     {
         GameObject temp = GameObject.Find("keyTabel");
         keySetting =temp.GetComponent<KeyRegister>().keySetting;
+        action = GetComponent<AnimatorTable>();
+        player = ((Player)KBEngineApp.app.player());
+        on_keyleft_down += onKeyLeftDown;
+        on_keydown_down += onKeyDownDown;
+        on_keyright_down += onKeyRightDown;
+        on_keyup_down += onKeyUpDown;
     }
     void OnEnable()
     {
-        transform.position = entity.position;
+        transform.position = entity.position;//在setActive时同步角色位置
     }
     void Update()
     {
@@ -144,24 +158,125 @@ public class NetPlayerControler : MonoBehaviour,Controler {
             entity.direction = transform.eulerAngles;
             //Debug.Log("up is"+KeyCode.UpArrow);
             Vector3 changeV3 = new Vector3(0, 0, 0);
+            if (Input.GetKeyDown(keySetting["up"]))
+            {
+                on_keyup_down();
+            }
+            if (Input.GetKeyDown(keySetting["left"]))
+            {
+                on_keyleft_down();
+            }
+            if (Input.GetKeyDown(keySetting["down"]))
+            {
+                on_keydown_down();
+            }
+            if (Input.GetKeyDown(keySetting["right"]))
+            {
+                on_keyright_down();
+            }
             if (Input.GetKey(keySetting["up"]))
             {
                 changeV3.y += 5 * Time.deltaTime;
+                on_keyup_ing();
             }
             if (Input.GetKey(keySetting["left"]))
             {
                 changeV3.x += 5 * Time.deltaTime;
+                on_keyleft_ing();
             }
             if (Input.GetKey(keySetting["down"]))
             {
                 changeV3.y -= 5 * Time.deltaTime;
+                on_keydown_ing();
             }
             if (Input.GetKey(keySetting["right"]))
             {
                 changeV3.x -= 5 * Time.deltaTime;
+                on_keyright_ing();
+            }
+            if (Input.GetKeyUp(keySetting["up"]))
+            {
+                
+                on_keyup_up();
+            }
+            if (Input.GetKeyUp(keySetting["left"]))
+            {
+                
+                on_keyleft_up();
+            }
+            if (Input.GetKeyUp(keySetting["down"]))
+            {
+               
+                on_keydown_up();
+            }
+            if (Input.GetKeyUp(keySetting["right"]))
+            {
+               
+                on_keyright_up();
             }
             transform.position += changeV3;
         }
 
+    }
+    //基本控制的
+    void onKeyUpDown()
+    {
+        player.baseCall("notify1", new object[] {roomNo,CodeTable.KEYUP_DOWN});
+        action.moveStart();
+        upIng = true;
+    }
+    void onKeyDownDown()
+    {
+        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_DOWN });
+        action.moveStart();
+        downIng = true;
+    }
+    void onKeyLeftDown()
+    {
+        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYLEFT_DOWN });
+        action.moveStart();
+        leftIng = true;
+    }
+    void onKeyRightDown()
+    {
+        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYRIGHT_DOWN});
+        action.moveStart();
+        rightIng = true;
+    }
+    void onKeyUpUp()
+    {
+        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYUP_UP });
+        upIng = false;
+        if (!upIng && !leftIng && !downIng && !rightIng)
+        {
+            action.moveEnd();
+        }
+     }
+    void onKeyDownUp()
+    {
+        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_UP });
+        downIng = false;
+        if (!upIng && !leftIng && !downIng && !rightIng)
+        {
+            action.moveEnd();
+        }
+    }
+    void onKeyLeftUp()
+    {
+        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYLEFT_UP });
+        leftIng = false;
+        if (!upIng && !leftIng && !downIng && !rightIng)
+        {
+            action.moveEnd();
+        }
+    }
+    void onKeyRightUp()
+    {
+        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYRIGHT_UP });
+        rightIng = false;
+        if (!upIng && !leftIng && !downIng && !rightIng)
+        {
+            action.moveEnd();
+        }
     }
 }

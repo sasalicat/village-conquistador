@@ -31,5 +31,56 @@
             
             manager.directionList.Add(new NetManager.dirPair(roomNo,(short)z));
         }
+        public void receive1(sbyte roomNo,sbyte code)
+        {
+            if (manager.register.PlayerInWar[roomNo].islocal)
+            {
+                Debug.LogError("in receive Type 1 roomNo" + roomNo + "is local player");
+                return;
+            }
+            switch (code)
+            {
+                case CodeTable.KEYUP_DOWN:
+                    {
+                        manager.controlerList[roomNo].get_on_keyup_down()();
+                        break;
+                    }
+                case CodeTable.KEYLEFT_DOWN:
+                    {
+                        manager.controlerList[roomNo].get_on_keyleft_down()();
+                        break;
+                    }
+                case CodeTable.KEYRIGHT_DOWN:
+                    {
+                        manager.controlerList[roomNo].get_on_keyright_down()();
+                        break;
+                    }
+                case CodeTable.KEYDOWN_DOWN:
+                    {
+                        manager.controlerList[roomNo].get_on_keydown_down()();
+                        break;
+                    }
+                case CodeTable.KEYUP_UP:
+                    {
+                        manager.controlerList[roomNo].get_on_keyup_up()();
+                        break;
+                    }
+                case CodeTable.KEYLEFT_UP:
+                    {
+                        manager.controlerList[roomNo].get_on_keyleft_up()();
+                        break;
+                    }
+                case CodeTable.KEYRIGHT_UP:
+                    {
+                        manager.controlerList[roomNo].get_on_keyright_up()();
+                        break;
+                    }
+                case CodeTable.KEYDOWN_UP:
+                    {
+                        manager.controlerList[roomNo].get_on_keydown_up()();
+                        break;
+                    }
+            }
+        }
     }
 }

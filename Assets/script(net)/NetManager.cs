@@ -7,6 +7,7 @@ using KBEngine;
 public class NetManager : MonoBehaviour ,Manager {
     private const int MAX_NUM = 6;
     private GameObject[] objList;
+    public NetControler[] controlerList;
     public GameObject roleparfab;
     public dataRegister register;
     public List<dirPair> directionList=new List<dirPair>();
@@ -40,6 +41,7 @@ public class NetManager : MonoBehaviour ,Manager {
 
             }
         }
+        controlerList = new NetControler[MAX_NUM];
         ((Player)KBEngineApp.app.player()).baseCall("onChangeToWar", new object[] { });
         ((Player)KBEngineApp.app.player()).manager = this;
     }
@@ -64,11 +66,15 @@ public class NetManager : MonoBehaviour ,Manager {
                 {
                     NetPlayerControler control = objList[i].AddComponent<NetPlayerControler>();
                     control.entity = e;
+                    control.roomNo = (sbyte)i
+                    
                 }
                 else
                 {
+
                     NetControler control = objList[i].AddComponent<NetControler>();
                     control.entity = e;
+                    controlerList[i] = control;
                 }
                 objList[i].SetActive(true);
                 break;
