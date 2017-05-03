@@ -8,6 +8,8 @@
     public class Player : Entity
     {
         public NetManager manager;
+        public Controler controler;
+        public sbyte roomNo;
         public override void __init__()
         {
             Debug.Log("KB: player init!!!");
@@ -27,60 +29,24 @@
         }
        public void updateZ(sbyte roomNo,short z)
         {
-            Debug.Log("update"+roomNo+":"+z);
+            //Debug.Log("update"+roomNo+":"+z);
             
             manager.directionList.Add(new NetManager.dirPair(roomNo,(short)z));
         }
         public void receive1(sbyte roomNo,sbyte code)
         {
-            if (manager.register.PlayerInWar[roomNo].islocal)
-            {
-                Debug.LogError("in receive Type 1 roomNo" + roomNo + "is local player");
-                return;
-            }
-            switch (code)
-            {
-                case CodeTable.KEYUP_DOWN:
-                    {
-                        manager.controlerList[roomNo].get_on_keyup_down()();
-                        break;
-                    }
-                case CodeTable.KEYLEFT_DOWN:
-                    {
-                        manager.controlerList[roomNo].get_on_keyleft_down()();
-                        break;
-                    }
-                case CodeTable.KEYRIGHT_DOWN:
-                    {
-                        manager.controlerList[roomNo].get_on_keyright_down()();
-                        break;
-                    }
-                case CodeTable.KEYDOWN_DOWN:
-                    {
-                        manager.controlerList[roomNo].get_on_keydown_down()();
-                        break;
-                    }
-                case CodeTable.KEYUP_UP:
-                    {
-                        manager.controlerList[roomNo].get_on_keyup_up()();
-                        break;
-                    }
-                case CodeTable.KEYLEFT_UP:
-                    {
-                        manager.controlerList[roomNo].get_on_keyleft_up()();
-                        break;
-                    }
-                case CodeTable.KEYRIGHT_UP:
-                    {
-                        manager.controlerList[roomNo].get_on_keyright_up()();
-                        break;
-                    }
-                case CodeTable.KEYDOWN_UP:
-                    {
-                        manager.controlerList[roomNo].get_on_keydown_up()();
-                        break;
-                    }
-            }
+            Debug.Log("this id is" + this.id + "player is" + KBEngineApp.app.player().id);
+            Dictionary<string, object> order = new Dictionary<string, object>();
+            order["code"] = code;
+            controler.addOrder(order);
+        }
+        public void receive2(sbyte roomNo,sbyte code,Vector3 mousePos)
+        {
+            Debug.Log("this id is" + this.id + "player is" + KBEngineApp.app.player().id);
+            Dictionary<string, object> order = new Dictionary<string, object>();
+            order["code"] = code;
+            order["directionZ"]= mousePos;
+            controler.addOrder(order);
         }
     }
 }

@@ -1951,7 +1951,7 @@
 				
 				if(z - System.Math.PI > 0.0)
 					z -= System.Math.PI * 2;
-                Dbg.DEBUG_MSG(dirHasChanged + ":in upate player direction is" + x + "," + y + "," + z);
+                //Dbg.DEBUG_MSG(dirHasChanged + ":in upate player direction is" + x + "," + y + "," + z);
                 bundle.writeFloat((float)x);
 				bundle.writeFloat((float)y);
 				bundle.writeFloat((float)z);

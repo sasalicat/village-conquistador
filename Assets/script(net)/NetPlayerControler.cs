@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using KBEngine;
+using System;
 
 public class NetPlayerControler : MonoBehaviour,Controler {
     public const float UPDATE_Z_INTERVAL = 0.1f;
@@ -118,16 +119,22 @@ public class NetPlayerControler : MonoBehaviour,Controler {
     {
         return on_right_down;
     }
-    void Start()
+     void Start()
     {
+
         GameObject temp = GameObject.Find("keyTabel");
         keySetting =temp.GetComponent<KeyRegister>().keySetting;
         action = GetComponent<AnimatorTable>();
         player = ((Player)KBEngineApp.app.player());
+        //添加控制器事件
         on_keyleft_down += onKeyLeftDown;
         on_keydown_down += onKeyDownDown;
         on_keyright_down += onKeyRightDown;
         on_keyup_down += onKeyUpDown;
+        on_keydown_up += onKeyDownUp;
+        on_keyup_up += onKeyUpUp;
+        on_keyleft_up += onKeyLeftUp;
+        on_keyright_up += onKeyRightUp;
     }
     void OnEnable()
     {
@@ -138,7 +145,7 @@ public class NetPlayerControler : MonoBehaviour,Controler {
         timeInterval += Time.deltaTime;
         int nowz = (int)transform.eulerAngles.z;
         Vector3 mousePos = Input.mousePosition;
-        Debug.Log(mousePos);
+        //Debug.Log(mousePos);
         mousePos.z = 19;
         mousePos= Camera.main.ScreenToWorldPoint(mousePos);
         mousePos.z = 0;
@@ -147,14 +154,15 @@ public class NetPlayerControler : MonoBehaviour,Controler {
         {
            
             short ans = (short)(nowz);
-            Debug.Log("Z change nowz is"+nowz+" ans is" + ans);
+            //Debug.Log("Z change nowz is"+nowz+" ans is" + ans);
             ((Player)entity).baseCall("updateZ", new object[] {ans});
+            
             timeInterval = 0;
             lastZ = nowz;
         }
         if (entity != null)
         {
-             entity.position=transform.position;
+            entity.position=transform.position;
             entity.direction = transform.eulerAngles;
             //Debug.Log("up is"+KeyCode.UpArrow);
             Vector3 changeV3 = new Vector3(0, 0, 0);
@@ -177,22 +185,22 @@ public class NetPlayerControler : MonoBehaviour,Controler {
             if (Input.GetKey(keySetting["up"]))
             {
                 changeV3.y += 5 * Time.deltaTime;
-                on_keyup_ing();
+                //on_keyup_ing();
             }
             if (Input.GetKey(keySetting["left"]))
             {
                 changeV3.x += 5 * Time.deltaTime;
-                on_keyleft_ing();
+                //on_keyleft_ing();
             }
             if (Input.GetKey(keySetting["down"]))
             {
                 changeV3.y -= 5 * Time.deltaTime;
-                on_keydown_ing();
+                //on_keydown_ing();
             }
             if (Input.GetKey(keySetting["right"]))
             {
                 changeV3.x -= 5 * Time.deltaTime;
-                on_keyright_ing();
+                //on_keyright_ing();
             }
             if (Input.GetKeyUp(keySetting["up"]))
             {
@@ -214,6 +222,11 @@ public class NetPlayerControler : MonoBehaviour,Controler {
                
                 on_keyright_up();
             }
+            //鼠標
+            if (Input.GetMouseButtonDown(0))
+            {
+                on_left_down(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
             transform.position += changeV3;
         }
 
@@ -221,31 +234,32 @@ public class NetPlayerControler : MonoBehaviour,Controler {
     //基本控制的
     void onKeyUpDown()
     {
-        player.baseCall("notify1", new object[] {roomNo,CodeTable.KEYUP_DOWN});
+        player.cellCall("notify1", new object[] {roomNo,CodeTable.KEYUP_DOWN});
         action.moveStart();
         upIng = true;
     }
     void onKeyDownDown()
     {
-        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_DOWN });
+        //player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_DOWN });
+        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_DOWN });
         action.moveStart();
         downIng = true;
     }
     void onKeyLeftDown()
     {
-        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYLEFT_DOWN });
+        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYLEFT_DOWN });
         action.moveStart();
         leftIng = true;
     }
     void onKeyRightDown()
     {
-        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYRIGHT_DOWN});
+        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYRIGHT_DOWN});
         action.moveStart();
         rightIng = true;
     }
     void onKeyUpUp()
     {
-        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYUP_UP });
+        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYUP_UP });
         upIng = false;
         if (!upIng && !leftIng && !downIng && !rightIng)
         {
@@ -254,7 +268,8 @@ public class NetPlayerControler : MonoBehaviour,Controler {
      }
     void onKeyDownUp()
     {
-        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_UP });
+        //player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_UP });
+        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_UP });
         downIng = false;
         if (!upIng && !leftIng && !downIng && !rightIng)
         {
@@ -263,7 +278,7 @@ public class NetPlayerControler : MonoBehaviour,Controler {
     }
     void onKeyLeftUp()
     {
-        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYLEFT_UP });
+        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYLEFT_UP });
         leftIng = false;
         if (!upIng && !leftIng && !downIng && !rightIng)
         {
@@ -272,11 +287,25 @@ public class NetPlayerControler : MonoBehaviour,Controler {
     }
     void onKeyRightUp()
     {
-        player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYRIGHT_UP });
+        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYRIGHT_UP });
         rightIng = false;
         if (!upIng && !leftIng && !downIng && !rightIng)
         {
             action.moveEnd();
         }
+    }
+    void onMouseLeftDown()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 19;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        mousePos.z = 0;
+        player.cellCall("notify2", new object[] { roomNo,CodeTable.MOUSE_LEFT_DOWN,mousePos});
+        action.attackStart();
+
+    }
+    public void addOrder(Dictionary<string, object> item)
+    {
+        return;
     }
 }

@@ -50,7 +50,7 @@ public class NetManager : MonoBehaviour ,Manager {
 	void Update () {
         if (directionList.Count > 0)
         {
-            Debug.Log(" directionList[0].z is" + directionList[0].z);
+            //Debug.Log(" directionList[0].z is" + directionList[0].z);
             objList[directionList[0].No].transform.eulerAngles = new Vector3(0, 0, directionList[0].z);
             directionList.RemoveAt(0);
         }
@@ -66,7 +66,10 @@ public class NetManager : MonoBehaviour ,Manager {
                 {
                     NetPlayerControler control = objList[i].AddComponent<NetPlayerControler>();
                     control.entity = e;
-                    control.roomNo = (sbyte)i
+                    ((Player)e).controler = control;
+                    ((Player)e).roomNo = (sbyte)i;
+                    ((Player)e).manager = this;
+                    control.roomNo = (sbyte)i;
                     
                 }
                 else
@@ -74,6 +77,9 @@ public class NetManager : MonoBehaviour ,Manager {
 
                     NetControler control = objList[i].AddComponent<NetControler>();
                     control.entity = e;
+                    ((Player)e).controler = control;
+                    ((Player)e).roomNo = (sbyte)i;
+                    ((Player)e).manager = this;
                     controlerList[i] = control;
                 }
                 objList[i].SetActive(true);

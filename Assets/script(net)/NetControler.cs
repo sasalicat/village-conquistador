@@ -6,6 +6,13 @@ using System;
 
 public class NetControler : MonoBehaviour,Controler {
     public Entity entity;
+    public List<Dictionary<string, object>> codeLine;
+    private bool upIng = false;
+    private bool leftIng = false;
+    private bool downIng = false;
+    private bool rightIng = false;
+    private AnimatorTable action;
+
     _on_left_down on_left_down;
     _on_right_down on_right_down;
     _on_middle_down on_middle_down;
@@ -108,6 +115,20 @@ public class NetControler : MonoBehaviour,Controler {
         return on_right_down;
     }
 
+    void Start()
+    {
+        action = GetComponent<AnimatorTable>();
+        codeLine = new List<Dictionary<string,object>>();
+        //添加控制器事件
+        on_keyleft_down += onKeyLeftDown;
+        on_keydown_down += onKeyDownDown;
+        on_keyright_down += onKeyRightDown;
+        on_keyup_down += onKeyUpDown;
+        on_keydown_up += onKeyDownUp;
+        on_keyup_up += onKeyUpUp;
+        on_keyleft_up += onKeyLeftUp;
+        on_keyright_up += onKeyRightUp;
+    }
     void Update()
     {
         if (entity != null)
@@ -115,7 +136,126 @@ public class NetControler : MonoBehaviour,Controler {
             transform.position = entity.position;
            
         }
+        while(codeLine.Count > 0)
+        {
+            Debug.Log("codeline do------");
+            Dictionary<string,object> item = codeLine[0];
+            sbyte nextcode = (sbyte)item["code"];
+            switch (nextcode)
+            {
+                case CodeTable.KEYUP_DOWN:
+                    {
+                        get_on_keyup_down()();
+                        break;
+                    }
+                case CodeTable.KEYLEFT_DOWN:
+                    {
+                        get_on_keyleft_down()();
+                        break;
+                    }
+                case CodeTable.KEYRIGHT_DOWN:
+                    {
+                        get_on_keyright_down()();
+                        break;
+                    }
+                case CodeTable.KEYDOWN_DOWN:
+                    {
+                        get_on_keydown_down()();
+                        break;
+                    }
+                case CodeTable.KEYUP_UP:
+                    {
+                        get_on_keyup_up()();
+                        break;
+                    }
+                case CodeTable.KEYLEFT_UP:
+                    {
+                        get_on_keyleft_up()();
+                        break;
+                    }
+                case CodeTable.KEYRIGHT_UP:
+                    {
+                        get_on_keyright_up()();
+                        break;
+                    }
+                case CodeTable.KEYDOWN_UP:
+                    {
+                        get_on_keydown_up()();
+                        break;
+                    }
+                case CodeTable.MOUSE_LEFT_DOWN:
+                    {
+                        get_on_left_down()((Vector3)item["directionZ"]);
+                        break;
+                    }
+            }
+            codeLine.RemoveAt(0);
+
+        }
         
     }
+    void onKeyUpDown()
+    {
+        action.moveStart();
+        upIng = true;
+    }
+    void onKeyDownDown()
+    {
+        action.moveStart();
+        downIng = true;
+    }
+    void onKeyLeftDown()
+    {
+        action.moveStart();
+        leftIng = true;
+    }
+    void onKeyRightDown()
+    {
+        action.moveStart();
+        rightIng = true;
+    }
+    void onKeyUpUp()
+    {
+        upIng = false;
+        if (!upIng && !leftIng && !downIng && !rightIng)
+        {
+            action.moveEnd();
+        }
+    }
+    void onKeyDownUp()
+    {
 
+        downIng = false;
+        if (!upIng && !leftIng && !downIng && !rightIng)
+        {
+            action.moveEnd();
+        }
+    }
+    void onKeyLeftUp()
+    {
+        leftIng = false;
+        if (!upIng && !leftIng && !downIng && !rightIng)
+        {
+            action.moveEnd();
+        }
+    }
+    void onKeyRightUp()
+    {
+        rightIng = false;
+        if (!upIng && !leftIng && !downIng && !rightIng)
+        {
+            action.moveEnd();
+        }
+    }
+    void onMouseLeftDown(Vector3 mousePos)
+    {
+        transform.up = mousePos - transform.position;
+        action.attackStart();
+    }
+
+    public void addOrder(Dictionary<string, object> item)
+    {
+        Debug.Log("add order for" + entity.id);
+        codeLine.Add(item);
+    }
 }

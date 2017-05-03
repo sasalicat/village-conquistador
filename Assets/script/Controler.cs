@@ -51,6 +51,7 @@ public interface Controler
     _on_keyleft_down get_on_keyleft_down();
     _on_keyleft_ing get_on_keyleft_ing();
     _on_keyleft_up get_on_keyleft_up();
+    void addOrder(Dictionary<string, object> item);
 
 
 }

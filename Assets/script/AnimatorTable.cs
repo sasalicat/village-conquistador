@@ -19,6 +19,10 @@ public class AnimatorTable : MonoBehaviour {
     }
     public void moveEnd()
     {
-        animator.SetBool("movw", false);
+        animator.SetBool("move", false);
+    }
+    public void attackStart()
+    {
+        animator.SetBool("attack", true);
     }
 }
