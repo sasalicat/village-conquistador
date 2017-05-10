@@ -8,7 +8,7 @@
     public class Player : Entity
     {
         public NetManager manager;
-        public Controler controler;
+        public KBControler controler;
         public sbyte roomNo;
         public override void __init__()
         {
@@ -48,5 +48,13 @@
             order["directionZ"]= mousePos;
             controler.addOrder(order);
         }
+        public void receive3(sbyte eindex,Vector3 PlayerPos,Vector3 mousePos)
+        {
+            Dictionary<string, object> args=new Dictionary<string, object>();
+            args["PlayerPosition"] = PlayerPos;
+            args["MousePosition"] = mousePos;
+            controler.addTriggerOrder(eindex, args);
+        }
+
     }
 }

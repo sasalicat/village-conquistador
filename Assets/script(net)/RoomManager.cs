@@ -90,7 +90,7 @@ public class RoomManager : MonoBehaviour {
                 }
                 register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]] = new dataRegister.PlayerData((sbyte)dataSingle["roleKind"], newlist, (string)dataSingle["name"], selfRoomId == (sbyte)dataSingle["roleRoomId"]);
                 updateItem((sbyte)dataSingle["roleRoomId"], selfRoomId == (sbyte)dataSingle["roleRoomId"], (string)nameobj, (bool)((sbyte)dataSingle["ready"] > 0), (sbyte)dataSingle["roleKind"]);
-
+                Debug.Log("add playerdata roomNo" + dataSingle["roleRoomId"] + " eList Count:" + elist.Count);
             }
             else//改變某個現有玩家的資料
             {

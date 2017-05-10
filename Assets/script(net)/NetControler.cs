@@ -4,7 +4,17 @@ using UnityEngine;
 using KBEngine;
 using System;
 
-public class NetControler : MonoBehaviour,Controler {
+public class NetControler : MonoBehaviour,KBControler{
+    private class eTrigger
+    {
+        public sbyte eIndex;
+        public Dictionary<string, object> Args;
+        public eTrigger(sbyte eIndex,Dictionary<string,object> Args)
+        {
+            this.eIndex = eIndex;
+            this.Args = Args;
+        }
+    }
     public Entity entity;
     public List<Dictionary<string, object>> codeLine;
     private bool upIng = false;
@@ -12,6 +22,8 @@ public class NetControler : MonoBehaviour,Controler {
     private bool downIng = false;
     private bool rightIng = false;
     private AnimatorTable action;
+    private EquipmentList eList;
+    private List<eTrigger> eTriggerLine=new List<eTrigger>();
 
     _on_left_down on_left_down;
     _on_right_down on_right_down;
@@ -33,6 +45,32 @@ public class NetControler : MonoBehaviour,Controler {
     _on_keyright_down on_keyright_down;
     _on_keyright_ing on_keyright_ing;
     _on_keyright_up on_keyright_up;
+
+    public Entity Entity
+    {
+        get
+        {
+            return entity;
+        }
+
+        set
+        {
+            entity = value;
+        }
+    }
+
+    public EquipmentList equipmentList
+    {
+        get
+        {
+            return eList;
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     public _on_key1_down get_on_key1_down()
     {
@@ -117,6 +155,7 @@ public class NetControler : MonoBehaviour,Controler {
 
     void Start()
     {
+        eList = GetComponent<EquipmentList>();
         action = GetComponent<AnimatorTable>();
         codeLine = new List<Dictionary<string,object>>();
         //添加控制器事件
@@ -128,6 +167,7 @@ public class NetControler : MonoBehaviour,Controler {
         on_keyup_up += onKeyUpUp;
         on_keyleft_up += onKeyLeftUp;
         on_keyright_up += onKeyRightUp;
+        on_left_down += onMouseLeftDown;
     }
     void Update()
     {
@@ -192,7 +232,12 @@ public class NetControler : MonoBehaviour,Controler {
             codeLine.RemoveAt(0);
 
         }
-        
+        while (eTriggerLine.Count > 0)
+        {
+            eTrigger temp = eTriggerLine[0];
+            eList.equipments[temp.eIndex].trigger(temp.Args);
+            eTriggerLine.RemoveAt(0);
+        }
     }
     void onKeyUpDown()
     {
@@ -249,13 +294,18 @@ public class NetControler : MonoBehaviour,Controler {
     }
     void onMouseLeftDown(Vector3 mousePos)
     {
-        transform.up = mousePos - transform.position;
-        action.attackStart();
+        transform.up = -(mousePos - transform.position);
+        action.AttackStart();
     }
 
     public void addOrder(Dictionary<string, object> item)
     {
         Debug.Log("add order for" + entity.id);
         codeLine.Add(item);
+    }
+
+    public void addTriggerOrder(sbyte eIndex, Dictionary<string, object> args)
+    {
+        eTriggerLine.Add(new eTrigger(eIndex, args));
     }
 }

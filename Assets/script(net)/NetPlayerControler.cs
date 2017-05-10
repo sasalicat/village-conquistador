@@ -4,7 +4,17 @@ using UnityEngine;
 using KBEngine;
 using System;
 
-public class NetPlayerControler : MonoBehaviour,Controler {
+public class NetPlayerControler : MonoBehaviour,KBControler {
+    private class eTrigger
+    {
+        public sbyte eIndex;
+        public Dictionary<string, object> Args;
+        public eTrigger(sbyte eIndex, Dictionary<string, object> Args)
+        {
+            this.eIndex = eIndex;
+            this.Args = Args;
+        }
+    }
     public const float UPDATE_Z_INTERVAL = 0.1f;
     public Entity entity;
     public sbyte roomNo;
@@ -17,6 +27,8 @@ public class NetPlayerControler : MonoBehaviour,Controler {
     private bool downIng= false;
     private bool rightIng = false;
     private Player player;
+    private EquipmentList eList;
+    private List<eTrigger> eTriggerLine = new List<eTrigger>();
 
     _on_left_down on_left_down;
     _on_right_down on_right_down;
@@ -38,6 +50,32 @@ public class NetPlayerControler : MonoBehaviour,Controler {
     _on_keyright_down on_keyright_down;
     _on_keyright_ing on_keyright_ing;
     _on_keyright_up on_keyright_up;
+
+    public Entity Entity
+    {
+        get
+        {
+            return entity;
+        }
+
+        set
+        {
+            entity = value;
+        }
+    }
+
+    public EquipmentList equipmentList
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     public _on_key1_down get_on_key1_down()
     {
@@ -123,6 +161,7 @@ public class NetPlayerControler : MonoBehaviour,Controler {
     {
 
         GameObject temp = GameObject.Find("keyTabel");
+        eList = GetComponent<EquipmentList>();
         keySetting =temp.GetComponent<KeyRegister>().keySetting;
         action = GetComponent<AnimatorTable>();
         player = ((Player)KBEngineApp.app.player());
@@ -135,6 +174,7 @@ public class NetPlayerControler : MonoBehaviour,Controler {
         on_keyup_up += onKeyUpUp;
         on_keyleft_up += onKeyLeftUp;
         on_keyright_up += onKeyRightUp;
+        on_left_down += onMouseLeftDown;
     }
     void OnEnable()
     {
@@ -149,7 +189,7 @@ public class NetPlayerControler : MonoBehaviour,Controler {
         mousePos.z = 19;
         mousePos= Camera.main.ScreenToWorldPoint(mousePos);
         mousePos.z = 0;
-        transform.up = mousePos - transform.position;
+        transform.up = -(mousePos - transform.position);
         if (nowz != lastZ && timeInterval >= UPDATE_Z_INTERVAL)
         {
            
@@ -225,9 +265,23 @@ public class NetPlayerControler : MonoBehaviour,Controler {
             //鼠標
             if (Input.GetMouseButtonDown(0))
             {
-                on_left_down(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                Vector3 mouse = Input.mousePosition;
+                mouse.z = 19;
+                mouse = Camera.main.ScreenToWorldPoint(mouse);
+                mouse.z = 0;
+                Debug.Log("NetPlayerControler:position"+transform.position+"mouse Position"+mouse);
+                on_left_down(mouse);
+                Debug.Log("num"+on_left_down.GetInvocationList().Length+ "after mousePos is" + mouse);
             }
             transform.position += changeV3;
+
+        //處理觸發事件
+            while (eTriggerLine.Count > 0)
+            {
+                eTrigger temp = eTriggerLine[0];
+                eList.equipments[temp.eIndex].trigger(temp.Args);
+                eTriggerLine.RemoveAt(0);
+            }
         }
 
     }
@@ -294,18 +348,21 @@ public class NetPlayerControler : MonoBehaviour,Controler {
             action.moveEnd();
         }
     }
-    void onMouseLeftDown()
+    void onMouseLeftDown(Vector3 mousePos)
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 19;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        mousePos.z = 0;
+        Debug.Log("on event mouse position is" + mousePos);
         player.cellCall("notify2", new object[] { roomNo,CodeTable.MOUSE_LEFT_DOWN,mousePos});
-        action.attackStart();
-
+        action.AttackStart();
+        player.cellCall("notify3", new object[] { 0, transform.position, mousePos });
+        //0為普通攻擊的裝備索引
     }
     public void addOrder(Dictionary<string, object> item)
     {
         return;
+    }
+
+    public void addTriggerOrder(sbyte eIndex, Dictionary<string, object> args)
+    {
+        eTriggerLine.Add(new eTrigger(eIndex, args));
     }
 }

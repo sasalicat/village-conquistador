@@ -21,8 +21,13 @@ public class AnimatorTable : MonoBehaviour {
     {
         animator.SetBool("move", false);
     }
-    public void attackStart()
+    public void AttackStart()
     {
         animator.SetBool("attack", true);
     }
+    public void AttackEnd()
+    {
+        animator.SetBool("attack", false);
+    }
+   
 }

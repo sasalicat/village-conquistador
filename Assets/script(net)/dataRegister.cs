@@ -20,7 +20,9 @@ public class dataRegister : MonoBehaviour {
     public PlayerData[] PlayerInWar = new PlayerData[6];//用於暫存現在有那些玩家的角色參加遊戲
 	// Use this for initialization
 	void Start () {
-        roleList.Add(new RoleData(0));
+        List < sbyte > elist= new List<sbyte>();
+        elist.Add(0);
+        roleList.Add(new RoleData(0,elist));
 	}
 	
 	// Update is called once per frame

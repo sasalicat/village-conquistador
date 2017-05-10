@@ -11,6 +11,7 @@ public class NetManager : MonoBehaviour ,Manager {
     public GameObject roleparfab;
     public dataRegister register;
     public List<dirPair> directionList=new List<dirPair>();
+    public List<createOrder> createOrderList = new List<createOrder>();
     public class dirPair
     {
         public sbyte No;
@@ -21,6 +22,19 @@ public class NetManager : MonoBehaviour ,Manager {
             this.z = z;
         }
     }
+    public class createOrder
+    {//另一個方案,直接創建投射物,未採用
+        public sbyte No;
+        public Vector3 atPos;
+        public Vector3 MissileRota;
+        public createOrder(sbyte no,Vector3 pos,Vector3 rota)
+        {
+            No = no;
+            atPos = pos;
+            rota = MissileRota;
+        }
+    }
+
     public GameObject[] getGameObjectList()
     {
         return objList;
@@ -54,6 +68,11 @@ public class NetManager : MonoBehaviour ,Manager {
             objList[directionList[0].No].transform.eulerAngles = new Vector3(0, 0, directionList[0].z);
             directionList.RemoveAt(0);
         }
+        if (createOrderList.Count > 0)//另一個方案,直接創建投射物,未採用
+        {
+            createOrder order = createOrderList[0];
+            //Instantiate();
+        }
 	}
     public void onEnterWorld(Entity e)
     {
@@ -62,10 +81,15 @@ public class NetManager : MonoBehaviour ,Manager {
         for (int i=0;i<MAX_NUM;i++) {
             if (e.id == register.PlayerInWar[i].entityId)
             {
+                EquipmentList elist = objList[i].GetComponent<EquipmentList>();
                 if (e.id == KBEngineApp.app.player().id)
                 {
                     NetPlayerControler control = objList[i].AddComponent<NetPlayerControler>();
+                    
+                    elist.controler = control;
                     control.entity = e;
+                    
+                    
                     ((Player)e).controler = control;
                     ((Player)e).roomNo = (sbyte)i;
                     ((Player)e).manager = this;
@@ -76,13 +100,19 @@ public class NetManager : MonoBehaviour ,Manager {
                 {
 
                     NetControler control = objList[i].AddComponent<NetControler>();
+                    objList[i].GetComponent<EquipmentList>().controler = control;
+                    
+                    elist.controler = control;
                     control.entity = e;
+                    
+
                     ((Player)e).controler = control;
                     ((Player)e).roomNo = (sbyte)i;
                     ((Player)e).manager = this;
                     controlerList[i] = control;
                 }
                 objList[i].SetActive(true);
+                elist.AddEquipments();
                 break;
             }
         }
@@ -103,4 +133,16 @@ public class NetManager : MonoBehaviour ,Manager {
     {
         return MAX_NUM;
     }
+    public static void createMissile(sbyte No,Vector3 pos,Vector3 rota)
+    {
+        ((Player)KBEngineApp.app.player()).baseCall("createMissile", new object[] { No, pos, rota });
+    }
+    public static void SkillTrigger(sbyte eIndex,Vector3 pos,Vector3 mousePos)
+    {
+        ((Player)KBEngineApp.app.player()).baseCall("notify3", new object[] { eIndex, pos, mousePos});
+    }
+    /*public static Vector3 getOriginalInitPoint(Vector3 oriRolePos,float angleZ,Vector3 localMissitlePos)
+    {
+        float newx = localMissitlePos.magnitude * Mathf.Cos(angleZ-);
+    }*/
 }

@@ -12,7 +12,11 @@ public interface Equipment {
     {
         get;
     }
-    void trigger(Dictionary<sbyte,object> args);
+    sbyte Kind
+    {
+        get;
+    }
+    void trigger(Dictionary<string,object> args);
 
 	
 }
