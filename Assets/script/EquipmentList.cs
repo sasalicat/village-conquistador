@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class EquipmentList : MonoBehaviour {
     public List<Equipment> equipments=new List<Equipment>();
-    public List<PassiveEquipment> passiveEquipments = new List<PassiveEquipment>();
+    public List<CDEquipment> passiveEquipments = new List<CDEquipment>();
     public EquipmentTable table;
     public dataRegister register;
     public KBControler controler;
@@ -39,49 +39,49 @@ public class EquipmentList : MonoBehaviour {
                 case 0:
                     {
                         _on_left_down temp = controler.get_on_left_down();
-                        temp += passiveEquipments[i].passiveSkill;
+                        //temp += passiveEquipments[i].passiveSkill;
                         break;
                     }
                 case 1:
                     {
                         _on_right_down temp = controler.get_on_right_down();
-                        temp += passiveEquipments[i].passiveSkill;
+                        //temp += passiveEquipments[i].passiveSkill;
                         break;
                     }
                 case 2:
                     {
                         _on_key1_down temp = controler.get_on_key1_down();
-                        temp += passiveEquipments[i].passiveSkill;
+                        //temp += passiveEquipments[i].passiveSkill;
                         break;
                     }
                 case 3:
                     {
                         _on_key2_down temp = controler.get_on_key2_down();
-                        temp += passiveEquipments[i].passiveSkill;
+                        //temp += passiveEquipments[i].passiveSkill;
                         break;
                     }
                 case 4:
                     {
                         _on_key2_down temp = controler.get_on_key2_down();
-                        temp += passiveEquipments[i].passiveSkill;
+                        //temp += passiveEquipments[i].passiveSkill;
                         break;
                     }
                 case 5:
                     {
                         _on_key3_down temp = controler.get_on_key3_down();
-                        temp += passiveEquipments[i].passiveSkill;
+                        //temp += passiveEquipments[i].passiveSkill;
                         break;
                     }
                 case 6:
                     {
                         _on_key4_down temp = controler.get_on_key4_down();
-                        temp += passiveEquipments[i].passiveSkill;
+                        //temp += passiveEquipments[i].passiveSkill;
                         break;
                     }
                 case 7:
                     {
                         _on_key5_down temp = controler.get_on_key5_down();
-                        temp += passiveEquipments[i].passiveSkill;
+                        //temp += passiveEquipments[i].passiveSkill;
                         break;
                     }
             }
@@ -96,7 +96,7 @@ public class EquipmentList : MonoBehaviour {
         Component newone= gameObject.AddComponent(System.Type.GetType(typeName));
         if (table.passiveList[EquipmentNo])//主動道具
         {
-            passiveEquipments.Add((PassiveEquipment)newone);
+            passiveEquipments.Add((CDEquipment)newone);
         }
         equipments.Add((Equipment)newone);
     }
