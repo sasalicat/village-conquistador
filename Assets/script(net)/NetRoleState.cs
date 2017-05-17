@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NetRoleState :RoleState {
-
 	// Use this for initialization
 	void Start () {
         base.Start();
@@ -14,4 +13,8 @@ public class NetRoleState :RoleState {
 	void Update () {
 		
 	}
+    public void  TakeDamage(damage damage)
+    {
+
+    }
 }

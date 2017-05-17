@@ -48,11 +48,12 @@
             order["directionZ"]= mousePos;
             controler.addOrder(order);
         }
-        public void receive3(sbyte eindex,Vector3 PlayerPos,Vector3 mousePos)
+        public void receive3(sbyte eindex,Vector3 PlayerPos,Vector3 mousePos,sbyte randint)
         {
             Dictionary<string, object> args=new Dictionary<string, object>();
             args["PlayerPosition"] = PlayerPos;
             args["MousePosition"] = mousePos;
+            args["randomPoint"] = randint;
             controler.addTriggerOrder(eindex, args);
         }
 

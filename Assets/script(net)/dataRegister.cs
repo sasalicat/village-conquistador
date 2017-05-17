@@ -22,6 +22,10 @@ public class dataRegister : MonoBehaviour {
 	void Start () {
         List < sbyte > elist= new List<sbyte>();
         elist.Add(0);
+        elist.Add(0);
+        elist.Add(0);
+        elist.Add(0);
+        elist.Add(0);
         roleList.Add(new RoleData(0,elist));
 	}
 	

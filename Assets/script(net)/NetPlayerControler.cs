@@ -50,7 +50,9 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     _on_keyright_down on_keyright_down;
     _on_keyright_ing on_keyright_ing;
     _on_keyright_up on_keyright_up;
+    //新架構儲存觸發物件
 
+    List<Equipment> onAttack=new List<Equipment>();
     public Entity Entity
     {
         get
@@ -64,18 +66,6 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         }
     }
 
-    public EquipmentList equipmentList
-    {
-        get
-        {
-            throw new NotImplementedException();
-        }
-
-        set
-        {
-            throw new NotImplementedException();
-        }
-    }
 
     public _on_key1_down get_on_key1_down()
     {
@@ -157,6 +147,15 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         return on_right_down;
     }
+
+    private Vector3 getmousePos()
+    {
+        Vector3 mouse = Input.mousePosition;
+        mouse.z = 19;
+        mouse = Camera.main.ScreenToWorldPoint(mouse);
+        mouse.z = 0;
+        return mouse;
+    }
      void Start()
     {
 
@@ -175,6 +174,45 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         on_keyleft_up += onKeyLeftUp;
         on_keyright_up += onKeyRightUp;
         on_left_down += onMouseLeftDown;
+        if (eList.passiveEquipments.Count>EquipmentList.PASSIVE1) {//為了防止當角色沒有裝備那麼多主動道具時報錯
+            on_key1_down += onKey1Dowm;//因為道具一定是順著順序排放鍵位的,例如第一個道具一定是key1,所以只要判斷主動道具數量就知道角色那個鍵位有沒有主動道具
+        }
+        else
+        {
+            on_key1_down += empty;
+        }
+        if (eList.passiveEquipments.Count >EquipmentList.PASSIVE2)
+        {
+            on_key2_down += onKey2Dowm;
+        }
+        else
+        {
+            on_key2_down += empty;
+        }
+        if (eList.passiveEquipments.Count > EquipmentList.PASSIVE3)
+        {
+            on_key3_down += onKey3Dowm;
+        }
+        else
+        {
+            on_key3_down += empty;
+        }
+        if (eList.passiveEquipments.Count > EquipmentList.PASSIVE4)
+        {
+            on_key4_down += onKey4Dowm;
+        }
+        else
+        {
+            on_key4_down += empty;
+        }
+        if (eList.passiveEquipments.Count > EquipmentList.PASSIVE5)
+        {
+            on_key5_down += onKey5Dowm;
+        }
+        else
+        {
+            on_key5_down += empty;
+        }
     }
     void OnEnable()
     {
@@ -184,12 +222,10 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         timeInterval += Time.deltaTime;
         int nowz = (int)transform.eulerAngles.z;
-        Vector3 mousePos = Input.mousePosition;
-        //Debug.Log(mousePos);
-        mousePos.z = 19;
-        mousePos= Camera.main.ScreenToWorldPoint(mousePos);
-        mousePos.z = 0;
+        Vector3 mousePos = getmousePos();
+
         transform.up = -(mousePos - transform.position);
+
         if (nowz != lastZ && timeInterval >= UPDATE_Z_INTERVAL)
         {
            
@@ -262,16 +298,33 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                
                 on_keyright_up();
             }
+            if (Input.GetKeyDown(keySetting["key1"]))
+            {
+                on_key1_down(mousePos);
+            }
+            if (Input.GetKeyDown(keySetting["key2"]))
+            {
+                on_key2_down(mousePos);
+            }
+            if (Input.GetKeyDown(keySetting["key3"]))
+            {
+                on_key3_down(mousePos);
+            }
+            if (Input.GetKeyDown(keySetting["key4"]))
+            {
+                on_key4_down(mousePos);
+            }
+            if (Input.GetKeyDown(keySetting["key5"]))
+            {
+                on_key5_down(mousePos);
+            }
             //鼠標
             if (Input.GetMouseButtonDown(0))
             {
-                Vector3 mouse = Input.mousePosition;
-                mouse.z = 19;
-                mouse = Camera.main.ScreenToWorldPoint(mouse);
-                mouse.z = 0;
-                Debug.Log("NetPlayerControler:position"+transform.position+"mouse Position"+mouse);
-                on_left_down(mouse);
-                Debug.Log("num"+on_left_down.GetInvocationList().Length+ "after mousePos is" + mouse);
+
+                Debug.Log("NetPlayerControler:position"+transform.position+"mouse Position"+mousePos);
+                on_left_down(mousePos);
+                Debug.Log("num"+on_left_down.GetInvocationList().Length+ "after mousePos is" + mousePos);
             }
             transform.position += changeV3;
 
@@ -353,8 +406,47 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         Debug.Log("on event mouse position is" + mousePos);
         player.cellCall("notify2", new object[] { roomNo,CodeTable.MOUSE_LEFT_DOWN,mousePos});
         action.AttackStart();
-        player.cellCall("notify3", new object[] { 0, transform.position, mousePos });
+        player.cellCall("notify3", new object[] { EquipmentList.ATK, transform.position, mousePos });
         //0為普通攻擊的裝備索引
+    }
+    void onKey1Dowm(Vector3 mousePos)
+    {
+        if (eList.passiveEquipments[EquipmentList.PASSIVE1].CanUse)
+        {
+            player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE1].selfIndex, transform.position, mousePos });
+        }
+    }
+    void onKey2Dowm(Vector3 mousePos)
+    {
+        if (eList.passiveEquipments[EquipmentList.PASSIVE1].CanUse)
+        {
+            player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE2].selfIndex, transform.position, mousePos });
+        }
+    }
+    void onKey3Dowm(Vector3 mousePos)
+    {
+        if (eList.passiveEquipments[EquipmentList.PASSIVE1].CanUse)
+        {
+            player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE3].selfIndex, transform.position, mousePos });
+        }
+    }
+    void onKey4Dowm(Vector3 mousePos)
+    {
+        if (eList.passiveEquipments[EquipmentList.PASSIVE1].CanUse)
+        {
+            player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE4].selfIndex, transform.position, mousePos });
+        }
+    }
+    void onKey5Dowm(Vector3 mousePos)
+    {
+        if (eList.passiveEquipments[EquipmentList.PASSIVE1].CanUse)
+        {
+            player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE5].selfIndex, transform.position, mousePos });
+        }
+    }
+    void empty(Vector3 mousePos)
+    {
+        return;
     }
     public void addOrder(Dictionary<string, object> item)
     {

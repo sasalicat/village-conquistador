@@ -12,7 +12,12 @@ public class KeyRegister : MonoBehaviour {
         keySetting["left"] = KeyCode.LeftArrow;
         keySetting["right"] = KeyCode.RightArrow;
         keySetting["down"] = KeyCode.DownArrow;
-	}
+        keySetting["key1"] = KeyCode.Q;
+        keySetting["key2"] = KeyCode.E;
+        keySetting["key3"] = KeyCode.R;
+        keySetting["key4"] = KeyCode.F;
+        keySetting["key5"] = KeyCode.LeftShift;
+    }
 	
 	// Update is called once per frame
 	void Update () {

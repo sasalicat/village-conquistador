@@ -6,6 +6,15 @@ using UnityEngine.UI;
 
 
 public class EquipmentList : MonoBehaviour {
+    //主動裝備編號---------------------------------
+    public const sbyte ATK = 0;
+    public const sbyte SKILL = 1;
+    public const sbyte PASSIVE1 = 2;
+    public const sbyte PASSIVE2 = 3;
+    public const sbyte PASSIVE3 = 4;
+    public const sbyte PASSIVE4 = 5;
+    public const sbyte PASSIVE5 = 6;
+
     public List<Equipment> equipments=new List<Equipment>();
     public List<CDEquipment> passiveEquipments = new List<CDEquipment>();
     public EquipmentTable table;
@@ -33,7 +42,8 @@ public class EquipmentList : MonoBehaviour {
             addByNo(eList[0]);
             eList.RemoveAt(0);
         }
-        for (int i = 0; i < passiveEquipments.Count; i++)
+        //目前版本不再註冊控制器,直接由controler觸發
+        /*for (int i = 0; i < passiveEquipments.Count; i++)
         {//註冊主動裝備到控制器
             switch (i){
                 case 0:
@@ -86,7 +96,7 @@ public class EquipmentList : MonoBehaviour {
                     }
             }
             
-        }
+        }*/
        
         text.text += "+1";
     }

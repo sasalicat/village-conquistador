@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoleState : MonoBehaviour {
-    interface state
+    public interface state
     {
         void takedamage(damage damage);
         void beenTreat(int num, GameObject from);
     }
-    class normal : state
+    public class normal : state
     {
         private RoleState role;
         public normal(RoleState rs)
@@ -64,6 +64,10 @@ public class RoleState : MonoBehaviour {
         energyRecover_Second = unit.STAND_MP_RECOVER* (((float)selfdata.energyRecover) / 100);
         speed = unit.STAND_SPEED + unit.STAND_SPEED * (((float)selfdata.accelerate) / 100);
         //attackInterval -= attackInterval * (((float)attackSpeed)/100);
+
+    }
+    public void TakeDamage(damage damage)
+    {
 
     }
 }
