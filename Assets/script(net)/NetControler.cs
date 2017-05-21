@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KBEngine;
 using System;
+using UnityEngine.UI;
 
 public class NetControler : MonoBehaviour,KBControler{
     private class eTrigger
@@ -24,6 +25,9 @@ public class NetControler : MonoBehaviour,KBControler{
     private AnimatorTable action;
     private EquipmentList eList;
     private List<eTrigger> eTriggerLine=new List<eTrigger>();
+    public Text Label;
+    //装备事件
+    _on_attack on_attack;
 
     _on_left_down on_left_down;
     _on_right_down on_right_down;
@@ -155,6 +159,8 @@ public class NetControler : MonoBehaviour,KBControler{
 
     void Start()
     {
+        Label = GameObject.Find("Canvas/Text").GetComponent<Text>();
+        //Label.text = "我活著";
         eList = GetComponent<EquipmentList>();
         action = GetComponent<AnimatorTable>();
         codeLine = new List<Dictionary<string,object>>();
@@ -171,6 +177,7 @@ public class NetControler : MonoBehaviour,KBControler{
     }
     void Update()
     {
+        //Label.text = ".........";
         if (entity != null)
         {
             transform.position = entity.position;
@@ -234,9 +241,12 @@ public class NetControler : MonoBehaviour,KBControler{
         }
         while (eTriggerLine.Count > 0)
         {
-            eTrigger temp = eTriggerLine[0];
+            Label.text = "enter etrigger! size:"+ eList.equipments.Count;
+             eTrigger temp = eTriggerLine[0];
+            Label.text = "in eTrigger gameobj is"+ eList.equipments[temp.eIndex].ToString();
             eList.equipments[temp.eIndex].trigger(temp.Args);
             eTriggerLine.RemoveAt(0);
+           
         }
     }
     void onKeyUpDown()
@@ -307,5 +317,31 @@ public class NetControler : MonoBehaviour,KBControler{
     public void addTriggerOrder(sbyte eIndex, Dictionary<string, object> args)
     {
         eTriggerLine.Add(new eTrigger(eIndex, args));
+    }
+
+    public void Role_onTakeDamage(damage damage)
+    {
+        return;
+    }
+
+    public void onAttack()
+    {
+        return;
+    }
+
+    public _on_attack get_on_attack()
+    {
+        return on_attack;
+    }
+
+    public _on_take_damage get_on_take_damage()
+    {
+        throw new NotImplementedException();
+    }
+
+
+    public void onTakeDamage(Vector3 selfPos, Vector3 selfEuler, Vector3 damagerPos, sbyte damagerNo, damage damage, sbyte randomInt)
+    {
+        throw new NotImplementedException();
     }
 }

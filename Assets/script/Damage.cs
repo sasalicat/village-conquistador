@@ -7,6 +7,7 @@ public class damage {
     public float stiffTime;
     public bool hitConversely;//是否對倒地的單位有效
     public bool makeConversaly;//是否使單位倒地
+    public GameObject damager;
 
     public damage(int kind,int num,float stiffTime)
     {
@@ -17,12 +18,13 @@ public class damage {
         makeConversaly = false;
         
     }
-    public damage(int kind, int num,float stiffTime,bool hitConversely,bool makeConversaly)
+    public damage(int kind, int num,float stiffTime,bool hitConversely,bool makeConversaly,GameObject damager)
     {
         this.kind = kind;
         this.num = num;
         this.stiffTime = stiffTime;
         this.hitConversely = hitConversely;
         this.makeConversaly = makeConversaly;
+        this.damager = damager;
     }
 }

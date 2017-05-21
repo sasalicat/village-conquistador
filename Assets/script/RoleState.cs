@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoleState : MonoBehaviour {
-    public interface state
+    protected interface state
     {
         void takedamage(damage damage);
         void beenTreat(int num, GameObject from);
@@ -30,8 +30,10 @@ public class RoleState : MonoBehaviour {
         }
     }
     public unit selfdata;
-    public Controler control;
+    public KBControler control;
     public AnimatorTable anima;
+    protected state nowState;
+    protected List<state> StateTable=new List<state>();
 //真實屬性------------------------------------------------------
     public int maxHp;
     public int nowHp;
@@ -57,6 +59,8 @@ public class RoleState : MonoBehaviour {
 
     protected void Start()
     {
+        selfdata = GetComponent<unit>();
+        anima = GetComponent<AnimatorTable>();
         Debug.Log("in Role state");
         maxHp = unit.STAND_HP + unit.STAND_HP * (selfdata.physique / 100);
         nowHp= maxHp;

@@ -27,14 +27,16 @@ public class EquipmentList : MonoBehaviour {
         table = GameObject.Find("keyTabel").GetComponent<EquipmentTable>();
         register = GameObject.Find("client").GetComponent<dataRegister>();
         text = GameObject.Find("Canvas/Text").GetComponent<Text>();
-        text.text = "完成start";
-        Debug.Log("完成start");
+        AddEquipments();
+        //text.text = "完成start";
+        //Debug.Log("完成start");
 
     }
     public void AddEquipments()//在NetManager裏面被呼叫以至於賦值順序不混亂,主要是controler.Entity
     {
         Debug.Log("ADDing-----");
         text.text = "add";
+        text.text = "Player is:"+ controler.Entity.ToString();
         int selfNo = ((Player)controler.Entity).roomNo;
         List<sbyte> eList = register.PlayerInWar[selfNo].role.equipmentIdList;
         while (eList.Count > 0)

@@ -5,7 +5,7 @@ using KBEngine;
 using System;
 
 public class NetPlayerControler : MonoBehaviour,KBControler {
-    private class eTrigger
+    private class eTrigger//裝備觸發指令,eIndex為裝備的Index
     {
         public sbyte eIndex;
         public Dictionary<string, object> Args;
@@ -29,6 +29,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private Player player;
     private EquipmentList eList;
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
+    private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
 
     _on_left_down on_left_down;
     _on_right_down on_right_down;
@@ -50,9 +51,11 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     _on_keyright_down on_keyright_down;
     _on_keyright_ing on_keyright_ing;
     _on_keyright_up on_keyright_up;
+    _on_attack on_attack;
+    _on_take_damage on_take_damage;
     //新架構儲存觸發物件
 
-    List<Equipment> onAttack=new List<Equipment>();
+    List<Equipment> onAttackLine=new List<Equipment>();
     public Entity Entity
     {
         get
@@ -403,7 +406,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     }
     void onMouseLeftDown(Vector3 mousePos)
     {
-        Debug.Log("on event mouse position is" + mousePos);
+        //Debug.Log("Role_onTakeDamage event mouse position is" + mousePos);
         player.cellCall("notify2", new object[] { roomNo,CodeTable.MOUSE_LEFT_DOWN,mousePos});
         action.AttackStart();
         player.cellCall("notify3", new object[] { EquipmentList.ATK, transform.position, mousePos });
@@ -448,8 +451,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         return;
     }
-    public void addOrder(Dictionary<string, object> item)
-    {
+    public void addOrder(Dictionary<string, object> item)//移動按鍵操作的動畫,由於用的是位置同步所以本機角色並不需要同步位置
+    {//鏡像角色則需要接受同步動畫
         return;
     }
 
@@ -457,4 +460,42 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         eTriggerLine.Add(new eTrigger(eIndex, args));
     }
+
+    public void Role_onTakeDamage(damage damage)//这是给RoleState用的
+    {
+       
+        sbyte kind = (sbyte)damage.kind;
+        short num = (short)damage.num;
+        //处理成为毫秒用short形态传输节省流量:乘以1000后省去小数点后
+        short stiffMilli = (short)(damage.stiffTime*1000);
+
+        sbyte damagerNo = damage.damager.GetComponent<NetRoleState>().roomNo;
+        Vector3 damagerPos = damage.damager.transform.position;
+        Debug.Log("player:" + player + " damage:" + damage);
+        ((Player)KBEngineApp.app.player()).cellCall("notify4", new object[] { transform.position, transform.eulerAngles, damagerPos, damagerNo, kind, num, stiffMilli, damage.makeConversaly, damage.hitConversely });
+
+        //player.cellCall("notify4", new object[] { transform.position,transform.eulerAngles, damagerPos,damagerNo,kind,num,stiffMilli,damage.makeConversaly,damage.hitConversely });
+    }
+
+    public void onAttack()
+    {
+        throw new NotImplementedException();
+    }
+
+    public _on_attack get_on_attack()
+    {
+        return on_attack;
+    }
+
+    public _on_take_damage get_on_take_damage()
+    {
+        return on_take_damage;
+    }
+
+    public void onTakeDamage(Vector3 selfPos, Vector3 selfEuler, Vector3 damagerPos, sbyte damagerNo, damage damage, sbyte randomInt)
+    {//使用eTrigger原因見上  class eTrigger
+       
+    }
+
+
 }

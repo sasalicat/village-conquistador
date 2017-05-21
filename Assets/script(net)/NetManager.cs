@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using KBEngine;
 
 public class NetManager : MonoBehaviour ,Manager {
+    public Text Label;
+
     private const int MAX_NUM = 6;
     private GameObject[] objList;
     public NetControler[] controlerList;
@@ -51,13 +54,14 @@ public class NetManager : MonoBehaviour ,Manager {
             if (register.PlayerInWar[i] != null)//在這裡生成角色對應的gameobj
             {
                 objList[i] =  (GameObject)Instantiate(roleparfab, new Vector3(0,0,0),transform.rotation);
-                objList[i].SetActive(false);
+                
 
             }
         }
         controlerList = new NetControler[MAX_NUM];
         ((Player)KBEngineApp.app.player()).baseCall("onChangeToWar", new object[] { });
         ((Player)KBEngineApp.app.player()).manager = this;
+        Label= Label = Label = GameObject.Find("Canvas/Text2").GetComponent<Text>();
     }
 	
 	// Update is called once per frame
@@ -81,6 +85,8 @@ public class NetManager : MonoBehaviour ,Manager {
         for (int i=0;i<MAX_NUM;i++) {
             if (e.id == register.PlayerInWar[i].entityId)
             {
+                //懷疑AddEquipment沒有被呼叫過
+               
                 EquipmentList elist = objList[i].GetComponent<EquipmentList>();
                 if (e.id == KBEngineApp.app.player().id)
                 {
@@ -94,6 +100,7 @@ public class NetManager : MonoBehaviour ,Manager {
                     ((Player)e).roomNo = (sbyte)i;
                     ((Player)e).manager = this;
                     control.roomNo = (sbyte)i;
+                    objList[i].GetComponent<NetRoleState>().control = control;
                     
                 }
                 else
@@ -110,9 +117,13 @@ public class NetManager : MonoBehaviour ,Manager {
                     ((Player)e).roomNo = (sbyte)i;
                     ((Player)e).manager = this;
                     controlerList[i] = control;
+                    objList[i].GetComponent<NetRoleState>().control = control;
                 }
+                objList[i].GetComponent<NetRoleState>().roomNo = (sbyte)i;
                 objList[i].SetActive(true);
-                elist.AddEquipments();
+                Label.text = "elist control is:" + elist.controler.ToString();
+                //elist.AddEquipments();
+                //Label.text = "after add";
                 break;
             }
         }

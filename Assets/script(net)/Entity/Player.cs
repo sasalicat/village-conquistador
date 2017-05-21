@@ -56,6 +56,10 @@
             args["randomPoint"] = randint;
             controler.addTriggerOrder(eindex, args);
         }
-
+        public void receive4(Vector3 selfPos, Vector3 selfEuler, Vector3 damagerPos, sbyte damagerNo,sbyte kind, short num,short stiffMilli,sbyte makeC,sbyte hitC, sbyte randomInt)
+        {
+            Debug.Log("makeC is" + makeC + "hitC is" + hitC);
+            //damage damage = new damage(kind,num,((float)stiffMilli)/1000);
+        }
     }
 }

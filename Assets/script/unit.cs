@@ -24,7 +24,7 @@ public class unit : MonoBehaviour {
     public int rechargeEnergyRecover;//道具能量恢復加成
     //public int attackSpeed;//攻擊速度加成
     public int damageReduce;//物理減傷比例
-    public int energyReduce;//技能減傷比例
+    public int specialReduce;//技能減傷比例
     //-----------------------------------------------
 
     //-----------------------------------------------

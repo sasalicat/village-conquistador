@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class mg_atk : MonoBehaviour,CDEquipment
 {
@@ -13,6 +14,8 @@ public class mg_atk : MonoBehaviour,CDEquipment
     const short selfMissileNo = 0;
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
     public MissileTable table;
+    public Text Label;
+
 //實做Equipment介面-------------------------------------------------------
     public sbyte No
     {
@@ -66,6 +69,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
+        Label.text = "in index" + selfIndex + "trigger start";
        getVector getVector= GameObject.Find("keyTabel").GetComponent<getVector>();
         Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
@@ -73,12 +77,14 @@ public class mg_atk : MonoBehaviour,CDEquipment
         Vector3 tragetPos=getVector.getOriginalInitPoint(origenPlayerPosition,mousePosition,new Vector3(0,-1,0));//獲得相對座標
         Instantiate(missilePraf, tragetPos, transform.rotation);
         CDTime = CD;//技能冷卻
+        Label.text = "in index" + selfIndex + "trigger end";
     }
     void Start()
     {
         table = GameObject.Find("keyTabel").GetComponent<MissileTable>();
         //Debug.Log(table);
         missilePraf = table.MissileList[0];
+        Label= Label = GameObject.Find("Canvas/Text2").GetComponent<Text>();
     }
 
 }
