@@ -20,23 +20,37 @@ public class EquipmentList : MonoBehaviour {
     public EquipmentTable table;
     public dataRegister register;
     public KBControler controler;
-    public Text text;
+    //public Text text;
+    private bool InitTime = true;
 
    void Start()
     {
         table = GameObject.Find("keyTabel").GetComponent<EquipmentTable>();
         register = GameObject.Find("client").GetComponent<dataRegister>();
-        text = GameObject.Find("Canvas/Text").GetComponent<Text>();
+        //text = GameObject.Find("Canvas/Text").GetComponent<Text>();
         AddEquipments();
         //text.text = "完成start";
         //Debug.Log("完成start");
 
     }
+    void Update()
+    {
+        MissileTable table = GameObject.Find("keyTabel").GetComponent<MissileTable>();
+        RoleState state = GetComponent<RoleState>();
+        if (InitTime)
+        {
+            for(int i = 0; i < equipments.Count; i++)
+            {
+                equipments[i].onInit(table,state);
+            }
+            InitTime = false;
+        }
+    }
     public void AddEquipments()//在NetManager裏面被呼叫以至於賦值順序不混亂,主要是controler.Entity
     {
         Debug.Log("ADDing-----");
-        text.text = "add";
-        text.text = "Player is:"+ controler.Entity.ToString();
+        //text.text = "add";
+        //text.text = "Player is:"+ controler.Entity.ToString();
         int selfNo = ((Player)controler.Entity).roomNo;
         List<sbyte> eList = register.PlayerInWar[selfNo].role.equipmentIdList;
         while (eList.Count > 0)
@@ -100,7 +114,7 @@ public class EquipmentList : MonoBehaviour {
             
         }*/
        
-        text.text += "+1";
+        //text.text += "+1";
     }
     private void addByNo(int EquipmentNo)
     {
@@ -111,5 +125,16 @@ public class EquipmentList : MonoBehaviour {
             passiveEquipments.Add((CDEquipment)newone);
         }
         equipments.Add((Equipment)newone);
+        Debug.Log("name"+typeName+"kind is"+((Equipment)newone).Kind);
+        switch (((Equipment)newone).Kind) {
+            case CodeTable.TAKE_DAMAGE:
+                {
+                    //_on_take_damage t= controler.get_on_take_damage();
+                    controler.On_Take_Damage+= ((Equipment)newone).trigger;
+                    //Debug.Log("t have" + t.GetInvocationList().Length);
+                    break;
+                }
+        }
+
     }
 }

@@ -56,9 +56,21 @@
             args["randomPoint"] = randint;
             controler.addTriggerOrder(eindex, args);
         }
-        public void receive4(Vector3 selfPos, Vector3 selfEuler, Vector3 damagerPos, sbyte damagerNo,sbyte kind, short num,short stiffMilli,sbyte makeC,sbyte hitC, sbyte randomInt)
+        public void receive4(Vector3 selfPos, Vector3 selfEuler, Vector3 damagerPos, sbyte damagerNo,sbyte kind, short num,short stiffMilli,sbyte makeC,sbyte hitC, sbyte randooumInt)
         {
+            
             Debug.Log("makeC is" + makeC + "hitC is" + hitC);
+            GameObject damager = manager.getObjByRoomNo(roomNo);
+            damage damage = new damage(kind, num, ((float)stiffMilli) / 1000,hitC >0 ,makeC >0 ,damager);
+            Dictionary<string, object> Arg = new Dictionary<string, object>();
+            Arg["PlayerPosition"] = selfPos;
+            Arg["PlayerEuler"] = selfEuler;
+            Arg["DamagerPosition"] = damagerPos;
+            Arg["Damager"] = damager;
+            Arg["randomPoint"] = randooumInt;
+            Arg["Damage"] = damage;
+            controler.addEvent(CodeTable.TAKE_DAMAGE,Arg);
+            //controler.addEvent(CodeTable.TAKE_DAMAGE,)
             //damage damage = new damage(kind,num,((float)stiffMilli)/1000);
         }
     }

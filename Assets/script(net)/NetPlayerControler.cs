@@ -28,6 +28,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private bool rightIng = false;
     private Player player;
     private EquipmentList eList;
+    private NetRoleState state;
+
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
 
@@ -150,6 +152,25 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         return on_right_down;
     }
+    public _on_attack get_on_attack()
+    {
+        return on_attack;
+    }
+    public _on_take_damage get_on_take_damage()
+    {
+        return on_take_damage;
+    }
+    public _on_take_damage On_Take_Damage
+    {
+        set
+        {
+            on_take_damage = value;
+        }
+        get
+        {
+            return on_take_damage;
+        }
+    }
 
     private Vector3 getmousePos()
     {
@@ -167,6 +188,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         keySetting =temp.GetComponent<KeyRegister>().keySetting;
         action = GetComponent<AnimatorTable>();
         player = ((Player)KBEngineApp.app.player());
+        state = GetComponent<NetRoleState>();
         //添加控制器事件
         on_keyleft_down += onKeyLeftDown;
         on_keydown_down += onKeyDownDown;
@@ -226,110 +248,116 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         timeInterval += Time.deltaTime;
         int nowz = (int)transform.eulerAngles.z;
         Vector3 mousePos = getmousePos();
+        if (state.canRota) {
+            //Debug.Log("canRota is" + state.canRota);
+            transform.up = -(mousePos - transform.position);
 
-        transform.up = -(mousePos - transform.position);
+            if (nowz != lastZ && timeInterval >= UPDATE_Z_INTERVAL)
+            {
 
-        if (nowz != lastZ && timeInterval >= UPDATE_Z_INTERVAL)
-        {
-           
-            short ans = (short)(nowz);
-            //Debug.Log("Z change nowz is"+nowz+" ans is" + ans);
-            ((Player)entity).baseCall("updateZ", new object[] {ans});
-            
-            timeInterval = 0;
-            lastZ = nowz;
+                short ans = (short)(nowz);
+                //Debug.Log("Z change nowz is"+nowz+" ans is" + ans);
+                ((Player)entity).baseCall("updateZ", new object[] { ans });
+
+                timeInterval = 0;
+                lastZ = nowz;
+            }
         }
         if (entity != null)
         {
-            entity.position=transform.position;
-            entity.direction = transform.eulerAngles;
-            //Debug.Log("up is"+KeyCode.UpArrow);
-            Vector3 changeV3 = new Vector3(0, 0, 0);
-            if (Input.GetKeyDown(keySetting["up"]))
+            if (state.canMove)
             {
-                on_keyup_down();
-            }
-            if (Input.GetKeyDown(keySetting["left"]))
-            {
-                on_keyleft_down();
-            }
-            if (Input.GetKeyDown(keySetting["down"]))
-            {
-                on_keydown_down();
-            }
-            if (Input.GetKeyDown(keySetting["right"]))
-            {
-                on_keyright_down();
-            }
-            if (Input.GetKey(keySetting["up"]))
-            {
-                changeV3.y += 5 * Time.deltaTime;
-                //on_keyup_ing();
-            }
-            if (Input.GetKey(keySetting["left"]))
-            {
-                changeV3.x += 5 * Time.deltaTime;
-                //on_keyleft_ing();
-            }
-            if (Input.GetKey(keySetting["down"]))
-            {
-                changeV3.y -= 5 * Time.deltaTime;
-                //on_keydown_ing();
-            }
-            if (Input.GetKey(keySetting["right"]))
-            {
-                changeV3.x -= 5 * Time.deltaTime;
-                //on_keyright_ing();
-            }
-            if (Input.GetKeyUp(keySetting["up"]))
-            {
-                
-                on_keyup_up();
-            }
-            if (Input.GetKeyUp(keySetting["left"]))
-            {
-                
-                on_keyleft_up();
-            }
-            if (Input.GetKeyUp(keySetting["down"]))
-            {
-               
-                on_keydown_up();
-            }
-            if (Input.GetKeyUp(keySetting["right"]))
-            {
-               
-                on_keyright_up();
-            }
-            if (Input.GetKeyDown(keySetting["key1"]))
-            {
-                on_key1_down(mousePos);
-            }
-            if (Input.GetKeyDown(keySetting["key2"]))
-            {
-                on_key2_down(mousePos);
-            }
-            if (Input.GetKeyDown(keySetting["key3"]))
-            {
-                on_key3_down(mousePos);
-            }
-            if (Input.GetKeyDown(keySetting["key4"]))
-            {
-                on_key4_down(mousePos);
-            }
-            if (Input.GetKeyDown(keySetting["key5"]))
-            {
-                on_key5_down(mousePos);
-            }
-            //鼠標
-            if (Input.GetMouseButtonDown(0))
-            {
+                //Debug.Log("enter move");
+                entity.position = transform.position;
+                entity.direction = transform.eulerAngles;
+                //Debug.Log("up is"+KeyCode.UpArrow);
+                Vector3 changeV3 = new Vector3(0, 0, 0);
+                if (Input.GetKeyDown(keySetting["up"]))
+                {
+                    on_keyup_down();
+                }
+                if (Input.GetKeyDown(keySetting["left"]))
+                {
+                    on_keyleft_down();
+                }
+                if (Input.GetKeyDown(keySetting["down"]))
+                {
+                    on_keydown_down();
+                }
+                if (Input.GetKeyDown(keySetting["right"]))
+                {
+                    on_keyright_down();
+                }
+                if (Input.GetKey(keySetting["up"]))
+                {
+                    changeV3.y += 5 * Time.deltaTime;
+                    //on_keyup_ing();
+                }
+                if (Input.GetKey(keySetting["left"]))
+                {
+                    changeV3.x += 5 * Time.deltaTime;
+                    //on_keyleft_ing();
+                }
+                if (Input.GetKey(keySetting["down"]))
+                {
+                    changeV3.y -= 5 * Time.deltaTime;
+                    //on_keydown_ing();
+                }
+                if (Input.GetKey(keySetting["right"]))
+                {
+                    changeV3.x -= 5 * Time.deltaTime;
+                    //on_keyright_ing();
+                }
+                if (Input.GetKeyUp(keySetting["up"]))
+                {
 
-                Debug.Log("NetPlayerControler:position"+transform.position+"mouse Position"+mousePos);
-                on_left_down(mousePos);
-                Debug.Log("num"+on_left_down.GetInvocationList().Length+ "after mousePos is" + mousePos);
+                    on_keyup_up();
+                }
+                if (Input.GetKeyUp(keySetting["left"]))
+                {
+
+                    on_keyleft_up();
+                }
+                if (Input.GetKeyUp(keySetting["down"]))
+                {
+
+                    on_keydown_up();
+                }
+                if (Input.GetKeyUp(keySetting["right"]))
+                {
+
+                    on_keyright_up();
+                }
+                if (Input.GetKeyDown(keySetting["key1"]))
+                {
+                    on_key1_down(mousePos);
+                }
+                if (Input.GetKeyDown(keySetting["key2"]))
+                {
+                    on_key2_down(mousePos);
+                }
+                if (Input.GetKeyDown(keySetting["key3"]))
+                {
+                    on_key3_down(mousePos);
+                }
+                if (Input.GetKeyDown(keySetting["key4"]))
+                {
+                    on_key4_down(mousePos);
+                }
+                if (Input.GetKeyDown(keySetting["key5"]))
+                {
+                    on_key5_down(mousePos);
+                }
+                //鼠標
+                if (Input.GetMouseButtonDown(0))
+                {
+
+                    //Debug.Log("NetPlayerControler:position" + transform.position + "mouse Position" + mousePos);
+                    on_left_down(mousePos);
+                    //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
+                }
+                transform.position += changeV3;
             }
-            transform.position += changeV3;
 
         //處理觸發事件
             while (eTriggerLine.Count > 0)
@@ -337,6 +365,28 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                 eTrigger temp = eTriggerLine[0];
                 eList.equipments[temp.eIndex].trigger(temp.Args);
                 eTriggerLine.RemoveAt(0);
+            }
+            while (EventLine.Count > 0)
+            {
+                Debug.Log("code is"+ EventLine[0].eIndex);
+                switch (EventLine[0].eIndex)
+                {
+                    case CodeTable.TAKE_DAMAGE:
+                        {
+
+                            if (get_on_take_damage() != null)
+                            {
+                                get_on_take_damage()(EventLine[0].Args);
+                            }
+                            else
+                            {
+                                Debug.Log("takedamage null");
+                            }
+                            state.realHurt((damage)EventLine[0].Args["Damage"]);
+                            break;
+                        }
+                }
+                EventLine.RemoveAt(0);
             }
         }
 
@@ -482,20 +532,10 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         throw new NotImplementedException();
     }
 
-    public _on_attack get_on_attack()
+
+    public void addEvent(sbyte code, Dictionary<string, object> args)
     {
-        return on_attack;
+        Debug.Log("add event");
+        EventLine.Add(new eTrigger(code, args));
     }
-
-    public _on_take_damage get_on_take_damage()
-    {
-        return on_take_damage;
-    }
-
-    public void onTakeDamage(Vector3 selfPos, Vector3 selfEuler, Vector3 damagerPos, sbyte damagerNo, damage damage, sbyte randomInt)
-    {//使用eTrigger原因見上  class eTrigger
-       
-    }
-
-
 }

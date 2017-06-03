@@ -54,6 +54,11 @@ public interface Controler
     /*装备事件*/
     _on_attack get_on_attack();
     _on_take_damage get_on_take_damage();
+    _on_take_damage On_Take_Damage
+    {
+        set;
+        get;
+    }
     void addOrder(Dictionary<string, object> item);
     
 

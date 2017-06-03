@@ -26,6 +26,7 @@ public class dataRegister : MonoBehaviour {
         elist.Add(0);
         elist.Add(0);
         elist.Add(0);
+        elist.Add(1);
         roleList.Add(new RoleData(0,elist));
 	}
 	

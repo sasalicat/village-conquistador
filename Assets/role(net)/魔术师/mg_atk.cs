@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class mg_atk : MonoBehaviour,CDEquipment
 {
     public const float CD = 0.5f;
-
+    public const int BaseDamage = 50;
+    public const float BaseStiff = 0.25f;
 
     private float CDTime = 0; 
     sbyte index;
     const short selfMissileNo = 0;
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
-    public MissileTable table;
+    private RoleState selfState;
     public Text Label;
 
 //實做Equipment介面-------------------------------------------------------
@@ -38,7 +39,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
         }
     }
 
-    public sbyte Kind
+    public sbyte Kind//本技能属于主动技能所以kind为 PASSIVE_SKILL
     {
         get
         {
@@ -46,7 +47,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
         }
     }
 //實做CDEquipment介面----------------------------------------------
-    public void getTime(float time)
+    public void setTime(float time)
     {
         CDTime -= time;//減少CD時間
     }
@@ -69,22 +70,32 @@ public class mg_atk : MonoBehaviour,CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
-        Label.text = "in index" + selfIndex + "trigger start";
+      
        getVector getVector= GameObject.Find("keyTabel").GetComponent<getVector>();
         Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
-        Debug.Log("In trigger:position:"+origenPlayerPosition+"mouse position:"+mousePosition);
-        Vector3 tragetPos=getVector.getOriginalInitPoint(origenPlayerPosition,mousePosition,new Vector3(0,-1,0));//獲得相對座標
-        Instantiate(missilePraf, tragetPos, transform.rotation);
+        //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
+        Vector3 tragetPos =getVector.getOriginalInitPoint(origenPlayerPosition,mousePosition,new Vector3(0,-1,0));//獲得相對座標
+        //制造子弹物件
+        GameObject newone= Instantiate(missilePraf, tragetPos, transform.rotation);
+        //修改子弹物件携带的子弹脚本
+        Missile missile = newone.GetComponent<Missile>();
+        missile.Creater = gameObject;
+        //创建伤害物件
+        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
+        float stiff = BaseStiff+BaseStiff * (((float)selfState.selfdata.stiffable)/100);
+        missile.Damage = new damage(1, num,stiff,false,false,gameObject);
+
+
         CDTime = CD;//技能冷卻
-        Label.text = "in index" + selfIndex + "trigger end";
-    }
-    void Start()
-    {
-        table = GameObject.Find("keyTabel").GetComponent<MissileTable>();
-        //Debug.Log(table);
-        missilePraf = table.MissileList[0];
-        Label= Label = GameObject.Find("Canvas/Text2").GetComponent<Text>();
+        
     }
 
+
+    public void onInit(MissileTable table,RoleState state)
+    {
+        //初始化赋值
+        missilePraf = table.MissileList[0];
+        this.selfState = state;
+    }
 }

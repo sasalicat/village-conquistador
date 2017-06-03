@@ -24,7 +24,9 @@ public class NetControler : MonoBehaviour,KBControler{
     private bool rightIng = false;
     private AnimatorTable action;
     private EquipmentList eList;
+    private NetRoleState state;
     private List<eTrigger> eTriggerLine=new List<eTrigger>();
+    private List<eTrigger> EventLine = new List<eTrigger>();
     public Text Label;
     //装备事件
     _on_attack on_attack;
@@ -50,6 +52,7 @@ public class NetControler : MonoBehaviour,KBControler{
     _on_keyright_ing on_keyright_ing;
     _on_keyright_up on_keyright_up;
 
+    _on_take_damage on_take_damage;
     public Entity Entity
     {
         get
@@ -73,6 +76,18 @@ public class NetControler : MonoBehaviour,KBControler{
         set
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public _on_take_damage On_Take_Damage
+    {
+        set
+        {
+            on_take_damage = value;
+        }
+        get
+        {
+            return on_take_damage;
         }
     }
 
@@ -164,6 +179,7 @@ public class NetControler : MonoBehaviour,KBControler{
         eList = GetComponent<EquipmentList>();
         action = GetComponent<AnimatorTable>();
         codeLine = new List<Dictionary<string,object>>();
+        state = GetComponent<NetRoleState>();
         //添加控制器事件
         on_keyleft_down += onKeyLeftDown;
         on_keydown_down += onKeyDownDown;
@@ -247,6 +263,21 @@ public class NetControler : MonoBehaviour,KBControler{
             eList.equipments[temp.eIndex].trigger(temp.Args);
             eTriggerLine.RemoveAt(0);
            
+        }
+        while (EventLine.Count > 0)
+        {
+            switch (EventLine[0].eIndex) {
+                case CodeTable.TAKE_DAMAGE:
+                    {
+                        if (get_on_take_damage() != null)
+                        {
+                            get_on_take_damage()(EventLine[0].Args);
+                        }
+                        state.realHurt((damage)EventLine[0].Args["Damage"]);
+                        break;
+                    }
+            }
+            EventLine.RemoveAt(0);
         }
     }
     void onKeyUpDown()
@@ -336,12 +367,11 @@ public class NetControler : MonoBehaviour,KBControler{
 
     public _on_take_damage get_on_take_damage()
     {
-        throw new NotImplementedException();
+        return on_take_damage;
     }
 
-
-    public void onTakeDamage(Vector3 selfPos, Vector3 selfEuler, Vector3 damagerPos, sbyte damagerNo, damage damage, sbyte randomInt)
+    public void addEvent(sbyte code, Dictionary<string, object> args)
     {
-        throw new NotImplementedException();
+        EventLine.Add(new eTrigger(code, args));
     }
 }

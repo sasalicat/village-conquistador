@@ -29,5 +29,21 @@ public class AnimatorTable : MonoBehaviour {
     {
         animator.SetBool("attack", false);
     }
-   
+    public void StiffStart()
+    {
+        animator.SetBool("stiff",true);
+    }
+    public void StiffEnd()
+    {
+        animator.SetBool("stiff", false);
+    }
+    public void ConverselyStart()
+    {
+        animator.SetBool("conversely", true);
+    }
+    public void ConverselyEnd()
+    {
+        animator.SetBool("conversely", false);
+    }
+
 }

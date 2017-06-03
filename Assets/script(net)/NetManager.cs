@@ -10,6 +10,7 @@ public class NetManager : MonoBehaviour ,Manager {
 
     private const int MAX_NUM = 6;
     private GameObject[] objList;
+    private ObjAndRoomNo[] orList;
     public NetControler[] controlerList;
     public GameObject roleparfab;
     public dataRegister register;
@@ -37,6 +38,16 @@ public class NetManager : MonoBehaviour ,Manager {
             rota = MissileRota;
         }
     }
+    private class ObjAndRoomNo
+    {
+        public sbyte roomNo;
+        public GameObject obj;
+        public ObjAndRoomNo(sbyte roomNo,GameObject obj)
+        {
+            this.roomNo = roomNo;
+            this.obj = obj;
+        }
+    }
 
     public GameObject[] getGameObjectList()
     {
@@ -58,6 +69,7 @@ public class NetManager : MonoBehaviour ,Manager {
 
             }
         }
+        orList = new ObjAndRoomNo[MAX_NUM];
         controlerList = new NetControler[MAX_NUM];
         ((Player)KBEngineApp.app.player()).baseCall("onChangeToWar", new object[] { });
         ((Player)KBEngineApp.app.player()).manager = this;
@@ -82,7 +94,7 @@ public class NetManager : MonoBehaviour ,Manager {
     {
         Debug.Log("id " + e.id + "on Enter World");
 
-        for (int i=0;i<MAX_NUM;i++) {
+        for (int i=0;i<MAX_NUM;i++) {//roomNo就是物件雜objList的索引值
             if (e.id == register.PlayerInWar[i].entityId)
             {
                 //懷疑AddEquipment沒有被呼叫過
@@ -119,6 +131,7 @@ public class NetManager : MonoBehaviour ,Manager {
                     controlerList[i] = control;
                     objList[i].GetComponent<NetRoleState>().control = control;
                 }
+                orList[i] = new ObjAndRoomNo((sbyte)i,objList[i]); 
                 objList[i].GetComponent<NetRoleState>().roomNo = (sbyte)i;
                 objList[i].SetActive(true);
                 Label.text = "elist control is:" + elist.controler.ToString();
@@ -127,12 +140,6 @@ public class NetManager : MonoBehaviour ,Manager {
                 break;
             }
         }
-    }
-    public void onEnterSpace(Entity e)//已经取消使用
-    {
-        Debug.Log("id " + e.id + "on Enter Space");
-        GameObject newone = (GameObject)Instantiate(roleparfab, e.position, Quaternion.Euler(e.direction));
-        newone.AddComponent<NetPlayerControler>();
     }
     public void PlayerInit(Entity e)
     {
@@ -156,4 +163,15 @@ public class NetManager : MonoBehaviour ,Manager {
     {
         float newx = localMissitlePos.magnitude * Mathf.Cos(angleZ-);
     }*/
+    public GameObject getObjByRoomNo(sbyte roomNo)
+    {
+        for(int i = 0; i < orList.Length; i++)
+        {
+            if (orList[i].roomNo == roomNo)
+            {
+                return orList[i].obj;
+            }
+        }
+        return null;
+    } 
 }

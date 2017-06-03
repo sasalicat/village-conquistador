@@ -16,6 +16,7 @@ public interface Equipment {
     {
         get;
     }
+    void onInit(MissileTable table,RoleState state);//这个funciton会在EquipmentList第一个Update呼叫
     void trigger(Dictionary<string,object> args);
 
 	

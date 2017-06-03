@@ -8,6 +8,15 @@ public class RoleState : MonoBehaviour {
     {
         void takedamage(damage damage);
         void beenTreat(int num, GameObject from);
+        void onUpdate();
+        bool canRota
+        {
+            get;
+        }
+        bool canMove{
+            get;
+        }
+
     }
     public class normal : state
     {
@@ -16,12 +25,34 @@ public class RoleState : MonoBehaviour {
         {
             role = rs;
         }
+
+        public bool canMove
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public bool canRota
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         public void beenTreat(int num, GameObject from)
         {
             if (role.canBetreat)
             {
                 //這裡應有觸發治療事件
             }
+        }
+
+        public void onUpdate()
+        {
+            throw new NotImplementedException();
         }
 
         public void takedamage(damage damage)
@@ -38,24 +69,42 @@ public class RoleState : MonoBehaviour {
     public int maxHp;
     public int nowHp;
     public float nowMp;
+    public float nowStiff;//当前硬直时间
+    public float nowConversely;//当前倒地时间
     public float energyRecover_Second;
     public float speed;
     //實時狀態-----------------------------------------------------
     //狀態屬性
-    public bool immune_attack;//是否為攻擊免疫
-    public bool immune_skill;//是否為特殊傷害免疫
-    public bool nonlife;//是否為場上靜態物體
-    public bool fastened;//靜態物體是否固定在位置上
-    public bool tools;//是否為道具
-    public bool canBeExiled;//是否可被放逐
-    public bool canBeStiff;//是否可被硬直
-    public bool canBeConvesly;//是否可被击倒
-    public bool canBeKill;//可以被杀死
-    public bool canBetreat;//可以被治疗
+    public bool immune_attack=false;//是否為攻擊免疫
+    public bool immune_skill=false;//是否為特殊傷害免疫
+    public bool nonlife=false;//是否為場上靜態物體
+    public bool fastened=false;//靜態物體是否固定在位置上
+    public bool tools=false;//是否為道具
+    public bool canBeExiled=true;//是否可被放逐
+    public bool canBeStiff=true;//是否可被硬直
+    public bool canBeConvesly=true;//是否可被击倒
+    public bool canBeKill=true;//可以被杀死
+    public bool canBetreat=true;//可以被治疗
 
-    public bool conversely;//是否為倒地
-    public bool alive;//是否存活
-    public bool exiled;//是否被放逐
+    public bool conversely=false;//是否為倒地
+    public bool alive=true;//是否存活
+    public bool exiled=true;//是否被放逐
+
+    public bool canMove
+    {
+        get
+        {
+            return nowState.canMove;
+        }
+    }
+    public bool canRota
+    {
+        get
+        {
+            return nowState.canRota;
+        }
+    }
+
 
     protected void Start()
     {
@@ -70,8 +119,8 @@ public class RoleState : MonoBehaviour {
         //attackInterval -= attackInterval * (((float)attackSpeed)/100);
 
     }
-    public void TakeDamage(damage damage)
+    public virtual void TakeDamage(damage damage)
     {
-
+        Debug.Log("super");
     }
 }

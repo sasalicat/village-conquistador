@@ -23,4 +23,5 @@ public class CodeTable{
     public const sbyte KEYRIGHT_DOWN = 18;
     public const sbyte KEYRIGHT_ING = 19;
     public const sbyte KEYRIGHT_UP = 20;
+    public const sbyte TAKE_DAMAGE = 21;
 }
