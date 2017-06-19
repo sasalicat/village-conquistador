@@ -175,7 +175,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private Vector3 getmousePos()
     {
         Vector3 mouse = Input.mousePosition;
-        mouse.z = 19;
+        mouse.z = 33;
         mouse = Camera.main.ScreenToWorldPoint(mouse);
         mouse.z = 0;
         return mouse;
@@ -257,7 +257,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
 
                 short ans = (short)(nowz);
                 //Debug.Log("Z change nowz is"+nowz+" ans is" + ans);
-                ((Player)entity).baseCall("updateZ", new object[] { ans });
+                ((Player)entity).cellCall("updateZ", new object[] { ans });
 
                 timeInterval = 0;
                 lastZ = nowz;
@@ -265,11 +265,12 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         }
         if (entity != null)
         {
-            if (state.canMove)
-            {
+          
                 //Debug.Log("enter move");
-                entity.position = transform.position;
-                entity.direction = transform.eulerAngles;
+                
+                //entity.position = transform.position;
+                //entity.direction = transform.eulerAngles;
+                
                 //Debug.Log("up is"+KeyCode.UpArrow);
                 Vector3 changeV3 = new Vector3(0, 0, 0);
                 if (Input.GetKeyDown(keySetting["up"]))
@@ -290,22 +291,22 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                 }
                 if (Input.GetKey(keySetting["up"]))
                 {
-                    changeV3.y += 5 * Time.deltaTime;
+                    changeV3.y += state.speed * Time.deltaTime;
                     //on_keyup_ing();
                 }
                 if (Input.GetKey(keySetting["left"]))
                 {
-                    changeV3.x += 5 * Time.deltaTime;
+                    changeV3.x += state.speed * Time.deltaTime;
                     //on_keyleft_ing();
                 }
                 if (Input.GetKey(keySetting["down"]))
                 {
-                    changeV3.y -= 5 * Time.deltaTime;
+                    changeV3.y -= state.speed * Time.deltaTime;
                     //on_keydown_ing();
                 }
                 if (Input.GetKey(keySetting["right"]))
                 {
-                    changeV3.x -= 5 * Time.deltaTime;
+                    changeV3.x -= state.speed * Time.deltaTime;
                     //on_keyright_ing();
                 }
                 if (Input.GetKeyUp(keySetting["up"]))
@@ -328,6 +329,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
 
                     on_keyright_up();
                 }
+            if (state.canAction)
+            {
                 if (Input.GetKeyDown(keySetting["key1"]))
                 {
                     on_key1_down(mousePos);
@@ -356,6 +359,9 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                     on_left_down(mousePos);
                     //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
                 }
+            }
+            if (state.canMove)
+            {
                 transform.position += changeV3;
             }
 
@@ -363,7 +369,9 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
             while (eTriggerLine.Count > 0)
             {
                 eTrigger temp = eTriggerLine[0];
+               
                 eList.equipments[temp.eIndex].trigger(temp.Args);
+              
                 eTriggerLine.RemoveAt(0);
             }
             while (EventLine.Count > 0)
@@ -389,37 +397,43 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                 EventLine.RemoveAt(0);
             }
         }
+        //装备冷却------------------------------------------------------------
 
     }
     //基本控制的
     void onKeyUpDown()
     {
-        player.cellCall("notify1", new object[] {roomNo,CodeTable.KEYUP_DOWN});
+        Vector3 position = transform.position;
+        player.cellCall("notify1", new object[] {new Vector2(position.x,position.y),CodeTable.KEYUP_DOWN});
         action.moveStart();
         upIng = true;
     }
     void onKeyDownDown()
     {
         //player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_DOWN });
-        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_DOWN });
+        Vector3 position = transform.position;
+        player.cellCall("notify1", new object[] { new Vector2(position.x, position.y), CodeTable.KEYDOWN_DOWN });
         action.moveStart();
         downIng = true;
     }
     void onKeyLeftDown()
     {
-        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYLEFT_DOWN });
+        Vector3 position = transform.position;
+        player.cellCall("notify1", new object[] { new Vector2(position.x, position.y), CodeTable.KEYLEFT_DOWN });
         action.moveStart();
         leftIng = true;
     }
     void onKeyRightDown()
     {
-        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYRIGHT_DOWN});
+        Vector3 position = transform.position;
+        player.cellCall("notify1", new object[] { new Vector2(position.x, position.y), CodeTable.KEYRIGHT_DOWN});
         action.moveStart();
         rightIng = true;
     }
     void onKeyUpUp()
     {
-        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYUP_UP });
+        Vector3 position = transform.position;
+        player.cellCall("notify1", new object[] { new Vector2(position.x, position.y), CodeTable.KEYUP_UP });
         upIng = false;
         if (!upIng && !leftIng && !downIng && !rightIng)
         {
@@ -429,7 +443,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     void onKeyDownUp()
     {
         //player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_UP });
-        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_UP });
+        Vector3 position = transform.position;
+        player.cellCall("notify1", new object[] { new Vector2(position.x, position.y), CodeTable.KEYDOWN_UP });
         downIng = false;
         if (!upIng && !leftIng && !downIng && !rightIng)
         {
@@ -438,7 +453,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     }
     void onKeyLeftUp()
     {
-        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYLEFT_UP });
+        Vector3 position = transform.position;
+        player.cellCall("notify1", new object[] { new Vector2(position.x, position.y), CodeTable.KEYLEFT_UP });
         leftIng = false;
         if (!upIng && !leftIng && !downIng && !rightIng)
         {
@@ -447,7 +463,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     }
     void onKeyRightUp()
     {
-        player.cellCall("notify1", new object[] { roomNo, CodeTable.KEYRIGHT_UP });
+        Vector3 position = transform.position;
+        player.cellCall("notify1", new object[] { new Vector2(position.x, position.y), CodeTable.KEYRIGHT_UP });
         rightIng = false;
         if (!upIng && !leftIng && !downIng && !rightIng)
         {
@@ -457,8 +474,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     void onMouseLeftDown(Vector3 mousePos)
     {
         //Debug.Log("Role_onTakeDamage event mouse position is" + mousePos);
-        player.cellCall("notify2", new object[] { roomNo,CodeTable.MOUSE_LEFT_DOWN,mousePos});
-        action.AttackStart();
+        //player.cellCall("notify2", new object[] { roomNo,CodeTable.MOUSE_LEFT_DOWN,mousePos});
+        //action.AttackStart();
         player.cellCall("notify3", new object[] { EquipmentList.ATK, transform.position, mousePos });
         //0為普通攻擊的裝備索引
     }
@@ -471,28 +488,28 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     }
     void onKey2Dowm(Vector3 mousePos)
     {
-        if (eList.passiveEquipments[EquipmentList.PASSIVE1].CanUse)
+        if (eList.passiveEquipments[EquipmentList.PASSIVE2].CanUse)
         {
             player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE2].selfIndex, transform.position, mousePos });
         }
     }
     void onKey3Dowm(Vector3 mousePos)
     {
-        if (eList.passiveEquipments[EquipmentList.PASSIVE1].CanUse)
+        if (eList.passiveEquipments[EquipmentList.PASSIVE3].CanUse)
         {
             player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE3].selfIndex, transform.position, mousePos });
         }
     }
     void onKey4Dowm(Vector3 mousePos)
     {
-        if (eList.passiveEquipments[EquipmentList.PASSIVE1].CanUse)
+        if (eList.passiveEquipments[EquipmentList.PASSIVE4].CanUse)
         {
             player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE4].selfIndex, transform.position, mousePos });
         }
     }
     void onKey5Dowm(Vector3 mousePos)
     {
-        if (eList.passiveEquipments[EquipmentList.PASSIVE1].CanUse)
+        if (eList.passiveEquipments[EquipmentList.PASSIVE5].CanUse)
         {
             player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE5].selfIndex, transform.position, mousePos });
         }

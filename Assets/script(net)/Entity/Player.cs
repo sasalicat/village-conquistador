@@ -27,22 +27,25 @@
             Dbg.DEBUG_MSG("onIdReady-----------------------");
             baseCall("onIdReady", new object[] { });
         }
-       public void updateZ(sbyte roomNo,short z)
+        public void updateZ(short z)
         {
             //Debug.Log("update"+roomNo+":"+z);
-            
-            manager.directionList.Add(new NetManager.dirPair(roomNo,(short)z));
-        }
-        public void receive1(sbyte roomNo,sbyte code)
-        {
-            Debug.Log("this id is" + this.id + "player is" + KBEngineApp.app.player().id);
             Dictionary<string, object> order = new Dictionary<string, object>();
+            order["code"] = CodeTable.UPDATE_Z;
+            order["Z"] = z;
+            controler.addOrder(order);
+        }
+        public void receive1(Vector2 Position,sbyte code)
+        {
+            //Debug.Log("this id is" + this.id + "player is" + KBEngineApp.app.player().id);
+            Dictionary<string, object> order = new Dictionary<string, object>();
+            order["PlayerPosition"] = Position;
             order["code"] = code;
             controler.addOrder(order);
         }
         public void receive2(sbyte roomNo,sbyte code,Vector3 mousePos)
         {
-            Debug.Log("this id is" + this.id + "player is" + KBEngineApp.app.player().id);
+            //Debug.Log("this id is" + this.id + "player is" + KBEngineApp.app.player().id);
             Dictionary<string, object> order = new Dictionary<string, object>();
             order["code"] = code;
             order["directionZ"]= mousePos;
@@ -59,7 +62,7 @@
         public void receive4(Vector3 selfPos, Vector3 selfEuler, Vector3 damagerPos, sbyte damagerNo,sbyte kind, short num,short stiffMilli,sbyte makeC,sbyte hitC, sbyte randooumInt)
         {
             
-            Debug.Log("makeC is" + makeC + "hitC is" + hitC);
+            //Debug.Log("makeC is" + makeC + "hitC is" + hitC);
             GameObject damager = manager.getObjByRoomNo(roomNo);
             damage damage = new damage(kind, num, ((float)stiffMilli) / 1000,hitC >0 ,makeC >0 ,damager);
             Dictionary<string, object> Arg = new Dictionary<string, object>();

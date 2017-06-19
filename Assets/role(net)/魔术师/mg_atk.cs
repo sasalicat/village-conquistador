@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class mg_atk : MonoBehaviour,CDEquipment
 {
-    public const float CD = 0.5f;
+    public const float CD = 10;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
 
-    private float CDTime = 0; 
-    sbyte index;
+    public float CDTime = 0; 
+    public sbyte index;
     const short selfMissileNo = 0;
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
     private RoleState selfState;
@@ -38,12 +38,13 @@ public class mg_atk : MonoBehaviour,CDEquipment
             index = value;
         }
     }
-
+    
     public sbyte Kind//本技能属于主动技能所以kind为 PASSIVE_SKILL
     {
         get
         {
             return EquipmentTable.PASSIVE_SKILL;
+            //return EquipmentTable.ON_TAKE_DAMAGE;
         }
     }
 //實做CDEquipment介面----------------------------------------------
@@ -55,7 +56,8 @@ public class mg_atk : MonoBehaviour,CDEquipment
     {
         get
         {
-            return CDTime <= 0;//如果CDTime小於0代表技能可以使用
+            Debug.Log(" in can use CDTime is" + CDTime);
+            return (CDTime <= 0);//如果CDTime小於0代表技能可以使用
         }
     }
     public uint Consumption
@@ -88,6 +90,8 @@ public class mg_atk : MonoBehaviour,CDEquipment
 
 
         CDTime = CD;//技能冷卻
+        Debug.Log("in trigger CDTime is" + CDTime);
+
         
     }
 

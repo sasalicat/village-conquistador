@@ -18,10 +18,10 @@ public class NetControler : MonoBehaviour,KBControler{
     }
     public Entity entity;
     public List<Dictionary<string, object>> codeLine;
-    private bool upIng = false;
-    private bool leftIng = false;
-    private bool downIng = false;
-    private bool rightIng = false;
+    public bool upIng = false;
+    public bool leftIng = false;
+    public bool downIng = false;
+    public bool rightIng = false;
     private AnimatorTable action;
     private EquipmentList eList;
     private NetRoleState state;
@@ -194,67 +194,113 @@ public class NetControler : MonoBehaviour,KBControler{
     void Update()
     {
         //Label.text = ".........";
-        if (entity != null)
+        /*if (entity != null)
         {
             transform.position = entity.position;
            
-        }
+        }*/
         while(codeLine.Count > 0)
         {
             Debug.Log("codeline do------");
             Dictionary<string,object> item = codeLine[0];
             sbyte nextcode = (sbyte)item["code"];
-            switch (nextcode)
+            Debug.Log("code " + nextcode);
+          
+            switch (nextcode)//先同步位置再动画
             {
                 case CodeTable.KEYUP_DOWN:
                     {
+                        Vector2 Pos = (Vector2)item["PlayerPosition"];
+                        this.transform.position = new Vector3(Pos.x,Pos.y,0);
                         get_on_keyup_down()();
                         break;
                     }
                 case CodeTable.KEYLEFT_DOWN:
                     {
+                        Vector2 Pos = (Vector2)item["PlayerPosition"];
+                        this.transform.position = new Vector3(Pos.x, Pos.y, 0);
                         get_on_keyleft_down()();
                         break;
                     }
                 case CodeTable.KEYRIGHT_DOWN:
                     {
+                        Vector2 Pos = (Vector2)item["PlayerPosition"];
+                        this.transform.position = new Vector3(Pos.x, Pos.y, 0);
                         get_on_keyright_down()();
                         break;
                     }
                 case CodeTable.KEYDOWN_DOWN:
                     {
+                        Vector2 Pos = (Vector2)item["PlayerPosition"];
+                        this.transform.position = new Vector3(Pos.x, Pos.y, 0);
                         get_on_keydown_down()();
                         break;
                     }
                 case CodeTable.KEYUP_UP:
                     {
+                        Vector2 Pos = (Vector2)item["PlayerPosition"];
+                        this.transform.position = new Vector3(Pos.x, Pos.y, 0);
                         get_on_keyup_up()();
                         break;
                     }
                 case CodeTable.KEYLEFT_UP:
                     {
+                        Vector2 Pos = (Vector2)item["PlayerPosition"];
+                        this.transform.position = new Vector3(Pos.x, Pos.y, 0);
                         get_on_keyleft_up()();
                         break;
                     }
                 case CodeTable.KEYRIGHT_UP:
                     {
+                        Vector2 Pos = (Vector2)item["PlayerPosition"];
+                        this.transform.position = new Vector3(Pos.x, Pos.y, 0);
                         get_on_keyright_up()();
                         break;
                     }
                 case CodeTable.KEYDOWN_UP:
                     {
+                        Vector2 Pos = (Vector2)item["PlayerPosition"];
+                        this.transform.position = new Vector3(Pos.x, Pos.y, 0);
                         get_on_keydown_up()();
                         break;
                     }
-                case CodeTable.MOUSE_LEFT_DOWN:
+                case CodeTable.UPDATE_Z:
                     {
-                        get_on_left_down()((Vector3)item["directionZ"]);
+                        if (state.canRota)
+                        {
+                            short directZ = (short)item["Z"];
+                            transform.eulerAngles = new Vector3(0, 0, directZ);
+                        }
                         break;
                     }
             }
             codeLine.RemoveAt(0);
 
         }
+        //移动---------------------------------------
+        //Vector3 changeV3 = Vector3.zero;
+        if (state.canMove)
+        {
+            Vector3 changeV3 = new Vector3(0, 0, 0);
+            if (leftIng)
+            {
+                changeV3.x += state.speed * Time.deltaTime;
+            }
+            if (rightIng)
+            {
+                changeV3.x -= state.speed * Time.deltaTime;
+            }
+            if (upIng)
+            {
+                changeV3.y += state.speed * Time.deltaTime;
+            }
+            if (downIng)
+            {
+                changeV3.y -= state.speed * Time.deltaTime;
+            }
+            transform.position += changeV3;
+        }
+        //-------------------------------------------
         while (eTriggerLine.Count > 0)
         {
             Label.text = "enter etrigger! size:"+ eList.equipments.Count;
@@ -341,7 +387,7 @@ public class NetControler : MonoBehaviour,KBControler{
 
     public void addOrder(Dictionary<string, object> item)
     {
-        Debug.Log("add order for" + entity.id);
+        //Debug.Log("add order for" + entity.id);
         codeLine.Add(item);
     }
 

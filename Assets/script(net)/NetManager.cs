@@ -10,12 +10,12 @@ public class NetManager : MonoBehaviour ,Manager {
 
     private const int MAX_NUM = 6;
     private GameObject[] objList;
-    private ObjAndRoomNo[] orList;
+    //private ObjAndRoomNo[] orList;
     public NetControler[] controlerList;
     public GameObject roleparfab;
     public dataRegister register;
     public List<dirPair> directionList=new List<dirPair>();
-    public List<createOrder> createOrderList = new List<createOrder>();
+    //public List<createOrder> createOrderList = new List<createOrder>();
     public class dirPair
     {
         public sbyte No;
@@ -69,7 +69,7 @@ public class NetManager : MonoBehaviour ,Manager {
 
             }
         }
-        orList = new ObjAndRoomNo[MAX_NUM];
+        //orList = new ObjAndRoomNo[MAX_NUM];
         controlerList = new NetControler[MAX_NUM];
         ((Player)KBEngineApp.app.player()).baseCall("onChangeToWar", new object[] { });
         ((Player)KBEngineApp.app.player()).manager = this;
@@ -84,11 +84,11 @@ public class NetManager : MonoBehaviour ,Manager {
             objList[directionList[0].No].transform.eulerAngles = new Vector3(0, 0, directionList[0].z);
             directionList.RemoveAt(0);
         }
-        if (createOrderList.Count > 0)//另一個方案,直接創建投射物,未採用
+        /*if (createOrderList.Count > 0)//另一個方案,直接創建投射物,未採用
         {
             createOrder order = createOrderList[0];
             //Instantiate();
-        }
+        }*/
 	}
     public void onEnterWorld(Entity e)
     {
@@ -97,8 +97,7 @@ public class NetManager : MonoBehaviour ,Manager {
         for (int i=0;i<MAX_NUM;i++) {//roomNo就是物件雜objList的索引值
             if (e.id == register.PlayerInWar[i].entityId)
             {
-                //懷疑AddEquipment沒有被呼叫過
-               
+                
                 EquipmentList elist = objList[i].GetComponent<EquipmentList>();
                 if (e.id == KBEngineApp.app.player().id)
                 {
@@ -131,8 +130,9 @@ public class NetManager : MonoBehaviour ,Manager {
                     controlerList[i] = control;
                     objList[i].GetComponent<NetRoleState>().control = control;
                 }
-                orList[i] = new ObjAndRoomNo((sbyte)i,objList[i]); 
+                //orList[i] = new ObjAndRoomNo((sbyte)i,objList[i]); 
                 objList[i].GetComponent<NetRoleState>().roomNo = (sbyte)i;
+                objList[i].transform.position = e.position;
                 objList[i].SetActive(true);
                 Label.text = "elist control is:" + elist.controler.ToString();
                 //elist.AddEquipments();
@@ -165,13 +165,14 @@ public class NetManager : MonoBehaviour ,Manager {
     }*/
     public GameObject getObjByRoomNo(sbyte roomNo)
     {
-        for(int i = 0; i < orList.Length; i++)
+        /*for(int i = 0; i < orList.Length; i++)
         {
             if (orList[i].roomNo == roomNo)
             {
                 return orList[i].obj;
             }
         }
-        return null;
+        return null;*/
+        return objList[roomNo];
     } 
 }

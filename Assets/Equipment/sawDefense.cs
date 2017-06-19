@@ -11,6 +11,7 @@ public class sawDefense : MonoBehaviour,CDEquipment {
     private float CDTime = 0;
     private RoleState state;
     private GameObject missile;
+
     public bool CanUse
    {
         get
@@ -55,7 +56,6 @@ public class sawDefense : MonoBehaviour,CDEquipment {
             index = value;
         }
     }
-
     public void setTime(float time)
     {
         if (CDTime > 0)
@@ -72,17 +72,23 @@ public class sawDefense : MonoBehaviour,CDEquipment {
 
     public void trigger(Dictionary<string, object> args)
     {
-        Vector3 pos=(Vector3)args["PlayerPosition"];
-        int realNum = (int)(BaseDamage + BaseDamage * (((float)state.selfdata.power) / 100));
-        float realStiff = BaseStiff + BaseStiff * (((float)state.selfdata.stiffable) / 100);
-        damage damage = new damage(2,realNum,realStiff,false,false,gameObject);
-        GameObject newone= Instantiate(missile,pos,this.transform.rotation);
-        Missile mis= newone.GetComponent<Missile>();
-        mis.Damage = damage;
-        mis.Creater = gameObject;
+        if (CDTime<=0) {
+            Vector3 pos = (Vector3)args["PlayerPosition"];
+            int realNum = (int)(BaseDamage + BaseDamage * (((float)state.selfdata.power) / 100));
+            float realStiff = BaseStiff + BaseStiff * (((float)state.selfdata.stiffable) / 100);
+            damage damage = new damage(2, realNum, realStiff, false, false, gameObject);
+            GameObject newone = Instantiate(missile, pos, this.transform.rotation);
+            Missile mis = newone.GetComponent<Missile>();
+            mis.Damage = damage;
+            mis.Creater = gameObject;
 
-        CDTime = CD;
+            CDTime = CD;
+        }
     }
-
+    public void Update()//这里写法不对
+    {
+        CDTime -= Time.deltaTime;
+    }
+  
 
 }

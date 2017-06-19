@@ -9,6 +9,7 @@ public interface KBControler : Controler{
         set;
         get;
     }
+    void addOrder(Dictionary<string, object> item);
     void addTriggerOrder(sbyte eIndex,Dictionary<string,object> args);
     void addEvent(sbyte code, Dictionary<string, object> args);
     //給netrolestate使用的方法-----------------

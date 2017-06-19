@@ -119,13 +119,17 @@ public class EquipmentList : MonoBehaviour {
     private void addByNo(int EquipmentNo)
     {
         string typeName = table.equipmentNameList[EquipmentNo];
+
         Component newone= gameObject.AddComponent(System.Type.GetType(typeName));
         if (table.passiveList[EquipmentNo])//主動道具
         {
             passiveEquipments.Add((CDEquipment)newone);
         }
+
         equipments.Add((Equipment)newone);
-        Debug.Log("name"+typeName+"kind is"+((Equipment)newone).Kind);
+
+        ((Equipment)newone).selfIndex = ((sbyte)(equipments.Count - 1));
+
         switch (((Equipment)newone).Kind) {
             case CodeTable.TAKE_DAMAGE:
                 {

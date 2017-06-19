@@ -8,10 +8,10 @@ public class KeyRegister : MonoBehaviour {
 	void Start () {
         DontDestroyOnLoad(gameObject);
         keySetting = new Dictionary<string,KeyCode>();
-        keySetting["up"] = KeyCode.UpArrow;
-        keySetting["left"] = KeyCode.LeftArrow;
-        keySetting["right"] = KeyCode.RightArrow;
-        keySetting["down"] = KeyCode.DownArrow;
+        keySetting["up"] = KeyCode.W;
+        keySetting["left"] = KeyCode.A;
+        keySetting["right"] = KeyCode.D;
+        keySetting["down"] = KeyCode.S;
         keySetting["key1"] = KeyCode.Q;
         keySetting["key2"] = KeyCode.E;
         keySetting["key3"] = KeyCode.R;

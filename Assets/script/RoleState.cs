@@ -16,6 +16,10 @@ public class RoleState : MonoBehaviour {
         bool canMove{
             get;
         }
+        bool canAction
+        {
+            get;
+        }
 
     }
     public class normal : state
@@ -24,6 +28,14 @@ public class RoleState : MonoBehaviour {
         public normal(RoleState rs)
         {
             role = rs;
+        }
+
+        public bool canAction
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public bool canMove
@@ -104,7 +116,13 @@ public class RoleState : MonoBehaviour {
             return nowState.canRota;
         }
     }
-
+    public bool canAction
+    {
+        get
+        {
+            return nowState.canAction;
+        }
+    }
 
     protected void Start()
     {

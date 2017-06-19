@@ -59,7 +59,7 @@ public interface Controler
         set;
         get;
     }
-    void addOrder(Dictionary<string, object> item);
+    
     
 
 }

@@ -37,6 +37,14 @@ public class NetRoleState :RoleState {
             }
         }
 
+        public bool canAction
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         public normal(NetRoleState role)
         {
             this.role = role;
@@ -81,23 +89,24 @@ public class NetRoleState :RoleState {
             else if (role.canBeKill)//死亡
             {
                 role.nowHp = 0;
-                role.changeState(3);
+                role.changeState(DEAD_NO);
                 role.anima.ConverselyStart();
+                return;
             }
           
-                if (damage.makeConversaly && role.canBeConvesly)//如果会被击倒则不做硬直判定
-                {
-                    role.nowConversely = unit.STAND_CONVESLY_TIME;
-                    role.changeState(CONVERSELY_NO);
-                    role.changeState(3);
-                }
-                else if (role.canBeStiff)
-                {
+            if (damage.makeConversaly && role.canBeConvesly)//如果会被击倒则不做硬直判定
+            {
+                role.nowConversely = unit.STAND_CONVESLY_TIME;
+                role.changeState(CONVERSELY_NO);
+                
+             }
+             else if (role.canBeStiff)
+             {
                     Debug.Log("enter stiff");
                     role.nowStiff = damage.stiffTime;
                     role.changeState(STIFF_NO);
                     role.anima.StiffStart();
-                }
+             }
             
         }
 
@@ -112,6 +121,14 @@ public class NetRoleState :RoleState {
         public stiff(NetRoleState role)
         {
             this.role = role;
+        }
+
+        public bool canAction
+        {
+            get
+            {
+                return false;
+            }
         }
 
         public bool canMove
@@ -141,9 +158,12 @@ public class NetRoleState :RoleState {
             {
                 role.nowHp -= damage.num;
             }
-            else
+            else if(role.canBeKill)
             {
                 role.nowHp = 0;
+                role.changeState(DEAD_NO);
+                role.anima.ConverselyStart();
+                return;
             }
             if (damage.makeConversaly && role.canBeConvesly)//如果会被击倒则不做硬直判定
             {
@@ -204,6 +224,14 @@ public class NetRoleState :RoleState {
             this.role = role;
         }
 
+        public bool canAction
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         public bool canMove
         {
             get
@@ -232,9 +260,11 @@ public class NetRoleState :RoleState {
             {
                 role.nowHp -= damage.num;
             }
-            else
+            else if(role.canBeKill)
             {
                 role.nowHp = 0;
+                role.changeState(DEAD_NO);
+                return;
             }
             
         }
@@ -283,10 +313,19 @@ public class NetRoleState :RoleState {
     }
     class died : state_net
     {
+        public bool canAction
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         public bool canMove
         {
             get
             {
+                Debug.Log("in died can't move");
                 return false;
             }
         }
@@ -318,6 +357,7 @@ public class NetRoleState :RoleState {
         {
             return;
         }
+      
     }
 
     new void  Start () {
@@ -327,6 +367,7 @@ public class NetRoleState :RoleState {
         StateTable.Add(new normal(this));
         StateTable.Add(new stiff(this));
         StateTable.Add(new conversely(this));
+        StateTable.Add(new died());
 
         //初始为normal
         nowState = StateTable[0];
