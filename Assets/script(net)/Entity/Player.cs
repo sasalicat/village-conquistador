@@ -10,21 +10,24 @@
         public NetManager manager;
         public KBControler controler;
         public sbyte roomNo;
+        public loading loadPage;
         public override void __init__()
         {
             Debug.Log("KB: player init!!!");
             KBEngine.Event.fireOut("PlayerInit", new object[] {  this });
         }
-        public void reqChangeReady(List<object> PlayerList)
+        public void reqChangeReady(List<object> PlayerList)//server回应onChangeToWar(在netManager的start中呼叫) 的funtion
         {
-            Debug.Log("这是reqchangeReady的Log");
+            //Debug.Log("这是reqchangeReady的Log");
             while (PlayerList.Count > 0)
             {
                 Dictionary<string, object> item = (Dictionary<string, object>)PlayerList[0];
                 manager.register.PlayerInWar[(sbyte)item["roomNo"]].entityId = (int)item["eId"];
                 PlayerList.RemoveAt(0);
             }
-            Dbg.DEBUG_MSG("onIdReady-----------------------");
+
+
+            //Dbg.DEBUG_MSG("onIdReady-----------------------");
             baseCall("onIdReady", new object[] { });
         }
         public void updateZ(short z)
@@ -76,5 +79,10 @@
             //controler.addEvent(CodeTable.TAKE_DAMAGE,)
             //damage damage = new damage(kind,num,((float)stiffMilli)/1000);
         }
+        public void getFinish(sbyte roomNo)
+        {
+            loadPage.finishLine.Add(roomNo);
+        }
+
     }
 }

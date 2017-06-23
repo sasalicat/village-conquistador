@@ -8,13 +8,14 @@ using KBEngine;
 public class NetManager : MonoBehaviour ,Manager {
     public Text Label;
 
-    private const int MAX_NUM = 6;
+    public const int MAX_NUM = 6;
     private GameObject[] objList;
     //private ObjAndRoomNo[] orList;
     public NetControler[] controlerList;
     public GameObject roleparfab;
     public dataRegister register;
     public List<dirPair> directionList=new List<dirPair>();
+    public bool[] finishTable = new bool[MAX_NUM];
     //public List<createOrder> createOrderList = new List<createOrder>();
     public class dirPair
     {
@@ -73,7 +74,8 @@ public class NetManager : MonoBehaviour ,Manager {
         controlerList = new NetControler[MAX_NUM];
         ((Player)KBEngineApp.app.player()).baseCall("onChangeToWar", new object[] { });
         ((Player)KBEngineApp.app.player()).manager = this;
-        Label= Label = Label = GameObject.Find("Canvas/Text2").GetComponent<Text>();
+        ((Player)KBEngineApp.app.player()).loadPage = GameObject.Find("loadingPage").GetComponent<loading>();
+        Label = Label = Label = GameObject.Find("Canvas/Text2").GetComponent<Text>();
     }
 	
 	// Update is called once per frame
@@ -90,6 +92,22 @@ public class NetManager : MonoBehaviour ,Manager {
             //Instantiate();
         }*/
 	}
+    private bool checkFinish()//如果所有玩家都完成加载回传true.用于本地创建
+    {
+        bool allFinish = true;//旗标,只要有一个玩家没有准备就会被设置为false
+        for(int i = 0; i < MAX_NUM; i++)
+        {
+            if (register.PlayerInWar[i] != null)
+            {
+                if (!finishTable[i])
+                {
+                    allFinish = false;
+                    break;
+                }
+            }
+        }
+        return allFinish;
+    }
     public void onEnterWorld(Entity e)
     {
         Debug.Log("id " + e.id + "on Enter World");
@@ -130,11 +148,17 @@ public class NetManager : MonoBehaviour ,Manager {
                     controlerList[i] = control;
                     objList[i].GetComponent<NetRoleState>().control = control;
                 }
+
                 //orList[i] = new ObjAndRoomNo((sbyte)i,objList[i]); 
                 objList[i].GetComponent<NetRoleState>().roomNo = (sbyte)i;
                 objList[i].transform.position = e.position;
                 objList[i].SetActive(true);
-                Label.text = "elist control is:" + elist.controler.ToString();
+                finishTable[i] = true;
+                if (checkFinish())//如果本地段都全部完成则通知server本client已经完成加载
+                {
+                    ((Player)KBEngineApp.app.player()).baseCall("notifyFinish", new object[] { });
+                }
+               // Label.text = "elist control is:" + elist.controler.ToString();
                 //elist.AddEquipments();
                 //Label.text = "after add";
                 break;
