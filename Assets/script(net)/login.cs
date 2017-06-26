@@ -26,8 +26,15 @@ public class login : MonoBehaviour {
 	}
     public void onClick()
     {
-        KBEngine.Event.fireIn("login", inf.text, inf.text, System.Text.Encoding.UTF8.GetBytes("kbengine_unity3d_demo"));
-    }
+        try
+        {
+            KBEngine.Event.fireIn("login", inf.text, inf.text, System.Text.Encoding.UTF8.GetBytes("kbengine_unity3d_demo"));
+        }
+        catch (Exception e)
+        {
+
+        }
+     }
     public void onConnectState(bool state)
     {
         if (state)

@@ -24,6 +24,8 @@ public class roomShow : MonoBehaviour {
     public List<roomData> handleLine = new List<roomData>();
     public dataRegister register;
     public HallManager manager;
+    public GameObject createTable;
+
 
 	// Use this for initialization
 	void Start () {
@@ -74,18 +76,35 @@ public class roomShow : MonoBehaviour {
 	}
     public void OnAddClick()
     {
-        object[] param = new object[1];
-        param[0] = "我差不多已經是條鹹魚了";
+        createTable.SetActive(true);
+    }
+    public void OnSureClick()//用于创建房间页面的确定的listener
+    {
+        object[] param = new object[3];
+        string roomname = createTable.transform.Find("InputField/Text").GetComponent<Text>().text;
+        if (roomname != "")
+        {
+            param[0] = roomname;
+        }
+        else
+        {
+            param[0] = createTable.transform.Find("InputField/Placeholder").GetComponent<Text>().text;
+        }
         List<sbyte> temp = register.roleList[0].equipmentIdList;
         List<object> objList = new List<object>();
-        for(int i = 0; i < temp.Count; i++)
+        for (int i = 0; i < temp.Count; i++)
         {
             objList.Add(temp[i]);
         }
-
-        ((Account)(KBEngineApp.app.player())).baseCall("createRoom", new object[] { "我差不多已經是條鹹魚了", register.roleList[0].roleKind,objList});
+        param[1] = register.roleList[0].roleKind;
+        param[2] = objList;
+        ((Account)(KBEngineApp.app.player())).baseCall("createRoom",param);
         manager.JumpRoomScene();
     }
+    public void OnCancelClick()
+    {
+        createTable.SetActive(false);
+    } 
     public void AddRoomReq(int id,string name, sbyte num)
     {
         handleLine.Add(new roomData(id,name,num));

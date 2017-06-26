@@ -4,6 +4,7 @@ using UnityEngine;
 using KBEngine;
 using System;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class NetControler : MonoBehaviour,KBControler{
     private class eTrigger
@@ -268,8 +269,10 @@ public class NetControler : MonoBehaviour,KBControler{
                     {
                         if (state.canRota)
                         {
+                            //用dotween来平滑转向
                             short directZ = (short)item["Z"];
-                            transform.eulerAngles = new Vector3(0, 0, directZ);
+                            transform.DORotate(new Vector3(0, 0, directZ), 0.1f, RotateMode.Fast);
+ 
                         }
                         break;
                     }
