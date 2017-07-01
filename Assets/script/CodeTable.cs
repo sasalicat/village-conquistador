@@ -25,4 +25,5 @@ public class CodeTable{
     public const sbyte KEYRIGHT_UP = 20;
     public const sbyte TAKE_DAMAGE = 21;
     public const sbyte UPDATE_Z = 22;
+    public const sbyte INTERVAL = 23;
 }

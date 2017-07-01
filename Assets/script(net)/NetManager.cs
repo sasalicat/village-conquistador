@@ -9,13 +9,18 @@ public class NetManager : MonoBehaviour ,Manager {
     public Text Label;
 
     public const int MAX_NUM = 6;
+    public const float INTERVAL_CYCLE = 0.1f;
+
     private GameObject[] objList;
     //private ObjAndRoomNo[] orList;
     public NetControler[] controlerList;
+    public NetPlayerControler playerContorler;
     public GameObject roleparfab;
     public dataRegister register;
     public List<dirPair> directionList=new List<dirPair>();
     public bool[] finishTable = new bool[MAX_NUM];
+    public int intervals = 0;//累积的时间间隔触发次数
+
     //public List<createOrder> createOrderList = new List<createOrder>();
     public class dirPair
     {
@@ -86,12 +91,29 @@ public class NetManager : MonoBehaviour ,Manager {
             objList[directionList[0].No].transform.eulerAngles = new Vector3(0, 0, directionList[0].z);
             directionList.RemoveAt(0);
         }
+        while (intervals > 0)
+        {
+            Debug.Log("in netmanager >0");
+            for (int i = 0; i < MAX_NUM; i++)
+            {
+                if (controlerList[i] != null)
+                {
+                    Dictionary<string, object> newData = new Dictionary<string, object>();
+                    newData["interval"] = INTERVAL_CYCLE;
+                    ((KBControler)controlerList[i]).addEvent(CodeTable.INTERVAL, newData);
+                }
+            }
+            Dictionary<string, object> newDatap = new Dictionary<string, object>();
+            newDatap["interval"] = INTERVAL_CYCLE;
+            ((KBControler)playerContorler).addEvent(CodeTable.INTERVAL, newDatap);
+            intervals--;
+        }
         /*if (createOrderList.Count > 0)//另一個方案,直接創建投射物,未採用
         {
             createOrder order = createOrderList[0];
             //Instantiate();
         }*/
-	}
+    }
     private bool checkFinish()//如果所有玩家都完成加载回传true.用于本地创建
     {
         bool allFinish = true;//旗标,只要有一个玩家没有准备就会被设置为false
@@ -129,6 +151,7 @@ public class NetManager : MonoBehaviour ,Manager {
                     ((Player)e).roomNo = (sbyte)i;
                     ((Player)e).manager = this;
                     control.roomNo = (sbyte)i;
+                    playerContorler = control;
                     objList[i].GetComponent<NetRoleState>().control = control;
                     
                 }

@@ -198,7 +198,14 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         on_keyup_up += onKeyUpUp;
         on_keyleft_up += onKeyLeftUp;
         on_keyright_up += onKeyRightUp;
-        on_left_down += onMouseLeftDown;
+        if (eList.passiveEquipments.Count > EquipmentList.ATK)
+        {
+            on_left_down += onMouseLeftDown;
+        }
+        else
+        {
+            on_left_down += empty;
+        }
         if (eList.passiveEquipments.Count>EquipmentList.PASSIVE1) {//為了防止當角色沒有裝備那麼多主動道具時報錯
             on_key1_down += onKey1Dowm;//因為道具一定是順著順序排放鍵位的,例如第一個道具一定是key1,所以只要判斷主動道具數量就知道角色那個鍵位有沒有主動道具
         }
@@ -369,7 +376,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
             while (eTriggerLine.Count > 0)
             {
                 eTrigger temp = eTriggerLine[0];
-               
+                Debug.Log("netPlayerControler eIndex is"+temp.eIndex);
                 eList.equipments[temp.eIndex].trigger(temp.Args);
               
                 eTriggerLine.RemoveAt(0);
@@ -391,6 +398,11 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                                 Debug.Log("takedamage null");
                             }
                             state.realHurt((damage)EventLine[0].Args["Damage"]);
+                            break;
+                        }
+                    case CodeTable.INTERVAL:
+                        {
+                            Debug.Log("inveral " + EventLine[0].Args["interval"]);
                             break;
                         }
                 }
@@ -476,8 +488,10 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         //Debug.Log("Role_onTakeDamage event mouse position is" + mousePos);
         //player.cellCall("notify2", new object[] { roomNo,CodeTable.MOUSE_LEFT_DOWN,mousePos});
         //action.AttackStart();
-        player.cellCall("notify3", new object[] { EquipmentList.ATK, transform.position, mousePos });
-        //0為普通攻擊的裝備索引
+        if (eList.passiveEquipments[EquipmentList.ATK].CanUse)
+        {
+            player.cellCall("notify3", new object[] { EquipmentList.ATK, transform.position, mousePos });
+        }//0為普通攻擊的裝備索引
     }
     void onKey1Dowm(Vector3 mousePos)
     {
@@ -525,6 +539,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
 
     public void addTriggerOrder(sbyte eIndex, Dictionary<string, object> args)
     {
+        Debug.Log("addTrigger in net contrler");
         eTriggerLine.Add(new eTrigger(eIndex, args));
     }
 

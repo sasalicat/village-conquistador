@@ -202,10 +202,10 @@ public class NetControler : MonoBehaviour,KBControler{
         }*/
         while(codeLine.Count > 0)
         {
-            Debug.Log("codeline do------");
+            //Debug.Log("codeline do------");
             Dictionary<string,object> item = codeLine[0];
             sbyte nextcode = (sbyte)item["code"];
-            Debug.Log("code " + nextcode);
+            // Debug.Log("code " + nextcode);
           
             switch (nextcode)//先同步位置再动画
             {
@@ -306,10 +306,12 @@ public class NetControler : MonoBehaviour,KBControler{
         //-------------------------------------------
         while (eTriggerLine.Count > 0)
         {
-            Label.text = "enter etrigger! size:"+ eList.equipments.Count;
-             eTrigger temp = eTriggerLine[0];
-            Label.text = "in eTrigger gameobj is"+ eList.equipments[temp.eIndex].ToString();
+            
+            //Label.text = "enter etrigger! size:"+ eList.equipments.Count;
+            eTrigger temp = eTriggerLine[0];
+            //Label.text = "in eTrigger gameobj is"+ eList.equipments[temp.eIndex].ToString();
             eList.equipments[temp.eIndex].trigger(temp.Args);
+            Debug.Log("in eTrigger eIndex is"+temp.eIndex);
             eTriggerLine.RemoveAt(0);
            
         }
@@ -323,6 +325,11 @@ public class NetControler : MonoBehaviour,KBControler{
                             get_on_take_damage()(EventLine[0].Args);
                         }
                         state.realHurt((damage)EventLine[0].Args["Damage"]);
+                        break;
+                    }
+                case CodeTable.INTERVAL:
+                    {
+                        Debug.Log("inveral "+ EventLine[0].Args["interval"]);
                         break;
                     }
             }
@@ -396,6 +403,7 @@ public class NetControler : MonoBehaviour,KBControler{
 
     public void addTriggerOrder(sbyte eIndex, Dictionary<string, object> args)
     {
+        Debug.Log("netcontroler AddTrigger");
         eTriggerLine.Add(new eTrigger(eIndex, args));
     }
 

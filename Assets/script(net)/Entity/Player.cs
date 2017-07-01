@@ -48,7 +48,7 @@
         }
         public void receive2(sbyte roomNo,sbyte code,Vector3 mousePos)
         {
-            //Debug.Log("this id is" + this.id + "player is" + KBEngineApp.app.player().id);
+            Debug.Log("this id is" + this.id + "player is" + KBEngineApp.app.player().id);
             Dictionary<string, object> order = new Dictionary<string, object>();
             order["code"] = code;
             order["directionZ"]= mousePos;
@@ -56,6 +56,7 @@
         }
         public void receive3(sbyte eindex,Vector3 PlayerPos,Vector3 mousePos,sbyte randint)
         {
+            Debug.Log("in r3 this id is" + this.id + "player is" + KBEngineApp.app.player().id);
             Dictionary<string, object> args=new Dictionary<string, object>();
             args["PlayerPosition"] = PlayerPos;
             args["MousePosition"] = mousePos;
@@ -83,6 +84,9 @@
         {
             loadPage.finishLine.Add(roomNo);
         }
-
+        public void intervalTrigger()
+        {
+            manager.intervals++;
+        }
     }
 }

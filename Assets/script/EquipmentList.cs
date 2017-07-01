@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using KBEngine;
+using System;
 using UnityEngine.UI;
 
 
 public class EquipmentList : MonoBehaviour {
+
+    private delegate void reduce(float time);
+
+
     //主動裝備編號---------------------------------
     public const sbyte ATK = 0;
     public const sbyte SKILL = 1;
@@ -17,6 +22,7 @@ public class EquipmentList : MonoBehaviour {
 
     public List<Equipment> equipments=new List<Equipment>();
     public List<CDEquipment> passiveEquipments = new List<CDEquipment>();
+    private reduce reduceLine;
     public EquipmentTable table;
     public dataRegister register;
     public KBControler controler;
@@ -55,6 +61,7 @@ public class EquipmentList : MonoBehaviour {
         List<sbyte> eList = register.PlayerInWar[selfNo].role.equipmentIdList;
         while (eList.Count > 0)
         {
+            Debug.Log("elist do");
             addByNo(eList[0]);
             eList.RemoveAt(0);
         }
@@ -124,6 +131,25 @@ public class EquipmentList : MonoBehaviour {
         if (table.passiveList[EquipmentNo])//主動道具
         {
             passiveEquipments.Add((CDEquipment)newone);
+        }
+        //[判断是不是CDEquiment,如果是加入技能冷却列表
+        Type[] inters = newone.GetType().GetInterfaces();
+        Debug.Log("type length"+inters.Length);
+
+        bool isCDE=false;
+        for(int i = 0; i < inters.Length; i++)
+        {
+            Debug.Log("i type:" + inters[i] + "type:" + Type.GetType("CDEquipment"));
+            if (inters[i] == Type.GetType("CDEquipment"))
+            {
+                isCDE = true;
+                break;
+            }
+        }
+        if (isCDE)
+        {
+            Debug.Log(newone.name+"isCDE");
+            reduceLine += ((CDEquipment)newone).setTime;
         }
 
         equipments.Add((Equipment)newone);

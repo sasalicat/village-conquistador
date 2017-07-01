@@ -18,16 +18,11 @@ public class dataRegister : MonoBehaviour {
     }
     public List<RoleData> roleList=new List<RoleData>();//用於存從數據庫取出的角色資料
     public PlayerData[] PlayerInWar = new PlayerData[6];//用於暫存現在有那些玩家的角色參加遊戲
-	// Use this for initialization
+    public List<sbyte> equipmentNoList;
+    // Use this for initialization
 	void Start () {
-        List < sbyte > elist= new List<sbyte>();
-        elist.Add(0);
-        elist.Add(0);
-        elist.Add(0);
-        elist.Add(0);
-        elist.Add(0);
-        elist.Add(1);
-        roleList.Add(new RoleData(0,elist));
+
+        roleList.Add(new RoleData(0,equipmentNoList));
 	}
 	
 	// Update is called once per frame

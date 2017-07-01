@@ -42,7 +42,9 @@ public class roomShow : MonoBehaviour {
 	void Update () {
         while (handleLine.Count > 0)
         {
+         
             roomData firstData= handleLine[0];
+            Debug.Log("in room show id is" + firstData.id);
             if (roomList[firstData.id]==null) {
                 Debug.Log("count is" + handleLine.Count + "0`s name is " + firstData.name);
                 if(firstData.playerNum>0)
