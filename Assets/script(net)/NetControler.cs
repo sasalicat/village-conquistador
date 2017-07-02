@@ -175,7 +175,7 @@ public class NetControler : MonoBehaviour,KBControler{
 
     void Start()
     {
-        Label = GameObject.Find("Canvas/Text").GetComponent<Text>();
+        //Label = GameObject.Find("Canvas/Text").GetComponent<Text>();
         //Label.text = "我活著";
         eList = GetComponent<EquipmentList>();
         action = GetComponent<AnimatorTable>();

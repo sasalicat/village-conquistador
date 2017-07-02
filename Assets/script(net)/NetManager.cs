@@ -80,7 +80,8 @@ public class NetManager : MonoBehaviour ,Manager {
         ((Player)KBEngineApp.app.player()).baseCall("onChangeToWar", new object[] { });
         ((Player)KBEngineApp.app.player()).manager = this;
         ((Player)KBEngineApp.app.player()).loadPage = GameObject.Find("loadingPage").GetComponent<loading>();
-        Label = Label = Label = GameObject.Find("Canvas/Text2").GetComponent<Text>();
+        ((Player)KBEngineApp.app.player()).ms = GameObject.Find("Canvas/mslabel").GetComponent<msTask>();
+        //Label = Label = Label = GameObject.Find("Canvas/Text2").GetComponent<Text>();
     }
 	
 	// Update is called once per frame

@@ -11,6 +11,7 @@
         public KBControler controler;
         public sbyte roomNo;
         public loading loadPage;
+        public msTask ms;
         public override void __init__()
         {
             Debug.Log("KB: player init!!!");
@@ -87,6 +88,11 @@
         public void intervalTrigger()
         {
             manager.intervals++;
+        }
+        public void reqmsTask()
+        {
+            //Debug.Log("reqms");
+            ms.ReqTime = System.DateTime.Now.Millisecond;
         }
     }
 }
