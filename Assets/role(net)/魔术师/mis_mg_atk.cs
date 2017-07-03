@@ -49,6 +49,7 @@ public class mis_mg_atk : MonoBehaviour,Missile {
     }
     void Start()
     {
+            
            vspeed = new Vector3(0, -speed, 0);
     }
     void Update()

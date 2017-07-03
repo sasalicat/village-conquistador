@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLevel: 0
   isMultiThreads: 1
-  ip: 127.0.0.1
+  ip: 140.134.26.31
   port: 20013
   clientType: 7
   persistentDataPath: Application.persistentDataPath
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd6000c4a08a6a49bf88a677547458b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentNoList: 01
+  equipmentNoList: 00
 --- !u!1 &427121161
 GameObject:
   m_ObjectHideFlags: 0

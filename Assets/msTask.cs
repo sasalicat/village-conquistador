@@ -25,7 +25,7 @@ public class msTask : MonoBehaviour {
         }
         if (ReqTime > 0)
         {
-            text.text = ((ReqTime - oriTime)/2).ToString();
+            text.text = (ReqTime - oriTime).ToString();
             ReqTime = -1;
         }
 	}

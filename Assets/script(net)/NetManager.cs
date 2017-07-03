@@ -15,6 +15,7 @@ public class NetManager : MonoBehaviour ,Manager {
     //private ObjAndRoomNo[] orList;
     public NetControler[] controlerList;
     public NetPlayerControler playerContorler;
+    //public 
     public GameObject roleparfab;
     public dataRegister register;
     public List<dirPair> directionList=new List<dirPair>();
