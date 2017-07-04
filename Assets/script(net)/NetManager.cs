@@ -73,7 +73,7 @@ public class NetManager : MonoBehaviour ,Manager {
             if (register.PlayerInWar[i] != null)//在這裡生成角色對應的gameobj
             {
                 int roleNo=register.PlayerInWar[i].role.roleKind;
-                Debug.Log("i:"+i+" :"+roleNo);
+                //Debug.Log("i:"+i+" :"+roleNo);
                 objList[i] =  (GameObject)Instantiate(prafebTable.table[roleNo], new Vector3(0,0,0),transform.rotation);
                 
 
