@@ -1041,11 +1041,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4543191403026872, guid: a0a6446f1bc0e884e94786a644ab1276, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 16.62
+      value: 14.23
       objectReference: {fileID: 0}
     - target: {fileID: 4543191403026872, guid: a0a6446f1bc0e884e94786a644ab1276, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.5671716
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 4543191403026872, guid: a0a6446f1bc0e884e94786a644ab1276, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   equipmentNameList:
   - mg_atk
   - sawDefense
-  - tujishou
+  - tujishou_atk
   - 
   - 
   - 
@@ -1219,6 +1219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   table:
+  - {fileID: 1878559187541248, guid: a0a6446f1bc0e884e94786a644ab1276, type: 2}
   - {fileID: 1878559187541248, guid: a0a6446f1bc0e884e94786a644ab1276, type: 2}
 --- !u!1 &2138347942
 GameObject:
