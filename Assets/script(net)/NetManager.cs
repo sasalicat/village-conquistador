@@ -15,7 +15,7 @@ public class NetManager : MonoBehaviour ,Manager {
     //private ObjAndRoomNo[] orList;
     public NetControler[] controlerList;
     public NetPlayerControler playerContorler;
-    //public 
+    public PrabTabel prafebTable;
     public GameObject roleparfab;
     public dataRegister register;
     public List<dirPair> directionList=new List<dirPair>();
@@ -64,6 +64,7 @@ public class NetManager : MonoBehaviour ,Manager {
     // Use this for initialization
     void Start () {
         register = GameObject.Find("client").GetComponent<dataRegister>();
+        prafebTable = GameObject.Find("keyTabel").GetComponent<PrabTabel>();
         KBEngine.Event.registerOut("onEnterWorld", this, "onEnterWorld");
         //KBEngine.Event.registerOut("onEnterSpace", this, "onEnterSpace");
         objList = new GameObject[MAX_NUM];
@@ -71,7 +72,9 @@ public class NetManager : MonoBehaviour ,Manager {
         {
             if (register.PlayerInWar[i] != null)//在這裡生成角色對應的gameobj
             {
-                objList[i] =  (GameObject)Instantiate(roleparfab, new Vector3(0,0,0),transform.rotation);
+                int roleNo=register.PlayerInWar[i].role.roleKind;
+                Debug.Log("i:"+i+" :"+roleNo);
+                objList[i] =  (GameObject)Instantiate(prafebTable.table[roleNo], new Vector3(0,0,0),transform.rotation);
                 
 
             }

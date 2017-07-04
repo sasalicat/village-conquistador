@@ -106,7 +106,7 @@ public class RoomManager : MonoBehaviour {
                     {
                         newlist.Add((sbyte)elist[index]);
                     }
-                    register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]].role.roleKind = (sbyte)dataSingle["roleRoomId"];
+                    register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]].role.roleKind = (sbyte)dataSingle["roleKind"];
                     register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]].role.equipmentIdList = newlist;
 
                 }
