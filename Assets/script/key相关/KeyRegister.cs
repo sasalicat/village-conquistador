@@ -17,6 +17,7 @@ public class KeyRegister : MonoBehaviour {
         keySetting["key3"] = KeyCode.R;
         keySetting["key4"] = KeyCode.F;
         keySetting["key5"] = KeyCode.LeftShift;
+        keySetting["ESC"] = KeyCode.Escape;
     }
 	
 	// Update is called once per frame

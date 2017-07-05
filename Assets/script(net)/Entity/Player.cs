@@ -19,7 +19,7 @@
         }
         public void reqChangeReady(List<object> PlayerList)//server回应onChangeToWar(在netManager的start中呼叫) 的funtion
         {
-            //Debug.Log("这是reqchangeReady的Log");
+            Debug.Log("这是reqchangeReady的Log");
             while (PlayerList.Count > 0)
             {
                 Dictionary<string, object> item = (Dictionary<string, object>)PlayerList[0];

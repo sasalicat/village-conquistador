@@ -402,7 +402,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                         }
                     case CodeTable.INTERVAL:
                         {
-                            Debug.Log("inveral " + EventLine[0].Args["interval"]);
+                            //Debug.Log("inveral " + EventLine[0].Args["interval"]);
+                            eList.allReduceCD((float)EventLine[0].Args["interval"]);
                             break;
                         }
                 }

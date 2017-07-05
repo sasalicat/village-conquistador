@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class mg_atk : MonoBehaviour,CDEquipment
 {
-    public const float CD = 10;//0.5f;
+    public const float CD = 0.5f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
 
@@ -50,6 +50,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
 //實做CDEquipment介面----------------------------------------------
     public void setTime(float time)
     {
+        Debug.Log(CDTime + "left");
         CDTime -= time;//減少CD時間
     }
     public bool CanUse
@@ -58,6 +59,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
         {
             Debug.Log(" in can use CDTime is" + CDTime);
             return (CDTime <= 0);//如果CDTime小於0代表技能可以使用
+            //return true;
         }
     }
     public uint Consumption
