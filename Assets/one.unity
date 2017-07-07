@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLevel: 0
   isMultiThreads: 1
-  ip: 140.134.26.31
+  ip: 127.0.0.1
   port: 20013
   clientType: 7
   persistentDataPath: Application.persistentDataPath
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roleNo: 0
-  equipmentNoList: 00
+  equipmentNoList: 0001
 --- !u!1 &427121161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,6 +1098,11 @@ Prefab:
     - target: {fileID: 114547640573324348, guid: a0a6446f1bc0e884e94786a644ab1276,
         type: 2}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114613517439900950, guid: a0a6446f1bc0e884e94786a644ab1276,
+        type: 2}
+      propertyPath: fastened
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

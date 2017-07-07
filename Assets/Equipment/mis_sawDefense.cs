@@ -3,55 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mis_sawDefense : MonoBehaviour, Missile
+public class mis_sawDefense : Missile
 {
-    private GameObject creater;
-    private float speed;
-    private damage damage;
+
     private float existTime = 0;
-    public GameObject Creater
-    {
-        get
-        {
-            return creater;
-        }
-
-        set
-        {
-            creater = value;
-        }
-    }
-
-    public damage Damage
-    {
-        get
-        {
-            return damage;
-        }
-
-        set
-        {
-            damage = value;
-        }
-    }
-
-    public float Speed
-    {
-        get
-        {
-            return speed;
-        }
-
-        set
-        {
-            speed = value;
-        }
-    }
+  
+    
 
     // Use this for initialization
     void Start()
     {
-        transform.parent = creater.transform;
+        transform.parent = Creater.transform;
     }
 
     // Update is called once per frame
@@ -66,7 +28,7 @@ public class mis_sawDefense : MonoBehaviour, Missile
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject != creater)
+        if (other.gameObject != Creater)
         {
             RoleState role = other.gameObject.GetComponent<RoleState>();
             if(role!=null)

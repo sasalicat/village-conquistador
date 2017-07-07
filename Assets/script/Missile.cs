@@ -2,20 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-interface Missile  {
-    GameObject Creater
+public class Missile:MonoBehaviour  {
+    GameObject creater;
+    damage damage;
+    float speed = 20;
+
+    public GameObject Creater
     {
-        set;
-        get;
+        get
+        {
+            return creater;
+        }
+
+        set
+        {
+            creater = value;
+        }
     }
-    damage Damage
+
+    public damage Damage
     {
-        set;
-        get;
+        get
+        {
+            return damage;
+        }
+
+        set
+        {
+            damage = value;
+        }
     }
-    float Speed
+
+    public float Speed
     {
-        set;
-        get;
+        get
+        {
+            return speed;
+        }
+
+        set
+        {
+            speed = value;
+        }
     }
 }
