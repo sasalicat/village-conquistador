@@ -43,11 +43,12 @@ public class EquipmentList : MonoBehaviour {
     {
         MissileTable table = GameObject.Find("keyTabel").GetComponent<MissileTable>();
         RoleState state = GetComponent<RoleState>();
+        AnimatorTable anim=GetComponent<AnimatorTable>();
         if (InitTime)
         {
             for(int i = 0; i < equipments.Count; i++)
             {
-                equipments[i].onInit(table,state);
+                equipments[i].onInit(table,state,anim);
             }
             InitTime = false;
         }

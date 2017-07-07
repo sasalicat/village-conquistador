@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Missile:MonoBehaviour  {
-    GameObject creater;
-    damage damage;
-    float speed = 20;
+    private GameObject creater;
+    private damage damage;
+    private float speed = 20;
 
     public GameObject Creater
     {

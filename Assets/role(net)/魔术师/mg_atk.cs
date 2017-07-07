@@ -16,6 +16,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
     private RoleState selfState;
     public Text Label;
+    getVector getVector;
 
 //實做Equipment介面-------------------------------------------------------
     public sbyte No
@@ -75,7 +76,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
     public void trigger(Dictionary<string, object> args)
     {
       
-       getVector getVector= GameObject.Find("keyTabel").GetComponent<getVector>();
+      
         Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
         //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
@@ -98,10 +99,11 @@ public class mg_atk : MonoBehaviour,CDEquipment
     }
 
 
-    public void onInit(MissileTable table,RoleState state)
+    public void onInit(MissileTable table,RoleState state,AnimatorTable anim)
     {
         //初始化赋值
         missilePraf = table.MissileList[0];
         this.selfState = state;
+        getVector= GameObject.Find("keyTabel").GetComponent<getVector>();
     }
 }

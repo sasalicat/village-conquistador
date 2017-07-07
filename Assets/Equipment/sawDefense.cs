@@ -11,6 +11,7 @@ public class sawDefense : MonoBehaviour,CDEquipment {
     private float CDTime = 0;
     private RoleState state;
     private GameObject missile;
+    private AnimatorTable anim;
 
     public bool CanUse
    {
@@ -64,10 +65,11 @@ public class sawDefense : MonoBehaviour,CDEquipment {
         }
     }
 
-    public void onInit(MissileTable table, RoleState state)
+    public void onInit(MissileTable table, RoleState state,AnimatorTable anim)
     {
         this.missile = table.MissileList[1];
-        this.state = state; 
+        this.state = state;
+        this.anim = anim;
     }
 
     public void trigger(Dictionary<string, object> args)
