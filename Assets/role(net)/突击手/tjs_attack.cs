@@ -17,6 +17,7 @@ public class tjs_attack : MonoBehaviour, CDEquipment
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
     private RoleState selfState;
     public Text Label;
+    private AnimatorTable animator;
 
     //實做Equipment介面-------------------------------------------------------
     public sbyte No
@@ -98,6 +99,7 @@ public class tjs_attack : MonoBehaviour, CDEquipment
 
         CDTime = CD;//技能冷卻
         //Debug.Log("in trigger CDTime is" + CDTime);
+        animator.AttackStart();
 
 
     }
@@ -108,5 +110,6 @@ public class tjs_attack : MonoBehaviour, CDEquipment
         //初始化赋值
         missilePraf = table.MissileList[2];
         this.selfState = state;
+        this.animator = anim;
     }
 }
