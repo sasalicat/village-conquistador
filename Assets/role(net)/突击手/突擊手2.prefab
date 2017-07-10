@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114275869155194270}
   - component: {fileID: 114191021644173736}
   m_Layer: 0
-  m_Name: "\u7A81\u64CA\u624B"
+  m_Name: "\u7A81\u64CA\u624B2"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,6 +163,7 @@ MonoBehaviour:
   alive: 1
   exiled: 1
   roomNo: 0
+  islocal: 0
 --- !u!114 &114456731966303042
 MonoBehaviour:
   m_ObjectHideFlags: 1

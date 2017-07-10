@@ -87,7 +87,7 @@ public class tjs_attack : MonoBehaviour, CDEquipment
         //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
         
         GameObject newone = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
-        newone.transform.forward = direction;
+        newone.transform.up = direction;
         Debug.Log(newone.transform.forward);
         //修改子弹物件携带的子弹脚本
         Missile missile = newone.GetComponent<Missile>();
