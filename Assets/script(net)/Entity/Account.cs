@@ -26,6 +26,7 @@
                 ((EntityControl)renderObj).updatePosition(new Vector3());
             }
         }*/
+        //大厅内的函数
         public void updateNum(int num)
         {
             if (hallManager != null)
@@ -66,6 +67,7 @@
                 updateRoom((Dictionary<string,object>)list[i]);
             }
         }
+        //房间内的函数
         public void InitRoomInfo(Dictionary<string,object> info)
         {
             this.RoomInitData = info;

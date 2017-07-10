@@ -51,7 +51,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
 //實做CDEquipment介面----------------------------------------------
     public void setTime(float time)
     {
-        Debug.Log(CDTime + "left");
+        //Debug.Log(CDTime + "left");
         CDTime -= time;//減少CD時間
     }
     public bool CanUse

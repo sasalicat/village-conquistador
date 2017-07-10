@@ -11,7 +11,8 @@ public class NetRoleState :RoleState {
     public const int STIFF_NO = 1;
     public const int CONVERSELY_NO = 2;
     public const int DEAD_NO = 3;
-    interface state_net :state
+    public bool islocal = false;
+     interface state_net :state
     {
         void hurt(damage damage);
     }

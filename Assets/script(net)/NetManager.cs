@@ -98,7 +98,7 @@ public class NetManager : MonoBehaviour ,Manager {
         }
         while (intervals > 0)
         {
-            Debug.Log("in netmanager >0");
+            //Debug.Log("in netmanager >0");
             for (int i = 0; i < MAX_NUM; i++)
             {
                 if (controlerList[i] != null)
@@ -138,59 +138,72 @@ public class NetManager : MonoBehaviour ,Manager {
     public void onEnterWorld(Entity e)
     {
         Debug.Log("id " + e.id + "on Enter World");
-
-        for (int i=0;i<MAX_NUM;i++) {//roomNo就是物件雜objList的索引值
-            if (e.id == register.PlayerInWar[i].entityId)
-            {
-                
-                EquipmentList elist = objList[i].GetComponent<EquipmentList>();
-                if (e.id == KBEngineApp.app.player().id)
-                {
-                    NetPlayerControler control = objList[i].AddComponent<NetPlayerControler>();
-                    
-                    elist.controler = control;
-                    control.entity = e;
-                    
-                    
-                    ((Player)e).controler = control;
-                    ((Player)e).roomNo = (sbyte)i;
-                    ((Player)e).manager = this;
-                    control.roomNo = (sbyte)i;
-                    playerContorler = control;
-                    objList[i].GetComponent<NetRoleState>().control = control;
-                    
-                }
-                else
+        Debug.Log("type:" + e.GetType());
+    
+        if (e is Player)
+        {
+            for (int i = 0; i < MAX_NUM; i++)
+            {//roomNo就是物件雜objList的索引值
+                if (e.id == register.PlayerInWar[i].entityId)
                 {
 
-                    NetControler control = objList[i].AddComponent<NetControler>();
-                    objList[i].GetComponent<EquipmentList>().controler = control;
-                    
-                    elist.controler = control;
-                    control.entity = e;
-                    
+                    EquipmentList elist = objList[i].GetComponent<EquipmentList>();
+                    if (e.id == KBEngineApp.app.player().id)
+                    {
+                        NetPlayerControler control = objList[i].AddComponent<NetPlayerControler>();
 
-                    ((Player)e).controler = control;
-                    ((Player)e).roomNo = (sbyte)i;
-                    ((Player)e).manager = this;
-                    controlerList[i] = control;
-                    objList[i].GetComponent<NetRoleState>().control = control;
-                }
+                        elist.controler = control;
+                        control.entity = e;
 
-                //orList[i] = new ObjAndRoomNo((sbyte)i,objList[i]); 
-                objList[i].GetComponent<NetRoleState>().roomNo = (sbyte)i;
-                objList[i].transform.position = e.position;
-                objList[i].SetActive(true);
-                finishTable[i] = true;
-                if (checkFinish())//如果本地段都全部完成则通知server本client已经完成加载
-                {
-                    ((Player)KBEngineApp.app.player()).baseCall("notifyFinish", new object[] { });
+
+                        ((Player)e).controler = control;
+                        ((Player)e).roomNo = (sbyte)i;
+                        ((Player)e).manager = this;
+                        control.roomNo = (sbyte)i;
+                        playerContorler = control;
+                        objList[i].GetComponent<NetRoleState>().control = control;
+                        objList[i].GetComponent<NetRoleState>().islocal = true;
+
+
+                    }
+                    else
+                    {
+
+                        NetControler control = objList[i].AddComponent<NetControler>();
+                        objList[i].GetComponent<EquipmentList>().controler = control;
+
+                        elist.controler = control;
+                        control.entity = e;
+
+
+                        ((Player)e).controler = control;
+                        ((Player)e).roomNo = (sbyte)i;
+                        ((Player)e).manager = this;
+                        controlerList[i] = control;
+                        objList[i].GetComponent<NetRoleState>().control = control;
+                        objList[i].GetComponent<NetRoleState>().islocal = false;
+                    }
+
+                    //orList[i] = new ObjAndRoomNo((sbyte)i,objList[i]); 
+                    objList[i].GetComponent<NetRoleState>().roomNo = (sbyte)i;
+                    objList[i].transform.position = e.position;
+                    objList[i].SetActive(true);
+                    finishTable[i] = true;
+                    if (checkFinish())//如果本地段都全部完成则通知server本client已经完成加载
+                    {
+                        ((Player)KBEngineApp.app.player()).baseCall("notifyFinish", new object[] { });
+                    }
+                    // Label.text = "elist control is:" + elist.controler.ToString();
+                    //elist.AddEquipments();
+                    //Label.text = "after add";
+                    break;
                 }
-               // Label.text = "elist control is:" + elist.controler.ToString();
-                //elist.AddEquipments();
-                //Label.text = "after add";
-                break;
             }
+        }else if(e is Obstacle)
+        {
+            sbyte index = (sbyte)((Obstacle)e).getDefinedProperty("kind");
+            GameObject newone = Instantiate(prafebTable.Obstacles[index],e.position,Quaternion.Euler(e.direction));
+            newone.GetComponent<ObstacleState>().entity = e;
         }
     }
     public void PlayerInit(Entity e)

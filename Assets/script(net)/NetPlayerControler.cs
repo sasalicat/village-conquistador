@@ -383,7 +383,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
             }
             while (EventLine.Count > 0)
             {
-                Debug.Log("code is"+ EventLine[0].eIndex);
+                //Debug.Log("code is"+ EventLine[0].eIndex);
                 switch (EventLine[0].eIndex)
                 {
                     case CodeTable.TAKE_DAMAGE:
@@ -568,7 +568,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
 
     public void addEvent(sbyte code, Dictionary<string, object> args)
     {
-        Debug.Log("add event");
+        //Debug.Log("add event");
         EventLine.Add(new eTrigger(code, args));
     }
 }

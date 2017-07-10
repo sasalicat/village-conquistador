@@ -139,6 +139,7 @@ public class RoleState : MonoBehaviour {
     }
     public virtual void TakeDamage(damage damage)
     {
+        nowState.takedamage(damage);
         Debug.Log("super");
     }
 }

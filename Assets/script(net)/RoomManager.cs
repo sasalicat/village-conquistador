@@ -94,7 +94,8 @@ public class RoomManager : MonoBehaviour {
             }
             else//改變某個現有玩家的資料
             {
-                if ((sbyte)dataSingle["roleKind"] < 0)
+                //更新本地存储的玩家资料
+                if ((sbyte)dataSingle["roleKind"] < 0)//移除玩家
                 {
                     register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]] = null;
                 }
@@ -110,6 +111,7 @@ public class RoomManager : MonoBehaviour {
                     register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]].role.equipmentIdList = newlist;
 
                 }
+                //更新界面
                 updateItem((sbyte)dataSingle["roleRoomId"], selfRoomId == (sbyte)dataSingle["roleRoomId"], (bool)((sbyte)dataSingle["ready"] > 0), (sbyte)dataSingle["roleKind"]);
             }
             account.RoomChangeList.RemoveAt(0);
@@ -171,6 +173,7 @@ public class RoomManager : MonoBehaviour {
         {
             if (roleKind < 0)//刪除item
             {
+                Debug.Log("删除角色index等于" + index);
                 ItemOtherArray[index].SetActive(false);
                 return;
             }

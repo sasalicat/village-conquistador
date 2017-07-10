@@ -1226,6 +1226,8 @@ MonoBehaviour:
   table:
   - {fileID: 1878559187541248, guid: a0a6446f1bc0e884e94786a644ab1276, type: 2}
   - {fileID: 1878559187541248, guid: a0a6446f1bc0e884e94786a644ab1276, type: 2}
+  Obstacles:
+  - {fileID: 1007501565136412, guid: 2d90e6a0282f7bc4a86625f4e161bebc, type: 2}
 --- !u!1 &2138347942
 GameObject:
   m_ObjectHideFlags: 0
