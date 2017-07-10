@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class tjs_attack : MonoBehaviour, CDEquipment
+public class tjs_skill : MonoBehaviour, CDEquipment
 {
 
     public const float CD = 0.5f;//0.5f;
@@ -84,16 +84,40 @@ public class tjs_attack : MonoBehaviour, CDEquipment
         //GameObject newone = Instantiate(missilePraf, tragetPos, this.transform.rotation);
         //missilePraf.transform.forward = direction;
         //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
-        
-        GameObject newone = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
-        newone.transform.up = direction;
+
+        GameObject newone1 = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
+        GameObject newone2 = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
+        GameObject newone3 = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
+        GameObject newone4 = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
+        GameObject newone5 = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
+        newone1.transform.up = direction;
+        newone2.transform.up = direction;
+        newone3.transform.up = direction;
+        newone4.transform.up = direction;
+        newone5.transform.up = direction;
+        newone2.transform.eulerAngles = new Vector3(0, 0, newone2.transform.eulerAngles.z + 45);
+        newone3.transform.eulerAngles = new Vector3(0, 0, newone3.transform.eulerAngles.z + 90);
+        newone4.transform.eulerAngles = new Vector3(0, 0, newone4.transform.eulerAngles.z - 45);
+        newone5.transform.eulerAngles = new Vector3(0, 0, newone5.transform.eulerAngles.z - 90);
         //修改子弹物件携带的子弹脚本
-        Missile missile = newone.GetComponent<Missile>();
-        missile.Creater = gameObject;
+        Missile missile1 = newone1.GetComponent<Missile>();
+        Missile missile2 = newone2.GetComponent<Missile>();
+        Missile missile3 = newone3.GetComponent<Missile>();
+        Missile missile4 = newone4.GetComponent<Missile>();
+        Missile missile5 = newone5.GetComponent<Missile>();
+        missile1.Creater = gameObject;
+        missile2.Creater = gameObject;
+        missile3.Creater = gameObject;
+        missile4.Creater = gameObject;
+        missile5.Creater = gameObject;
         //创建伤害物件
         int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
         float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
-        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+        missile1.Damage = new damage(1, num, stiff, false, false, gameObject);
+        missile2.Damage = new damage(1, num, stiff, false, false, gameObject);
+        missile3.Damage = new damage(1, num, stiff, false, false, gameObject);
+        missile4.Damage = new damage(1, num, stiff, false, false, gameObject);
+        missile5.Damage = new damage(1, num, stiff, false, false, gameObject);
 
 
         CDTime = CD;//技能冷卻
