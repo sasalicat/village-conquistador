@@ -204,6 +204,8 @@ public class NetManager : MonoBehaviour ,Manager {
             sbyte index = (sbyte)((Obstacle)e).getDefinedProperty("kind");
             GameObject newone = Instantiate(prafebTable.Obstacles[index],e.position,Quaternion.Euler(e.direction));
             newone.GetComponent<ObstacleState>().entity = e;
+            Debug.Log("obstacle" + newone.GetComponent<ObstacleState>());
+            ((Obstacle)e).state = newone.GetComponent<ObstacleState>();
         }
     }
     public void PlayerInit(Entity e)

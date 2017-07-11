@@ -47,9 +47,7 @@ public class ObstacleState : RoleState {//相当于控制器和State结合在同
         {
             if (damage.damager.GetComponent<NetPlayerControler>() != null)
             {
-                Debug.Log("in take damage on Obstacle");
-               
-                
+                obs.entity.cellCall("reduceHp", new object[] { (short)damage.num });
             }
         }
         public obs_normal(ObstacleState obs)

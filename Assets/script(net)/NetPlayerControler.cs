@@ -206,6 +206,14 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         {
             on_left_down += empty;
         }
+        if (eList.passiveEquipments.Count > EquipmentList.SKILL)
+        {
+            on_right_down += onMouseRightDown;
+        }
+        else
+        {
+            on_left_down += empty;
+        }
         if (eList.passiveEquipments.Count>EquipmentList.PASSIVE1) {//為了防止當角色沒有裝備那麼多主動道具時報錯
             on_key1_down += onKey1Dowm;//因為道具一定是順著順序排放鍵位的,例如第一個道具一定是key1,所以只要判斷主動道具數量就知道角色那個鍵位有沒有主動道具
         }
@@ -366,6 +374,13 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                     on_left_down(mousePos);
                     //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
                 }
+                if (Input.GetMouseButtonDown(1))
+                {
+
+                    //Debug.Log("NetPlayerControler:position" + transform.position + "mouse Position" + mousePos);
+                    on_right_down(mousePos);
+                    //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
+                }
             }
             if (state.canMove)
             {
@@ -492,6 +507,16 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         if (eList.passiveEquipments[EquipmentList.ATK].CanUse)
         {
             player.cellCall("notify3", new object[] { EquipmentList.ATK, transform.position, mousePos });
+        }//0為普通攻擊的裝備索引
+    }
+    void onMouseRightDown(Vector3 mousePos)
+    {
+        //Debug.Log("Role_onTakeDamage event mouse position is" + mousePos);
+        //player.cellCall("notify2", new object[] { roomNo,CodeTable.MOUSE_LEFT_DOWN,mousePos});
+        //action.AttackStart();
+        if (eList.passiveEquipments[EquipmentList.SKILL].CanUse)
+        {
+            player.cellCall("notify3", new object[] { EquipmentList.SKILL, transform.position, mousePos });
         }//0為普通攻擊的裝備索引
     }
     void onKey1Dowm(Vector3 mousePos)
