@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86bd0a2d30f7e7c4cbb326a0963c3a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_liveTime: 20
+  m_liveTime: 2
   juli: 0
   zhuangtai: 0
 --- !u!212 &212063919220530944
