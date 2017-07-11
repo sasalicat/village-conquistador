@@ -6,9 +6,11 @@
     using UnityEngine;
     public class Obstacle :Entity
     {
-        /*public void set_Hp()
+        public ObstacleState state;
+        public void set_Hp(short Hp)
         {
-            Debug.Log("set__HP");
-        }*/
+            if(state!=null)//在EnterWorld之前被呼叫会出问题
+                state.nowHp = Hp;
+        }
     }
 }
