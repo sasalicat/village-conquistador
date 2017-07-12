@@ -33,7 +33,7 @@ public class sawDefense : MonoBehaviour,CDEquipment {
     {
         get
         {
-            return CodeTable.TAKE_DAMAGE;
+            return EquipmentTable.ON_TAKE_DAMAGE;
         }
     }
 

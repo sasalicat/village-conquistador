@@ -14,7 +14,6 @@ public interface KBControler : Controler{
     void addEvent(sbyte code, Dictionary<string, object> args);
     //給netrolestate使用的方法-----------------
     void Role_onTakeDamage(damage damage);
-   
     void onAttack();
 
 }

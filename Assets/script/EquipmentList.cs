@@ -158,13 +158,19 @@ public class EquipmentList : MonoBehaviour {
         ((Equipment)newone).selfIndex = ((sbyte)(equipments.Count - 1));
 
         switch (((Equipment)newone).Kind) {
-            case CodeTable.TAKE_DAMAGE:
+            case EquipmentTable.ON_TAKE_DAMAGE:
                 {
                     //_on_take_damage t= controler.get_on_take_damage();
                     controler.On_Take_Damage+= ((Equipment)newone).trigger;
                     //Debug.Log("t have" + t.GetInvocationList().Length);
                     break;
                 }
+            case EquipmentTable.ON_INTERVAL:
+                {
+                    controler.On_Interval+= ((Equipment)newone).trigger;
+                    break;
+                }
+
         }
 
     }

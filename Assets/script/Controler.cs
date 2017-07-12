@@ -25,9 +25,9 @@ public delegate void _on_keyleft_down();
 public delegate void _on_keyleft_ing();
 public delegate void _on_keyleft_up();
 //被动效果触发事件----------------------------------------
-public delegate void _on_attack(Dictionary<string,object> arg);
-public delegate void _on_take_damage(Dictionary<string,object> arg);
 public delegate void up_press_on();
+public delegate void _on_trigger(Dictionary<string,object> arg);
+
 public interface Controler
 {
     _on_left_down get_on_left_down();
@@ -52,9 +52,13 @@ public interface Controler
     _on_keyleft_ing get_on_keyleft_ing();
     _on_keyleft_up get_on_keyleft_up();
     /*装备事件*/
-    _on_attack get_on_attack();
-    _on_take_damage get_on_take_damage();
-    _on_take_damage On_Take_Damage
+
+    _on_trigger On_Take_Damage
+    {
+        set;
+        get;
+    }
+    _on_trigger On_Interval
     {
         set;
         get;

@@ -30,7 +30,7 @@ public class NetControler : MonoBehaviour,KBControler{
     private List<eTrigger> EventLine = new List<eTrigger>();
     public Text Label;
     //装备事件
-    _on_attack on_attack;
+    _on_trigger on_attack;
 
     _on_left_down on_left_down;
     _on_right_down on_right_down;
@@ -53,7 +53,8 @@ public class NetControler : MonoBehaviour,KBControler{
     _on_keyright_ing on_keyright_ing;
     _on_keyright_up on_keyright_up;
 
-    _on_take_damage on_take_damage;
+    _on_trigger on_take_damage;
+    _on_trigger on_inteval;
     public Entity Entity
     {
         get
@@ -80,7 +81,7 @@ public class NetControler : MonoBehaviour,KBControler{
         }
     }
 
-    public _on_take_damage On_Take_Damage
+    public _on_trigger On_Take_Damage
     {
         set
         {
@@ -89,6 +90,19 @@ public class NetControler : MonoBehaviour,KBControler{
         get
         {
             return on_take_damage;
+        }
+    }
+
+    public _on_trigger On_Interval
+    {
+        get
+        {
+            return on_inteval;
+        }
+
+        set
+        {
+            on_inteval = value;
         }
     }
 
@@ -320,15 +334,19 @@ public class NetControler : MonoBehaviour,KBControler{
             switch (EventLine[0].eIndex) {
                 case CodeTable.TAKE_DAMAGE:
                     {
-                        if (get_on_take_damage() != null)
+                        if (on_take_damage != null)
                         {
-                            get_on_take_damage()(EventLine[0].Args);
+                            on_take_damage(EventLine[0].Args);
                         }
                         state.realHurt((damage)EventLine[0].Args["Damage"]);
                         break;
                     }
                 case CodeTable.INTERVAL:
                     {
+                        if (on_inteval != null)
+                        {
+                            on_inteval(EventLine[0].Args);
+                        }
                         //Debug.Log("inveral "+ EventLine[0].Args["interval"]);
                         eList.allReduceCD((float)EventLine[0].Args["interval"]);
                         break;
@@ -418,18 +436,11 @@ public class NetControler : MonoBehaviour,KBControler{
         return;
     }
 
-    public _on_attack get_on_attack()
-    {
-        return on_attack;
-    }
 
-    public _on_take_damage get_on_take_damage()
-    {
-        return on_take_damage;
-    }
 
     public void addEvent(sbyte code, Dictionary<string, object> args)
     {
         EventLine.Add(new eTrigger(code, args));
     }
+
 }

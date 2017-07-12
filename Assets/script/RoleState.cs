@@ -142,4 +142,15 @@ public class RoleState : MonoBehaviour {
         nowState.takedamage(damage);
         Debug.Log("super");
     }
+    public void recoverMP(float num)
+    {
+        if (nowMp + num < unit.STAND_MP)
+        {
+            nowMp += num;
+        }
+        else
+        {
+            nowMp = unit.STAND_MP;
+        }
+    }
 }

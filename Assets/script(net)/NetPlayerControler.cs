@@ -16,6 +16,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         }
     }
     public const float UPDATE_Z_INTERVAL = 0.1f;
+    public const float RECOVER_INTERVAL = 0.5f;
+
     public Entity entity;
     public sbyte roomNo;
     private int lastZ=0;
@@ -29,6 +31,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private Player player;
     private EquipmentList eList;
     private NetRoleState state;
+    private float nextrecover = 0.5f;
 
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
@@ -53,8 +56,9 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     _on_keyright_down on_keyright_down;
     _on_keyright_ing on_keyright_ing;
     _on_keyright_up on_keyright_up;
-    _on_attack on_attack;
-    _on_take_damage on_take_damage;
+    
+    _on_trigger on_take_damage;
+    _on_trigger on_inteval;
     //新架構儲存觸發物件
 
     List<Equipment> onAttackLine=new List<Equipment>();
@@ -152,15 +156,9 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         return on_right_down;
     }
-    public _on_attack get_on_attack()
-    {
-        return on_attack;
-    }
-    public _on_take_damage get_on_take_damage()
-    {
-        return on_take_damage;
-    }
-    public _on_take_damage On_Take_Damage
+
+
+    public _on_trigger On_Take_Damage
     {
         set
         {
@@ -169,6 +167,18 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         get
         {
             return on_take_damage;
+        }
+    }
+    public _on_trigger On_Interval
+    {
+        get
+        {
+            return on_inteval;
+        }
+
+        set
+        {
+            on_inteval = value;
         }
     }
 
@@ -403,10 +413,10 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                 {
                     case CodeTable.TAKE_DAMAGE:
                         {
-
-                            if (get_on_take_damage() != null)
+                            Debug.Log("event-takedamage");
+                            if (on_take_damage != null)
                             {
-                                get_on_take_damage()(EventLine[0].Args);
+                                on_take_damage(EventLine[0].Args);
                             }
                             else
                             {
@@ -418,7 +428,17 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                     case CodeTable.INTERVAL:
                         {
                             //Debug.Log("inveral " + EventLine[0].Args["interval"]);
+                            if (on_inteval != null)
+                            {
+                                on_inteval(EventLine[0].Args);
+                            }
                             eList.allReduceCD((float)EventLine[0].Args["interval"]);
+                            nextrecover -= Time.deltaTime;
+                            if (nextrecover<=0)
+                            {
+                                state.recoverMP((int)unit.STAND_MP_RECOVER);
+                                nextrecover = RECOVER_INTERVAL;
+                            }
                             break;
                         }
                 }

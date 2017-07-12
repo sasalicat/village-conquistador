@@ -15,6 +15,7 @@ public class NetRoleState :RoleState {
      interface state_net :state
     {
         void hurt(damage damage);
+        void treat(int num);
     }
 
     class normal : state_net
@@ -115,6 +116,11 @@ public class NetRoleState :RoleState {
         public void onUpdate()
         {
             
+        }
+
+        public void treat(int num)
+        {
+            throw new NotImplementedException();
         }
     }
     class stiff : state_net
@@ -217,6 +223,11 @@ public class NetRoleState :RoleState {
             }
 
         }
+
+        public void treat(int num)
+        {
+            throw new NotImplementedException();
+        }
     }
     class conversely : state_net
     {
@@ -312,6 +323,11 @@ public class NetRoleState :RoleState {
 
             }
         }
+
+        public void treat(int num)
+        {
+            throw new NotImplementedException();
+        }
     }
     class died : state_net
     {
@@ -359,7 +375,11 @@ public class NetRoleState :RoleState {
         {
             return;
         }
-      
+
+        public void treat(int num)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     new void  Start () {
@@ -389,6 +409,10 @@ public class NetRoleState :RoleState {
    public void realHurt(damage damage)
     {
         ((state_net)nowState).hurt(damage);
+    }
+    public void realTreat(int num)
+    {
+        ((state_net)nowState).treat(num);
     }
     public void changeState(int no)
     {

@@ -7,6 +7,7 @@ public class EquipmentTable : MonoBehaviour {
     public bool[] passiveList;
     public const sbyte PASSIVE_SKILL = 1;
     public const sbyte ON_TAKE_DAMAGE = 2;
+    public const sbyte ON_INTERVAL = 3;
 	// Use this for initialization
 	void Start () {
 		
