@@ -33,11 +33,14 @@
         }
         public void updateZ(short z)
         {
-            //Debug.Log("update"+roomNo+":"+z);
-            Dictionary<string, object> order = new Dictionary<string, object>();
-            order["code"] = CodeTable.UPDATE_Z;
-            order["Z"] = z;
-            controler.addOrder(order);
+            if (controler != null)
+            {
+                //Debug.Log("update"+roomNo+":"+z);
+                Dictionary<string, object> order = new Dictionary<string, object>();
+                order["code"] = CodeTable.UPDATE_Z;
+                order["Z"] = z;
+                controler.addOrder(order);
+            }
         }
         public void receive1(Vector2 Position,sbyte code)
         {
