@@ -29,6 +29,14 @@ public class AnimatorTable : MonoBehaviour {
     {
         animator.SetBool("attack", false);
     }
+    public void SkillStart()
+    {
+        animator.SetBool("skill", true);
+    }
+    public void SkillEnd()
+    {
+        animator.SetBool("skill", false);
+    }
     public void StiffStart()
     {
         animator.SetBool("stiff",true);
