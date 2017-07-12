@@ -93,6 +93,7 @@ public class NetRoleState :RoleState {
                 role.changeState(DEAD_NO);
                 role.anima.ConverselyStart();
                 return;
+              
             }
           
             if (damage.makeConversaly && role.canBeConvesly)//如果会被击倒则不做硬直判定
