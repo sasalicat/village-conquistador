@@ -1,14 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
-public class rush : MonoBehaviour, CDEquipment
+public class lr_atk : MonoBehaviour, CDEquipment
 {
+
     public const float CD = 0.5f;//0.5f;
-    public const int BaseDamage = 200;
-    public const float BaseStiff = 4f;
+    public const int BaseDamage = 50;
+    public const float BaseStiff = 0.25f;
 
     public float CDTime = 0;
     public sbyte index;
@@ -16,6 +17,7 @@ public class rush : MonoBehaviour, CDEquipment
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
     private RoleState selfState;
     public Text Label;
+    private AnimatorTable animator;
 
     //實做Equipment介面-------------------------------------------------------
     public sbyte No
@@ -72,23 +74,43 @@ public class rush : MonoBehaviour, CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
+
         getVector getVector = GameObject.Find("keyTabel").GetComponent<getVector>();
         Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
-        transform.position = origenPlayerPosition;
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
         //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
         Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, mousePosition, new Vector3(0, -1, 0));//獲得相對座標
+        //制造子弹物件
+        Vector3 direction = mousePosition - origenPlayerPosition;
+        //GameObject newone = Instantiate(missilePraf, tragetPos, this.transform.rotation);
+        //missilePraf.transform.forward = direction;
+        //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
 
-        Vector3 position = (mousePosition - origenPlayerPosition).normalized * 10 + origenPlayerPosition;
-        transform.DOMove(position, 0.5f, false).OnComplete(()=>Debug.Log("endddddddd")).SetEase(Ease.OutQuart);
+        GameObject newone = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
+        newone.transform.up = direction;
+        //修改子弹物件携带的子弹脚本
+        Missile missile = newone.GetComponent<Missile>();
+        missile.Creater = gameObject;
+        //创建伤害物件
+        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
+        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
+        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+
 
         CDTime = CD;//技能冷卻
-        Debug.Log("in trigger CDTime is" + CDTime);
+        //Debug.Log("in trigger CDTime is" + CDTime);
+        animator.AttackStart();
+
+
     }
+
 
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
-        missilePraf = table.MissileList[4];
+        //初始化赋值
+        missilePraf = table.MissileList[3];
         this.selfState = state;
+        this.animator = anim;
     }
 }
+
