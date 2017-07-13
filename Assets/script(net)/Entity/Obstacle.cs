@@ -12,5 +12,13 @@
             if(state!=null)//在EnterWorld之前被呼叫会出问题
                 state.nowHp = Hp;
         }
+        public void methodNull()
+        {
+            state.nullCallTimes++;
+        }
+        public void methodSbyte(sbyte data)
+        {
+            state.sbyteCalldatas.Add(data);
+        }
     }
 }

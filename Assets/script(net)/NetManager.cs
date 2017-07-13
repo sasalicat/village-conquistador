@@ -206,6 +206,18 @@ public class NetManager : MonoBehaviour ,Manager {
             newone.GetComponent<ObstacleState>().entity = e;
             Debug.Log("obstacle" + newone.GetComponent<ObstacleState>());
             ((Obstacle)e).state = newone.GetComponent<ObstacleState>();
+            int cno = (sbyte)e.getDefinedProperty("createrNo");
+            if (cno!= -1)
+            {
+                if (cno == playerContorler.roomNo)
+                {
+                    newone.GetComponent<ObstacleState>().Creater = playerContorler.gameObject;
+                }
+                else
+                {
+                    newone.GetComponent<ObstacleState>().Creater = controlerList[cno].gameObject;
+                }
+            }
         }
     }
     public void PlayerInit(Entity e)
@@ -221,6 +233,12 @@ public class NetManager : MonoBehaviour ,Manager {
     public static void createMissile(sbyte No,Vector3 pos,Vector3 rota)
     {
         ((Player)KBEngineApp.app.player()).baseCall("createMissile", new object[] { No, pos, rota });
+    }
+    public static void createObstacle(GameObject creater,Vector3 position,sbyte kind)
+    {
+        NetPlayerControler control = creater.GetComponent<NetPlayerControler>();
+        if (control != null)
+           control.Entity.baseCall("createObstracle", new object[] { position, kind });
     }
     public static void SkillTrigger(sbyte eIndex,Vector3 pos,Vector3 mousePos)
     {

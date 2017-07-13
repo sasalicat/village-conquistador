@@ -6,6 +6,9 @@ using KBEngine;
 
 public class ObstacleState : RoleState {//相当于控制器和State结合在同一个脚本
     public Entity entity;
+    public  GameObject Creater;
+    public int nullCallTimes = 0;
+    public List<sbyte> sbyteCalldatas = new List<sbyte>();
     class obs_normal : state
     {
         private ObstacleState obs;
@@ -40,7 +43,16 @@ public class ObstacleState : RoleState {//相当于控制器和State结合在同
 
         public void onUpdate()
         {
-            
+            while (obs.nullCallTimes > 0)
+            {
+                obs.callMethodNull();
+                obs.nullCallTimes--;
+            }
+            while (obs.sbyteCalldatas.Count > 0)
+            {
+                obs.callMethodSbyte(obs.sbyteCalldatas[0]);
+                obs.sbyteCalldatas.RemoveAt(0);
+            }
         }
 
         public void takedamage(damage damage)
@@ -66,5 +78,26 @@ public class ObstacleState : RoleState {//相当于控制器和State结合在同
 	void Update () {
 		
 	}
+    public virtual void methodNull()
+    {
 
+    }
+    public virtual void methodSbyte(sbyte data)
+    {
+
+    }
+    public void callMethodNull()
+    {
+        if (Creater.GetComponent<NetRoleState>().islocal)
+        {
+            entity.cellCall("method_Null");
+        }
+    }
+    public void callMethodSbyte(sbyte data)
+    {
+        if (Creater.GetComponent<NetRoleState>().islocal)
+        {
+            entity.cellCall("methodSbyte",new object[] {data});
+        }
+    }
 }

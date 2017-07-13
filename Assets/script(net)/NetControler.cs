@@ -17,6 +17,7 @@ public class NetControler : MonoBehaviour,KBControler{
             this.Args = Args;
         }
     }
+    public const float RECOVER_INTERVAL = 0.5f;
     public Entity entity;
     public List<Dictionary<string, object>> codeLine;
     public bool upIng = false;
@@ -29,6 +30,7 @@ public class NetControler : MonoBehaviour,KBControler{
     private List<eTrigger> eTriggerLine=new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();
     public Text Label;
+    private float nextrecover = 0.5f;
     //装备事件
     _on_trigger on_attack;
 
@@ -343,12 +345,18 @@ public class NetControler : MonoBehaviour,KBControler{
                     }
                 case CodeTable.INTERVAL:
                     {
+                        //Debug.Log("inveral " + EventLine[0].Args["interval"]);
                         if (on_inteval != null)
                         {
                             on_inteval(EventLine[0].Args);
                         }
-                        //Debug.Log("inveral "+ EventLine[0].Args["interval"]);
                         eList.allReduceCD((float)EventLine[0].Args["interval"]);
+                        nextrecover -= Time.deltaTime;
+                        if (nextrecover <= 0)
+                        {
+                            state.recoverMP((int)unit.STAND_MP_RECOVER);
+                            nextrecover = RECOVER_INTERVAL;
+                        }
                         break;
                     }
             }
