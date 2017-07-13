@@ -14,9 +14,7 @@ public class mis_lr_atk : Missile {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 fei = this.transform.position;
-        Vector3 zhujiao = Creater.transform.position;
-        Vector3 direction = fei - zhujiao;
+        
         transform.Translate(0, -Speed * Time.deltaTime, 0, Space.Self);
         m_liveTime -= Time.deltaTime;
         if(m_liveTime <= 0)
@@ -34,7 +32,11 @@ public class mis_lr_atk : Missile {
             RoleState role = other.gameObject.GetComponent<RoleState>();
             if (role != null)
             {
-                Damage.num = (int)(25 + juli * 0.75);
+                Vector3 fei = this.transform.position;
+                Vector3 zhujiao = Creater.transform.position;
+                Vector3 direction = fei - zhujiao;
+                juli = direction.magnitude;
+                Damage.num = (int)(25 + (float)juli * 0.75);
                 role.TakeDamage(Damage);
             }
 
