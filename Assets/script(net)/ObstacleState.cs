@@ -45,12 +45,13 @@ public class ObstacleState : RoleState {//相当于控制器和State结合在同
         {
             while (obs.nullCallTimes > 0)
             {
-                obs.callMethodNull();
+                Debug.Log("method null从服务器呼叫 times:"+ obs.nullCallTimes);
+                obs.methodNull();
                 obs.nullCallTimes--;
             }
             while (obs.sbyteCalldatas.Count > 0)
             {
-                obs.callMethodSbyte(obs.sbyteCalldatas[0]);
+                obs.methodSbyte(obs.sbyteCalldatas[0]);
                 obs.sbyteCalldatas.RemoveAt(0);
             }
         }
@@ -76,11 +77,11 @@ public class ObstacleState : RoleState {//相当于控制器和State结合在同
 	
 	// Update is called once per frame
 	void Update () {
-		
+        nowState.onUpdate();
 	}
     public virtual void methodNull()
     {
-
+        Debug.Log("父類別methodnull");
     }
     public virtual void methodSbyte(sbyte data)
     {
@@ -90,6 +91,7 @@ public class ObstacleState : RoleState {//相当于控制器和State结合在同
     {
         if (Creater.GetComponent<NetRoleState>().islocal)
         {
+            Debug.Log("呼叫服务器nullmethod");
             entity.cellCall("method_Null");
         }
     }

@@ -9,6 +9,6 @@ public class obs1 : ObstacleState {
     }
     public override void methodNull()
     {
-        Debug.Log("methodnull");
+        Debug.Log("methodnull被呼叫!!!");
     }
 }

@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLevel: 0
   isMultiThreads: 1
-  ip: 140.134.26.31
+  ip: 127.0.0.1
   port: 20013
   clientType: 7
   persistentDataPath: Application.persistentDataPath
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roleNo: 1
-  equipmentNoList: 0203
+  equipmentNoList: 020305
 --- !u!1 &427121161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,6 +1700,7 @@ MonoBehaviour:
   - 
   - 
   - 
+  - obsSample
   - 
   - 
   - 
@@ -1709,8 +1710,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  - 
-  passiveList: 0100010101010000000000000000000000000000
+  passiveList: 0100010101010000000001000000000000000000
 --- !u!114 &1995136365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1757,6 +1757,7 @@ MonoBehaviour:
   - {fileID: 1373321678833760, guid: c2222de9d36e6444f9718776167cd0bc, type: 2}
   Obstacles:
   - {fileID: 1007501565136412, guid: 2d90e6a0282f7bc4a86625f4e161bebc, type: 2}
+  - {fileID: 1424429232851234, guid: 596da52c212a3014fafb3efca59c06e9, type: 2}
 --- !u!1 &2138347942
 GameObject:
   m_ObjectHideFlags: 0
