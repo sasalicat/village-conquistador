@@ -87,7 +87,7 @@ public class lr_atk : MonoBehaviour, CDEquipment
         //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
 
         GameObject newone = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
-        newone.transform.up = direction;
+        newone.transform.up = -direction;
         //修改子弹物件携带的子弹脚本
         Missile missile = newone.GetComponent<Missile>();
         missile.Creater = gameObject;

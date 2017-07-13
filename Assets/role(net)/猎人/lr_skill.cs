@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class lr_skill : MonoBehaviour, CDEquipment
 {
-    public SpriteRenderer s;
-    public bool local;
 
     public const float CD = 0.5f;//0.5f;
     public const int BaseDamage = 50;
@@ -108,21 +106,12 @@ public class lr_skill : MonoBehaviour, CDEquipment
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        missilePraf = table.MissileList[5];
+        missilePraf = table.MissileList[6];
         this.selfState = state;
         this.animator = anim;
     }
 
     // Use this for initialization
-    void Start()
-    {
-        s = gameObject.GetComponent(typeof(SpriteRenderer)) as SpriteRenderer;
-        if (local = gameObject.GetComponent<NetRoleState>().islocal)
-        {
-            s.color = new Color(255, 255, 255, 125);
-        }
-
-    }
 
     // Update is called once per frame
     void Update()
