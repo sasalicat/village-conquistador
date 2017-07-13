@@ -14,7 +14,9 @@
         }
         public void methodNull()
         {
+            Debug.Log("method null id:"+this.id+" "+state.nowHp);
             state.nullCallTimes++;
+            Debug.Log("times after:"+ state.nullCallTimes);
         }
         public void methodSbyte(sbyte data)
         {
