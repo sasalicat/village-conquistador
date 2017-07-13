@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class lr_atk : MonoBehaviour, CDEquipment
+public class lr_skill : MonoBehaviour, CDEquipment
 {
+    public SpriteRenderer s;
+    public bool local;
 
     public const float CD = 0.5f;//0.5f;
     public const int BaseDamage = 50;
@@ -16,7 +17,6 @@ public class lr_atk : MonoBehaviour, CDEquipment
     const short selfMissileNo = 0;
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
     private RoleState selfState;
-    public Text Label;
     private AnimatorTable animator;
 
     //實做Equipment介面-------------------------------------------------------
@@ -112,5 +112,24 @@ public class lr_atk : MonoBehaviour, CDEquipment
         this.selfState = state;
         this.animator = anim;
     }
+
+    // Use this for initialization
+    void Start()
+    {
+        s = gameObject.GetComponent(typeof(SpriteRenderer)) as SpriteRenderer;
+        if (local = gameObject.GetComponent<NetRoleState>().islocal)
+        {
+            s.color = new Color(255, 255, 255, 125);
+        }
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //  if（local != Creater.GetComponent<NetRoleState>().islocal &&
+    }
+
+
 }
 
