@@ -70,7 +70,7 @@ public class ObstacleState : RoleState {//相当于控制器和State结合在同
         }
     }
     // Use this for initialization
-    void Start () {
+      override protected void Start () {
         base.Start();
         StateTable = new List<state>();
         nowState = new obs_normal(this);

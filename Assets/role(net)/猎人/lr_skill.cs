@@ -84,15 +84,7 @@ public class lr_skill : MonoBehaviour, CDEquipment
         //missilePraf.transform.forward = direction;
         //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
 
-        GameObject newone = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
-        newone.transform.up = direction;
-        //修改子弹物件携带的子弹脚本
-        Missile missile = newone.GetComponent<Missile>();
-        missile.Creater = gameObject;
-        //创建伤害物件
-        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
-        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
-        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+        NetManager.createObstacle(gameObject, transform.position, 2);
 
 
         CDTime = CD;//技能冷卻
@@ -106,7 +98,6 @@ public class lr_skill : MonoBehaviour, CDEquipment
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        missilePraf = table.MissileList[6];
         this.selfState = state;
         this.animator = anim;
     }
@@ -119,6 +110,15 @@ public class lr_skill : MonoBehaviour, CDEquipment
         //  if（local != Creater.GetComponent<NetRoleState>().islocal &&
     }
 
+    public void onCreateFinish(ObstacleState obstacle)
+    {
 
+        if (obstacle.Kind == 2)
+        {//如果障碍种类是本技能的则执行以下步骤
+            ((obs_lr_skill)obstacle).damage = new damage(2, (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100)) , 0.5f);
+            obstacle.gameObject.SetActive(true);
+        }
+    }
+    
 }
 

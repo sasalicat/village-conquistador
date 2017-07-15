@@ -124,7 +124,7 @@ public class RoleState : MonoBehaviour {
         }
     }
 
-    protected void Start()
+    virtual protected void Start()
     {
         selfdata = GetComponent<unit>();
         anima = GetComponent<AnimatorTable>();

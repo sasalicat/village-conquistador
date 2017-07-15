@@ -382,7 +382,7 @@ public class NetRoleState :RoleState {
         }
     }
 
-    new void  Start () {
+   protected override void  Start () {
         base.Start();
         StateTable = new List<state>();
         //重置父類別的StateTable

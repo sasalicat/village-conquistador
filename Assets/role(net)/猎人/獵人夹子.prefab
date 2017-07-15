@@ -21,14 +21,15 @@ GameObject:
   - component: {fileID: 4872127280090074}
   - component: {fileID: 212290400457676192}
   - component: {fileID: 58556012136557286}
-  - component: {fileID: 114180372279884020}
+  - component: {fileID: 114007051202902070}
+  - component: {fileID: 114086853462528174}
   m_Layer: 0
   m_Name: "\u7375\u4EBA\u5939\u5B50"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4872127280090074
 Transform:
   m_ObjectHideFlags: 1
@@ -56,7 +57,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.9599999
---- !u!114 &114180372279884020
+--- !u!114 &114007051202902070
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -64,11 +65,69 @@ MonoBehaviour:
   m_GameObject: {fileID: 1734511024712918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9721f5b356fe3cc418bf787d8507cc42, type: 3}
+  m_Script: {fileID: 11500000, guid: 4aca90948fdbc7643ad3da7f9978a6e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfdata: {fileID: 0}
+  anima: {fileID: 0}
+  maxHp: 0
+  nowHp: 0
+  nowMp: 0
+  nowStiff: 0
+  nowConversely: 0
+  energyRecover_Second: 0
+  speed: 0
+  immune_attack: 0
+  immune_skill: 0
+  nonlife: 0
+  fastened: 0
+  tools: 0
+  canBeExiled: 1
+  canBeStiff: 1
+  canBeConvesly: 1
+  canBeKill: 1
+  canBetreat: 1
+  conversely: 0
+  alive: 1
+  exiled: 1
+  Creater: {fileID: 0}
+  Kind: 0
+  nullCallTimes: 0
+  sbyteCalldatas: 
   s: {fileID: 0}
   local: 0
+  jishiqi: 0.5
+--- !u!114 &114086853462528174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1734511024712918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d6392f596b68d438f3612873dd08f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 0
+  skill: 0
+  physique: 0
+  energyRecover: 0
+  accelerate: 0
+  stiffable: 0
+  stiffReduce: 0
+  rechargeLifeRecover: 0
+  rechargeEnergyRecover: 0
+  damageReduce: 0
+  specialReduce: 0
+  stiffTime: 0
+  converselyTime: 0
+  action: 1
+  actionBefore: 1
+  No: 0
+  team: 0
+  captain: 0
+  master: {fileID: 0}
+  commendMode: 0
 --- !u!212 &212290400457676192
 SpriteRenderer:
   m_ObjectHideFlags: 1
