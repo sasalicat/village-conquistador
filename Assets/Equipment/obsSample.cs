@@ -67,12 +67,13 @@ public class obsSample : MonoBehaviour,CDEquipment {
     }
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void onCreateFinish(ObstacleState obstacle)
+    {
+        Debug.Log("onCreateFinish");
+        if (obstacle.Kind ==1)
+        {//如果障碍种类是本技能的则执行以下步骤
+            ((obs1)obstacle).damage = new damage(1,100,0.5f);
+        }
+    }
 }
+

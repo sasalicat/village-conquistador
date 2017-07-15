@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class obs1 : ObstacleState {
+public class obs1 : ObstacleState
+{
+    public damage damage;
     void OnTriggerEnter2D(Collider2D other)
     {
         callMethodNull();

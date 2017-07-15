@@ -7,6 +7,7 @@ using KBEngine;
 public class ObstacleState : RoleState {//相当于控制器和State结合在同一个脚本
     public Entity entity;
     public  GameObject Creater;
+    public int Kind;
     public int nullCallTimes = 0;
     public List<sbyte> sbyteCalldatas = new List<sbyte>();
     class obs_normal : state
