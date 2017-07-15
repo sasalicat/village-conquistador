@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLevel: 0
   isMultiThreads: 1
-  ip: 127.0.0.1
+  ip: 140.134.26.31
   port: 20013
   clientType: 7
   persistentDataPath: Application.persistentDataPath
@@ -271,8 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd6000c4a08a6a49bf88a677547458b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roleNo: 1
-  equipmentNoList: 020305
+  roleNo: 2
+  equipmentNoList: 0a
 --- !u!1 &427121161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,11 +1696,11 @@ MonoBehaviour:
   - tjs_skill
   - anubalake
   - rush
+  - lr_atk
+  - lr_skill
   - 
   - 
-  - 
-  - 
-  - obsSample
+  - grenades
   - 
   - 
   - 
@@ -1740,7 +1740,9 @@ MonoBehaviour:
   - {fileID: 1033534314292100, guid: 534044f03f89efa42a9173d7b92b927b, type: 2}
   - {fileID: 1891231981771858, guid: 5fddc31df5d8455458633db4eca920cd, type: 2}
   - {fileID: 1907743865691334, guid: bbe1912ea68167743b1ae42229da2ff8, type: 2}
-  - {fileID: 1033534314292100, guid: 534044f03f89efa42a9173d7b92b927b, type: 2}
+  - {fileID: 1973082440081994, guid: 2c3e0654ebe948a43a02e53154e017f0, type: 2}
+  - {fileID: 1734511024712918, guid: fe894ad79601b054cb40bf48b38f4cd6, type: 2}
+  - {fileID: 1590609011939994, guid: 9eca0311f03625c4c8f4859cf7b00c25, type: 2}
 --- !u!114 &1995136367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1755,6 +1757,7 @@ MonoBehaviour:
   table:
   - {fileID: 1878559187541248, guid: a0a6446f1bc0e884e94786a644ab1276, type: 2}
   - {fileID: 1373321678833760, guid: c2222de9d36e6444f9718776167cd0bc, type: 2}
+  - {fileID: 1966427290879090, guid: cd64df3fbcf909146927fbb8a7dcbc26, type: 2}
   Obstacles:
   - {fileID: 1007501565136412, guid: 2d90e6a0282f7bc4a86625f4e161bebc, type: 2}
   - {fileID: 1424429232851234, guid: 596da52c212a3014fafb3efca59c06e9, type: 2}

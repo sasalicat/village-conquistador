@@ -85,6 +85,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00ad91a4c7c9e4409521411fc7d7e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  origenPlayerPosition: {x: 0, y: 0, z: 0}
+  mousePosition: {x: 0, y: 0, z: 0}
 --- !u!212 &212883081541496828
 SpriteRenderer:
   m_ObjectHideFlags: 1
