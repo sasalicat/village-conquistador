@@ -209,6 +209,7 @@ public class NetManager : MonoBehaviour ,Manager {
             int cno = (sbyte)e.getDefinedProperty("createrNo");
             if (cno!= -1)
             {
+                newone.GetComponent<ObstacleState>().Kind = index;
                 if (cno == playerContorler.roomNo)
                 {
                     newone.GetComponent<ObstacleState>().Creater = playerContorler.gameObject;
@@ -226,6 +227,7 @@ public class NetManager : MonoBehaviour ,Manager {
             float radiu_f = radiu / 1000;
             GameObject newArea=Instantiate(prafebTable.Areas[0], e.position, Quaternion.Euler(e.direction));
             newArea.transform.localScale = new Vector3(radiu_f, radiu_f, 1);
+            //newArea.Get
         }
     }
     public void PlayerInit(Entity e)
