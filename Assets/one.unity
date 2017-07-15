@@ -1758,6 +1758,8 @@ MonoBehaviour:
   Obstacles:
   - {fileID: 1007501565136412, guid: 2d90e6a0282f7bc4a86625f4e161bebc, type: 2}
   - {fileID: 1424429232851234, guid: 596da52c212a3014fafb3efca59c06e9, type: 2}
+  Areas:
+  - {fileID: 0}
 --- !u!1 &2138347942
 GameObject:
   m_ObjectHideFlags: 0

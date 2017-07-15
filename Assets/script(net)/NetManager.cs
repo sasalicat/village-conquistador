@@ -218,6 +218,12 @@ public class NetManager : MonoBehaviour ,Manager {
                     newone.GetComponent<ObstacleState>().Creater = controlerList[cno].gameObject;
                 }
             }
+        }else if(e is Area)
+        {
+            short radiu = (short)e.getDefinedProperty("radius");
+            float radiu_f = radiu / 1000;
+            GameObject newArea=Instantiate(prafebTable.Areas[0], e.position, Quaternion.Euler(e.direction));
+            newArea.transform.localScale = new Vector3(radiu_f, radiu_f, 1);
         }
     }
     public void PlayerInit(Entity e)
