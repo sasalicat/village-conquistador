@@ -22,6 +22,8 @@ public class NetManager : MonoBehaviour ,Manager {
     public bool[] finishTable = new bool[MAX_NUM];
     public int intervals = 0;//累积的时间间隔触发次数
 
+    private bool first = true;//第一个update的flag用于BaseCallonChangToWar
+
     //public List<createOrder> createOrderList = new List<createOrder>();
     public class dirPair
     {
@@ -81,15 +83,19 @@ public class NetManager : MonoBehaviour ,Manager {
         }
         //orList = new ObjAndRoomNo[MAX_NUM];
         controlerList = new NetControler[MAX_NUM];
-        ((Player)KBEngineApp.app.player()).baseCall("onChangeToWar", new object[] { });
-        ((Player)KBEngineApp.app.player()).manager = this;
-        ((Player)KBEngineApp.app.player()).loadPage = GameObject.Find("loadingPage").GetComponent<loading>();
-        ((Player)KBEngineApp.app.player()).ms = GameObject.Find("Canvas/mslabel").GetComponent<msTask>();
-        //Label = Label = Label = GameObject.Find("Canvas/Text2").GetComponent<Text>();
+                //Label = Label = Label = GameObject.Find("Canvas/Text2").GetComponent<Text>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if(first&& KBEngineApp.app.player()is Player)
+        {
+            ((Player)KBEngineApp.app.player()).baseCall("onChangeToWar", new object[] { });
+            ((Player)KBEngineApp.app.player()).manager = this;
+            ((Player)KBEngineApp.app.player()).loadPage = GameObject.Find("loadingPage").GetComponent<loading>();
+            ((Player)KBEngineApp.app.player()).ms = GameObject.Find("Canvas/mslabel").GetComponent<msTask>();
+            first = false;
+        }
         if (directionList.Count > 0)
         {
             //Debug.Log(" directionList[0].z is" + directionList[0].z);

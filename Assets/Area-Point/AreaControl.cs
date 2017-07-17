@@ -13,15 +13,14 @@ public class AreaControl : MonoBehaviour {
             NetRoleState state= other.gameObject.GetComponent<NetRoleState>();
             sbyte roomNo = state.roomNo;
             Debug.Log("e:"+e+" state:"+state.name+" roomNo:"+ state.roomNo);
-            Debug.Log("mailBox-Base:" + e.baseMailbox);
-            e.baseCall("EnterArea", new object[] {roomNo});
+            e.cellCall("EnterArea", new object[] {roomNo});
         }
     }
     void OnTriggerExit2D(Collider2D other)
     {
         if (e != null)
         {
-            e.baseCall("ExitArea", new object[] { other.gameObject.GetComponent<NetRoleState>().roomNo });
+            e.cellCall("ExitArea", new object[] { other.gameObject.GetComponent<NetRoleState>().roomNo });
         }
     }
 
