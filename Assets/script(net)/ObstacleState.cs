@@ -77,7 +77,7 @@ public class ObstacleState : RoleState {//相当于控制器和State结合在同
     }
 	
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
         nowState.onUpdate();
 	}
     public virtual void methodNull()

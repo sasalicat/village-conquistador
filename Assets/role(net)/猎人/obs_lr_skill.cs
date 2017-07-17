@@ -21,6 +21,7 @@ public class obs_lr_skill : ObstacleState
 
     void Update()
     {
+        base.Update();
         jishiqi -= Time.deltaTime;
         if(!local && jishiqi <= 0)
         {
