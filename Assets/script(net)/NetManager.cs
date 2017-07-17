@@ -227,7 +227,7 @@ public class NetManager : MonoBehaviour ,Manager {
             float radiu_f = radiu / 1000;
             GameObject newArea=Instantiate(prafebTable.Areas[0], e.position, Quaternion.Euler(e.direction));
             newArea.transform.localScale = new Vector3(radiu_f, radiu_f, 1);
-            //newArea.Get
+            newArea.GetComponent<AreaControl>().e = e;
         }
     }
     public void PlayerInit(Entity e)

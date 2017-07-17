@@ -4,15 +4,20 @@ using UnityEngine;
 using KBEngine;
 
 public class AreaControl : MonoBehaviour {
-    Entity e;
-    void OnCollisionEnter2D(Collision2D other)
+    public Entity e;
+    void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("enter area");
         if (e != null)
         {
-            e.baseCall("EnterArea", new object[] { other.gameObject.GetComponent<NetRoleState>().roomNo});
+            NetRoleState state= other.gameObject.GetComponent<NetRoleState>();
+            sbyte roomNo = state.roomNo;
+            Debug.Log("e:"+e+" state:"+state.name+" roomNo:"+ state.roomNo);
+            Debug.Log("mailBox-Base:" + e.baseMailbox);
+            e.baseCall("EnterArea", new object[] {roomNo});
         }
     }
-    void OnCollisionExit2D(Collision2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
         if (e != null)
         {
