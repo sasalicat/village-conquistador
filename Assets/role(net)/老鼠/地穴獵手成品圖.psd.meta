@@ -1,0 +1,244 @@
+fileFormatVersion: 2
+guid: 0446552d38392d94d9d61efa594fdd8a
+timeCreated: 1500292754
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_0"
+    21300002: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_1"
+    21300004: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_2"
+    21300006: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_3"
+    21300008: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_4"
+    21300010: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_5"
+    21300012: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_6"
+    21300014: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_7"
+    21300016: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_8"
+    21300018: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_9"
+    21300020: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_10"
+    21300022: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_11"
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_0"
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 2557
+        width: 429
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_1"
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 2534
+        width: 450
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_2"
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 2543
+        width: 449
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_3"
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 2042
+        width: 393
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_4"
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 2042
+        width: 365
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_5"
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 2042
+        width: 445
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_6"
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 1560
+        width: 250
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_7"
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 1576
+        width: 254
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_8"
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 1127
+        width: 381
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_9"
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 1114
+        width: 382
+        height: 352
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_10"
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 722
+        width: 291
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u5730\u7A74\u7375\u624B\u6210\u54C1\u5716_11"
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 730
+        width: 280
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

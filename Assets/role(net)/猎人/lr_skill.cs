@@ -115,7 +115,7 @@ public class lr_skill : MonoBehaviour, CDEquipment
 
         if (obstacle.Kind == 2)
         {//如果障碍种类是本技能的则执行以下步骤
-            ((obs_lr_skill)obstacle).damage = new damage(2, (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100)) , 0.5f);
+            ((obs_lr_skill)obstacle).damage = new damage(2, (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100)) , 0.5f , false ,false , gameObject);
             obstacle.gameObject.SetActive(true);
         }
     }
