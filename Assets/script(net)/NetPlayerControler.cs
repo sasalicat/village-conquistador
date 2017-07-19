@@ -59,6 +59,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     
     _on_trigger on_take_damage;
     _on_trigger on_inteval;
+    _on_trigger on_been_treat;
+    _on_trigger on_Hp_change;
     //新架構儲存觸發物件
 
     List<Equipment> onAttackLine=new List<Equipment>();
@@ -182,6 +184,31 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         }
     }
 
+    public _on_trigger On_Been_Treat
+    {
+        get
+        {
+            return on_been_treat;
+        }
+
+        set
+        {
+            on_been_treat = value;
+        }
+    }
+
+    public _on_trigger On_Hp_Change
+    {
+        get
+        {
+            return on_Hp_change;
+        }
+        set
+        {
+                on_Hp_change = value;
+        }
+    }
+
     private Vector3 getmousePos()
     {
         Vector3 mouse = Input.mousePosition;
@@ -263,10 +290,19 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         {
             on_key5_down += empty;
         }
+        on_been_treat += (Dictionary<string, object> Arg) => Debug.Log("触发治疗事件");
     }
     void OnEnable()
     {
         transform.position = entity.position;//在setActive时同步角色位置
+    }
+    private void HpChangeHappen()
+    {
+        Dictionary<string, object> changeArg = new Dictionary<string, object>();
+        float parcent = ((float)state.nowHp) / ((float)state.maxHp);
+        changeArg["Percent"] = parcent;
+        changeArg["NowHp"] = state.nowHp;
+        on_Hp_change(changeArg);
     }
     void Update()
     {
@@ -411,6 +447,22 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                 //Debug.Log("code is"+ EventLine[0].eIndex);
                 switch (EventLine[0].eIndex)
                 {
+                    case CodeTable.INTERVAL:
+                        {
+                            //Debug.Log("inveral " + EventLine[0].Args["interval"]);
+                            if (on_inteval != null)
+                            {
+                                on_inteval(EventLine[0].Args);
+                            }
+                            eList.allReduceCD((float)EventLine[0].Args["interval"]);
+                            nextrecover -= Time.deltaTime;
+                            if (nextrecover <= 0)
+                            {
+                                state.recoverMP((int)unit.STAND_MP_RECOVER);
+                                nextrecover = RECOVER_INTERVAL;
+                            }
+                            break;
+                        }
                     case CodeTable.TAKE_DAMAGE:
                         {
                             Debug.Log("event-takedamage");
@@ -423,22 +475,19 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                                 Debug.Log("takedamage null");
                             }
                             state.realHurt((damage)EventLine[0].Args["Damage"]);
+                            //触发血量变动事件
+                            HpChangeHappen();
                             break;
                         }
-                    case CodeTable.INTERVAL:
+                    case CodeTable.BEEN_TREAT:
                         {
-                            //Debug.Log("inveral " + EventLine[0].Args["interval"]);
-                            if (on_inteval != null)
+                            if (on_been_treat != null)
                             {
-                                on_inteval(EventLine[0].Args);
+                                on_been_treat(EventLine[0].Args);
                             }
-                            eList.allReduceCD((float)EventLine[0].Args["interval"]);
-                            nextrecover -= Time.deltaTime;
-                            if (nextrecover<=0)
-                            {
-                                state.recoverMP((int)unit.STAND_MP_RECOVER);
-                                nextrecover = RECOVER_INTERVAL;
-                            }
+                            state.realTreat((short)EventLine[0].Args["Num"]);
+                            //触发血量变动事件
+                            HpChangeHappen();
                             break;
                         }
                 }
@@ -615,5 +664,13 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         //Debug.Log("add event");
         EventLine.Add(new eTrigger(code, args));
+    }
+
+    public void Role_onBeenTreat(GameObject treater, int num)
+    {//因为只有本机角色能真正治疗,所以对于本机角色来说不可能被别人治疗
+        if (treater.GetComponent<NetRoleState>().islocal)
+        {
+            Entity.cellCall("notify5", new object[] { treater.GetComponent<NetRoleState>().roomNo, num });
+        }
     }
 }

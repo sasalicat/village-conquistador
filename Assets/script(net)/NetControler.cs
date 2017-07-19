@@ -57,6 +57,8 @@ public class NetControler : MonoBehaviour,KBControler{
 
     _on_trigger on_take_damage;
     _on_trigger on_inteval;
+    _on_trigger on_been_treat;
+    _on_trigger on_Hp_change;
     public Entity Entity
     {
         get
@@ -108,6 +110,29 @@ public class NetControler : MonoBehaviour,KBControler{
         }
     }
 
+    public _on_trigger On_Been_Treat
+    {
+        get
+        {
+            return on_been_treat;
+        }
+
+        set
+        {
+            on_been_treat = value;
+        }
+    }
+    public _on_trigger On_Hp_Change
+    {
+        get
+        {
+            return on_Hp_change;
+        }
+        set
+        {
+            on_Hp_change = value;
+        }
+    }
     public _on_key1_down get_on_key1_down()
     {
         return on_key1_down;
@@ -207,6 +232,14 @@ public class NetControler : MonoBehaviour,KBControler{
         on_keyleft_up += onKeyLeftUp;
         on_keyright_up += onKeyRightUp;
         on_left_down += onMouseLeftDown;
+    }
+    private void HpChangeHappen()
+    {
+        Dictionary<string, object> changeArg = new Dictionary<string, object>();
+        float parcent = ((float)state.nowHp) / ((float)state.maxHp);
+        changeArg["Percent"] = parcent;
+        changeArg["NowHp"] = state.nowHp;
+        on_Hp_change(changeArg);
     }
     void Update()
     {
@@ -341,6 +374,7 @@ public class NetControler : MonoBehaviour,KBControler{
                             on_take_damage(EventLine[0].Args);
                         }
                         state.realHurt((damage)EventLine[0].Args["Damage"]);
+                        HpChangeHappen();
                         break;
                     }
                 case CodeTable.INTERVAL:
@@ -357,6 +391,16 @@ public class NetControler : MonoBehaviour,KBControler{
                             state.recoverMP((int)unit.STAND_MP_RECOVER);
                             nextrecover = RECOVER_INTERVAL;
                         }
+                        break;
+                    }
+                case CodeTable.BEEN_TREAT:
+                    {
+                        if (on_been_treat != null)
+                        {
+                            on_been_treat(EventLine[0].Args);
+                        }
+                        state.realTreat((short)EventLine[0].Args["Num"]);
+                        HpChangeHappen();
                         break;
                     }
             }
@@ -451,4 +495,11 @@ public class NetControler : MonoBehaviour,KBControler{
         EventLine.Add(new eTrigger(code, args));
     }
 
+    public void Role_onBeenTreat(GameObject treater, int num)
+    {
+        if (treater.GetComponent<NetRoleState>().islocal)
+        {
+            Entity.cellCall("notify5", new object[] {treater.GetComponent<NetRoleState>().roomNo,num});
+        }
+    }
 }

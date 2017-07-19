@@ -84,6 +84,15 @@
             //controler.addEvent(CodeTable.TAKE_DAMAGE,)
             //damage damage = new damage(kind,num,((float)stiffMilli)/1000);
         }
+        public void receive5(sbyte treaterNo,short num,sbyte random)
+        {
+            GameObject treater = manager.getObjByRoomNo(roomNo);
+            Dictionary<string, object> Arg = new Dictionary<string, object>();
+            Arg["Treater"] = treater;
+            Arg["Num"] = num;
+            Arg["randomPoint"] = random;
+            controler.addEvent(CodeTable.BEEN_TREAT, Arg);
+        }
         public void getFinish(sbyte roomNo)
         {
             loadPage.finishLine.Add(roomNo);

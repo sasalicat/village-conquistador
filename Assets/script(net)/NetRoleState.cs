@@ -53,7 +53,10 @@ public class NetRoleState :RoleState {
         }
         public void beenTreat(int num, GameObject from)
         {
-            throw new NotImplementedException();
+            if (role.canBetreat)
+            {
+                role.control.Role_onBeenTreat(from, num);
+            }
         }
 
         public void takedamage(damage damage)
@@ -120,7 +123,14 @@ public class NetRoleState :RoleState {
 
         public void treat(int num)
         {
-            throw new NotImplementedException();
+            if (role.nowHp + num > role.maxHp)
+            {
+                role.nowHp = role.maxHp;
+            }
+            else
+            {
+                role.nowHp += num;
+            }
         }
     }
     class stiff : state_net
@@ -157,7 +167,10 @@ public class NetRoleState :RoleState {
 
         public void beenTreat(int num, GameObject from)
         {
-            throw new NotImplementedException();
+            if (role.canBetreat)
+            {
+                role.control.Role_onBeenTreat(from, num);
+            }
         }
 
         public void hurt(damage damage)
@@ -226,7 +239,14 @@ public class NetRoleState :RoleState {
 
         public void treat(int num)
         {
-            throw new NotImplementedException();
+            if (role.nowHp + num > role.maxHp)
+            {
+                role.nowHp = role.maxHp;
+            }
+            else
+            {
+                role.nowHp += num;
+            }
         }
     }
     class conversely : state_net
@@ -264,7 +284,10 @@ public class NetRoleState :RoleState {
 
         public void beenTreat(int num, GameObject from)
         {
-            throw new NotImplementedException();
+            if (role.canBetreat)
+            {
+                role.control.Role_onBeenTreat(from, num);
+            }
         }
 
         public void hurt(damage damage)
@@ -326,7 +349,14 @@ public class NetRoleState :RoleState {
 
         public void treat(int num)
         {
-            throw new NotImplementedException();
+            if (role.nowHp + num > role.maxHp)
+            {
+                role.nowHp = role.maxHp;
+            }
+            else
+            {
+                role.nowHp += num;
+            }
         }
     }
     class died : state_net
@@ -378,7 +408,7 @@ public class NetRoleState :RoleState {
 
         public void treat(int num)
         {
-            throw new NotImplementedException();
+            return;
         }
     }
 
@@ -406,7 +436,7 @@ public class NetRoleState :RoleState {
         Debug.Log("net role state");
         nowState.takedamage(damage);
     }
-   public void realHurt(damage damage)
+    public void realHurt(damage damage)
     {
         ((state_net)nowState).hurt(damage);
     }

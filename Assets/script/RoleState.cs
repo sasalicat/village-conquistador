@@ -142,6 +142,10 @@ public class RoleState : MonoBehaviour {
         nowState.takedamage(damage);
         Debug.Log("super");
     }
+    public virtual void BeenTreat(GameObject treater,int num)
+    {
+        nowState.beenTreat(num, treater);
+    }
     public void recoverMP(float num)
     {
         if (nowMp + num < unit.STAND_MP)

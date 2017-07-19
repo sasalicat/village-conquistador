@@ -63,7 +63,15 @@ public interface Controler
         set;
         get;
     }
-    
-    
+    _on_trigger On_Been_Treat
+    {
+        set;
+        get;
+    }
+    _on_trigger On_Hp_Change
+    {
+        set;
+        get;
+    }
 
 }

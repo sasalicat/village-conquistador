@@ -18,6 +18,7 @@ public class NetManager : MonoBehaviour ,Manager {
     public PrabTabel prafebTable;
     public GameObject roleparfab;
     public dataRegister register;
+    public HpBarManager hpBarCreater;//手动拉取
     public List<dirPair> directionList=new List<dirPair>();
     public bool[] finishTable = new bool[MAX_NUM];
     public int intervals = 0;//累积的时间间隔触发次数
@@ -194,6 +195,8 @@ public class NetManager : MonoBehaviour ,Manager {
                     objList[i].GetComponent<NetRoleState>().roomNo = (sbyte)i;
                     objList[i].transform.position = e.position;
                     objList[i].SetActive(true);
+                    hpBarCreater.CreateHpBar(objList[i]);
+
                     finishTable[i] = true;
                     if (checkFinish())//如果本地段都全部完成则通知server本client已经完成加载
                     {

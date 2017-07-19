@@ -170,7 +170,11 @@ public class EquipmentList : MonoBehaviour {
                     controler.On_Interval+= ((Equipment)newone).trigger;
                     break;
                 }
-
+            case EquipmentTable.ON_BEEN_TREAT:
+                {
+                    controler.On_Been_Treat+= ((Equipment)newone).trigger;
+                    break;
+                }
         }
 
     }

@@ -91,7 +91,6 @@ public class mg_atk : MonoBehaviour,CDEquipment
         float stiff = BaseStiff+BaseStiff * (((float)selfState.selfdata.stiffable)/100);
         missile.Damage = new damage(1, num,stiff,false,false,gameObject);
 
-
         CDTime = CD;//技能冷卻
         Debug.Log("in trigger CDTime is" + CDTime);
 
