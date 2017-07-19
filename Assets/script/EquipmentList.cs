@@ -175,6 +175,11 @@ public class EquipmentList : MonoBehaviour {
                     controler.On_Been_Treat+= ((Equipment)newone).trigger;
                     break;
                 }
+            case EquipmentTable.ON_HP_CHANGE:
+                {
+                    controler.On_Hp_Change += ((Equipment)newone).trigger;
+                    break;
+                }
         }
 
     }
