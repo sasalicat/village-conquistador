@@ -1,22 +1,22 @@
-﻿using DG.Tweening;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class grenades : MonoBehaviour, CDEquipment
+public class protect_mask : MonoBehaviour, CDEquipment
 {
-    public const float CD = 5f;//4f;
-    public const int BaseDamage = 100;//80
-    public const float BaseStiff = 0.5f;
+    public const float CD = 0.5f;//0.5f;
+    public const int BaseDamage = 0;
+    public const float BaseStiff = 4f;
 
     public float CDTime = 0;
     public sbyte index;
     const short selfMissileNo = 0;
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
-    private GameObject missilePraf2;
     private RoleState selfState;
     public Text Label;
+    AnimatorTable anim;
+
     //實做Equipment介面-------------------------------------------------------
     public sbyte No
     {
@@ -72,25 +72,15 @@ public class grenades : MonoBehaviour, CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
+
         getVector getVector = GameObject.Find("keyTabel").GetComponent<getVector>();
         Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
         //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
         Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, mousePosition, new Vector3(0, -1, 0));//獲得相對座標
-        //制造子弹物件
-        GameObject newone = Instantiate(missilePraf, tragetPos, transform.rotation);
-        newone.transform.up = mousePosition - origenPlayerPosition;
-        //修改子弹物件携带的子弹脚本
-        Missile missile = newone.GetComponent<Missile>();
-        missile.Creater = gameObject;
-        //创建伤害物件
-        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
-        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
-        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
 
-        ((mis_grenades)missile).origenPlayerPosition = origenPlayerPosition;
-        ((mis_grenades)missile).mousePosition = mousePosition;
-        ((mis_grenades)missile).missilePraf2 = missilePraf2;
+        NetManager.createObstacle(gameObject, origenPlayerPosition, 3);
+        anim.AttackStart();
 
         CDTime = CD;//技能冷卻
         Debug.Log("in trigger CDTime is" + CDTime);
@@ -99,9 +89,6 @@ public class grenades : MonoBehaviour, CDEquipment
 
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
-        missilePraf = table.MissileList[7];
-        missilePraf2 = table.MissileList[4];
-        this.selfState = state;
-
+        this.anim = anim;
     }
 }

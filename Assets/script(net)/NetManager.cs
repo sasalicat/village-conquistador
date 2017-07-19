@@ -222,12 +222,12 @@ public class NetManager : MonoBehaviour ,Manager {
                 if (cno == playerContorler.roomNo)
                 {
                     newone.GetComponent<ObstacleState>().Creater = playerContorler.gameObject;
-                    playerContorler.gameObject.SendMessage("onCreateFinish", ((Obstacle)e).state);
+                    playerContorler.gameObject.SendMessage("onCreateFinish", ((Obstacle)e).state,SendMessageOptions.DontRequireReceiver);
                 }
                 else
                 {
                     newone.GetComponent<ObstacleState>().Creater = controlerList[cno].gameObject;
-                    controlerList[cno].gameObject.SendMessage("onCreateFinish", ((Obstacle)e).state);
+                    controlerList[cno].gameObject.SendMessage("onCreateFinish", ((Obstacle)e).state, SendMessageOptions.DontRequireReceiver);
                 }
             }
         }else if(e is Area)
