@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class berserker : MonoBehaviour,Equipment {
+public class regeneration : MonoBehaviour, Equipment
+{
     public sbyte index;
-    float percent;
-    float beforePercent;
     RoleState roleState;
-    bool isFist = true;
+    float time = 2f;
     public sbyte No
     {
         get
@@ -34,8 +32,7 @@ public class berserker : MonoBehaviour,Equipment {
     {
         get
         {
-            return EquipmentTable.ON_HP_CHANGE;
-            //return EquipmentTable.ON_TAKE_DAMAGE;
+            return EquipmentTable.ON_INTERVAL;
         }
     }
 
@@ -46,19 +43,12 @@ public class berserker : MonoBehaviour,Equipment {
 
     public void trigger(Dictionary<string, object> args)
     {
-        percent = (float) args["Percent"];//小數的百分比
-        
-        if (isFist)
+        float interval = (float)args["interval"];
+        if ((time -= interval) <= 0)
         {
-            beforePercent = percent;
-            roleState.selfdata.power += (int)((1 - beforePercent) * 100);
-            isFist = false;
-        }else
-        {
-            roleState.selfdata.power += (int)((beforePercent - percent) * 100);
-            beforePercent = percent;
+            roleState.BeenTreat(this.gameObject,(int)(roleState.maxHp * 0.03));
+            time = 2;
         }
-        
     }
-    
+
 }

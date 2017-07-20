@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class protect_mask : MonoBehaviour, CDEquipment
 {
-    public const float CD = 0.5f;//0.5f;
+    public const float CD = 15f;//0.5f;
     public const int BaseDamage = 0;
     public const float BaseStiff = 4f;
 
