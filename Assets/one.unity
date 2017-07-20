@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roleNo: 2
-  equipmentNoList: 000c
+  equipmentNoList: 000d
 --- !u!1 &427121161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,7 +1220,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  passiveList: 0100010101010101010001010100000000000000
+  passiveList: 0100010101010101010001010000000000000000
 --- !u!114 &1995136365
 MonoBehaviour:
   m_ObjectHideFlags: 0
