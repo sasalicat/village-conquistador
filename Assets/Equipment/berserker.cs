@@ -35,7 +35,6 @@ public class berserker : MonoBehaviour,Equipment {
         get
         {
             return EquipmentTable.ON_HP_CHANGE;
-            //return EquipmentTable.ON_TAKE_DAMAGE;
         }
     }
 

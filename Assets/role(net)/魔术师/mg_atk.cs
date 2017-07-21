@@ -75,8 +75,6 @@ public class mg_atk : MonoBehaviour,CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
-      
-      
         Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
         //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
@@ -93,8 +91,6 @@ public class mg_atk : MonoBehaviour,CDEquipment
 
         CDTime = CD;//技能冷卻
         Debug.Log("in trigger CDTime is" + CDTime);
-
-        
     }
 
 
