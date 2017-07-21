@@ -13,7 +13,7 @@ public class HpBarControler : MonoBehaviour {
     void Update () {
         if (role != null)
         {
-            transform.position = new Vector3(role.position.x, role.position.y+1, 0);
+            transform.position = new Vector3(role.position.x, role.position.y+3, 0);
         }
 	}
     public void onGetRole()

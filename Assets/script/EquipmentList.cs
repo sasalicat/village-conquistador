@@ -58,6 +58,7 @@ public class EquipmentList : MonoBehaviour {
         Debug.Log("ADDing-----");
         //text.text = "add";
         //text.text = "Player is:"+ controler.Entity.ToString();
+        Debug.Log("空的" + controler);
         int selfNo = ((Player)controler.Entity).roomNo;
         List<sbyte> eList = register.PlayerInWar[selfNo].role.equipmentIdList;
         while (eList.Count > 0)

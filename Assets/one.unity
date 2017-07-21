@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -229,8 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd6000c4a08a6a49bf88a677547458b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roleNo: 2
-  equipmentNoList: 000d
+  roleNo: 3
+  equipmentNoList: 0809
 --- !u!1 &427121161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,7 +1209,7 @@ MonoBehaviour:
   - lr_atk
   - lr_skill
   - tk_atk
-  - 
+  - tk_skill
   - grenades
   - protect_mask
   - berserker
@@ -1220,7 +1220,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  passiveList: 0100010101010101010001010000000000000000
+  passiveList: 0100010101010101010101010000000000000000
 --- !u!114 &1995136365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,6 +1275,7 @@ MonoBehaviour:
   - {fileID: 1424429232851234, guid: 596da52c212a3014fafb3efca59c06e9, type: 2}
   - {fileID: 1734511024712918, guid: fe894ad79601b054cb40bf48b38f4cd6, type: 2}
   - {fileID: 1178681234940520, guid: 7653a89b42c02c848ad6f86c36244e13, type: 2}
+  - {fileID: 1699108556279174, guid: 4957e0f33cc075f48a66c656837c45b5, type: 2}
   Areas:
   - {fileID: 1708283513118796, guid: 81d83ce2cb9983d4d9480e5bc1aa9eaa, type: 2}
 --- !u!1 &2138347942

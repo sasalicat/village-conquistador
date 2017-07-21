@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class lr_skill : MonoBehaviour, CDEquipment
+public class tk_skill : MonoBehaviour, CDEquipment
 {
-
+    public GameObject dunpai;
     public const float CD = 0.5f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
@@ -77,19 +76,25 @@ public class lr_skill : MonoBehaviour, CDEquipment
         Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
         //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
-        Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, mousePosition, new Vector3(0, -1, 0));//獲得相對座標
+        Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, mousePosition, new Vector3(0, -4, 0));//獲得相對座標
         //制造子弹物件
         Vector3 direction = mousePosition - origenPlayerPosition;
         //GameObject newone = Instantiate(missilePraf, tragetPos, this.transform.rotation);
         //missilePraf.transform.forward = direction;
         //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
-
-        NetManager.createObstacle(gameObject, transform.position, 2);
-
+        if (dunpai == null) {
+            NetManager.createObstacle(gameObject, transform.position, 4);
+            animator.SkillStart();
+        }
+        else
+        {
+            Destroy(dunpai);
+            animator.SkillEnd();    
+        }
 
         CDTime = CD;//技能冷卻
         //Debug.Log("in trigger CDTime is" + CDTime);
-        animator.SkillStart();
+        
 
 
     }
@@ -112,13 +117,13 @@ public class lr_skill : MonoBehaviour, CDEquipment
 
     public void onCreateFinish(ObstacleState obstacle)
     {
-
-        if (obstacle.Kind == 2)
-        {//如果障碍种类是本技能的则执行以下步骤
-            ((obs_lr_skill)obstacle).damage = new damage(2, (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100)) , 0.5f , false ,false , gameObject);
-            obstacle.gameObject.SetActive(true);
+        if (obstacle.Kind == 4)
+        {
+            dunpai = obstacle.gameObject;
+            obstacle.transform.parent = this.transform;
+            obstacle.transform.localEulerAngles = new Vector3(0, 0, 0);
+            obstacle.transform.localPosition = new Vector3(0, -2, 0);
         }
     }
-    
-}
 
+}

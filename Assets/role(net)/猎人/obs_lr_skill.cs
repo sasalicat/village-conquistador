@@ -30,7 +30,6 @@ public class obs_lr_skill : ObstacleState
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(Creater+ ";" +other.gameObject);
         if (other.gameObject != Creater)
         {
             callMethodNull();

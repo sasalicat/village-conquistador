@@ -128,7 +128,7 @@ public class RoleState : MonoBehaviour {
     {
         selfdata = GetComponent<unit>();
         anima = GetComponent<AnimatorTable>();
-        Debug.Log("in Role state");
+        Debug.Log("in Role state"+maxHp+nowHp);
         maxHp = unit.STAND_HP + unit.STAND_HP * (selfdata.physique / 100);
         nowHp= maxHp;
         nowMp = 0;
