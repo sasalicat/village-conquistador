@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roleNo: 3
-  equipmentNoList: 1409
+  equipmentNoList: 000e
 --- !u!1 &427121161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,7 +1214,7 @@ MonoBehaviour:
   - protect_mask
   - berserker
   - regeneration
-  - 
+  - shield
   - 
   - 
   - 
