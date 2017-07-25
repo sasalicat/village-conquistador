@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class HpBarManager : MonoBehaviour {
     public GameObject HpBar;
-    public void CreateHpBar(GameObject role)
+    private GameObject[] hpbars=new GameObject[NetManager.MAX_NUM];
+    public void CreateHpBar(GameObject role,int roomNo)
     {
        GameObject newone=Instantiate(HpBar,this.transform);
         newone.GetComponent<HpBarControler>().role = role.transform;
         newone.GetComponent<HpBarControler>().onGetRole();
+        hpbars[roomNo] = newone;
     }
+    public void deleteHpBarWith(sbyte roomNo)
+    {
+        Destroy(hpbars[roomNo]);
+    }
+    
 	// Use this for initialization
 	void Start () {
 		

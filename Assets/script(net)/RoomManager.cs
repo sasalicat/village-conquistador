@@ -37,6 +37,7 @@ public class RoomManager : MonoBehaviour {
         //Icon= Resources.Load("a") as Sprite;
         storage = GetComponent<IconStorage>();
         ((Account)KBEngineApp.app.player()).roomManager = this;
+        Account.PlayerInRoom = true;
     }
 	
 	// Update is called once per frame
@@ -48,7 +49,7 @@ public class RoomManager : MonoBehaviour {
             Debug.Log("item type is" + ((List<System.Object>)account.RoomInitData["list"])[0].GetType());
             List<System.Object> dataList = (List<System.Object>)account.RoomInitData["list"];
             selfRoomId = (sbyte)account.RoomInitData["selfRoomId"];
-            Debug.Log("Yours own room id is:" + selfRoomId);
+            Debug.Log("Yours own room id is:" + selfRoomId+"list length is"+dataList.Count);
 
 
             for (int i = 0; i < dataList.Count; i++) {
@@ -66,8 +67,8 @@ public class RoomManager : MonoBehaviour {
                 {
                     newlist.Add((sbyte)elist[index]);
                 }
-                register.PlayerInWar[(sbyte)data["roleRoomId"]] = new dataRegister.PlayerData((sbyte)data["roleKind"],newlist,(string)data["name"],selfRoomId== (sbyte)data["roleRoomId"]);
-                
+                register.PlayerInWar[(sbyte)data["roleRoomId"]] = new dataRegister.PlayerData((sbyte)data["roleKind"],newlist,(string)data["name"],selfRoomId== (sbyte)data["roleRoomId"],(sbyte)data["team"]);
+                //Debug.Log("player"+ (string)data["name"]);
 
             }
             account.RoomInitData = null;
@@ -88,7 +89,7 @@ public class RoomManager : MonoBehaviour {
                 {
                     newlist.Add((sbyte)elist[index]);
                 }
-                register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]] = new dataRegister.PlayerData((sbyte)dataSingle["roleKind"], newlist, (string)dataSingle["name"], selfRoomId == (sbyte)dataSingle["roleRoomId"]);
+                register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]] = new dataRegister.PlayerData((sbyte)dataSingle["roleKind"], newlist, (string)dataSingle["name"], selfRoomId == (sbyte)dataSingle["roleRoomId"], (sbyte)dataSingle["team"]);
                 updateItem((sbyte)dataSingle["roleRoomId"], selfRoomId == (sbyte)dataSingle["roleRoomId"], (string)nameobj, (bool)((sbyte)dataSingle["ready"] > 0), (sbyte)dataSingle["roleKind"]);
                 Debug.Log("add playerdata roomNo" + dataSingle["roleRoomId"] + " eList Count:" + elist.Count);
             }
@@ -109,7 +110,7 @@ public class RoomManager : MonoBehaviour {
                     }
                     register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]].role.roleKind = (sbyte)dataSingle["roleKind"];
                     register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]].role.equipmentIdList = newlist;
-
+                    register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]].team = (sbyte)dataSingle["team"];
                 }
                 //更新界面
                 updateItem((sbyte)dataSingle["roleRoomId"], selfRoomId == (sbyte)dataSingle["roleRoomId"], (bool)((sbyte)dataSingle["ready"] > 0), (sbyte)dataSingle["roleKind"]);
@@ -190,6 +191,7 @@ public class RoomManager : MonoBehaviour {
     }
     public void onLeaveClick()
     {
+        Debug.Log("离开房间按钮被点击了");
         ((Account)KBEngineApp.app.player()).baseCall("leaveRoom", new object[] {});
         Application.LoadLevel("Hall");
     }

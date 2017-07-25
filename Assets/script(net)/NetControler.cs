@@ -59,6 +59,7 @@ public class NetControler : MonoBehaviour,KBControler{
     _on_trigger on_inteval;
     _on_trigger on_been_treat;
     _on_trigger on_Hp_change;
+    _on_trigger on_cause_damage;
     public Entity Entity
     {
         get
@@ -133,6 +134,20 @@ public class NetControler : MonoBehaviour,KBControler{
             on_Hp_change = value;
         }
     }
+
+    public _on_trigger On_Cause_Damage
+    {
+        get
+        {
+            return on_cause_damage;
+        }
+
+        set
+        {
+            on_cause_damage = value;
+        }
+    }
+
     public _on_key1_down get_on_key1_down()
     {
         return on_key1_down;
@@ -369,9 +384,22 @@ public class NetControler : MonoBehaviour,KBControler{
             switch (EventLine[0].eIndex) {
                 case CodeTable.TAKE_DAMAGE:
                     {
+                        damage damage = (damage)EventLine[0].Args["Damage"];
                         if (on_take_damage != null)
                         {
                             on_take_damage(EventLine[0].Args);
+                        }
+                        KBControler damageControler = damage.damager.GetComponent<KBControler>();
+                        if (damageControler.On_Cause_Damage != null)
+                        {
+                            Dictionary<string, object> Arg = new Dictionary<string, object>();
+                            Arg["Damage"] = damage;
+                            Arg["PlayerPosition"] = EventLine[0].Args["DamagerPosition"];
+                            Arg["TragetPosition"] = EventLine[0].Args["PlayerPosition"];
+                            Arg["randomPoint"] = EventLine[0].Args["randomPoint"];
+                            Arg["Traget"] = this.gameObject;
+                            //Arg["Traget"]=
+                            damageControler.On_Cause_Damage(Arg);
                         }
                         state.realHurt((damage)EventLine[0].Args["Damage"]);
                         HpChangeHappen();

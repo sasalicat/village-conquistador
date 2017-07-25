@@ -373,7 +373,7 @@ public class NetRoleState :RoleState {
         {
             get
             {
-                Debug.Log("in died can't move");
+                //Debug.Log("in died can't move");
                 return false;
             }
         }

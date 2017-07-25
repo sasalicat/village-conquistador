@@ -20,6 +20,7 @@ public class HallManager : MonoBehaviour {
         //((Account)KBEngine.KBEngineApp.app.player()).addroom_fuction = roomShowControl.AddRoom;
         ((Account)KBEngine.KBEngineApp.app.player()).baseCall("onHallReady");
         roomShowControl = transform.GetComponent<roomShow>();
+        Account.PlayerInRoom=false;
      
     }
 	

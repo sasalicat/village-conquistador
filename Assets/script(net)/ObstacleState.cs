@@ -103,4 +103,8 @@ public class ObstacleState : RoleState {//相当于控制器和State结合在同
             entity.cellCall("methodSbyte",new object[] {data});
         }
     }
+    public void DestoryObjInServer()
+    {
+        entity.cellCall("DestoryEntity");
+    }
 }

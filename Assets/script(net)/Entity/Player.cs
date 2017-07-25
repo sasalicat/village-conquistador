@@ -106,5 +106,11 @@
             //Debug.Log("reqms");
             ms.ReqTime = System.DateTime.Now.Millisecond;
         }
+        public void gameOver(sbyte winnerNo)
+        {
+            manager.register.winnerno = winnerNo;
+            manager.overFlag = true;
+
+        }
     }
 }

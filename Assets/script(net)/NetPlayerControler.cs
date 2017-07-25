@@ -61,6 +61,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     _on_trigger on_inteval;
     _on_trigger on_been_treat;
     _on_trigger on_Hp_change;
+    _on_trigger on_cause_damage;
     //新架構儲存觸發物件
 
     List<Equipment> onAttackLine=new List<Equipment>();
@@ -188,7 +189,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         get
         {
-            return on_been_treat;
+            return null;
         }
 
         set
@@ -206,6 +207,19 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         set
         {
                 on_Hp_change = value;
+        }
+    }
+
+    public _on_trigger On_Cause_Damage
+    {
+        get
+        {
+            return on_cause_damage;
+        }
+
+        set
+        {
+            on_cause_damage = value;
         }
     }
 
@@ -466,6 +480,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                     case CodeTable.TAKE_DAMAGE:
                         {
                             Debug.Log("event-takedamage");
+                            damage damage = (damage)EventLine[0].Args["Damage"];
                             if (on_take_damage != null)
                             {
                                 on_take_damage(EventLine[0].Args);
@@ -474,9 +489,28 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                             {
                                 Debug.Log("takedamage null");
                             }
-                            state.realHurt((damage)EventLine[0].Args["Damage"]);
+                            KBControler damageControler=damage.damager.GetComponent<KBControler>();
+                            if (damageControler.On_Cause_Damage!=null)
+                            {
+                                Dictionary<string, object> Arg = new Dictionary<string, object>();
+                                Arg["Damage"] = damage;
+                                Arg["PlayerPosition"] = EventLine[0].Args["DamagerPosition"];
+                                Arg["TragetPosition"] = EventLine[0].Args["PlayerPosition"];
+                                Arg["randomPoint"]= EventLine[0].Args["randomPoint"];
+                                Arg["Traget"] = this.gameObject;
+                                //Arg["Traget"]=
+                                damageControler.On_Cause_Damage(Arg);
+                            }
+                            state.realHurt(damage);
                             //触发血量变动事件
                             HpChangeHappen();
+                            if (state.nowHp<=0)
+                            {
+                                Dictionary<string, object> diedArg = new Dictionary<string, object>();
+                                diedArg["Killer"] = (damage).damager;
+                                Entity.baseCall("notifyDied", new object[] {(sbyte)0});
+
+                            }
                             break;
                         }
                     case CodeTable.BEEN_TREAT:

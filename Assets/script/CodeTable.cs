@@ -28,5 +28,6 @@ public class CodeTable{
     public const sbyte UPDATE_Z = 22;
     public const sbyte INTERVAL = 23;
     public const sbyte BEEN_TREAT = 24;
-    public const sbyte HP_CHANGE = 15;
+    public const sbyte HP_CHANGE = 25;
+    public const sbyte DEAD = 26;
 }

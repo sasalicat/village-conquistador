@@ -11,7 +11,7 @@ public class NetManager : MonoBehaviour ,Manager {
     public const int MAX_NUM = 6;
     public const float INTERVAL_CYCLE = 0.1f;
 
-    private GameObject[] objList;
+    public GameObject[] objList;
     //private ObjAndRoomNo[] orList;
     public NetControler[] controlerList;
     public NetPlayerControler playerContorler;
@@ -22,6 +22,7 @@ public class NetManager : MonoBehaviour ,Manager {
     public List<dirPair> directionList=new List<dirPair>();
     public bool[] finishTable = new bool[MAX_NUM];
     public int intervals = 0;//累积的时间间隔触发次数
+    public bool overFlag = false;//为true时执行页面切换
 
     private bool first = true;//第一个update的flag用于BaseCallonChangToWar
 
@@ -66,9 +67,11 @@ public class NetManager : MonoBehaviour ,Manager {
 
     // Use this for initialization
     void Start () {
+        Debug.Log("在netManager Start");
         register = GameObject.Find("client").GetComponent<dataRegister>();
         prafebTable = GameObject.Find("keyTabel").GetComponent<PrabTabel>();
         KBEngine.Event.registerOut("onEnterWorld", this, "onEnterWorld");
+        KBEngine.Event.registerOut("onLeaveWorld", this, "onLeaveWorld");
         //KBEngine.Event.registerOut("onEnterSpace", this, "onEnterSpace");
         objList = new GameObject[MAX_NUM];
         for(int i = 0; i < MAX_NUM; i++)
@@ -76,7 +79,7 @@ public class NetManager : MonoBehaviour ,Manager {
             if (register.PlayerInWar[i] != null)//在這裡生成角色對應的gameobj
             {
                 int roleNo=register.PlayerInWar[i].role.roleKind;
-                //Debug.Log("i:"+i+" :"+roleNo);
+                Debug.Log("在NetManager Start i:"+i+"创建obj种类:"+roleNo);
                 objList[i] =  (GameObject)Instantiate(prafebTable.table[roleNo], new Vector3(0,0,0),transform.rotation);
                 
 
@@ -85,6 +88,11 @@ public class NetManager : MonoBehaviour ,Manager {
         //orList = new ObjAndRoomNo[MAX_NUM];
         controlerList = new NetControler[MAX_NUM];
                 //Label = Label = Label = GameObject.Find("Canvas/Text2").GetComponent<Text>();
+    }
+    void OnDestroy()
+    {
+        KBEngine.Event.deregisterOut("onEnterWorld", this, "onEnterWorld");
+        KBEngine.Event.deregisterOut("onLeaveWorld", this, "onLeaveWorld");
     }
 	
 	// Update is called once per frame
@@ -120,6 +128,10 @@ public class NetManager : MonoBehaviour ,Manager {
             ((KBControler)playerContorler).addEvent(CodeTable.INTERVAL, newDatap);
             intervals--;
         }
+        if (overFlag)
+        {
+            Application.LoadLevel("over");
+        }
         /*if (createOrderList.Count > 0)//另一個方案,直接創建投射物,未採用
         {
             createOrder order = createOrderList[0];
@@ -146,14 +158,17 @@ public class NetManager : MonoBehaviour ,Manager {
     {
         Debug.Log("id " + e.id + "on Enter World");
         Debug.Log("type:" + e.GetType());
-    
         if (e is Player)
         {
+            Debug.Log("玩家进场id:" +e.id);
+
             for (int i = 0; i < MAX_NUM; i++)
-            {//roomNo就是物件雜objList的索引值
+            {//roomNo就是物件objList的索引值
+                Debug.Log(" i:" + i + "playerInWar: " + register.PlayerInWar[i]);
+                e.renderObj = objList[i];
                 if (e.id == register.PlayerInWar[i].entityId)
                 {
-
+                    Debug.Log("objList[i]"+objList[i]);
                     EquipmentList elist = objList[i].GetComponent<EquipmentList>();
                     if (e.id == KBEngineApp.app.player().id)
                     {
@@ -193,9 +208,10 @@ public class NetManager : MonoBehaviour ,Manager {
 
                     //orList[i] = new ObjAndRoomNo((sbyte)i,objList[i]); 
                     objList[i].GetComponent<NetRoleState>().roomNo = (sbyte)i;
+                    objList[i].GetComponent<NetRoleState>().team = register.PlayerInWar[i].team;
                     objList[i].transform.position = e.position;
                     objList[i].SetActive(true);
-                    hpBarCreater.CreateHpBar(objList[i]);
+                    hpBarCreater.CreateHpBar(objList[i],i);
 
                     finishTable[i] = true;
                     if (checkFinish())//如果本地段都全部完成则通知server本client已经完成加载
@@ -212,6 +228,8 @@ public class NetManager : MonoBehaviour ,Manager {
         {
             sbyte index = (sbyte)((Obstacle)e).getDefinedProperty("kind");
             GameObject newone = Instantiate(prafebTable.Obstacles[index],e.position,Quaternion.Euler(e.direction));
+
+            e.renderObj = newone;
             newone.GetComponent<ObstacleState>().entity = e;
             Debug.Log("obstacle" + newone.GetComponent<ObstacleState>());
             ((Obstacle)e).state = newone.GetComponent<ObstacleState>();
@@ -235,6 +253,7 @@ public class NetManager : MonoBehaviour ,Manager {
             short radiu = (short)e.getDefinedProperty("radius");
             float radiu_f = radiu / 1000;
             GameObject newArea=Instantiate(prafebTable.Areas[0], e.position, Quaternion.Euler(e.direction));
+            e.renderObj = newArea;
             newArea.transform.localScale = new Vector3(radiu_f, radiu_f, 1);
             newArea.GetComponent<AreaControl>().e = e;
         }
@@ -279,4 +298,13 @@ public class NetManager : MonoBehaviour ,Manager {
         return null;*/
         return objList[roomNo];
     } 
+    public void onLeaveWorld(Entity e)
+    {
+        Debug.Log("leaveRoom被呼叫");
+        Destroy((GameObject)e.renderObj);
+        if(e is Player)
+        {
+            hpBarCreater.deleteHpBarWith(((GameObject)e.renderObj).GetComponent<NetRoleState>().roomNo);
+        }
+    }
 }
