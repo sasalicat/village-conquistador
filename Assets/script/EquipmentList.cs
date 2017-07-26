@@ -133,9 +133,9 @@ public class EquipmentList : MonoBehaviour {
         Component newone= gameObject.AddComponent(System.Type.GetType(typeName));
         if (table.passiveList[EquipmentNo])//主動道具
         {
+            NeedCast.Add(((CDEquipment)newone).Designated);
             passiveEquipments.Add((CDEquipment)newone);
         }
-        NeedCast.Add(((CDEquipment)newone).Designated);
         //[判断是不是CDEquiment,如果是加入技能冷却列表
         Type[] inters = newone.GetType().GetInterfaces();
         Debug.Log("type length"+inters.Length);
