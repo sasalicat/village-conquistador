@@ -10,6 +10,7 @@ public class EquipmentTable : MonoBehaviour {
     public const sbyte ON_INTERVAL = 3;
     public const sbyte ON_BEEN_TREAT = 4;
     public const sbyte ON_HP_CHANGE = 5;
+    public const sbyte ON_CAUSE_DAMAGE = 6;
 	// Use this for initialization
 	void Start () {
 		
