@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class obs_lr_skill : ObstacleState
 {
+    public Animator animator;
+
     public SpriteRenderer s;
     public bool local;
     public damage damage;
@@ -12,6 +14,7 @@ public class obs_lr_skill : ObstacleState
     override protected void Start()
     {
         base.Start();
+        animator = GetComponent<Animator>();
         s = gameObject.GetComponent(typeof(SpriteRenderer)) as SpriteRenderer;
         if (local = Creater.GetComponent<NetRoleState>().islocal)
         {
@@ -35,11 +38,22 @@ public class obs_lr_skill : ObstacleState
             callMethodNull();
             RoleState role = other.gameObject.GetComponent<RoleState>();
             role.TakeDamage(damage);
+
         }
     }
     public override void methodNull()
     {
+        animator.SetBool("attack", true);
+    }
+
+    public void Destroy()
+    {
         Destroy(this.gameObject);
+    }
+
+    public void ChangeColor()
+    {
+        s.color = new Vector4(1, 1, 1, 1);
     }
 
 }

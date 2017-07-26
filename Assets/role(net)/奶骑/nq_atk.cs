@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class lr_atk : MonoBehaviour, CDEquipment
+public class nq_atk : MonoBehaviour, CDEquipment
 {
 
     public const float CD = 0.5f;//0.5f;
-    public const int BaseDamage = 50;
+    public const int BaseSkill = 40;
     public const float BaseStiff = 0.25f;
 
     public float CDTime = 0;
@@ -76,8 +76,6 @@ public class lr_atk : MonoBehaviour, CDEquipment
         }
     }
 
-
-
     //----------------------------------------------------------------------
 
 
@@ -101,9 +99,8 @@ public class lr_atk : MonoBehaviour, CDEquipment
         Missile missile = newone.GetComponent<Missile>();
         missile.Creater = gameObject;
         //创建伤害物件
-        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
-        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
-        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+        int num = (int)(BaseSkill + BaseSkill * ((float)selfState.selfdata.skill / 100));
+        missile.Damage = new damage(1, num, 0, false, false, gameObject);
 
 
         CDTime = CD;//技能冷卻
@@ -117,9 +114,8 @@ public class lr_atk : MonoBehaviour, CDEquipment
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        missilePraf = table.MissileList[5];
+        missilePraf = table.MissileList[12];
         this.selfState = state;
         this.animator = anim;
     }
 }
-
