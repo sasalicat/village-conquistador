@@ -34,14 +34,14 @@ public class NetControler : MonoBehaviour,KBControler{
     //装备事件
     _on_trigger on_attack;
 
-    _on_left_down on_left_down;
-    _on_right_down on_right_down;
-    _on_middle_down on_middle_down;
-    _on_key1_down on_key1_down;
-    _on_key2_down on_key2_down;
-    _on_key3_down on_key3_down;
-    _on_key4_down on_key4_down;
-    _on_key5_down on_key5_down;
+    _on_skill_key_down on_left_down;
+    _on_skill_key_down on_right_down;
+    _on_skill_key_down on_middle_down;
+    _on_skill_key_down on_key1_down;
+    _on_skill_key_down on_key2_down;
+    _on_skill_key_down on_key3_down;
+    _on_skill_key_down on_key4_down;
+    _on_skill_key_down on_key5_down;
     _on_keyup_down on_keyup_down;
     _on_keyup_ing on_keyup_ing;
     _on_keyup_up on_keyup_up;
@@ -148,23 +148,23 @@ public class NetControler : MonoBehaviour,KBControler{
         }
     }
 
-    public _on_key1_down get_on_key1_down()
+    public _on_skill_key_down get_on_key1_down()
     {
         return on_key1_down;
     }
-    public _on_key2_down get_on_key2_down()
+    public _on_skill_key_down get_on_key2_down()
     {
         return on_key2_down;
     }
-    public _on_key3_down get_on_key3_down()
+    public _on_skill_key_down get_on_key3_down()
     {
         return on_key3_down;
     }
-    public _on_key4_down get_on_key4_down()
+    public _on_skill_key_down get_on_key4_down()
     {
         return on_key4_down;
     }
-    public _on_key5_down get_on_key5_down()
+    public _on_skill_key_down get_on_key5_down()
     {
         return on_key5_down;
     }
@@ -216,15 +216,15 @@ public class NetControler : MonoBehaviour,KBControler{
     {
         return on_keyup_up;
     }
-    public _on_left_down get_on_left_down()
+    public _on_skill_key_down get_on_left_down()
     {
         return on_left_down;
     }
-    public _on_middle_down get_on_middle_down()
+    public _on_skill_key_down get_on_middle_down()
     {
         return on_middle_down;
     }
-    public _on_right_down get_on_right_down()
+    public _on_skill_key_down get_on_right_down()
     {
         return on_right_down;
     }
@@ -246,7 +246,7 @@ public class NetControler : MonoBehaviour,KBControler{
         on_keyup_up += onKeyUpUp;
         on_keyleft_up += onKeyLeftUp;
         on_keyright_up += onKeyRightUp;
-        on_left_down += onMouseLeftDown;
+
     }
     private void HpChangeHappen()
     {

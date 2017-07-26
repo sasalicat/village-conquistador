@@ -4,6 +4,9 @@ using UnityEngine;
 
 public interface CDEquipment:Equipment{//主動裝備都要繼承這個介面
     void setTime(float time);//減少CD值,float為減少的時間
+    bool Designated {//是否为指定角色施法的技能
+        get;
+    }
     uint Consumption//使用一次消耗的能量
     {
         get;

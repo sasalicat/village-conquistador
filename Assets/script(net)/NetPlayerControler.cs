@@ -36,14 +36,15 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
 
-    _on_left_down on_left_down;
-    _on_right_down on_right_down;
-    _on_middle_down on_middle_down;
-    _on_key1_down on_key1_down;
-    _on_key2_down on_key2_down;
-    _on_key3_down on_key3_down;
-    _on_key4_down on_key4_down;
-    _on_key5_down on_key5_down;
+    _on_skill_key_down on_left_down;
+    _on_skill_key_down on_right_down;
+    _on_skill_key_down on_middle_down;
+    _on_skill_key_down on_key1_down;
+    _on_skill_key_down on_key2_down;
+    _on_skill_key_down on_key3_down;
+    _on_skill_key_down on_key4_down;
+    _on_skill_key_down on_key5_down;
+
     _on_keyup_down on_keyup_down;
     _on_keyup_ing on_keyup_ing;
     _on_keyup_up on_keyup_up;
@@ -79,26 +80,27 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     }
 
 
-    public _on_key1_down get_on_key1_down()
+    public _on_skill_key_down get_on_key1_down()
     {
         return on_key1_down;
     }
-    public _on_key2_down get_on_key2_down()
+    public _on_skill_key_down get_on_key2_down()
     {
         return on_key2_down;
     }
-    public _on_key3_down get_on_key3_down()
+    public _on_skill_key_down get_on_key3_down()
     {
         return on_key3_down;
     }
-    public _on_key4_down get_on_key4_down()
+    public _on_skill_key_down get_on_key4_down()
     {
         return on_key4_down;
     }
-    public _on_key5_down get_on_key5_down()
+    public _on_skill_key_down get_on_key5_down()
     {
         return on_key5_down;
     }
+
     public _on_keydown_down get_on_keydown_down()
     {
         return on_keydown_down;
@@ -147,15 +149,16 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         return on_keyup_up;
     }
-    public _on_left_down get_on_left_down()
+
+    public _on_skill_key_down get_on_left_down()
     {
         return on_left_down;
     }
-    public _on_middle_down get_on_middle_down()
+    public _on_skill_key_down get_on_middle_down()
     {
         return on_middle_down;
     }
-    public _on_right_down get_on_right_down()
+    public _on_skill_key_down get_on_right_down()
     {
         return on_right_down;
     }
@@ -251,7 +254,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         on_keyright_up += onKeyRightUp;
         if (eList.passiveEquipments.Count > EquipmentList.ATK)
         {
-            on_left_down += onMouseLeftDown;
+            on_left_down += onSkillKeyDown;
         }
         else
         {
@@ -259,14 +262,14 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         }
         if (eList.passiveEquipments.Count > EquipmentList.SKILL)
         {
-            on_right_down += onMouseRightDown;
+            on_right_down += onSkillKeyDown;
         }
         else
         {
             on_left_down += empty;
         }
         if (eList.passiveEquipments.Count>EquipmentList.PASSIVE1) {//為了防止當角色沒有裝備那麼多主動道具時報錯
-            on_key1_down += onKey1Dowm;//因為道具一定是順著順序排放鍵位的,例如第一個道具一定是key1,所以只要判斷主動道具數量就知道角色那個鍵位有沒有主動道具
+            on_key1_down += onSkillKeyDown;//因為道具一定是順著順序排放鍵位的,例如第一個道具一定是key1,所以只要判斷主動道具數量就知道角色那個鍵位有沒有主動道具
         }
         else
         {
@@ -274,7 +277,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         }
         if (eList.passiveEquipments.Count >EquipmentList.PASSIVE2)
         {
-            on_key2_down += onKey2Dowm;
+            on_key2_down += onSkillKeyDown;
         }
         else
         {
@@ -282,7 +285,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         }
         if (eList.passiveEquipments.Count > EquipmentList.PASSIVE3)
         {
-            on_key3_down += onKey3Dowm;
+            on_key3_down += onSkillKeyDown;
         }
         else
         {
@@ -290,7 +293,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         }
         if (eList.passiveEquipments.Count > EquipmentList.PASSIVE4)
         {
-            on_key4_down += onKey4Dowm;
+            on_key4_down += onSkillKeyDown;
         }
         else
         {
@@ -298,7 +301,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         }
         if (eList.passiveEquipments.Count > EquipmentList.PASSIVE5)
         {
-            on_key5_down += onKey5Dowm;
+            on_key5_down += onSkillKeyDown;
         }
         else
         {
@@ -408,37 +411,37 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
             {
                 if (Input.GetKeyDown(keySetting["key1"]))
                 {
-                    on_key1_down(mousePos);
+                    on_key1_down(mousePos,EquipmentList.PASSIVE1);
                 }
                 if (Input.GetKeyDown(keySetting["key2"]))
                 {
-                    on_key2_down(mousePos);
+                    on_key2_down(mousePos, EquipmentList.PASSIVE2);
                 }
                 if (Input.GetKeyDown(keySetting["key3"]))
                 {
-                    on_key3_down(mousePos);
+                    on_key3_down(mousePos, EquipmentList.PASSIVE3);
                 }
                 if (Input.GetKeyDown(keySetting["key4"]))
                 {
-                    on_key4_down(mousePos);
+                    on_key4_down(mousePos, EquipmentList.PASSIVE4);
                 }
                 if (Input.GetKeyDown(keySetting["key5"]))
                 {
-                    on_key5_down(mousePos);
+                    on_key5_down(mousePos, EquipmentList.PASSIVE5);
                 }
                 //鼠標
                 if (Input.GetMouseButtonDown(0))
                 {
 
                     //Debug.Log("NetPlayerControler:position" + transform.position + "mouse Position" + mousePos);
-                    on_left_down(mousePos);
+                    on_left_down(mousePos, EquipmentList.ATK);
                     //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
                 }
                 if (Input.GetMouseButtonDown(1))
                 {
 
                     //Debug.Log("NetPlayerControler:position" + transform.position + "mouse Position" + mousePos);
-                    on_right_down(mousePos);
+                    on_right_down(mousePos, EquipmentList.SKILL);
                     //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
                 }
             }
@@ -602,62 +605,23 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
             action.moveEnd();
         }
     }
-    void onMouseLeftDown(Vector3 mousePos)
+
+    void onSkillKeyDown(Vector3 mousePos,sbyte KeyCode)
     {
-        //Debug.Log("Role_onTakeDamage event mouse position is" + mousePos);
-        //player.cellCall("notify2", new object[] { roomNo,CodeTable.MOUSE_LEFT_DOWN,mousePos});
-        //action.AttackStart();
-        if (eList.passiveEquipments[EquipmentList.ATK].CanUse)
+        if (eList.passiveEquipments[KeyCode].CanUse)
         {
-            player.cellCall("notify3", new object[] { EquipmentList.ATK, transform.position, mousePos });
-        }//0為普通攻擊的裝備索引
-    }
-    void onMouseRightDown(Vector3 mousePos)
-    {
-        //Debug.Log("Role_onTakeDamage event mouse position is" + mousePos);
-        //player.cellCall("notify2", new object[] { roomNo,CodeTable.MOUSE_LEFT_DOWN,mousePos});
-        //action.AttackStart();
-        if (eList.passiveEquipments[EquipmentList.SKILL].CanUse)
-        {
-            player.cellCall("notify3", new object[] { EquipmentList.SKILL, transform.position, mousePos });
-        }//0為普通攻擊的裝備索引
-    }
-    void onKey1Dowm(Vector3 mousePos)
-    {
-        if (eList.passiveEquipments[EquipmentList.PASSIVE1].CanUse)
-        {
-            player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE1].selfIndex, transform.position, mousePos });
+            if (eList.NeedCast[KeyCode])
+            {
+
+            }
+            else
+            {
+                player.cellCall("notify3", new object[] { eList.passiveEquipments[KeyCode].selfIndex, transform.position, mousePos });
+            }
         }
     }
-    void onKey2Dowm(Vector3 mousePos)
-    {
-        if (eList.passiveEquipments[EquipmentList.PASSIVE2].CanUse)
-        {
-            player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE2].selfIndex, transform.position, mousePos });
-        }
-    }
-    void onKey3Dowm(Vector3 mousePos)
-    {
-        if (eList.passiveEquipments[EquipmentList.PASSIVE3].CanUse)
-        {
-            player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE3].selfIndex, transform.position, mousePos });
-        }
-    }
-    void onKey4Dowm(Vector3 mousePos)
-    {
-        if (eList.passiveEquipments[EquipmentList.PASSIVE4].CanUse)
-        {
-            player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE4].selfIndex, transform.position, mousePos });
-        }
-    }
-    void onKey5Dowm(Vector3 mousePos)
-    {
-        if (eList.passiveEquipments[EquipmentList.PASSIVE5].CanUse)
-        {
-            player.cellCall("notify3", new object[] { eList.passiveEquipments[EquipmentList.PASSIVE5].selfIndex, transform.position, mousePos });
-        }
-    }
-    void empty(Vector3 mousePos)
+    
+    void empty(Vector3 mousePos,sbyte Code)
     {
         return;
     }

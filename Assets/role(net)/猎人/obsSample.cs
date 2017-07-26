@@ -51,6 +51,14 @@ public class obsSample : MonoBehaviour,CDEquipment {
         }
     }
 
+    public bool Designated
+    {
+        get
+        {
+            return false;
+        }
+    }
+
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         

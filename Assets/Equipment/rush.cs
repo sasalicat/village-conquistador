@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class rush : MonoBehaviour, CDEquipment
 {
@@ -67,6 +68,15 @@ public class rush : MonoBehaviour, CDEquipment
             return 0;//因為是攻擊所以無消耗
         }
     }
+
+    public bool Designated
+    {
+        get
+        {
+            return false;
+        }
+    }
+
     //----------------------------------------------------------------------
 
 

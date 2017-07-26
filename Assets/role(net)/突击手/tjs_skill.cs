@@ -68,6 +68,15 @@ public class tjs_skill : MonoBehaviour, CDEquipment
             return 0;//因為是攻擊所以無消耗
         }
     }
+
+    public bool Designated
+    {
+        get
+        {
+            return false;
+        }
+    }
+
     //----------------------------------------------------------------------
 
 

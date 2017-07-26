@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class grenades : MonoBehaviour, CDEquipment
 {
@@ -67,6 +68,15 @@ public class grenades : MonoBehaviour, CDEquipment
             return 0;//因為是攻擊所以無消耗
         }
     }
+
+    public bool Designated
+    {
+        get
+        {
+            return false;
+        }
+    }
+
     //----------------------------------------------------------------------
 
 

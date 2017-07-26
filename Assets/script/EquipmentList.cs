@@ -22,6 +22,7 @@ public class EquipmentList : MonoBehaviour {
 
     public List<Equipment> equipments=new List<Equipment>();
     public List<CDEquipment> passiveEquipments = new List<CDEquipment>();
+    public List<bool> NeedCast = new List<bool>();
     private reduce reduceLine;
     public EquipmentTable table;
     public dataRegister register;
@@ -134,6 +135,7 @@ public class EquipmentList : MonoBehaviour {
         {
             passiveEquipments.Add((CDEquipment)newone);
         }
+        NeedCast.Add(((CDEquipment)newone).Designated);
         //[判断是不是CDEquiment,如果是加入技能冷却列表
         Type[] inters = newone.GetType().GetInterfaces();
         Debug.Log("type length"+inters.Length);

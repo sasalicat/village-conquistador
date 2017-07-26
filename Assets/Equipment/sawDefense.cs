@@ -57,6 +57,15 @@ public class sawDefense : MonoBehaviour,CDEquipment {
             index = value;
         }
     }
+
+    public bool Designated
+    {
+        get
+        {
+            return false;
+        }
+    }
+
     public void setTime(float time)
     {
         if (CDTime > 0)
