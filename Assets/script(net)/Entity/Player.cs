@@ -71,7 +71,7 @@
         {
             
             //Debug.Log("makeC is" + makeC + "hitC is" + hitC);
-            GameObject damager = manager.getObjByRoomNo(roomNo);
+            GameObject damager = manager.getObjByRoomNo(damagerNo);
             damage damage = new damage(kind, num, ((float)stiffMilli) / 1000,hitC >0 ,makeC >0 ,damager);
             Dictionary<string, object> Arg = new Dictionary<string, object>();
             Arg["PlayerPosition"] = selfPos;
