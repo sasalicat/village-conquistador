@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLevel: 0
   isMultiThreads: 1
-  ip: 140.134.26.31
+  ip: 127.0.0.1
   port: 20013
   clientType: 7
   persistentDataPath: Application.persistentDataPath
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roleNo: 3
-  equipmentNoList: 00140405
+  equipmentNoList: 21140405
   winnerno: 0
 --- !u!1 &427121161
 GameObject:
@@ -484,7 +484,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4692915580807678, guid: c20ea980beb7b444e8318ab9e3ea1ec0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4692915580807678, guid: c20ea980beb7b444e8318ab9e3ea1ec0, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1382,14 +1382,14 @@ MonoBehaviour:
   - 
   - 
   - 
+  - apoint_Sample
   - 
   - 
   - 
   - 
   - 
   - 
-  - 
-  passiveList: 01000101010101010101010100000000000000000100000000000000000000000000000000000000
+  passiveList: 01000101010101010101010100000000000000000100000000000000000000000001000000000000
 --- !u!114 &1995136365
 MonoBehaviour:
   m_ObjectHideFlags: 0

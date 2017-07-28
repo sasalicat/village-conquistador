@@ -608,14 +608,25 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
 
     void onSkillKeyDown(Vector3 mousePos,sbyte KeyCode)
     {
+        Debug.Log("enter key down keyCode:"+KeyCode);
         if (eList.passiveEquipments[KeyCode].CanUse)
         {
             if (eList.NeedCast[KeyCode])
             {
-
+                Debug.Log("enter need cast");
+                Debug.DrawRay(mousePos, transform.forward, Color.red, 10);
+                RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
+                Debug.Log("enter need cast:"+(bool)hit+","+ hit.collider.tag);
+                if (hit&&(hit.collider.tag=="Player"))
+                {
+                    Debug.Log("enter need cast2");
+                    sbyte tragetNo=hit.collider.GetComponent<NetRoleState>().roomNo;
+                    player.cellCall("notify3_ap", new object[] { eList.passiveEquipments[KeyCode].selfIndex, transform.position, tragetNo, hit.transform.position });
+                }
             }
             else
             {
+                Debug.Log("do not need cast");
                 player.cellCall("notify3", new object[] { eList.passiveEquipments[KeyCode].selfIndex, transform.position, mousePos });
             }
         }

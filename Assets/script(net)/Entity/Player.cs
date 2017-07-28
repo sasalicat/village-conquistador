@@ -67,6 +67,16 @@
             args["randomPoint"] = randint;
             controler.addTriggerOrder(eindex, args);
         }
+        public void receive3_ap(sbyte eindex, Vector3 PlayerPos,sbyte TragetNo, Vector3 TragetPostion, sbyte randint)
+        {
+            Debug.Log("in r3_ap this id is" + this.id + "player is" + KBEngineApp.app.player().id);
+            Dictionary<string, object> args = new Dictionary<string, object>();
+            args["PlayerPosition"] = PlayerPos;
+            args["TragetPosition"] = TragetPostion;
+            args["randomPoint"] = randint;
+            args["Traget"]= manager.getObjByRoomNo(TragetNo);
+            controler.addTriggerOrder(eindex, args);
+        }
         public void receive4(Vector3 selfPos, Vector3 selfEuler, Vector3 damagerPos, sbyte damagerNo,sbyte kind, short num,short stiffMilli,sbyte makeC,sbyte hitC, sbyte randooumInt)
         {
             
