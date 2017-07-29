@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 114547640573324348}
   m_Layer: 0
   m_Name: "\u9B54\u8853\u5E2B"
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4ae46c6f02828449a36b81b43cfa87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NeedCast: 
   table: {fileID: 0}
   register: {fileID: 0}
 --- !u!114 &114547640573324348
@@ -167,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfdata: {fileID: 0}
   anima: {fileID: 0}
+  team: 0
   maxHp: 0
   nowHp: 0
   nowMp: 0
@@ -188,6 +190,7 @@ MonoBehaviour:
   alive: 1
   exiled: 1
   roomNo: 0
+  islocal: 0
 --- !u!212 &212745260608171808
 SpriteRenderer:
   m_ObjectHideFlags: 1

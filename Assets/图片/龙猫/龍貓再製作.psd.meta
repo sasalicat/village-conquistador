@@ -1,0 +1,314 @@
+fileFormatVersion: 2
+guid: e538413b2e31e4a4f9ddadc071a03fbf
+timeCreated: 1501243014
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: "\u9F8D\u8C93\u518D\u88FD\u4F5C_0"
+    21300002: "\u9F8D\u8C93\u518D\u88FD\u4F5C_1"
+    21300004: "\u9F8D\u8C93\u518D\u88FD\u4F5C_2"
+    21300006: "\u9F8D\u8C93\u518D\u88FD\u4F5C_3"
+    21300008: "\u9F8D\u8C93\u518D\u88FD\u4F5C_4"
+    21300010: "\u9F8D\u8C93\u518D\u88FD\u4F5C_5"
+    21300012: "\u9F8D\u8C93\u518D\u88FD\u4F5C_6"
+    21300014: "\u9F8D\u8C93\u518D\u88FD\u4F5C_7"
+    21300016: "\u9F8D\u8C93\u518D\u88FD\u4F5C_8"
+    21300018: "\u9F8D\u8C93\u518D\u88FD\u4F5C_9"
+    21300020: "\u9F8D\u8C93\u518D\u88FD\u4F5C_10"
+    21300022: "\u9F8D\u8C93\u518D\u88FD\u4F5C_11"
+    21300024: "\u9F8D\u8C93\u518D\u88FD\u4F5C_12"
+    21300026: "\u9F8D\u8C93\u518D\u88FD\u4F5C_13"
+    21300028: "\u9F8D\u8C93\u518D\u88FD\u4F5C_14"
+    21300030: "\u9F8D\u8C93\u518D\u88FD\u4F5C_15"
+    21300032: "\u9F8D\u8C93\u518D\u88FD\u4F5C_16"
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_0"
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 2708
+        width: 419
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_1"
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 2694
+        width: 431
+        height: 414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_2"
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 2687
+        width: 435
+        height: 426
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_3"
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 2093
+        width: 496
+        height: 399
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_4"
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 2092
+        width: 444
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_5"
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 2132
+        width: 403
+        height: 402
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_6"
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 1552
+        width: 446
+        height: 394
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_7"
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 1517
+        width: 432
+        height: 472
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_8"
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 1016
+        width: 419
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_9"
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1017
+        width: 418
+        height: 386
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_10"
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 1016
+        width: 493
+        height: 475
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_11"
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 592
+        width: 217
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_12"
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 592
+        width: 230
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_13"
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 211
+        width: 139
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_14"
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 211
+        width: 178
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_15"
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 198
+        width: 198
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u9F8D\u8C93\u518D\u88FD\u4F5C_16"
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 214
+        width: 230
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

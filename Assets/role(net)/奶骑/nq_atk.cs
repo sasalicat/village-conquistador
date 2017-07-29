@@ -93,7 +93,7 @@ public class nq_atk : MonoBehaviour, CDEquipment
         //missilePraf.transform.forward = direction;
         //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
 
-        GameObject newone = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
+        GameObject newone = Instantiate(missilePraf, mousePosition, Quaternion.Euler(direction));
         newone.transform.up = -direction;
         //修改子弹物件携带的子弹脚本
         Missile missile = newone.GetComponent<Missile>();
