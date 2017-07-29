@@ -104,8 +104,8 @@ public class NetRoleState :RoleState {
             {
                 role.nowConversely = unit.STAND_CONVESLY_TIME;
                 role.changeState(CONVERSELY_NO);
-                
-             }
+                role.anima.ConverselyStart();
+            }
              else if (role.canBeStiff)
              {
                     Debug.Log("enter stiff");
@@ -190,7 +190,7 @@ public class NetRoleState :RoleState {
             {
                 role.nowConversely = unit.STAND_CONVESLY_TIME;
                 role.changeState(CONVERSELY_NO);
-                role.changeState(3);
+                role.anima.ConverselyStart();
             }
             else if (damage.stiffTime > role.nowStiff)
             {
