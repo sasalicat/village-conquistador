@@ -8,11 +8,12 @@ public class bone_shield : MonoBehaviour, CDEquipment
     public const int BaseDamage = 0;
     public const float BaseStiff = 4f;
 
-    public float CDTime = 0;
+    public float CDTime = 2f;
     public sbyte index;
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
     private RoleState selfState;
     List<GameObject> newone = new List<GameObject>();
+    damage damage1;
 
     //實做Equipment介面-------------------------------------------------------
     public sbyte No
@@ -48,12 +49,14 @@ public class bone_shield : MonoBehaviour, CDEquipment
     public void setTime(float time)
     {
         CDTime -= time;//減少CD時間
+        Debug.Log("時間："+CDTime+"  ~~~~~~~~~~~~~~");
         if (CDTime <= 0)
         {
-            if(newone.Count < 6) { 
+            if(newone.Count < 5) { 
                 GameObject newCharater = Instantiate(missilePraf, transform.position, this.transform.rotation);
-                newCharater.transform.eulerAngles = Vector3.zero;
+                newCharater.transform.eulerAngles = new Vector3(0,0,270);
                 (newCharater.GetComponent<RotateAround>()).aroundPoint = gameObject.transform;
+                (newCharater.GetComponent<RotateAround>()).angled = 0;
                 newCharater.SetActive(true);
                 newone.Add(newCharater);
 
@@ -61,7 +64,7 @@ public class bone_shield : MonoBehaviour, CDEquipment
                 {
                     RotateAround rotateAround1 = newone[newone.Count - 2].GetComponent<RotateAround>();
                     RotateAround rotateAround2 = newone[newone.Count - 1].GetComponent<RotateAround>();
-                    rotateAround2.angled = rotateAround1.angled += 70;
+                    rotateAround2.angled = rotateAround1.angled + 70;
                 }
             }
             CDTime = 2;
@@ -96,11 +99,20 @@ public class bone_shield : MonoBehaviour, CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
-        getVector getVector = GameObject.Find("keyTabel").GetComponent<getVector>();
-        Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
-        Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
-        //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
-        Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, mousePosition, new Vector3(0, -1, 0));//獲得相對座標
+        //getVector getVector = GameObject.Find("keyTabel").GetComponent<getVector>();
+        //Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
+        //Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
+        ////使用getOriginalInitPoint得到技能在client端创建物件的正确位置
+        //Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, mousePosition, new Vector3(0, -1, 0));//獲得相對座標
+
+        damage1 = (damage)args["Damage"];
+        if(newone.Count > 0)
+        {
+            damage1.num = (int)(damage1.num * (1 - newone.Count / 10.0f));
+            Destroy(newone[newone.Count - 1]);
+            newone.RemoveAt(newone.Count - 1);
+        }
+
 
         CDTime = CD;//技能冷卻
         Debug.Log("in trigger CDTime is" + CDTime);

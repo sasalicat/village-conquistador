@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roleNo: 3
-  equipmentNoList: 19140405
+  equipmentNoList: 00190405
   winnerno: 0
 --- !u!1 &427121161
 GameObject:

@@ -15,7 +15,7 @@ public class shield : MonoBehaviour, CDEquipment
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
     private RoleState selfState;
     AnimatorTable anim;
-    damage damage;
+    damage damage1;
     GameObject shieldGameObject = null;
 
     //實做Equipment介面-------------------------------------------------------
@@ -88,12 +88,12 @@ public class shield : MonoBehaviour, CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
-        damage = (damage)args["Damage"];
+        damage1 = (damage)args["Damage"];
 
         if (shieldGameObject != null)
         {
-            damage.num = 0;
-            damage.stiffTime = 0;
+            damage1.num = 0;
+            damage1.stiffTime = 0;
             Debug.Log("123123123123123123~~~~");
             Destroy(shieldGameObject);
         }
