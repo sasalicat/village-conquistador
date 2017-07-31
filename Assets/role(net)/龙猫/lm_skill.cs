@@ -115,7 +115,7 @@ public class lm_skill : MonoBehaviour, CDEquipment
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        missilePraf = table.MissileList[13];
+        missilePraf = table.MissileList[14];
         this.selfState = state;
         this.animator = anim;
     }

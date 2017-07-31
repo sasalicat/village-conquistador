@@ -23,7 +23,7 @@ public class mis_lm_skill : Missile
         hy_liveTime -= Time.deltaTime;
         if (hy_liveTime <= 0) {
             hy_liveTime = 0.2f;
-            Instantiate(missletable.MissileList[14], Random.insideUnitCircle * 12 + weizhi, this.transform.rotation);
+            Instantiate(missletable.MissileList[15], Random.insideUnitCircle * 12 + weizhi, this.transform.rotation);
         }
         m_liveTime -= Time.deltaTime;
         if (m_liveTime <= 0)
