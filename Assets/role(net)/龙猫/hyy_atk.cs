@@ -5,7 +5,6 @@ using UnityEngine;
 public class hyy_atk : Missile
 {
 
-    public float m_liveTime = 0.5f;
     // Use this for initialization
     void Start()
     {
@@ -16,7 +15,6 @@ public class hyy_atk : Missile
     void Update()
     {
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z-60*Time.deltaTime);
-        m_liveTime -= Time.deltaTime;
         if(this.transform.position.z <= -1)
         {
             Destroy(this.gameObject);
@@ -25,7 +23,7 @@ public class hyy_atk : Missile
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject != Creater)
+        if (other.gameObject != Creater && this.transform.position.z <= 0)
         {
             RoleState role = other.gameObject.GetComponent<RoleState>();
             role.TakeDamage(Damage);
