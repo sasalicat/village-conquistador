@@ -11,6 +11,7 @@ public class obs_lr_skill : ObstacleState
     public bool local;
     public damage damage;
     public double jishiqi = 0.5f;
+    public int qibiao = 1;
     override protected void Start()
     {
         base.Start();
@@ -26,7 +27,7 @@ public class obs_lr_skill : ObstacleState
     {
         base.Update();
         jishiqi -= Time.deltaTime;
-        if(!local && jishiqi <= 0)
+        if(!local && jishiqi <= 0 && qibiao == 1)
         {
             s.color = new Vector4(1, 1, 1, 0);
         }
@@ -35,7 +36,9 @@ public class obs_lr_skill : ObstacleState
     {
         if (other.gameObject != Creater)
         {
+            qibiao = 2;
             callMethodNull();
+            ChangeColor();
             RoleState role = other.gameObject.GetComponent<RoleState>();
             role.TakeDamage(damage);
 
