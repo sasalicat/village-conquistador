@@ -29,8 +29,10 @@ public class NetControler : MonoBehaviour,KBControler{
     private NetRoleState state;
     private List<eTrigger> eTriggerLine=new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();
+    private BuffControler buffcontrol;
     public Text Label;
     private float nextrecover = 0.5f;
+    private string[] buffTable;
     //装备事件
     _on_trigger on_attack;
 
@@ -237,6 +239,8 @@ public class NetControler : MonoBehaviour,KBControler{
         action = GetComponent<AnimatorTable>();
         codeLine = new List<Dictionary<string,object>>();
         state = GetComponent<NetRoleState>();
+        buffcontrol = GetComponent<BuffControler>();
+        buffTable = GameObject.Find("keyTabel").GetComponent<EquipmentTable>().buffNameList;
         //添加控制器事件
         on_keyleft_down += onKeyLeftDown;
         on_keydown_down += onKeyDownDown;
@@ -431,6 +435,14 @@ public class NetControler : MonoBehaviour,KBControler{
                         HpChangeHappen();
                         break;
                     }
+                case CodeTable.ADD_BUFF:
+                    {
+                        sbyte no = (sbyte)EventLine[0].Args["buffNo"];
+                        Debug.Log("buffNo"+no);
+                        buffcontrol.AddBuff(buffTable[(sbyte)EventLine[0].Args["buffNo"]]);
+                        //buffcontrol.AddBuff();
+                        break;
+                    }
             }
             EventLine.RemoveAt(0);
         }
@@ -529,5 +541,10 @@ public class NetControler : MonoBehaviour,KBControler{
         {
             Entity.cellCall("notify5", new object[] {treater.GetComponent<NetRoleState>().roomNo,num});
         }
+    }
+
+    public void addBuffByNo(sbyte no)
+    {
+        return;
     }
 }

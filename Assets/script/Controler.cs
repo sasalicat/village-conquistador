@@ -71,5 +71,6 @@ public interface Controler
         set;
         get;
     }
+    void addBuffByNo(sbyte no);
 
 }

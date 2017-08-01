@@ -5,6 +5,7 @@ using UnityEngine;
 public class EquipmentTable : MonoBehaviour {
     public string[] equipmentNameList;
     public bool[] passiveList;
+    public string[] buffNameList;
     public const sbyte PASSIVE_SKILL = 1;
     public const sbyte ON_TAKE_DAMAGE = 2;
     public const sbyte ON_INTERVAL = 3;

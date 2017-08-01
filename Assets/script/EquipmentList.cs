@@ -129,10 +129,11 @@ public class EquipmentList : MonoBehaviour {
     private void addByNo(int EquipmentNo)
     {
         string typeName = table.equipmentNameList[EquipmentNo];
-
+        Debug.Log("typeName" + typeName);
         Component newone= gameObject.AddComponent(System.Type.GetType(typeName));
         if (table.passiveList[EquipmentNo])//主動道具
         {
+            Debug.Log("needCast" + NeedCast + "newone" + newone);
             NeedCast.Add(((CDEquipment)newone).Designated);
             passiveEquipments.Add((CDEquipment)newone);
         }

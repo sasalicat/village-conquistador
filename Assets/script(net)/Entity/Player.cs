@@ -122,5 +122,11 @@
             manager.overFlag = true;
 
         }
+        public void receiveAddBuff(sbyte no)
+        {
+            Dictionary<string, object> Arg = new Dictionary<string, object>();
+            Arg["buffNo"] = no;
+            controler.addEvent(CodeTable.ADD_BUFF, Arg);
+        }
     }
 }

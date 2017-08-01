@@ -31,6 +31,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private Player player;
     private EquipmentList eList;
     private NetRoleState state;
+    private BuffControler buffcontrol;
+    private string[] buffTable;
     private float nextrecover = 0.5f;
 
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
@@ -243,6 +245,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         action = GetComponent<AnimatorTable>();
         player = ((Player)KBEngineApp.app.player());
         state = GetComponent<NetRoleState>();
+        buffcontrol = GetComponent<BuffControler>();
+        buffTable = temp.GetComponent<EquipmentTable>().buffNameList;
         //添加控制器事件
         on_keyleft_down += onKeyLeftDown;
         on_keydown_down += onKeyDownDown;
@@ -527,6 +531,11 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                             HpChangeHappen();
                             break;
                         }
+                    case CodeTable.ADD_BUFF:
+                        {
+                            buffcontrol.AddBuff(buffTable[(sbyte)EventLine[0].Args["buffNo"]]);
+                            break;
+                        }
                 }
                 EventLine.RemoveAt(0);
             }
@@ -616,7 +625,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                 Debug.Log("enter need cast");
                 Debug.DrawRay(mousePos, transform.forward, Color.red, 10);
                 RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
-                Debug.Log("enter need cast:"+(bool)hit+","+ hit.collider.tag);
+                Debug.Log("enter need cast:"+hit);
                 if (hit&&(hit.collider.tag=="Player"))
                 {
                     Debug.Log("enter need cast2");
@@ -681,5 +690,10 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         {
             Entity.cellCall("notify5", new object[] { treater.GetComponent<NetRoleState>().roomNo, num });
         }
+    }
+
+    public void addBuffByNo(sbyte no)
+    {
+        KBEngineApp.app.player().cellCall("addBuff",new object[] {no});
     }
 }

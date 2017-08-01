@@ -37,6 +37,14 @@ public class ObstacleState : RoleState {//相当于控制器和State结合在同
             }
         }
 
+        public int StateNo
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
         public void beenTreat(int num, GameObject from)
         {
             return;

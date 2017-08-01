@@ -7,10 +7,7 @@ using KBEngine;
 public class NetRoleState :RoleState {
     // Use this for initialization
     public sbyte roomNo;
-    public const int NORMAL_NO= 0;
-    public const int STIFF_NO = 1;
-    public const int CONVERSELY_NO = 2;
-    public const int DEAD_NO = 3;
+
     public bool islocal = false;
      interface state_net :state
     {
@@ -44,6 +41,14 @@ public class NetRoleState :RoleState {
             get
             {
                 return true;
+            }
+        }
+
+        public int StateNo
+        {
+            get
+            {
+                return NORMAL_NO;
             }
         }
 
@@ -165,6 +170,14 @@ public class NetRoleState :RoleState {
             }
         }
 
+        public int StateNo
+        {
+            get
+            {
+                return STIFF_NO;
+            }
+        }
+
         public void beenTreat(int num, GameObject from)
         {
             if (role.canBetreat)
@@ -282,6 +295,14 @@ public class NetRoleState :RoleState {
             }
         }
 
+        public int StateNo
+        {
+            get
+            {
+                return CONVERSELY_NO;
+            }
+        }
+
         public void beenTreat(int num, GameObject from)
         {
             if (role.canBetreat)
@@ -383,6 +404,14 @@ public class NetRoleState :RoleState {
             get
             {
                 return false;
+            }
+        }
+
+        public int StateNo
+        {
+            get
+            {
+                return DEAD_NO;
             }
         }
 
