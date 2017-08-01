@@ -29,7 +29,6 @@ public class mis_tk_atk : Missile {
             if (role != null)
             {
                 role.TakeDamage(Damage);
-                Debug.Log(Damage.num+"123"+Damage.stiffTime);
             }
 
         }
