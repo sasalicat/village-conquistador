@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -229,8 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd6000c4a08a6a49bf88a677547458b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roleNo: 3
-  equipmentNoList: 00210405
+  roleNo: 6
+  equipmentNoList: 13
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -1570,11 +1570,11 @@ MonoBehaviour:
   - berserker
   - regeneration
   - shield
+  - nq_atk
   - 
   - 
-  - 
-  - 
-  - 
+  - lm_skill
+  - xwxz_atk
   - smoke_bomb
   - 
   - 
@@ -1595,7 +1595,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  passiveList: 01010101010101010001010100000000000000000100000001000000000000000001000000000000
+  passiveList: 01010101010101010101010100000001000001010100000001000000000000000001000000000000
   buffNameList:
   - buffForTask
 --- !u!114 &1995136365
@@ -1636,6 +1636,9 @@ MonoBehaviour:
   - {fileID: 1236716214046662, guid: 8343a676c04d79d4ea6284713278e248, type: 2}
   - {fileID: 1198361117992610, guid: cdcc7152eca995a45ad7d8c6144475b4, type: 2}
   - {fileID: 1705540490632404, guid: fda87c51b79cfb048a39c8b80b462826, type: 2}
+  - {fileID: 1091786901524938, guid: b3eaa1ebeefca784b8e4cc5df010cb23, type: 2}
+  - {fileID: 1090376039140290, guid: 1e198abf3e716de4bb5de7fe737ab47e, type: 2}
+  - {fileID: 1575805648889562, guid: b025a7be44d70994688840ecb8bc56a2, type: 2}
 --- !u!114 &1995136367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1652,6 +1655,9 @@ MonoBehaviour:
   - {fileID: 1373321678833760, guid: c2222de9d36e6444f9718776167cd0bc, type: 2}
   - {fileID: 1966427290879090, guid: cd64df3fbcf909146927fbb8a7dcbc26, type: 2}
   - {fileID: 1550564559274468, guid: 32321d40ce843b245b2794619e568bef, type: 2}
+  - {fileID: 1003696595511174, guid: c20ea980beb7b444e8318ab9e3ea1ec0, type: 2}
+  - {fileID: 1200280012762902, guid: 2f12f7171e7f6894cbaf8a6008385fc4, type: 2}
+  - {fileID: 1531962544373524, guid: 638ba80fcd385274e8980f99e9403789, type: 2}
   Obstacles:
   - {fileID: 1007501565136412, guid: 2d90e6a0282f7bc4a86625f4e161bebc, type: 2}
   - {fileID: 1424429232851234, guid: 596da52c212a3014fafb3efca59c06e9, type: 2}
