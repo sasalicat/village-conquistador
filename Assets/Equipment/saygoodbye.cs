@@ -1,22 +1,20 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
-using System;
 
-public class rush : MonoBehaviour, CDEquipment
+public class saygoodbye : MonoBehaviour, CDEquipment
 {
     public const float CD = 0.5f;//0.5f;
-    public const int BaseDamage = 200;
+    public const int BaseDamage = 100;
     public const float BaseStiff = 4f;
 
     public float CDTime = 0;
     public sbyte index;
     const short selfMissileNo = 0;
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
+    private GameObject missilePraf2;
     private RoleState selfState;
-    public Text Label;
 
     //實做Equipment介面-------------------------------------------------------
     public sbyte No
@@ -87,14 +85,33 @@ public class rush : MonoBehaviour, CDEquipment
         transform.position = origenPlayerPosition;
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
 
-        Vector3 position = (mousePosition - origenPlayerPosition).normalized * 10 + origenPlayerPosition;
-        transform.DOMove(position, 0.5f, false).OnComplete(()=>Debug.Log("endddddddd")).SetEase(Ease.OutQuart);
+        Vector3 position = (-(mousePosition - origenPlayerPosition).normalized) * 10 + origenPlayerPosition;
+        transform.DOMove(position, 0.5f, false).SetEase(Ease.OutQuart);
+
+        GameObject newone = Instantiate(missilePraf, origenPlayerPosition, transform.rotation);
+        newone.transform.up = mousePosition - origenPlayerPosition;
+
+        //修改子弹物件携带的子弹脚本
+        Missile missile = newone.GetComponent<Missile>();
+        Debug.Log(missile);
+        missile.Creater = gameObject;
+        //创建伤害物件
+        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
+        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
+        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+
+        ((mis_saygoodbye)missile).origenPlayerPosition = origenPlayerPosition;
+        ((mis_saygoodbye)missile).missilePraf2 = missilePraf2;
 
         CDTime = CD;//技能冷卻
         Debug.Log("in trigger CDTime is" + CDTime);
+
     }
 
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
+        missilePraf = table.MissileList[17];
+        missilePraf2 = table.MissileList[4];
+        this.selfState = state;
     }
 }

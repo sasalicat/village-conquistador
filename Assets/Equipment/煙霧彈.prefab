@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4406068342195388}
   - component: {fileID: 212490364405774206}
   - component: {fileID: 95213944219304724}
-  - component: {fileID: 114974599795996904}
   m_Layer: 0
   m_Name: "\u7159\u9727\u5F48"
   m_TagString: Untagged
@@ -59,21 +58,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114974599795996904
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1248245396946042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a9524bffc7243d40bfaea17156b3ed0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  origenPlayerPosition: {x: 0, y: 0, z: 0}
-  mousePosition: {x: 0, y: 0, z: 0}
-  boom: 0
-  missilePraf2: {fileID: 0}
 --- !u!212 &212490364405774206
 SpriteRenderer:
   m_ObjectHideFlags: 1

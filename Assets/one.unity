@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roleNo: 6
-  equipmentNoList: 13
+  equipmentNoList: 1b1a
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -571,6 +571,48 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!1001 &715660234
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4523127912078734, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 15.769465
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523127912078734, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.985364
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523127912078734, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -17.993519
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523127912078734, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523127912078734, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523127912078734, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523127912078734, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523127912078734, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &920085475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,8 +1623,8 @@ MonoBehaviour:
   - 
   - porcelain
   - bone_shield
-  - 
-  - 
+  - executioner
+  - jump_bomb
   - 
   - 
   - 
@@ -1595,7 +1637,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  passiveList: 01010101010101010101010100000001000001010100000001000000000000000001000000000000
+  passiveList: 01010101010101010101010100000001000001010100000001000001000000000001000000000000
   buffNameList:
   - buffForTask
 --- !u!114 &1995136365
@@ -1639,6 +1681,7 @@ MonoBehaviour:
   - {fileID: 1091786901524938, guid: b3eaa1ebeefca784b8e4cc5df010cb23, type: 2}
   - {fileID: 1090376039140290, guid: 1e198abf3e716de4bb5de7fe737ab47e, type: 2}
   - {fileID: 1575805648889562, guid: b025a7be44d70994688840ecb8bc56a2, type: 2}
+  - {fileID: 1094831508225238, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
 --- !u!114 &1995136367
 MonoBehaviour:
   m_ObjectHideFlags: 0
