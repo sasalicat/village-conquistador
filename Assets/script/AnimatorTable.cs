@@ -4,12 +4,42 @@ using UnityEngine;
 
 public class AnimatorTable : MonoBehaviour {
     public Animator animator;
+    private RuntimeAnimatorController origin=null;
+    public sbyte controtionNo;
+    public float controtTimeLeft = 0;
     // Use this for initialization
     void Start () {
+        
         animator = GetComponent<Animator>();
-	}
-	
+      
+
+    }
+	public RuntimeAnimatorController controler {
+        set
+        {
+            Debug.Log("进入controler origin is "+origin);
+            if (origin == null)
+            {
+                Debug.Log("进入origin");
+                origin = animator.runtimeAnimatorController;
+                animator.runtimeAnimatorController = value;
+            }
+        }
+        get
+        {
+            return animator.runtimeAnimatorController;
+        }
+    }
+
 	// Update is called once per frame
+    public void restoreAnimator()
+    {
+        if (origin != null)
+        {
+            animator.runtimeAnimatorController = origin;
+            origin = null;
+        }
+    }
 	void Update () {
 		
 	}

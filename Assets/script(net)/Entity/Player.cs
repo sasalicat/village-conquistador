@@ -128,5 +128,18 @@
             Arg["buffNo"] = no;
             controler.addEvent(CodeTable.ADD_BUFF, Arg);
         }
+        public void receiveContortion(sbyte no)
+        {
+            Dictionary<string, object> Arg = new Dictionary<string, object>();
+            Arg["contortionNo"] = no;
+            controler.addEvent(CodeTable.CONTORTION, Arg);
+        }
+        public void receiveSynchro(Vector3 pos,sbyte buttoms)
+        {
+            Dictionary<string, object> Arg = new Dictionary<string, object>();
+            Arg["position"] = pos;
+            Arg["buttomState"] = buttoms;
+            controler.addEvent(CodeTable.SYNCHRO, Arg);
+        }
     }
 }

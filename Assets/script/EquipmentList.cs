@@ -7,7 +7,53 @@ using UnityEngine.UI;
 
 
 public class EquipmentList : MonoBehaviour {
+    public class ArmedHarness
+    {
+        EquipmentList owner;
+        public List<CDEquipment> passiveEquipments=new List<CDEquipment>();
+        public List<bool> NeedCast=new List<bool>();
 
+        public ArmedHarness(EquipmentList owner)
+        {
+            this.owner = owner;
+
+        }
+        public ArmedHarness(EquipmentList owner,List<sbyte> EquipmentNo)
+        {
+            this.owner = owner;
+            foreach(sbyte no in EquipmentNo){
+                addByName(owner.table.equipmentNameList[no]);
+            }
+        }
+        public void initAll(MissileTable misTable,RoleState state,AnimatorTable anim)
+        {
+            foreach(Equipment e in passiveEquipments)
+            {
+                e.onInit(misTable, state, anim);
+            }
+        }
+        public CDEquipment addByName(string name)
+        {
+            Component newone = owner.gameObject.AddComponent(System.Type.GetType(name));
+            NeedCast.Add(((CDEquipment)newone).Designated);
+            passiveEquipments.Add((CDEquipment)newone);
+            Debug.Log("In addByname:" + name);
+            owner.reduceLine += ((CDEquipment)newone).setTime;
+            owner.equipments.Add((Equipment)newone);
+            ((Equipment)newone).selfIndex = ((sbyte)(owner.equipments.Count - 1));
+            return (CDEquipment)newone;
+        }       
+        public void removeAll()
+        {
+            foreach(CDEquipment equipment in passiveEquipments)
+            {
+                owner.reduceLine -= equipment.setTime;
+                owner.equipments.Remove(equipment);
+                //还差一个卸掉脚本
+                //owner.gameObject.Destroy(((Component)equipment).GetType());
+            }
+        }
+    }
     private delegate void reduce(float time);
 
 
@@ -21,19 +67,52 @@ public class EquipmentList : MonoBehaviour {
     public const sbyte PASSIVE5 = 6;
 
     public List<Equipment> equipments=new List<Equipment>();
-    public List<CDEquipment> passiveEquipments = new List<CDEquipment>();
-    public List<bool> NeedCast = new List<bool>();
+    //public List<CDEquipment> passiveEquipments = new List<CDEquipment>();
+    //public List<bool> NeedCast = new List<bool>();
+    public ArmedHarness nowHarness=null;
+    private ArmedHarness origin = null;
     private reduce reduceLine;
     public EquipmentTable table;
     public dataRegister register;
     public KBControler controler;
+    private AnimatorTable anim;
+    private RoleState state;
+    private MissileTable misTable;
     //public Text text;
     private bool InitTime = true;
-
-   void Start()
+    public List<CDEquipment> passiveEquipments
+    {
+        get
+        { return nowHarness.passiveEquipments; }
+    }
+    public List<bool> NeedCast
+    {
+        get
+        { return nowHarness.NeedCast; }
+    }
+    public void changeArmedHarness(ContortionData data)
+    {
+        if (origin == null)
+        {
+            origin = nowHarness;
+            nowHarness = new ArmedHarness(this, data.equipmentNos);
+            nowHarness.initAll(misTable, state, anim);
+            data.onInit(state);
+        }
+    }
+    public void restoreArmedHarness()
+    {
+        nowHarness = origin;
+        origin = null;
+    }
+    void Start()
     {
         table = GameObject.Find("keyTabel").GetComponent<EquipmentTable>();
         register = GameObject.Find("client").GetComponent<dataRegister>();
+        nowHarness = new ArmedHarness(this);
+        misTable= GameObject.Find("keyTabel").GetComponent<MissileTable>();
+        state = GetComponent<RoleState>();
+        anim =GetComponent<AnimatorTable>();
         //text = GameObject.Find("Canvas/Text").GetComponent<Text>();
         AddEquipments();
         //text.text = "完成start";
@@ -42,14 +121,12 @@ public class EquipmentList : MonoBehaviour {
     }
     void Update()
     {
-        MissileTable table = GameObject.Find("keyTabel").GetComponent<MissileTable>();
-        RoleState state = GetComponent<RoleState>();
-        AnimatorTable anim=GetComponent<AnimatorTable>();
+
         if (InitTime)
         {
             for(int i = 0; i < equipments.Count; i++)
             {
-                equipments[i].onInit(table,state,anim);
+                equipments[i].onInit(misTable,state,anim);
             }
             InitTime = false;
         }
@@ -130,65 +207,68 @@ public class EquipmentList : MonoBehaviour {
     {
         string typeName = table.equipmentNameList[EquipmentNo];
         Debug.Log("typeName" + typeName);
-        Component newone= gameObject.AddComponent(System.Type.GetType(typeName));
+
         if (table.passiveList[EquipmentNo])//主動道具
         {
-            Debug.Log("needCast" + NeedCast + "newone" + newone);
-            NeedCast.Add(((CDEquipment)newone).Designated);
-            passiveEquipments.Add((CDEquipment)newone);
+            nowHarness.addByName(typeName);
         }
-        //[判断是不是CDEquiment,如果是加入技能冷却列表
-        Type[] inters = newone.GetType().GetInterfaces();
-        Debug.Log("type length"+inters.Length);
-
-        bool isCDE=false;
-        for(int i = 0; i < inters.Length; i++)
+        else
         {
-            Debug.Log("i type:" + inters[i] + "type:" + Type.GetType("CDEquipment"));
-            if (inters[i] == Type.GetType("CDEquipment"))
+            Component newone = gameObject.AddComponent(System.Type.GetType(typeName));
+            //[判断是不是CDEquiment,如果是加入技能冷却列表
+            Type[] inters = newone.GetType().GetInterfaces();
+            Debug.Log("type length" + inters.Length);
+
+            bool isCDE = false;
+            for (int i = 0; i < inters.Length; i++)
             {
-                isCDE = true;
-                break;
+                Debug.Log("i type:" + inters[i] + "type:" + Type.GetType("CDEquipment"));
+                if (inters[i] == Type.GetType("CDEquipment"))
+                {
+                    isCDE = true;
+                    break;
+                }
             }
-        }
-        if (isCDE)
-        {
-            Debug.Log(newone.name+"isCDE");
-            reduceLine += ((CDEquipment)newone).setTime;
-        }
+            if (isCDE)
+            {
+                Debug.Log(newone.name + "isCDE");
+                reduceLine += ((CDEquipment)newone).setTime;
+            }
 
-        equipments.Add((Equipment)newone);
+            equipments.Add((Equipment)newone);
 
-        ((Equipment)newone).selfIndex = ((sbyte)(equipments.Count - 1));
+            ((Equipment)newone).selfIndex = ((sbyte)(equipments.Count - 1));
 
-        switch (((Equipment)newone).Kind) {
-            case EquipmentTable.ON_TAKE_DAMAGE:
-                {
-                    //_on_take_damage t= controler.get_on_take_damage();
-                    controler.On_Take_Damage+= ((Equipment)newone).trigger;
-                    //Debug.Log("t have" + t.GetInvocationList().Length);
-                    break;
-                }
-            case EquipmentTable.ON_INTERVAL:
-                {
-                    controler.On_Interval+= ((Equipment)newone).trigger;
-                    break;
-                }
-            case EquipmentTable.ON_BEEN_TREAT:
-                {
-                    controler.On_Been_Treat+= ((Equipment)newone).trigger;
-                    break;
-                }
-            case EquipmentTable.ON_HP_CHANGE:
-                {
-                    controler.On_Hp_Change += ((Equipment)newone).trigger;
-                    break;
-                }
-            case EquipmentTable.ON_CAUSE_DAMAGE:
-                {
-                    controler.On_Cause_Damage += ((Equipment)newone).trigger;
-                    break;
-                }
+            switch (((Equipment)newone).Kind)
+            {
+                case EquipmentTable.ON_TAKE_DAMAGE:
+                    {
+                        //_on_take_damage t= controler.get_on_take_damage();
+                        controler.On_Take_Damage += ((Equipment)newone).trigger;
+                        //Debug.Log("t have" + t.GetInvocationList().Length);
+                        break;
+                    }
+                case EquipmentTable.ON_INTERVAL:
+                    {
+                        controler.On_Interval += ((Equipment)newone).trigger;
+                        break;
+                    }
+                case EquipmentTable.ON_BEEN_TREAT:
+                    {
+                        controler.On_Been_Treat += ((Equipment)newone).trigger;
+                        break;
+                    }
+                case EquipmentTable.ON_HP_CHANGE:
+                    {
+                        controler.On_Hp_Change += ((Equipment)newone).trigger;
+                        break;
+                    }
+                case EquipmentTable.ON_CAUSE_DAMAGE:
+                    {
+                        controler.On_Cause_Damage += ((Equipment)newone).trigger;
+                        break;
+                    }
+            }
         }
 
     }

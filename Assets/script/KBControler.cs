@@ -16,5 +16,6 @@ public interface KBControler : Controler{
     void Role_onTakeDamage(damage damage);
     void Role_onBeenTreat(GameObject treater, int num);
     void onAttack();
+    void synchroPos();
 
 }

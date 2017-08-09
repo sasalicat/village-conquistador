@@ -72,5 +72,5 @@ public interface Controler
         get;
     }
     void addBuffByNo(sbyte no);
-
+    void distortionByNo(sbyte no);
 }

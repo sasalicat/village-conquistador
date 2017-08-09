@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class buffSample : MonoBehaviour,CDEquipment {
-    sbyte index;
+public class contortionSkillSample : MonoBehaviour,CDEquipment {
     public bool CanUse
     {
         get
@@ -25,7 +24,7 @@ public class buffSample : MonoBehaviour,CDEquipment {
     {
         get
         {
-            return true;
+            return false;
         }
     }
 
@@ -41,10 +40,10 @@ public class buffSample : MonoBehaviour,CDEquipment {
     {
         get
         {
-            return 33;
+            return 34;
         }
     }
-
+    sbyte index;
     public sbyte selfIndex
     {
         get
@@ -57,9 +56,9 @@ public class buffSample : MonoBehaviour,CDEquipment {
             index = value;
         }
     }
-
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
+        
     }
 
     public void setTime(float time)
@@ -69,7 +68,16 @@ public class buffSample : MonoBehaviour,CDEquipment {
 
     public void trigger(Dictionary<string, object> args)
     {
-        ((GameObject)args["Traget"]).GetComponent<Controler>().addBuffByNo(0);
+        gameObject.GetComponent<Controler>().distortionByNo(0);
     }
 
+    // Use this for initialization
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 }

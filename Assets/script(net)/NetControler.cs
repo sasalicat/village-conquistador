@@ -27,9 +27,10 @@ public class NetControler : MonoBehaviour,KBControler{
     private AnimatorTable action;
     private EquipmentList eList;
     private NetRoleState state;
+    private controtionTable controtions;
     private List<eTrigger> eTriggerLine=new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();
-    private BuffControler buffcontrol;
+    public BuffControler buffcontrol;
     public Text Label;
     private float nextrecover = 0.5f;
     private string[] buffTable;
@@ -240,6 +241,7 @@ public class NetControler : MonoBehaviour,KBControler{
         codeLine = new List<Dictionary<string,object>>();
         state = GetComponent<NetRoleState>();
         buffcontrol = GetComponent<BuffControler>();
+        controtions = GameObject.Find("keyTabel").GetComponent<controtionTable>();
         buffTable = GameObject.Find("keyTabel").GetComponent<EquipmentTable>().buffNameList;
         //添加控制器事件
         on_keyleft_down += onKeyLeftDown;
@@ -443,6 +445,37 @@ public class NetControler : MonoBehaviour,KBControler{
                         //buffcontrol.AddBuff();
                         break;
                     }
+                case CodeTable.CONTORTION:
+                    {
+
+                        sbyte no = (sbyte)EventLine[0].Args["contortionNo"];
+                        if (no < 0)
+                        {
+                            action.restoreAnimator();
+                            eList.restoreArmedHarness();
+                        }
+                        else
+                        {
+                            RuntimeAnimatorController anim = controtions.animators[no];
+                            action.controler = anim;
+                            ContortionData data = controtions.datas[no];
+                            eList.changeArmedHarness(data);
+                            controtState state = gameObject.AddComponent<controtState>();
+                            state.needRecord = data.Duration > 0;
+                            state.TimeLeft = data.Duration;
+                            state.nowNo = no;
+                        }
+                        //string typeName = controtions.dataNames[no];
+
+                        break;
+                    }
+                case CodeTable.SYNCHRO:
+                    {
+                        sbyte buttoms = (sbyte)EventLine[0].Args["buttomState"];
+                        Vector3 pos= (Vector3)EventLine[0].Args["position"];
+                        beenSynchro(pos, buttoms);
+                        break;
+                    }
             }
             EventLine.RemoveAt(0);
         }
@@ -546,5 +579,61 @@ public class NetControler : MonoBehaviour,KBControler{
     public void addBuffByNo(sbyte no)
     {
         return;
+    }
+
+    public void distortionByNo(sbyte no)
+    {
+        return;
+    }
+
+    public void synchroPos()
+    {
+        return;
+    }
+
+    public void beenSynchro(Vector3 pos,sbyte ButtomState)
+    {
+        Debug.Log("beenSynchro 被呼叫");
+        this.transform.position = pos;
+        int buttoms = ButtomState;
+        if (buttoms / 8 > 0)
+        {
+            leftIng = true;
+        }
+        else
+        {
+            leftIng = false;
+        }
+        buttoms = buttoms % 8;
+        if (buttoms / 4 > 0)
+        {
+            downIng = true;
+        }
+        else
+        {
+            downIng = false;
+        }
+        buttoms = buttoms % 4;
+        if (buttoms / 2 > 0)
+        {
+            rightIng = true;
+        }
+        else
+        {
+            rightIng = false;
+        }
+        buttoms = buttoms % 2;
+        if (buttoms / 1 > 0)
+        {
+            upIng = true;
+        }
+        else
+        {
+            upIng = false;
+        }
+        if (!upIng && !leftIng && !downIng && !rightIng)
+        {
+            action.moveEnd();
+        }
     }
 }

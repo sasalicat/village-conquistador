@@ -4,6 +4,7 @@ using UnityEngine;
 using KBEngine;
 using System;
 
+
 public class NetPlayerControler : MonoBehaviour,KBControler {
     private class eTrigger//裝備觸發指令,eIndex為裝備的Index
     {
@@ -32,8 +33,10 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private EquipmentList eList;
     private NetRoleState state;
     private BuffControler buffcontrol;
+    private controtionTable controtions;
     private string[] buffTable;
     private float nextrecover = 0.5f;
+    private RuntimeAnimatorController originAnim;
 
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
@@ -247,6 +250,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         state = GetComponent<NetRoleState>();
         buffcontrol = GetComponent<BuffControler>();
         buffTable = temp.GetComponent<EquipmentTable>().buffNameList;
+        controtions = temp.GetComponent<controtionTable>();
         //添加控制器事件
         on_keyleft_down += onKeyLeftDown;
         on_keydown_down += onKeyDownDown;
@@ -260,58 +264,58 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         {
             on_left_down += onSkillKeyDown;
         }
-        else
+       /* else
         {
             on_left_down += empty;
-        }
+        }*/
         if (eList.passiveEquipments.Count > EquipmentList.SKILL)
         {
             on_right_down += onSkillKeyDown;
         }
-        else
+        /*else
         {
             on_left_down += empty;
-        }
+        }*/
         if (eList.passiveEquipments.Count>EquipmentList.PASSIVE1) {//為了防止當角色沒有裝備那麼多主動道具時報錯
             on_key1_down += onSkillKeyDown;//因為道具一定是順著順序排放鍵位的,例如第一個道具一定是key1,所以只要判斷主動道具數量就知道角色那個鍵位有沒有主動道具
         }
-        else
+        /*else
         {
             on_key1_down += empty;
-        }
+        }*/
         if (eList.passiveEquipments.Count >EquipmentList.PASSIVE2)
         {
             on_key2_down += onSkillKeyDown;
         }
-        else
+        /*else
         {
             on_key2_down += empty;
-        }
+        }*/
         if (eList.passiveEquipments.Count > EquipmentList.PASSIVE3)
         {
             on_key3_down += onSkillKeyDown;
         }
-        else
+        /*else
         {
             on_key3_down += empty;
-        }
+        }*/
         if (eList.passiveEquipments.Count > EquipmentList.PASSIVE4)
         {
             on_key4_down += onSkillKeyDown;
         }
-        else
+        /*else
         {
             on_key4_down += empty;
-        }
+        }*/
         if (eList.passiveEquipments.Count > EquipmentList.PASSIVE5)
         {
             on_key5_down += onSkillKeyDown;
         }
-        else
+        /*else
         {
             on_key5_down += empty;
         }
-        on_been_treat += (Dictionary<string, object> Arg) => Debug.Log("触发治疗事件");
+        on_been_treat += (Dictionary<string, object> Arg) => Debug.Log("触发治疗事件");*/
     }
     void OnEnable()
     {
@@ -536,6 +540,36 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                             buffcontrol.AddBuff(buffTable[(sbyte)EventLine[0].Args["buffNo"]]);
                             break;
                         }
+                    case CodeTable.CONTORTION:
+                        {
+                            sbyte no = (sbyte)EventLine[0].Args["contortionNo"];
+                            if (no < 0)
+                            {
+                                action.restoreAnimator();
+                                eList.restoreArmedHarness();
+                            }
+                            else
+                            {
+                                Debug.Log("收到变身请求");
+                                RuntimeAnimatorController anim = controtions.animators[no];
+                                action.controler = anim;
+                                ContortionData data = controtions.datas[no];
+                                eList.changeArmedHarness(data);
+                                controtState state= gameObject.AddComponent<controtState>();
+                                Debug.Log("Duration:" + data.Duration + "needRecord:" + (data.Duration > 0));
+                                state.needRecord = data.Duration > 0;
+                                state.TimeLeft = data.Duration;
+                                state.nowNo = no;
+
+                                
+                                //string typeName = controtions.dataNames[no];
+                            }
+                            break;
+                        }
+                    case CodeTable.SYNCHRO:
+                        {
+                            break;
+                        }
                 }
                 EventLine.RemoveAt(0);
             }
@@ -618,25 +652,27 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     void onSkillKeyDown(Vector3 mousePos,sbyte KeyCode)
     {
         Debug.Log("enter key down keyCode:"+KeyCode);
-        if (eList.passiveEquipments[KeyCode].CanUse)
-        {
-            if (eList.NeedCast[KeyCode])
+        if (eList.passiveEquipments.Count>KeyCode) {
+            if (eList.passiveEquipments[KeyCode].CanUse)
             {
-                Debug.Log("enter need cast");
-                Debug.DrawRay(mousePos, transform.forward, Color.red, 10);
-                RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
-                Debug.Log("enter need cast:"+hit);
-                if (hit&&(hit.collider.tag=="Player"))
+                if (eList.NeedCast[KeyCode])
                 {
-                    Debug.Log("enter need cast2");
-                    sbyte tragetNo=hit.collider.GetComponent<NetRoleState>().roomNo;
-                    player.cellCall("notify3_ap", new object[] { eList.passiveEquipments[KeyCode].selfIndex, transform.position, tragetNo, hit.transform.position });
+                    Debug.Log("enter need cast");
+                    Debug.DrawRay(mousePos, transform.forward, Color.red, 10);
+                    RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
+                    Debug.Log("enter need cast:" + hit);
+                    if (hit && (hit.collider.tag == "Player"))
+                    {
+                        Debug.Log("enter need cast2");
+                        sbyte tragetNo = hit.collider.GetComponent<NetRoleState>().roomNo;
+                        player.cellCall("notify3_ap", new object[] { eList.passiveEquipments[KeyCode].selfIndex, transform.position, tragetNo, hit.transform.position });
+                    }
                 }
-            }
-            else
-            {
-                Debug.Log("do not need cast");
-                player.cellCall("notify3", new object[] { eList.passiveEquipments[KeyCode].selfIndex, transform.position, mousePos });
+                else
+                {
+                    Debug.Log("do not need cast");
+                    player.cellCall("notify3", new object[] { eList.passiveEquipments[KeyCode].selfIndex, transform.position, mousePos });
+                }
             }
         }
     }
@@ -695,5 +731,48 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     public void addBuffByNo(sbyte no)
     {
         KBEngineApp.app.player().cellCall("addBuff",new object[] {no});
+    }
+
+    public void distortionByNo(sbyte no)
+    {
+        if(GetComponent<controtState>()==null)//只有没有被变形才能被变形
+            KBEngineApp.app.player().cellCall("distortion", new object[] { no });
+    }
+
+    public void synchroPos()
+    {
+        sbyte buttomState = 0;//目前按键状态的变数
+        if (upIng)
+        {
+            buttomState += 1;
+        }
+        if (rightIng)
+        {
+            buttomState += 2;
+        }
+        if (downIng)
+        {
+            buttomState += 4;
+        }
+        if (leftIng)
+        {
+            buttomState += 8;
+        }
+
+        KBEngineApp.app.player().cellCall("synchroPos", new object[] { transform.position,buttomState });
+    }
+
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        Debug.Log("hasForce" + hasFocus);
+        if (!hasFocus)
+        {
+            upIng = false;
+            rightIng = false;
+            downIng = false;
+            leftIng = false;
+            synchroPos();
+        }
     }
 }

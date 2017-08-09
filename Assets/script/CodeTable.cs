@@ -31,4 +31,6 @@ public class CodeTable{
     public const sbyte HP_CHANGE = 25;
     public const sbyte DEAD = 26;
     public const sbyte ADD_BUFF = 27;
+    public const sbyte CONTORTION = 28;
+    public const sbyte SYNCHRO = 29;
 }
