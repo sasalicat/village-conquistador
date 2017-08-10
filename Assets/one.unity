@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLevel: 0
   isMultiThreads: 1
-  ip: 140.134.26.31
+  ip: 127.0.0.1
   port: 20013
   clientType: 7
   persistentDataPath: Application.persistentDataPath
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roleNo: 6
-  equipmentNoList: 1b1a
+  equipmentNoList: 0122
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -609,6 +609,10 @@ Prefab:
     - target: {fileID: 4523127912078734, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
       propertyPath: m_RootOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1094831508225238, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
@@ -1554,6 +1558,7 @@ GameObject:
   - component: {fileID: 1995136365}
   - component: {fileID: 1995136366}
   - component: {fileID: 1995136367}
+  - component: {fileID: 1995136368}
   m_Layer: 0
   m_Name: keyTabel
   m_TagString: Untagged
@@ -1637,7 +1642,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  passiveList: 01010101010101010101010100000001000001010100000001000001000000000001010000000000
+  passiveList: 01000101010101010101010100000001000001010100000001000001000000000001010000000000
   buffNameList:
   - buffForTask
 --- !u!114 &1995136365
@@ -1709,6 +1714,19 @@ MonoBehaviour:
   - {fileID: 1699108556279174, guid: 4957e0f33cc075f48a66c656837c45b5, type: 2}
   Areas:
   - {fileID: 1708283513118796, guid: 81d83ce2cb9983d4d9480e5bc1aa9eaa, type: 2}
+--- !u!114 &1995136368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1995136361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae809516c9a8c24da1959d5372de948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animators:
+  - {fileID: 9100000, guid: 70d1850fafc706648a12b42447643ab4, type: 2}
 --- !u!1 &2138347942
 GameObject:
   m_ObjectHideFlags: 0

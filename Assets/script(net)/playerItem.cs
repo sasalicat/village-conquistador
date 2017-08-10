@@ -9,4 +9,9 @@ public class playerItem : MonoBehaviour {//用来记录本地玩家准备按钮�
     {
         manager.setReady(!ready);//设置ready为现在的相反值
     }
+    public void onChangeTeam()
+    {
+        if(!ready)
+            manager.changeTeam();
+    }
 }
