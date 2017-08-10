@@ -380,8 +380,9 @@ public class NetControler : MonoBehaviour,KBControler{
             //Label.text = "enter etrigger! size:"+ eList.equipments.Count;
             eTrigger temp = eTriggerLine[0];
             //Label.text = "in eTrigger gameobj is"+ eList.equipments[temp.eIndex].ToString();
+            Debug.Log("eindex is" + temp.eIndex);
             eList.equipments[temp.eIndex].trigger(temp.Args);
-            Debug.Log("in eTrigger eIndex is"+temp.eIndex);
+
             eTriggerLine.RemoveAt(0);
            
         }

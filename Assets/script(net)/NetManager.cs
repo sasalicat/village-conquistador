@@ -18,7 +18,8 @@ public class NetManager : MonoBehaviour ,Manager {
     public PrabTabel prafebTable;
     public GameObject roleparfab;
     public dataRegister register;
-    public HpBarManager hpBarCreater;//手动拉取
+    public HpBarManager hpBarCreater;//手动拉取赋值
+    public cameraFollowBy follow;//手动拉取赋值
     public List<dirPair> directionList=new List<dirPair>();
     public bool[] finishTable = new bool[MAX_NUM];
     public int intervals = 0;//累积的时间间隔触发次数
@@ -186,7 +187,7 @@ public class NetManager : MonoBehaviour ,Manager {
                         objList[i].GetComponent<NetRoleState>().control = control;
                         objList[i].GetComponent<NetRoleState>().islocal = true;
 
-
+                        follow.MainRole = objList[i];//使镜头跟随主角
                     }
                     else
                     {

@@ -260,57 +260,46 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         on_keyup_up += onKeyUpUp;
         on_keyleft_up += onKeyLeftUp;
         on_keyright_up += onKeyRightUp;
-        if (eList.passiveEquipments.Count > EquipmentList.ATK)
-        {
-            on_left_down += onSkillKeyDown;
-        }
+       
+        on_left_down += onSkillKeyDown;
+
        /* else
         {
             on_left_down += empty;
         }*/
-        if (eList.passiveEquipments.Count > EquipmentList.SKILL)
-        {
-            on_right_down += onSkillKeyDown;
-        }
+
+        on_right_down += onSkillKeyDown;
         /*else
         {
             on_left_down += empty;
         }*/
-        if (eList.passiveEquipments.Count>EquipmentList.PASSIVE1) {//為了防止當角色沒有裝備那麼多主動道具時報錯
-            on_key1_down += onSkillKeyDown;//因為道具一定是順著順序排放鍵位的,例如第一個道具一定是key1,所以只要判斷主動道具數量就知道角色那個鍵位有沒有主動道具
-        }
+      
+        on_key1_down += onSkillKeyDown;//因為道具一定是順著順序排放鍵位的,例如第一個道具一定是key1,所以只要判斷主動道具數量就知道角色那個鍵位有沒有主動道具
+
         /*else
         {
             on_key1_down += empty;
         }*/
-        if (eList.passiveEquipments.Count >EquipmentList.PASSIVE2)
-        {
-            on_key2_down += onSkillKeyDown;
-        }
+
+        on_key2_down += onSkillKeyDown;
         /*else
         {
             on_key2_down += empty;
         }*/
-        if (eList.passiveEquipments.Count > EquipmentList.PASSIVE3)
-        {
-            on_key3_down += onSkillKeyDown;
-        }
+        on_key3_down += onSkillKeyDown;
+
         /*else
         {
             on_key3_down += empty;
         }*/
-        if (eList.passiveEquipments.Count > EquipmentList.PASSIVE4)
-        {
-            on_key4_down += onSkillKeyDown;
-        }
+
+       on_key4_down += onSkillKeyDown;
+
         /*else
         {
             on_key4_down += empty;
         }*/
-        if (eList.passiveEquipments.Count > EquipmentList.PASSIVE5)
-        {
-            on_key5_down += onSkillKeyDown;
-        }
+        on_key5_down += onSkillKeyDown;
         /*else
         {
             on_key5_down += empty;

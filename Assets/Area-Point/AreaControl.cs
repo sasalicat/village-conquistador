@@ -8,7 +8,7 @@ public class AreaControl : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("enter area");
-        if (e != null)
+        if (e != null&&other.tag=="Player")
         {
             NetRoleState state= other.gameObject.GetComponent<NetRoleState>();
             sbyte roomNo = state.roomNo;
