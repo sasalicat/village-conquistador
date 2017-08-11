@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114156301279683418}
   - component: {fileID: 114284121839531112}
   - component: {fileID: 114793728079084852}
-  - component: {fileID: 114117722966268818}
+  - component: {fileID: 114063911936230372}
   m_Layer: 0
   m_Name: "\u4E3B\u5766\u514B"
   m_TagString: Player
@@ -99,7 +99,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114117722966268818
+--- !u!114 &114063911936230372
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -146,19 +146,7 @@ MonoBehaviour:
   nowConversely: 0
   energyRecover_Second: 0
   speed: 0
-  immune_attack: 0
-  immune_skill: 0
-  nonlife: 0
-  fastened: 0
-  tools: 0
-  canBeExiled: 1
-  canBeStiff: 1
-  canBeConvesly: 1
-  canBeKill: 1
-  canBetreat: 1
-  conversely: 0
-  alive: 1
-  exiled: 1
+  speedRate: 1
   roomNo: 0
   islocal: 0
 --- !u!114 &114793728079084852

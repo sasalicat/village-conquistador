@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114528954486447600}
   - component: {fileID: 114997706590117764}
   - component: {fileID: 114927886403097610}
-  - component: {fileID: 114058769349910460}
+  - component: {fileID: 114069682522137020}
   m_Layer: 0
   m_Name: "\u7375\u4EBA"
   m_TagString: Player
@@ -99,7 +99,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114058769349910460
+--- !u!114 &114069682522137020
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

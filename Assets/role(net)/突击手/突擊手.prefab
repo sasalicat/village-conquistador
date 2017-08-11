@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114562369265830850}
   - component: {fileID: 114930150820138704}
   - component: {fileID: 114782994166569268}
+  - component: {fileID: 114780682398621020}
   m_Layer: 0
   m_Name: "\u7A81\u64CA\u624B"
   m_TagString: Player
@@ -112,6 +113,18 @@ MonoBehaviour:
   NeedCast: 
   table: {fileID: 0}
   register: {fileID: 0}
+--- !u!114 &114780682398621020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1373321678833760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2bdd18f4c25f944886e356d79c3d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roleState: {fileID: 0}
 --- !u!114 &114782994166569268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,19 +189,7 @@ MonoBehaviour:
   nowConversely: 0
   energyRecover_Second: 0
   speed: 0
-  immune_attack: 0
-  immune_skill: 0
-  nonlife: 0
-  fastened: 0
-  tools: 0
-  canBeExiled: 1
-  canBeStiff: 1
-  canBeConvesly: 1
-  canBeKill: 1
-  canBetreat: 1
-  conversely: 0
-  alive: 1
-  exiled: 1
+  speedRate: 1
   roomNo: 0
   islocal: 0
 --- !u!212 &212695722998750474

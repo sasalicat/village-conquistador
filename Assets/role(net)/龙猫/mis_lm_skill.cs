@@ -25,6 +25,7 @@ public class mis_lm_skill : Missile
             hy_liveTime = 0.2f;
             GameObject newone = Instantiate(missletable.MissileList[15], Random.insideUnitCircle * 12 + weizhi, this.transform.rotation);
             Missile missile = newone.GetComponent<Missile>();
+            missile.Creater = gameObject;
             missile.Damage = this.Damage;
         }
         

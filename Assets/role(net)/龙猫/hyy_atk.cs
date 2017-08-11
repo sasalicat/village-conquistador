@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class hyy_atk : Missile
 {
-
+    public MissileTable missletable;
     // Use this for initialization
     void Start()
     {
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 30);
+        GameObject keytable = GameObject.Find("keyTabel");
+        missletable = keytable.GetComponent(typeof(MissileTable)) as MissileTable;
     }
 
     // Update is called once per frame
@@ -18,16 +20,11 @@ public class hyy_atk : Missile
         if(this.transform.position.z <= -1)
         {
             Destroy(this.gameObject);
+            GameObject newone = Instantiate(missletable.MissileList[17], this.transform.position, this.transform.rotation);
+            Missile missile = newone.GetComponent<Missile>();
+            missile.Creater = gameObject;
+            missile.Damage = this.Damage;
         }
 
-    }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject != Creater && this.transform.position.z <= 0)
-        {
-            RoleState role = other.gameObject.GetComponent<RoleState>();
-            role.TakeDamage(Damage);
-
-        }
     }
 }
