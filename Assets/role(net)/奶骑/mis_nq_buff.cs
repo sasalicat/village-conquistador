@@ -39,11 +39,7 @@ public class mis_nq_buff : Buff
 	
 	// Update is called once per frame
 	void Update () {
-        jishiqi -= Time.deltaTime;
-        if(jishiqi <= 0)
-        {
-            Destroy(this.gameObject);
-        }
+
 	}
 }
 

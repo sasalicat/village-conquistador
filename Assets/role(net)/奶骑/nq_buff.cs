@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class nq_buff : MonoBehaviour, CDEquipment
 {
+    public float jishiqi = 5f;
+
     public const float CD = 5f;
     public float CDTime = 0;
     const short selfMissileNo = 0;
@@ -128,7 +130,12 @@ public class nq_buff : MonoBehaviour, CDEquipment
     // Update is called once per frame
     void Update()
     {
-
+        jishiqi -= Time.deltaTime;
+        if(jishiqi <= 0)
+        {
+            Destroy(missilePraf);
+            Destroy(missilePraf2);
+        }
     }
 
 }
