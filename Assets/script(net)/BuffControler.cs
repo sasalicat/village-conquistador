@@ -7,10 +7,12 @@ public class BuffControler : MonoBehaviour {
     public const int MAX_BUFF_NUM = 33;
     Buff[] buffInRole = new Buff[MAX_BUFF_NUM];
     public RoleState roleState;
+    public MissileTable misTable;
 	// Use this for initialization
 	void Start () {
         roleState = GetComponent<RoleState>();
         GetComponent<Controler>().On_Interval += Intarvel;
+        misTable = GameObject.Find("keyTabel").GetComponent<MissileTable>();
 	}
 	
 	// Update is called once per frame
@@ -45,7 +47,7 @@ public class BuffControler : MonoBehaviour {
             }
         }
         Buff buff= (Buff)gameObject.AddComponent(Type.GetType(buffName));
-        buff.onInit(roleState, buffs);
+        buff.onInit(roleState, buffs,misTable);
         for (int i = 0; i < buffInRole.Length; i++) {
             Debug.Log("buff in role i:" + i);
             if (buffInRole[i] == null)

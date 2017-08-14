@@ -13,6 +13,7 @@
         public delegate void addRoom(string name, string num);
         public Dictionary<string, object> RoomInitData;//用于初始化房间的列表
         public List<Dictionary<string, object>> RoomChangeList=new List<Dictionary<string, object>>();
+        public List<RoleData> lastRoles;//如果dataRegist没有加载则,先用这个变数存角色列表
 
         public static bool PlayerInRoom = false;//用于确定player的init是因为登入还是
         //public addRoom addroom_fuction;//在hallmanager裏面加 
@@ -93,6 +94,37 @@
         public void changeToWar()
         {
             roomManager.change = true;
+        }
+        public void set_RoleList(List<object> newlist)
+        {
+            Debug.Log("in set_RoleList<<<<<<<<");
+            List<RoleData> list = new List<RoleData>();
+            Debug.Log("newlist:"+newlist+" length:"+newlist.Count);
+            foreach(Dictionary<string,object> role in newlist)
+            {
+                List<object> elist = (List<object>)role["equipmentNos"];
+                List<sbyte> newelist = new List<sbyte>();
+                foreach(sbyte no in elist)
+                {
+                    newelist.Add(no);
+                }
+
+                list.Add(new RoleData((sbyte)role["kind"],newelist));
+
+            }
+
+            if (hallManager != null)
+            {
+                hallManager.register.roleList=list;
+            } else if (roomManager!=null)
+            {
+                roomManager.register.roleList = list;
+            }
+            else//都没有加载
+            {
+                Debug.Log("没有加载 list Count:"+list.Count);
+                lastRoles = list;
+            }
         }
     }
 }

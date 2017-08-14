@@ -12,10 +12,17 @@ public class HallManager : MonoBehaviour {
     public GameObject nameLable;
     public bool showNameLabel=false;
     public roomShow roomShowControl=null;
-	// Use this for initialization
-	void Start () {
+    public dataRegister register;
+    // Use this for initialization
+    void Start () {
         ((Account)KBEngine.KBEngineApp.app.player()).hallManager = this;
 
+        register = GameObject.Find("client").GetComponent<dataRegister>();
+        if (register.roleList.Count == 0)//如果Account在Hall加载之前就初始化
+        {
+            Debug.Log("set rolelist");
+            register.roleList = ((Account)KBEngine.KBEngineApp.app.player()).lastRoles;//设置roleList
+        }
         //Account.addRoom a = roomShowControl.AddRoom;
         //((Account)KBEngine.KBEngineApp.app.player()).addroom_fuction = roomShowControl.AddRoom;
         ((Account)KBEngine.KBEngineApp.app.player()).baseCall("onHallReady");
@@ -47,9 +54,9 @@ public class HallManager : MonoBehaviour {
     }
     public void enterRoom(int roomId)
     {
-        dataRegister register = GameObject.Find("client").GetComponent<dataRegister>();
-        sbyte rolekind = register.roleList[0].roleKind;
-        List<sbyte> temp = register.roleList[0].equipmentIdList;
+
+        sbyte rolekind = register.nowRoleData.roleKind;
+        List<sbyte> temp = register.nowRoleData.equipmentIdList;
         List<object> objList = new List<object>();
         for (int i = 0; i < temp.Count; i++)
         {
@@ -57,6 +64,10 @@ public class HallManager : MonoBehaviour {
         }
         ((Account)KBEngine.KBEngineApp.app.player()).baseCall("enterRoomReq",new object[]{roomId,rolekind,objList});
         JumpRoomScene();
+    }
+    public void askRandomRole()
+    {
+        ((Account)KBEngine.KBEngineApp.app.player()).baseCall("reRandomRole");
     }
    
 }

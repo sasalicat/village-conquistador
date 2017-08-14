@@ -8,7 +8,7 @@ public class AreaControl : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("enter area");
-        if (e != null&&other.tag=="Player")
+        if (e != null&&other.tag=="Player"&&other.GetComponent<NetPlayerControler>()!=null)
         {
             NetRoleState state= other.gameObject.GetComponent<NetRoleState>();
             sbyte roomNo = state.roomNo;
@@ -18,8 +18,9 @@ public class AreaControl : MonoBehaviour {
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (e != null)
+        if (e != null && other.tag == "Player" && other.GetComponent<NetPlayerControler>() != null)
         {
+            Debug.Log("leave Area");
             e.cellCall("ExitArea", new object[] { other.gameObject.GetComponent<NetRoleState>().roomNo });
         }
     }

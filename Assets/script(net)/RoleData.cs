@@ -17,4 +17,26 @@ public class RoleData
         this.roleKind = rolekind;
         this.equipmentIdList = equipmentIdList;
     }
+    public bool equal(RoleData other)
+    {
+        if (this.roleKind != other.roleKind)
+        {
+            return false;
+        }
+        if (other.equipmentIdList.Count != this.equipmentIdList.Count)
+        {
+            return false;
+        }
+        else
+        {
+            for(int i=0;i<equipmentIdList.Count;i++)
+            {
+                if (this.equipmentIdList[i] != other.equipmentIdList[i])
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

@@ -42,7 +42,7 @@ public class RoomManager : MonoBehaviour {
             youTeam[i] = ItemYouArray[i].transform.Find("teamButtom/Text").GetComponent<Text>();
         }
         //Icon= Resources.Load("a") as Sprite;
-        storage = GetComponent<IconStorage>();
+        storage = GameObject.Find("Icons").GetComponent<IconStorage>();
         //Debug.Log("storage:" + storage);
         ((Account)KBEngineApp.app.player()).roomManager = this;
         Account.PlayerInRoom = true;

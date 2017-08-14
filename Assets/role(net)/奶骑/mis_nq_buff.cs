@@ -14,13 +14,14 @@ public class mis_nq_buff : Buff
     }
 
 
-    public override bool onInit(RoleState role, Buff[] Repetitive)
+    public override bool onInit(RoleState role, Buff[] Repetitive,MissileTable misTable)
     {
         if (Repetitive == null)
         {
             Debug.Log("onInit Enter Null");
             role.immune_attack = true;
         }
+        
         return true;
     }
 

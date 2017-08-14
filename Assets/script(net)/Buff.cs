@@ -17,7 +17,7 @@ public abstract class  Buff :MonoBehaviour {
         get;
     }
     public int index;//位于buff阵列的索引
-    public abstract bool onInit(RoleState role, Buff[] Repetitive);//如果角色身上已经有相同buff存在了则Repetitive将不为null,Repetitive会回传所有相同的buff
+    public abstract bool onInit(RoleState role, Buff[] Repetitive,MissileTable misTable);//如果角色身上已经有相同buff存在了则Repetitive将不为null,Repetitive会回传所有相同的buff
     //onInit的回传值为是否添加,如果回传false,该buff会被删掉而不触发onRemove
     public virtual void onIntarvel(RoleState role, float timeBetween)
     {

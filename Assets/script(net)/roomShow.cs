@@ -92,13 +92,14 @@ public class roomShow : MonoBehaviour {
         {
             param[0] = createTable.transform.Find("InputField/Placeholder").GetComponent<Text>().text;
         }
-        List<sbyte> temp = register.roleList[0].equipmentIdList;
+        Debug.Log("roleList " + register.roleList.Count);
+        List<sbyte> temp = register.nowRoleData.equipmentIdList;
         List<object> objList = new List<object>();
         for (int i = 0; i < temp.Count; i++)
         {
             objList.Add(temp[i]);
         }
-        param[1] = register.roleList[0].roleKind;
+        param[1] = register.nowRoleData.roleKind;
         param[2] = objList;
         ((Account)(KBEngineApp.app.player())).baseCall("createRoom",param);
         manager.JumpRoomScene();

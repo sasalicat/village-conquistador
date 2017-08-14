@@ -2017,7 +2017,6 @@ GameObject:
   - component: {fileID: 1904802777}
   - component: {fileID: 1904802776}
   - component: {fileID: 1904802780}
-  - component: {fileID: 1904802781}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2142,43 +2141,6 @@ MonoBehaviour:
   - {fileID: 0}
   register: {fileID: 0}
   change: 0
---- !u!114 &1904802781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1904802775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c03b7ce285b8434ba75632b4c91059c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headIcon:
-  - {fileID: 21300000, guid: 38a0e5f3b14f18d46b3cee9d0e25f7e6, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  readyIcon:
-  - {fileID: 21300000, guid: 0dc9994001bc5bb4885676db440edcea, type: 3}
-  - {fileID: 21300000, guid: 8904eae5ae3512841976979b1241c74c, type: 3}
 --- !u!1 &1976022782
 GameObject:
   m_ObjectHideFlags: 0

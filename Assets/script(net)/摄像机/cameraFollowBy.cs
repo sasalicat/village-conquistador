@@ -19,10 +19,14 @@ public class cameraFollowBy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+      
+	}
+    void FixedUpdate()
+    {
         if (mainRole != null)
         {
 
-            transform.position = new Vector3(roleTrans.position.x,roleTrans.position.y,CAMERA_Z);
+            transform.position = new Vector3(roleTrans.position.x, roleTrans.position.y, CAMERA_Z);
         }
-	}
+    }
 }
