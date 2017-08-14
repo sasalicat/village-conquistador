@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -229,8 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd6000c4a08a6a49bf88a677547458b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roleNo: 6
-  equipmentNoList: 0122
+  roleNo: 4
+  equipmentNoList: 0610
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -1618,7 +1618,7 @@ MonoBehaviour:
   - regeneration
   - shield
   - nq_atk
-  - 
+  - nq_buff
   - 
   - lm_skill
   - xwxz_atk
@@ -1642,7 +1642,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  passiveList: 01000101010101010101010100000001000001010100000001000001000000000001010000000000
+  passiveList: 01000101010101010101010100000001010001010100000001000001000000000001010000000000
   buffNameList:
   - buffForTask
 --- !u!114 &1995136365
@@ -1687,6 +1687,9 @@ MonoBehaviour:
   - {fileID: 1090376039140290, guid: 1e198abf3e716de4bb5de7fe737ab47e, type: 2}
   - {fileID: 1575805648889562, guid: b025a7be44d70994688840ecb8bc56a2, type: 2}
   - {fileID: 1094831508225238, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
+  - {fileID: 1526068776552830, guid: 2b0fd42f87a2ffb4cad81e5cf96a6ca6, type: 2}
+  - {fileID: 1070986301982456, guid: 9b2741f46553d81498262c1213748456, type: 2}
+  - {fileID: 1650220541659682, guid: 255386f1f4ea7af4f820703aa7489e5e, type: 2}
 --- !u!114 &1995136367
 MonoBehaviour:
   m_ObjectHideFlags: 0
