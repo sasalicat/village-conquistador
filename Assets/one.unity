@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forDebug: 1
   roleNo: 4
-  equipmentNoList: 0610
+  equipmentNoList: 2210
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -1798,7 +1798,7 @@ MonoBehaviour:
   - bone_shield
   - executioner
   - jump_bomb
-  - 
+  - ImmortalDetermination
   - 
   - 
   - 
@@ -1810,10 +1810,11 @@ MonoBehaviour:
   - 
   - 
   - 
-  passiveList: 01000101010101010101010100000001010001010100000001000001000000000001010000000000
+  passiveList: 01000101010101010101010100000001010001010100000001000001010000000001010000000000
   buffNameList:
   - buffForTask
   - mis_nq_buff
+  - BuffImmortalDetermination
 --- !u!114 &1995136365
 MonoBehaviour:
   m_ObjectHideFlags: 0
