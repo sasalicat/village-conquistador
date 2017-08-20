@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class nq_buff : MonoBehaviour, CDEquipment
 {
-    public float jishiqi = 5f;
-
     public const float CD = 5f;
     public float CDTime = 0;
     const short selfMissileNo = 0;
@@ -78,19 +76,19 @@ public class nq_buff : MonoBehaviour, CDEquipment
     {
         ((GameObject)args["Traget"]).GetComponent<Controler>().addBuffByNo(1);
 
-        getVector getVector = GameObject.Find("keyTabel").GetComponent<getVector>();
-        Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
+        //getVector getVector = GameObject.Find("keyTabel").GetComponent<getVector>();
+        //Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
         //Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
         //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
-        Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, transform.position, new Vector3(-3, 0, 0));//獲得相對座標
-        Vector3 tragetPos2 = getVector.getOriginalInitPoint(origenPlayerPosition, transform.position, new Vector3(3, 0, 0));
+        //Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, transform.position, new Vector3(-3, 0, 0));//獲得相對座標
+        //Vector3 tragetPos2 = getVector.getOriginalInitPoint(origenPlayerPosition, transform.position, new Vector3(3, 0, 0));
         //制造子弹物件
         //Vector3 direction = mousePosition - origenPlayerPosition;
         //GameObject newone = Instantiate(missilePraf, tragetPos, this.transform.rotation);
         //missilePraf.transform.forward = direction;
         //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
 
-        GameObject newone = Instantiate(missilePraf, tragetPos, transform.rotation);
+        /*GameObject newone = Instantiate(missilePraf, tragetPos, transform.rotation);
         
         GameObject newone2 = Instantiate(missilePraf2, tragetPos2, transform.rotation);
         newone2.transform.eulerAngles = new Vector3(0, 0, newone2.transform.eulerAngles.z + 180);
@@ -104,7 +102,7 @@ public class nq_buff : MonoBehaviour, CDEquipment
         newone2.transform.parent = this.transform;
         //missile.Creater = gameObject;
         //创建伤害物件
-
+        */
 
         CDTime = CD;//技能冷卻
         //Debug.Log("in trigger CDTime is" + CDTime);
@@ -115,8 +113,6 @@ public class nq_buff : MonoBehaviour, CDEquipment
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        missilePraf = table.MissileList[18];
-        missilePraf2 = table.MissileList[19];
         this.selfState = state;
         this.animator = anim;
     }
@@ -130,12 +126,7 @@ public class nq_buff : MonoBehaviour, CDEquipment
     // Update is called once per frame
     void Update()
     {
-        jishiqi -= Time.deltaTime;
-        if(jishiqi <= 0)
-        {
-            Destroy(missilePraf);
-            Destroy(missilePraf2);
-        }
+
     }
 
 }
