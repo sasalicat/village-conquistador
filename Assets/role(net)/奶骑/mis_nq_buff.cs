@@ -9,7 +9,7 @@ public class mis_nq_buff : Buff
     {
         get
         {
-            return 3;
+            return 10;
         }
     }
 
@@ -47,16 +47,8 @@ public class mis_nq_buff : Buff
     }
     public override void onIntarvel(RoleState role, float timeBetween)
     {
-        
+        base.onIntarvel(role,timeBetween);
     }
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
-	}
 }
 

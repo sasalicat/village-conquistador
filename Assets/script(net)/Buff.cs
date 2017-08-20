@@ -33,6 +33,7 @@ public abstract class  Buff :MonoBehaviour {
     public abstract void onRemove(RoleState role);
     public void deleteSelf(RoleState role)
     {
+        Debug.Log("deleteSelf");
         this.onRemove(role);
         Destroy(this);
     }
