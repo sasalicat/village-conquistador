@@ -69,7 +69,7 @@ public class nq_buff : MonoBehaviour, CDEquipment
 
     public void setTime(float time)
     {
-
+        CDTime -= time;
     }
 
     public void trigger(Dictionary<string, object> args)

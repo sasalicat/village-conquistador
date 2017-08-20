@@ -5,11 +5,12 @@ using UnityEngine;
 public class mis_nq_buff : Buff
 {
     private GameObject missilePraf;
+    private GameObject newone;
     public override float Duration
     {
         get
         {
-            return 10;
+            return 3;
         }
     }
 
@@ -29,11 +30,9 @@ public class mis_nq_buff : Buff
         //missilePraf.transform.forward = direction;
         //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
 
-        GameObject newone = Instantiate(misTable.MissileList[18], this.transform.position, transform.rotation);
+        newone = Instantiate(misTable.MissileList[18], this.transform.position, transform.rotation);
 
         newone.transform.parent = this.transform;
-
-
         //newone.transform.up = -direction;
         //修改子弹物件携带的子弹脚本
         Missile missile = newone.GetComponent<Missile>();
@@ -43,7 +42,8 @@ public class mis_nq_buff : Buff
 
     public override void onRemove(RoleState role)
     {
-        Destroy(missilePraf);
+        role.immune_attack = false;
+        Destroy(newone);
     }
     public override void onIntarvel(RoleState role, float timeBetween)
     {
