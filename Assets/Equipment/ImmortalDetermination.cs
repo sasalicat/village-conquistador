@@ -65,7 +65,7 @@ public class ImmortalDetermination : MonoBehaviour, CDEquipment
     {
         get
         {
-            return false;
+            return true;
         }
     }
 
@@ -74,7 +74,7 @@ public class ImmortalDetermination : MonoBehaviour, CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
-        ((GameObject)args["Traget"]).GetComponent<Controler>().addBuffByNo(3);
+        ((GameObject)args["Traget"]).GetComponent<Controler>().addBuffByNo(2);
     }
 
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
