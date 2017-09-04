@@ -17,13 +17,17 @@ public class RoleShowControl : MonoBehaviour {
 	// Use this for initialization
     private void updateRole(List<RoleData> datas)
     {
-        foreach(GameObject item in nowItems)
+        Debug.Log("updateRole");
+        while (nowItems.Count > 0)
         {
+            GameObject item = nowItems[0];
+        
             nowItems.Remove(item);
             Destroy(item);
         }
         foreach(RoleData data in datas)
         {
+            Debug.Log("updateRole:in role" + data.roleKind);
             GameObject newItem = Instantiate(roleLabelItem);
             newItem.transform.parent = MainLabel.transform;
             newItem.GetComponent<Image>().sprite = storage.headIcon[data.roleKind];
@@ -36,6 +40,7 @@ public class RoleShowControl : MonoBehaviour {
                 newSkill.transform.parent = skillLable;
                 newSkill.transform.Find("Text").GetComponent<Text>().text = " "+eno;
             }
+            nowItems.Add(newItem);
         }
     }
     public bool checkDataEqual(List<RoleData> other)
@@ -62,7 +67,7 @@ public class RoleShowControl : MonoBehaviour {
     }
     public void OnChange(List<RoleData> newDatas)
     {//如果在label激活的时候的改变只可能是1.重置随机角色2.随机角色认证成永久角色.无论那种新的角色列表和旧的一定是不同的
-        updateRole(newDatas);
+        nextDatas = newDatas;
     }
 	void Start () {
         storage = GameObject.Find("Icons").GetComponent<IconStorage>();

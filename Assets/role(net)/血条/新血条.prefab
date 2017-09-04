@@ -116,6 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   role: {fileID: 0}
   hpline: {fileID: 1244734899779120}
+  hpBar: {fileID: 1253782685171190}
+  floating: {fileID: 0}
 --- !u!114 &114958220202370106
 MonoBehaviour:
   m_ObjectHideFlags: 1

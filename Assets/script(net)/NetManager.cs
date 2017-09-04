@@ -308,4 +308,5 @@ public class NetManager : MonoBehaviour ,Manager {
             hpBarCreater.deleteHpBarWith(((GameObject)e.renderObj).GetComponent<NetRoleState>().roomNo);
         }
     }
+    
 }
