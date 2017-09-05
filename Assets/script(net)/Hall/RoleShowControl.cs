@@ -9,6 +9,14 @@ public class RoleShowControl : MonoBehaviour {
     public GameObject skillIcon;
     public GameObject MainLabel;
     public IconStorage storage;
+    //技能详情---------------------
+    public GameObject skillDetail;
+    public Text detailStatement;
+    public Image detailIcon;
+    public Text detailName;
+
+    public SkillStatements statement;
+
     public dataRegister register;
     private List<GameObject> nowItems=new List<GameObject>();
     private List<RoleData> lastDatas=new List<RoleData>();
@@ -39,6 +47,15 @@ public class RoleShowControl : MonoBehaviour {
                 GameObject newSkill = Instantiate(skillIcon);
                 newSkill.transform.parent = skillLable;
                 newSkill.transform.Find("Text").GetComponent<Text>().text = " "+eno;
+                skillShow show = newSkill.GetComponent<skillShow>();
+                show.no = eno;
+                show.detailSkill = skillDetail;
+                show.storage = storage;
+                show.detailName = detailName;
+                show.detailIcon = detailIcon;
+                show.detailStatement = detailStatement;
+                show.statement = statement;
+                Debug.Log("赋值show.statment"+show.statement+"self.statement"+statement);
             }
             nowItems.Add(newItem);
         }
@@ -73,13 +90,18 @@ public class RoleShowControl : MonoBehaviour {
         storage = GameObject.Find("Icons").GetComponent<IconStorage>();
         register = GameObject.Find("client").GetComponent<dataRegister>();
         register.onRoleListChange += OnChange;
+
+        detailIcon = skillDetail.transform.Find("Image").GetComponent<Image>();
+        detailName = skillDetail.transform.Find("Name").GetComponent<Text>();
+        detailStatement = skillDetail.transform.Find("Statement").GetComponent<Text>();
+        statement = GameObject.Find("keyTabel").GetComponent<SkillStatements>();
         if (!checkDataEqual(register.roleList))//有两种情况1.角色列表没有被打开过2.角色列表被打开过所以有item
         {
             updateRole(register.roleList);
             lastDatas = register.roleList;
         }
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {

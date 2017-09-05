@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class RoleState : MonoBehaviour {
     public const int NORMAL_NO = 0;
     public const int STIFF_NO = 1;
     public const int CONVERSELY_NO = 2;
     public const int DEAD_NO = 3;
+    public bool hasStart = false;
     protected interface state
     {
         void takedamage(damage damage);
@@ -43,7 +45,7 @@ public class RoleState : MonoBehaviour {
         {
             get
             {
-                throw new NotImplementedException();
+                return true;
             }
         }
 
@@ -59,7 +61,7 @@ public class RoleState : MonoBehaviour {
         {
             get
             {
-                return false;
+                return true;
             }
         }
 
@@ -67,7 +69,7 @@ public class RoleState : MonoBehaviour {
         {
             get
             {
-                throw new NotImplementedException();
+                return NORMAL_NO;
             }
         }
 
@@ -75,22 +77,67 @@ public class RoleState : MonoBehaviour {
         {
             if (role.canBetreat)
             {
-                //這裡應有觸發治療事件
+                if (role.control.On_Been_Treat != null)
+                {
+                    Dictionary<string, object> Arg = new Dictionary<string, object>();
+                    Arg["Treater"] = from;
+                    Arg["Num"] = num;
+                    Arg["randomPoint"] = UnityEngine.Random.Range(0,100);
+                    role.control.On_Been_Treat(Arg);
+                }
+                
             }
         }
 
         public void onUpdate()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void takedamage(damage damage)
         {
-            throw new NotImplementedException();
+            if (damage.kind == 1)
+            {
+                if (!role.immune_attack)
+                {
+                    damage.num -= (int)(damage.num * (((float)role.selfdata.damageReduce) / 100));
+                    damage.stiffTime -= (int)(damage.stiffTime * (((float)role.selfdata.stiffReduce) / 100));
+                }
+            }
+            else if (damage.kind == 2)
+            {
+                if (!role.immune_skill)
+                {
+                    damage.num -= (int)(damage.num * (((float)role.selfdata.specialReduce) / 100));
+                    damage.stiffTime -= (int)(damage.stiffTime * (((float)role.selfdata.stiffReduce) / 100));
+                    Debug.Log("send backage");
+                }
+            }
+            if (role.control.On_Take_Damage != null)
+            {
+                Dictionary<string, object> Arg = new Dictionary<string, object>();
+                Arg["PlayerPosition"] = role.transform.position;
+                Arg["PlayerEuler"] = role.transform.eulerAngles;
+                Arg["DamagerPosition"] = damage.damager.transform.position;
+                Arg["Damager"] = damage.damager;
+                Arg["randomPoint"] = UnityEngine.Random.Range(0, 100);
+                Arg["Damage"] = damage;
+                role.control.On_Take_Damage(Arg);
+            }
+            if (role.control.On_Cause_Damage!=null)
+            {
+                Dictionary<string, object> Arg = new Dictionary<string, object>();
+                Arg["Damage"] = damage;
+                Arg["PlayerPosition"] = damage.damager.transform.position;
+                Arg["TragetPosition"] = role.transform.position;
+                Arg["randomPoint"] = UnityEngine.Random.Range(0, 100);
+                Arg["Traget"] = role.gameObject;
+                role.control.On_Cause_Damage(Arg);
+            }
         }
     }
     public unit selfdata;
-    public KBControler control;
+    public Controler control;
     public AnimatorTable anima;
     protected state nowState;
     protected List<state> StateTable=new List<state>();
@@ -230,6 +277,7 @@ public class RoleState : MonoBehaviour {
         }
         get
         {
+            Debug.Log("nowState is" + nowState+"lengh"+ StateTable.Count+"  "+hasStart);
             return nowState.canMove&&canMoveCount>0;
         }
     }
@@ -274,14 +322,24 @@ public class RoleState : MonoBehaviour {
     {
         selfdata = GetComponent<unit>();
         anima = GetComponent<AnimatorTable>();
+        control = GetComponent<Controler>();
         Debug.Log("in Role state"+maxHp+nowHp);
         maxHp = unit.STAND_HP + unit.STAND_HP * (selfdata.physique / 100);
         nowHp= maxHp;
         nowMp = 0;
         energyRecover_Second = unit.STAND_MP_RECOVER* (((float)selfdata.energyRecover) / 100);
         speed = unit.STAND_SPEED + unit.STAND_SPEED * (((float)selfdata.accelerate) / 100);
+
+        StateTable.Add(new normal(this));
+        nowState = StateTable[0];
+        hasStart = true;
+        Debug.Log("in start nowState is" + nowState);
         //attackInterval -= attackInterval * (((float)attackSpeed)/100);
 
+    }
+    virtual protected void Update()
+    {
+        nowState.onUpdate();
     }
     public virtual void TakeDamage(damage damage)
     {

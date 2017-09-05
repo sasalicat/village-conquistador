@@ -9,7 +9,6 @@
     {
         public NetManager manager;
         public KBControler controler;
-        public sbyte roomNo;
         public loading loadPage;
         public msTask ms;
         public override void __init__()
@@ -96,7 +95,7 @@
         }
         public void receive5(sbyte treaterNo,short num,sbyte random)
         {
-            GameObject treater = manager.getObjByRoomNo(roomNo);
+            GameObject treater = manager.getObjByRoomNo((sbyte)controler.Index);
             Dictionary<string, object> Arg = new Dictionary<string, object>();
             Arg["Treater"] = treater;
             Arg["Num"] = num;

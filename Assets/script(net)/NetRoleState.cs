@@ -7,7 +7,7 @@ using KBEngine;
 public class NetRoleState :RoleState {
     // Use this for initialization
     public sbyte roomNo;
-
+    public KBControler control;
     public bool islocal = false;
      interface state_net :state
     {
@@ -450,6 +450,7 @@ public class NetRoleState :RoleState {
         StateTable.Add(new conversely(this));
         StateTable.Add(new died());
 
+        control = GetComponent<KBControler>();
         //初始为normal
         nowState = StateTable[0];
         //TakeDamage(new damage(1, 100, 1, true, false, gameObject));

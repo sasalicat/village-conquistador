@@ -34,6 +34,7 @@ public class NetControler : MonoBehaviour,KBControler{
     public Text Label;
     private float nextrecover = 0.5f;
     private string[] buffTable;
+    private int index;
     //装备事件
     _on_trigger on_attack;
 
@@ -148,6 +149,19 @@ public class NetControler : MonoBehaviour,KBControler{
         set
         {
             on_cause_damage = value;
+        }
+    }
+
+    public int Index
+    {
+        get
+        {
+            return index;
+        }
+
+        set
+        {
+            index = value;
         }
     }
 

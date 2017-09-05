@@ -37,6 +37,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private string[] buffTable;
     private float nextrecover = 0.5f;
     private RuntimeAnimatorController originAnim;
+    private int index;
 
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
@@ -228,6 +229,19 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         set
         {
             on_cause_damage = value;
+        }
+    }
+
+    public int Index
+    {
+        get
+        {
+            return index;
+        }
+
+        set
+        {
+            index = value;
         }
     }
 

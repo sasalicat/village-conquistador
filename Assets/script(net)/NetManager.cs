@@ -174,13 +174,13 @@ public class NetManager : MonoBehaviour ,Manager {
                     if (e.id == KBEngineApp.app.player().id)
                     {
                         NetPlayerControler control = objList[i].AddComponent<NetPlayerControler>();
-
+                        objList[i].AddComponent<NetRoleState>();
                         elist.controler = control;
                         control.entity = e;
 
 
                         ((Player)e).controler = control;
-                        ((Player)e).roomNo = (sbyte)i;
+                        ((Player)e).controler.Index = (sbyte)i;
                         ((Player)e).manager = this;
                         control.roomNo = (sbyte)i;
                         playerContorler = control;
@@ -193,6 +193,7 @@ public class NetManager : MonoBehaviour ,Manager {
                     {
 
                         NetControler control = objList[i].AddComponent<NetControler>();
+                        objList[i].AddComponent<NetRoleState>();
                         objList[i].GetComponent<EquipmentList>().controler = control;
 
                         elist.controler = control;
@@ -200,7 +201,7 @@ public class NetManager : MonoBehaviour ,Manager {
 
 
                         ((Player)e).controler = control;
-                        ((Player)e).roomNo = (sbyte)i;
+                        ((Player)e).controler.Index = (sbyte)i;
                         ((Player)e).manager = this;
                         controlerList[i] = control;
                         objList[i].GetComponent<NetRoleState>().control = control;
