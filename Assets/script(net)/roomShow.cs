@@ -112,6 +112,10 @@ public class roomShow : MonoBehaviour {
     {
         handleLine.Add(new roomData(id,name,num));
     }
+    public void EnterTraining()
+    {
+        Application.LoadLevel("trainingspace");
+    }
     public void AddRoom(int id, string name,string num)
     {
         int initLocationIndex=-1;

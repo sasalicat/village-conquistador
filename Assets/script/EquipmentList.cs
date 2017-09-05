@@ -74,7 +74,7 @@ public class EquipmentList : MonoBehaviour {
     private reduce reduceLine;
     public EquipmentTable table;
     public dataRegister register;
-    public KBControler controler;
+    public Controler controler;
     private AnimatorTable anim;
     private RoleState state;
     private MissileTable misTable;
@@ -126,6 +126,7 @@ public class EquipmentList : MonoBehaviour {
         {
             for(int i = 0; i < equipments.Count; i++)
             {
+                Debug.Log("");
                 equipments[i].onInit(misTable,state,anim);
             }
             InitTime = false;
@@ -137,7 +138,7 @@ public class EquipmentList : MonoBehaviour {
         //text.text = "add";
         //text.text = "Player is:"+ controler.Entity.ToString();
         Debug.Log("空的" + controler);
-        int selfNo = ((Player)controler.Entity).roomNo;
+        int selfNo = controler.Index;
         List<sbyte> eList = register.PlayerInWar[selfNo].role.equipmentIdList;
         while (eList.Count > 0)
         {

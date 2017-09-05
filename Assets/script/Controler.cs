@@ -71,6 +71,11 @@ public interface Controler
         set;
         get;
     }
+    int Index
+    {
+        set;
+        get;
+    }
     void addBuffByNo(sbyte no);
     void distortionByNo(sbyte no);
 }

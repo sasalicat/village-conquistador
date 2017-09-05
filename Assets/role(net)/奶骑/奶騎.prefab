@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 58196292943599236}
   - component: {fileID: 114815160259242720}
   - component: {fileID: 114234936904743592}
-  - component: {fileID: 114181321549211372}
   - component: {fileID: 114249529601429952}
   - component: {fileID: 114108240603384300}
   m_Layer: 0
@@ -111,30 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roleState: {fileID: 0}
---- !u!114 &114181321549211372
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1003696595511174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f3cc16270e13b4c9ad1c88d94875a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selfdata: {fileID: 0}
-  anima: {fileID: 0}
-  team: 0
-  maxHp: 0
-  nowHp: 0
-  nowMp: 0
-  nowStiff: 0
-  nowConversely: 0
-  energyRecover_Second: 0
-  speed: 0
-  speedRate: 1
-  roomNo: 0
-  islocal: 0
+  misTable: {fileID: 0}
 --- !u!114 &114234936904743592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,7 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4ae46c6f02828449a36b81b43cfa87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NeedCast: 
   table: {fileID: 0}
   register: {fileID: 0}
 --- !u!114 &114249529601429952
@@ -192,6 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  controtionNo: 0
+  controtTimeLeft: 0
 --- !u!212 &212231456773627420
 SpriteRenderer:
   m_ObjectHideFlags: 1

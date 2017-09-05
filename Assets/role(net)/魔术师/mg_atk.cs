@@ -106,6 +106,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
     public void onInit(MissileTable table,RoleState state,AnimatorTable anim)
     {
         //初始化赋值
+        Debug.Log("魔术师扑克牌初始化 state:"+state);
         missilePraf = table.MissileList[0];
         this.selfState = state;
         getVector= GameObject.Find("keyTabel").GetComponent<getVector>();
