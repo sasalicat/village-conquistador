@@ -43,7 +43,7 @@ public class trainingControler : MonoBehaviour,Controler {
     public bool leftIng = false;
     public bool downIng = false;
     public bool rightIng = false;
-
+    
     
 
     void onKeyUpDown()

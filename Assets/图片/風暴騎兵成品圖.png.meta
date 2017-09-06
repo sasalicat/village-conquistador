@@ -1,0 +1,280 @@
+fileFormatVersion: 2
+guid: e5c28c3148aeb9d4b983a17bcabd9e1c
+timeCreated: 1504691380
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_0"
+    21300002: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_1"
+    21300004: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_2"
+    21300006: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_3"
+    21300008: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_4"
+    21300010: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_5"
+    21300012: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_6"
+    21300014: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_7"
+    21300016: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_8"
+    21300018: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_9"
+    21300020: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_10"
+    21300022: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_11"
+    21300024: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_12"
+    21300026: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_13"
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_0"
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 2532
+        width: 346
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_1"
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 2532
+        width: 346
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_2"
+      rect:
+        serializedVersion: 2
+        x: 1105
+        y: 2532
+        width: 347
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_3"
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 1882
+        width: 346
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_4"
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 1902
+        width: 337
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_5"
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 1990
+        width: 319
+        height: 382
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_6"
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 1882
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_7"
+      rect:
+        serializedVersion: 2
+        x: 1395
+        y: 1883
+        width: 17
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_8"
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 1359
+        width: 297
+        height: 421
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_9"
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 1367
+        width: 305
+        height: 422
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_10"
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 711
+        width: 353
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_11"
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 711
+        width: 335
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_12"
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 745
+        width: 336
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "\u98A8\u66B4\u9A0E\u5175\u6210\u54C1\u5716_13"
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 135
+        width: 171
+        height: 469
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

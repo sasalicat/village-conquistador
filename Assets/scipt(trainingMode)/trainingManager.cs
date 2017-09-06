@@ -7,7 +7,11 @@ public class trainingManager : MonoBehaviour,Manager {
     public PrabTabel prafebTable;
     public dataRegister register;
     private GameObject[] roleObjList=new GameObject[20];
+    private Controler[] controlers = new Controler[20];
+    private EquipmentList[] elists = new EquipmentList[20];
     public float nextInterval = 0.1f;
+    public HpBarManager hpManage;
+    public FloatingManager Floating;
     public GameObject[] getGameObjectList()
     {
         return roleObjList;
@@ -34,15 +38,48 @@ public class trainingManager : MonoBehaviour,Manager {
         RoleState state= (RoleState)roleObjList[0].AddComponent(Type.GetType("RoleState"));
 
         trainingControler control = roleObjList[0].AddComponent<trainingControler>();
+        controlers[0] = control;
         control.Index = 0;
         control.state = state;
 
-        roleObjList[0].GetComponent<EquipmentList>().controler = control;
+        elists[0] = roleObjList[0].GetComponent<EquipmentList>();
+        elists[0].controler = control;
         roleObjList[0].SetActive(true);
+
+        hpManage.CreateHpBar(roleObjList[0],0);
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        nextInterval -= Time.deltaTime;
+        if (nextInterval <= 0)
+        {
+            nextInterval = 0.1f;
+            foreach(Controler c in controlers)
+            {
+                if (c!=null) {
+                    Debug.Log("c is " + c);
+                    Dictionary<string, object> newData = new Dictionary<string, object>();
+                    newData["interval"] = NetManager.INTERVAL_CYCLE;
+                    c.On_Interval(newData);
+                }
+                else
+                {
+                    break;
+                }
+                
+            }
+            foreach(EquipmentList el in elists)
+            {
+                if (el != null)
+                {
+                    el.allReduceCD(NetManager.INTERVAL_CYCLE);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
 	}
 }

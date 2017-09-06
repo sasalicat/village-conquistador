@@ -474,8 +474,5 @@ public class NetRoleState :RoleState {
     {
         ((state_net)nowState).treat(num);
     }
-    public void changeState(int no)
-    {
-        nowState = StateTable[no];
-    }
+
 }

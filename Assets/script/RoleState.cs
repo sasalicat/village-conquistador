@@ -32,7 +32,7 @@ public class RoleState : MonoBehaviour {
         }
 
     }
-    public class normal : state
+    class normal : state
     {
         private RoleState role;
         
@@ -79,12 +79,9 @@ public class RoleState : MonoBehaviour {
             {
                 if (role.control.On_Been_Treat != null)
                 {
-                    Dictionary<string, object> Arg = new Dictionary<string, object>();
-                    Arg["Treater"] = from;
-                    Arg["Num"] = num;
-                    Arg["randomPoint"] = UnityEngine.Random.Range(0,100);
-                    role.control.On_Been_Treat(Arg);
+                   role.control.On_Been_Treat(RoleState.CreateTreatArg(num, from));
                 }
+                treat(num);
                 
             }
         }
@@ -115,25 +112,372 @@ public class RoleState : MonoBehaviour {
             }
             if (role.control.On_Take_Damage != null)
             {
-                Dictionary<string, object> Arg = new Dictionary<string, object>();
-                Arg["PlayerPosition"] = role.transform.position;
-                Arg["PlayerEuler"] = role.transform.eulerAngles;
-                Arg["DamagerPosition"] = damage.damager.transform.position;
-                Arg["Damager"] = damage.damager;
-                Arg["randomPoint"] = UnityEngine.Random.Range(0, 100);
-                Arg["Damage"] = damage;
-                role.control.On_Take_Damage(Arg);
+                role.control.On_Take_Damage(RoleState.CreateTakeDamageArg(role,damage));
             }
             if (role.control.On_Cause_Damage!=null)
             {
-                Dictionary<string, object> Arg = new Dictionary<string, object>();
-                Arg["Damage"] = damage;
-                Arg["PlayerPosition"] = damage.damager.transform.position;
-                Arg["TragetPosition"] = role.transform.position;
-                Arg["randomPoint"] = UnityEngine.Random.Range(0, 100);
-                Arg["Traget"] = role.gameObject;
-                role.control.On_Cause_Damage(Arg);
+                role.control.On_Cause_Damage(RoleState.CreateCauseDamageArg(role,damage));
             }
+            hurt(damage);
+        }
+        private void hurt(damage damage)
+        {
+            Debug.Log("enter hurt");
+            if (role.nowHp - damage.num > 0)
+            {
+                role.nowHp -= damage.num;
+            }
+            else if (role.canBeKill)//死亡
+            {
+                role.nowHp = 0;
+                role.changeState(DEAD_NO);
+                role.anima.ConverselyStart();
+                return;
+
+            }
+
+            if (damage.makeConversaly && role.canBeConvesly)//如果会被击倒则不做硬直判定
+            {
+                role.nowConversely = unit.STAND_CONVESLY_TIME;
+                role.changeState(CONVERSELY_NO);
+                role.anima.ConverselyStart();
+            }
+            else if (role.canBeStiff)
+            {
+                Debug.Log("enter stiff");
+                role.nowStiff = damage.stiffTime;
+                role.changeState(STIFF_NO);
+                role.anima.StiffStart();
+            }
+
+        }
+        private void treat(int num)
+        {
+            if (role.nowHp + num > role.maxHp)
+            {
+                role.nowHp = role.maxHp;
+            }
+            else
+            {
+                role.nowHp += num;
+            }
+        }
+    }
+    class stiff : state
+    {
+        private RoleState role;
+        public stiff(RoleState role)
+        {
+            this.role = role;
+        }
+
+        public bool canAction
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public bool canMove
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public bool canRota
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public int StateNo
+        {
+            get
+            {
+                return STIFF_NO;
+            }
+        }
+
+        public void beenTreat(int num, GameObject from)
+        {
+            if (role.canBetreat)
+            {
+                if (role.control.On_Been_Treat != null)
+                {
+                    role.control.On_Been_Treat(RoleState.CreateTreatArg(num,from));
+                }
+                treat(num);
+            }
+        }
+
+        private void hurt(damage damage)
+        {
+            if (role.nowHp - damage.num > 0)
+            {
+                role.nowHp -= damage.num;
+            }
+            else if (role.canBeKill)
+            {
+                role.nowHp = 0;
+                role.changeState(DEAD_NO);
+                role.anima.ConverselyStart();
+                return;
+            }
+            if (damage.makeConversaly && role.canBeConvesly)//如果会被击倒则不做硬直判定
+            {
+                role.nowConversely = unit.STAND_CONVESLY_TIME;
+                role.changeState(CONVERSELY_NO);
+                role.anima.ConverselyStart();
+            }
+            else if (damage.stiffTime > role.nowStiff)
+            {
+                role.nowStiff = damage.stiffTime;
+            }
+        }
+        private void treat(int num)
+        {
+            if (role.nowHp + num > role.maxHp)
+            {
+                role.nowHp = role.maxHp;
+            }
+            else
+            {
+                role.nowHp += num;
+            }
+        }
+        public void onUpdate()
+        {
+            if (role.nowStiff <= 0)
+            {
+                role.changeState(0);
+                role.anima.StiffEnd();
+            }
+            else
+            {
+                role.nowStiff -= Time.deltaTime;
+            }
+
+        }
+
+        public void takedamage(damage damage)
+        {
+            Debug.Log("role takedamage role kind is" + damage.kind);
+            if (damage.kind == 1)
+            {
+                if (!role.immune_attack)
+                {
+                    damage.num -= (int)(damage.num * (((float)role.selfdata.damageReduce) / 100));
+                    damage.stiffTime -= (int)(damage.stiffTime * (((float)role.selfdata.stiffReduce) / 100));
+                    
+                }
+            }
+            else if (damage.kind == 2)
+            {
+                if (!role.immune_skill)
+                {
+                    damage.num -= (int)(damage.num * (((float)role.selfdata.specialReduce) / 100));
+                    damage.stiffTime -= (int)(damage.stiffTime * (((float)role.selfdata.stiffReduce) / 100));
+                  
+                }
+            }
+            if (role.control.On_Take_Damage != null)
+            {
+                role.control.On_Take_Damage(RoleState.CreateTakeDamageArg(role, damage));
+            }
+            if (role.control.On_Cause_Damage != null)
+            {
+                role.control.On_Cause_Damage(RoleState.CreateCauseDamageArg(role, damage));
+            }
+            hurt(damage);
+
+        }
+    }
+    class conversely : state
+    {
+        private RoleState role;
+        public conversely(RoleState role)
+        {
+            this.role = role;
+        }
+
+        public bool canAction
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public bool canMove
+        {
+            get
+            {
+
+                return false;
+            }
+        }
+
+        public bool canRota
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public int StateNo
+        {
+            get
+            {
+                return CONVERSELY_NO;
+            }
+        }
+
+        public void beenTreat(int num, GameObject from)
+        {
+            if (role.control.On_Been_Treat != null)
+            {
+                role.control.On_Been_Treat(RoleState.CreateTreatArg(num, from));
+            }
+            treat(num);
+        }
+
+        public void hurt(damage damage)
+        {
+            if (role.nowHp - damage.num > 0)
+            {
+                role.nowHp -= damage.num;
+            }
+            else if (role.canBeKill)
+            {
+                role.nowHp = 0;
+                role.changeState(DEAD_NO);
+                return;
+            }
+
+        }
+
+        public void onUpdate()
+        {
+            if (role.nowConversely <= 0)
+            {
+                role.changeState(0);
+                role.anima.ConverselyEnd();
+            }
+            else
+            {
+                role.nowConversely -= Time.deltaTime;
+            }
+
+        }
+
+        public void takedamage(damage damage)
+        {
+            if (damage.hitConversely)
+            {
+                if (damage.kind == 1)
+                {
+                    if (!role.immune_attack)
+                    {
+                        damage.num -= (int)(damage.num * (((float)role.selfdata.damageReduce) / 100));
+                        damage.stiffTime -= (int)(damage.stiffTime * (((float)role.selfdata.stiffReduce) / 100));
+                    }
+                }
+                else if (damage.kind == 2)
+                {
+                    if (!role.immune_skill)
+                    {
+                        damage.num -= (int)(damage.num * (((float)role.selfdata.specialReduce) / 100));
+                        damage.stiffTime -= (int)(damage.stiffTime * (((float)role.selfdata.stiffReduce) / 100));
+                    }
+                }
+                if (role.control.On_Take_Damage != null)
+                {
+                    role.control.On_Take_Damage(RoleState.CreateTakeDamageArg(role, damage));
+                }
+                if (role.control.On_Cause_Damage != null)
+                {
+                    role.control.On_Cause_Damage(RoleState.CreateCauseDamageArg(role, damage));
+                }
+                hurt(damage);
+            }
+        }
+
+        public void treat(int num)
+        {
+            if (role.nowHp + num > role.maxHp)
+            {
+                role.nowHp = role.maxHp;
+            }
+            else
+            {
+                role.nowHp += num;
+            }
+        }
+    }
+    class died : state
+    {
+        public bool canAction
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public bool canMove
+        {
+            get
+            {
+                //Debug.Log("in died can't move");
+                return false;
+            }
+        }
+
+        public bool canRota
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public int StateNo
+        {
+            get
+            {
+                return DEAD_NO;
+            }
+        }
+
+        public void beenTreat(int num, GameObject from)
+        {
+            return;
+        }
+
+        public void hurt(damage damage)
+        {
+            return;
+        }
+
+        public void onUpdate()
+        {
+            return;
+        }
+
+        public void takedamage(damage damage)
+        {
+            return;
+        }
+
+        public void treat(int num)
+        {
+            return;
         }
     }
     public unit selfdata;
@@ -331,6 +675,9 @@ public class RoleState : MonoBehaviour {
         speed = unit.STAND_SPEED + unit.STAND_SPEED * (((float)selfdata.accelerate) / 100);
 
         StateTable.Add(new normal(this));
+        StateTable.Add(new stiff(this));
+        StateTable.Add(new conversely(this));
+        StateTable.Add(new died());
         nowState = StateTable[0];
         hasStart = true;
         Debug.Log("in start nowState is" + nowState);
@@ -340,6 +687,10 @@ public class RoleState : MonoBehaviour {
     virtual protected void Update()
     {
         nowState.onUpdate();
+    }
+    public void changeState(int no)
+    {
+        nowState = StateTable[no];
     }
     public virtual void TakeDamage(damage damage)
     {
@@ -360,5 +711,34 @@ public class RoleState : MonoBehaviour {
         {
             nowMp = unit.STAND_MP;
         }
+    }
+    public static Dictionary<string,object> CreateTakeDamageArg(RoleState role,damage damage)
+    {
+        Dictionary<string, object> Arg = new Dictionary<string, object>();
+        Arg["PlayerPosition"] = role.transform.position;
+        Arg["PlayerEuler"] = role.transform.eulerAngles;
+        Arg["DamagerPosition"] = damage.damager.transform.position;
+        Arg["Damager"] = damage.damager;
+        Arg["randomPoint"] = UnityEngine.Random.Range(0, 100);
+        Arg["Damage"] = damage;
+        return Arg;
+    }
+    public static Dictionary<string, object> CreateCauseDamageArg(RoleState role, damage damage)
+    {
+        Dictionary<string, object> Arg = new Dictionary<string, object>();
+        Arg["Damage"] = damage;
+        Arg["PlayerPosition"] = damage.damager.transform.position;
+        Arg["TragetPosition"] = role.transform.position;
+        Arg["randomPoint"] = UnityEngine.Random.Range(0, 100);
+        Arg["Traget"] = role.gameObject;
+        return Arg;
+    }
+    public static Dictionary<string, object> CreateTreatArg(int num,GameObject from)
+    {
+        Dictionary<string, object> Arg = new Dictionary<string, object>();
+        Arg["Treater"] = from;
+        Arg["Num"] = num;
+        Arg["randomPoint"] = UnityEngine.Random.Range(0, 100);
+        return Arg;
     }
 }
