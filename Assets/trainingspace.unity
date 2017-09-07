@@ -236,7 +236,7 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
+  m_DynamicPixelsPerUnit: 20
 --- !u!223 &1451815252
 Canvas:
   m_ObjectHideFlags: 0
@@ -441,6 +441,7 @@ MonoBehaviour:
   nextInterval: 0.1
   hpManage: {fileID: 1451815249}
   Floating: {fileID: 1451815248}
+  AttackOnly: {fileID: 1366518412737388, guid: 98241c9685941d94e98521911519dc1f, type: 2}
 --- !u!1 &2043864623
 GameObject:
   m_ObjectHideFlags: 0

@@ -82,7 +82,7 @@ public class RoleState : MonoBehaviour {
                    role.control.On_Been_Treat(RoleState.CreateTreatArg(num, from));
                 }
                 treat(num);
-                
+                role.control.On_Hp_Change(RoleState.CreateChangeArg(role));
             }
         }
 
@@ -119,6 +119,7 @@ public class RoleState : MonoBehaviour {
                 role.control.On_Cause_Damage(RoleState.CreateCauseDamageArg(role,damage));
             }
             hurt(damage);
+            role.control.On_Hp_Change(RoleState.CreateChangeArg(role));
         }
         private void hurt(damage damage)
         {
@@ -212,6 +213,7 @@ public class RoleState : MonoBehaviour {
                     role.control.On_Been_Treat(RoleState.CreateTreatArg(num,from));
                 }
                 treat(num);
+                role.control.On_Hp_Change(RoleState.CreateChangeArg(role));
             }
         }
 
@@ -294,7 +296,7 @@ public class RoleState : MonoBehaviour {
                 role.control.On_Cause_Damage(RoleState.CreateCauseDamageArg(role, damage));
             }
             hurt(damage);
-
+            role.control.On_Hp_Change(RoleState.CreateChangeArg(role));
         }
     }
     class conversely : state
@@ -345,6 +347,7 @@ public class RoleState : MonoBehaviour {
                 role.control.On_Been_Treat(RoleState.CreateTreatArg(num, from));
             }
             treat(num);
+            role.control.On_Hp_Change(RoleState.CreateChangeArg(role));
         }
 
         public void hurt(damage damage)
@@ -405,6 +408,7 @@ public class RoleState : MonoBehaviour {
                     role.control.On_Cause_Damage(RoleState.CreateCauseDamageArg(role, damage));
                 }
                 hurt(damage);
+                role.control.On_Hp_Change(RoleState.CreateChangeArg(role));
             }
         }
 
@@ -740,5 +744,13 @@ public class RoleState : MonoBehaviour {
         Arg["Num"] = num;
         Arg["randomPoint"] = UnityEngine.Random.Range(0, 100);
         return Arg;
+    }
+    public static Dictionary<string, object> CreateChangeArg(RoleState state)
+    {
+        Dictionary<string, object> changeArg = new Dictionary<string, object>();
+        float parcent = ((float)state.nowHp) / ((float)state.maxHp);
+        changeArg["Percent"] = parcent;
+        changeArg["NowHp"] = state.nowHp;
+        return changeArg;
     }
 }

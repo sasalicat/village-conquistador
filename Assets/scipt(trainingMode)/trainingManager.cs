@@ -12,6 +12,9 @@ public class trainingManager : MonoBehaviour,Manager {
     public float nextInterval = 0.1f;
     public HpBarManager hpManage;
     public FloatingManager Floating;
+
+    //暂时的陪练游戏物件
+    public GameObject AttackOnly;
     public GameObject[] getGameObjectList()
     {
         return roleObjList;
@@ -30,6 +33,7 @@ public class trainingManager : MonoBehaviour,Manager {
         prafebTable = GameObject.Find("keyTabel").GetComponent<PrabTabel>();
         register = GameObject.Find("client").GetComponent<dataRegister>();
         register.PlayerInWar[0] = new dataRegister.PlayerData(register.nowRoleData.roleKind, register.nowRoleData.equipmentIdList, "主角", true, 1);
+        register.PlayerInWar[1] = new dataRegister.PlayerData(0,new List<sbyte> {0},"攻击型沙袋",true,2);
 
         RoleData roledata=register.nowRoleData;
         roleObjList[0]= Instantiate(prafebTable.table[roledata.roleKind],new Vector3(0,0,0),this.transform.rotation);
@@ -45,8 +49,18 @@ public class trainingManager : MonoBehaviour,Manager {
         elists[0] = roleObjList[0].GetComponent<EquipmentList>();
         elists[0].controler = control;
         roleObjList[0].SetActive(true);
-
         hpManage.CreateHpBar(roleObjList[0],0);
+        //创建攻击陪练暂时先这样
+        roleObjList[1] = Instantiate(AttackOnly, new Vector3(-10, 10, 0), this.transform.rotation);
+        controlers[1] = roleObjList[1].GetComponent<trainingBase>();
+        Debug.Log("controler:"+controlers[1]);
+        controlers[1].Index = 1;
+        elists[1] = roleObjList[1].GetComponent<EquipmentList>();
+        elists[1].controler = controlers[1];
+        roleObjList[1].SetActive(true);
+        hpManage.CreateHpBar(roleObjList[1], 1);
+
+
     }
 	
 	// Update is called once per frame
@@ -61,7 +75,10 @@ public class trainingManager : MonoBehaviour,Manager {
                     Debug.Log("c is " + c);
                     Dictionary<string, object> newData = new Dictionary<string, object>();
                     newData["interval"] = NetManager.INTERVAL_CYCLE;
-                    c.On_Interval(newData);
+                    if (c.On_Interval != null)
+                    {
+                        c.On_Interval(newData);
+                    }
                 }
                 else
                 {
