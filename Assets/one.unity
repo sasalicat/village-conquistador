@@ -462,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLevel: 0
   isMultiThreads: 1
-  ip: 127.0.0.1
+  ip: 140.134.26.31
   port: 20013
   clientType: 7
   persistentDataPath: Application.persistentDataPath
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forDebug: 1
   roleNo: 4
-  equipmentNoList: 001012
+  equipmentNoList: 00101223
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -1906,12 +1906,12 @@ MonoBehaviour:
   - 
   - buffSample
   - contortionSkillSample
+  - limitTask
   - 
   - 
   - 
   - 
-  - 
-  passiveList: 01000101010101010101010100000001010001010100000001000001010000000001010000000000
+  passiveList: 01000101010101010101010100000001010001010100000001000001010000000001010100000000
   buffNameList:
   - buffForTask
   - mis_nq_buff

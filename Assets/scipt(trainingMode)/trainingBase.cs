@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ public class trainingBase : MonoBehaviour,Controler {
 
     private Dictionary<string, KeyCode> keySetting;
     private int index;
+    private List<sbyte> limit;
     //移动动画用变数
     public bool upIng = false;
     public bool leftIng = false;
@@ -178,6 +180,14 @@ public class trainingBase : MonoBehaviour,Controler {
         }
     }
 
+    public List<sbyte> skillLimit
+    {
+        set
+        {
+            limit = value;
+        }
+    }
+
     public _on_skill_key_down get_on_key1_down()
     {
         return on_key1_down;
@@ -263,30 +273,33 @@ public class trainingBase : MonoBehaviour,Controler {
         Debug.Log("enter key down keyCode:" + KeyCode);
         if (eList.passiveEquipments.Count > KeyCode)
         {
-            if (eList.passiveEquipments[KeyCode].CanUse)
+            if (limit == null || limit.Contains(KeyCode))
             {
-                action.AttackStart();
-                if (eList.NeedCast[KeyCode])
+                if (eList.passiveEquipments[KeyCode].CanUse)
                 {
-                    Debug.Log("enter need cast");
-                    Debug.DrawRay(mousePos, transform.forward, Color.red, 10);
-                    RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
-                    Debug.Log("enter need cast:" + hit);
-                    if (hit && (hit.collider.tag == "Player"))
+                    action.AttackStart();
+                    if (eList.NeedCast[KeyCode])
                     {
-                        Debug.Log("enter need cast2");
-                        sbyte tragetNo = hit.collider.GetComponent<NetRoleState>().roomNo;
+                        Debug.Log("enter need cast");
+                        Debug.DrawRay(mousePos, transform.forward, Color.red, 10);
+                        RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
+                        Debug.Log("enter need cast:" + hit);
+                        if (hit && (hit.collider.tag == "Player"))
+                        {
+                            Debug.Log("enter need cast2");
+                            sbyte tragetNo = hit.collider.GetComponent<NetRoleState>().roomNo;
 
+                        }
                     }
-                }
-                else
-                {
-                    Debug.Log("do not need cast");
-                    Dictionary<string, object> args = new Dictionary<string, object>();
-                    args["PlayerPosition"] = transform.position;
-                    args["MousePosition"] = mousePos;
-                    args["randomPoint"] = UnityEngine.Random.Range(0, 100);
-                    eList.equipments[KeyCode].trigger(args);
+                    else
+                    {
+                        Debug.Log("do not need cast");
+                        Dictionary<string, object> args = new Dictionary<string, object>();
+                        args["PlayerPosition"] = transform.position;
+                        args["MousePosition"] = mousePos;
+                        args["randomPoint"] = UnityEngine.Random.Range(0, 100);
+                        eList.equipments[KeyCode].trigger(args);
+                    }
                 }
             }
         }

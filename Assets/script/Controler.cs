@@ -76,6 +76,10 @@ public interface Controler
         set;
         get;
     }
+    List<sbyte> skillLimit//里面放的是可以且仅可以使用的技能编号,如果不为空则只能使用list里面编号的技能,若为空则没有限制
+    {
+        set;
+    }
     void addBuffByNo(sbyte no);
     void distortionByNo(sbyte no);
 }

@@ -38,6 +38,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private float nextrecover = 0.5f;
     private RuntimeAnimatorController originAnim;
     private int index;
+    private List<sbyte> limit;
 
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
@@ -244,6 +245,13 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
             index = value;
         }
     }
+    public List<sbyte> skillLimit
+    {
+        set
+        {
+            limit = value;
+        }
+    }
 
     private Vector3 getmousePos()
     {
@@ -420,40 +428,60 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                 }
             if (state.canAction)
             {
-                if (Input.GetKeyDown(keySetting["key1"]))
-                {
-                    on_key1_down(mousePos,EquipmentList.PASSIVE1);
+                if (limit==null||limit.Contains(EquipmentList.PASSIVE1)) {
+                    if (Input.GetKeyDown(keySetting["key1"]))
+                    {
+                        on_key1_down(mousePos, EquipmentList.PASSIVE1);
+                    }
                 }
-                if (Input.GetKeyDown(keySetting["key2"]))
+                if (limit == null || limit.Contains(EquipmentList.PASSIVE2))
                 {
-                    on_key2_down(mousePos, EquipmentList.PASSIVE2);
+                    if (Input.GetKeyDown(keySetting["key2"]))
+                    {
+                        on_key2_down(mousePos, EquipmentList.PASSIVE2);
+                    }
                 }
-                if (Input.GetKeyDown(keySetting["key3"]))
+                if (limit == null || limit.Contains(EquipmentList.PASSIVE3))
                 {
-                    on_key3_down(mousePos, EquipmentList.PASSIVE3);
+                    if (Input.GetKeyDown(keySetting["key3"]))
+                    {
+                        on_key3_down(mousePos, EquipmentList.PASSIVE3);
+                    }
                 }
-                if (Input.GetKeyDown(keySetting["key4"]))
+                if (limit == null || limit.Contains(EquipmentList.PASSIVE4))
                 {
-                    on_key4_down(mousePos, EquipmentList.PASSIVE4);
+                    if (Input.GetKeyDown(keySetting["key4"]))
+                    {
+                        on_key4_down(mousePos, EquipmentList.PASSIVE4);
+                    }
                 }
-                if (Input.GetKeyDown(keySetting["key5"]))
+                if (limit == null || limit.Contains(EquipmentList.PASSIVE5))
                 {
-                    on_key5_down(mousePos, EquipmentList.PASSIVE5);
+                    if (Input.GetKeyDown(keySetting["key5"]))
+                    {
+                        on_key5_down(mousePos, EquipmentList.PASSIVE5);
+                    }
                 }
                 //鼠標
-                if (Input.GetMouseButtonDown(0))
+                if (limit == null || limit.Contains(EquipmentList.ATK))
                 {
+                    if (Input.GetMouseButtonDown(0))
+                    {
 
-                    //Debug.Log("NetPlayerControler:position" + transform.position + "mouse Position" + mousePos);
-                    on_left_down(mousePos, EquipmentList.ATK);
-                    //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
+                        //Debug.Log("NetPlayerControler:position" + transform.position + "mouse Position" + mousePos);
+                        on_left_down(mousePos, EquipmentList.ATK);
+                        //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
+                    }
                 }
-                if (Input.GetMouseButtonDown(1))
+                if (limit == null || limit.Contains(EquipmentList.SKILL))
                 {
+                    if (Input.GetMouseButtonDown(1))
+                    {
 
-                    //Debug.Log("NetPlayerControler:position" + transform.position + "mouse Position" + mousePos);
-                    on_right_down(mousePos, EquipmentList.SKILL);
-                    //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
+                        //Debug.Log("NetPlayerControler:position" + transform.position + "mouse Position" + mousePos);
+                        on_right_down(mousePos, EquipmentList.SKILL);
+                        //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
+                    }
                 }
             }
             if (state.canMove)

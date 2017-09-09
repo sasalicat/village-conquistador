@@ -35,6 +35,7 @@ public class NetControler : MonoBehaviour,KBControler{
     private float nextrecover = 0.5f;
     private string[] buffTable;
     private int index;
+    private List<sbyte> limit;
     //装备事件
     _on_trigger on_attack;
 
@@ -162,6 +163,14 @@ public class NetControler : MonoBehaviour,KBControler{
         set
         {
             index = value;
+        }
+    }
+
+    public List<sbyte> skillLimit
+    {
+        set
+        {
+            limit = value;
         }
     }
 
