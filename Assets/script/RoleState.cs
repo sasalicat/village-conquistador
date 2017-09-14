@@ -492,8 +492,23 @@ public class RoleState : MonoBehaviour {
     public sbyte team;
 //真實屬性------------------------------------------------------
     public int maxHp;
+    
     public int nowHp;
-    public float nowMp;
+    public float nowMp {
+        set
+        {
+            Dictionary<string, object> Arg = new Dictionary<string, object>();
+            Arg["nowMp"] = (float)value;
+            Debug.Log("controler is:" + control);
+            control.On_MP_Change(Arg);
+            mpnum = value;
+        }
+        get
+        {
+            return mpnum;
+        }
+    }
+    private float mpnum;
     public float nowStiff;//当前硬直时间
     public float nowConversely;//当前倒地时间
     public float energyRecover_Second;

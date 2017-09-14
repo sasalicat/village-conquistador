@@ -462,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLevel: 0
   isMultiThreads: 1
-  ip: 140.134.26.31
+  ip: 127.0.0.1
   port: 20013
   clientType: 7
   persistentDataPath: Application.persistentDataPath

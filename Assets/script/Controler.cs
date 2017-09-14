@@ -66,6 +66,11 @@ public interface Controler
         set;
         get;
     }
+    _on_trigger On_MP_Change
+    {
+        set;
+        get;
+    }
     _on_trigger On_Cause_Damage
     {
         set;

@@ -9,6 +9,7 @@ public class trainingBase : MonoBehaviour,Controler {
     _on_trigger on_been_treat;
     _on_trigger on_Hp_change;
     _on_trigger on_cause_damage;
+    _on_trigger on_mp_change;
 
     _on_skill_key_down on_left_down;
     _on_skill_key_down on_right_down;
@@ -166,7 +167,18 @@ public class trainingBase : MonoBehaviour,Controler {
             on_cause_damage = value;
         }
     }
+    public _on_trigger On_MP_Change
+    {
+        get
+        {
+            return on_mp_change;
+        }
 
+        set
+        {
+            on_mp_change = value;
+        }
+    }
     public int Index
     {
         get

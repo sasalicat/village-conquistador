@@ -65,6 +65,7 @@ public class NetControler : MonoBehaviour,KBControler{
     _on_trigger on_been_treat;
     _on_trigger on_Hp_change;
     _on_trigger on_cause_damage;
+    _on_trigger on_mp_change;
     public Entity Entity
     {
         get
@@ -171,6 +172,19 @@ public class NetControler : MonoBehaviour,KBControler{
         set
         {
             limit = value;
+        }
+    }
+
+    public _on_trigger On_MP_Change
+    {
+        get
+        {
+            return on_mp_change;
+        }
+
+        set
+        {
+            on_mp_change = value;
         }
     }
 

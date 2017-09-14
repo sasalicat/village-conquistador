@@ -70,6 +70,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     _on_trigger on_been_treat;
     _on_trigger on_Hp_change;
     _on_trigger on_cause_damage;
+    _on_trigger on_mp_change;
     //新架構儲存觸發物件
 
     List<Equipment> onAttackLine=new List<Equipment>();
@@ -232,6 +233,20 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
             on_cause_damage = value;
         }
     }
+
+    public _on_trigger On_MP_Change
+    {
+        get
+        {
+            return on_mp_change;
+        }
+
+        set
+        {
+            on_mp_change = value;
+        }
+    }
+
 
     public int Index
     {
@@ -550,7 +565,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                             {
                                 Dictionary<string, object> diedArg = new Dictionary<string, object>();
                                 diedArg["Killer"] = (damage).damager;
-                                Entity.baseCall("notifyDied", new object[] {(sbyte)0});
+                                Entity.cellCall("notifyDied", new object[] {(sbyte)0});
 
                             }
                             break;

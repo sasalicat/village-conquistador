@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HpBarControler : MonoBehaviour {
     public Transform role;
@@ -8,6 +9,7 @@ public class HpBarControler : MonoBehaviour {
     RectTransform rect;
     public GameObject hpline;
     public GameObject hpBar;
+    public Text mpText;
     public FloatingManager floating;
     // Use this for initialization
     void Start()
@@ -26,6 +28,7 @@ public class HpBarControler : MonoBehaviour {
         rect = hpline.GetComponent<RectTransform>();
         role.GetComponent<Controler>().On_Hp_Change += HpChange;
         role.GetComponent<Controler>().On_Take_Damage += TakeDamage;
+        role.GetComponent<Controler>().On_MP_Change += MPChange;
     }
     public void HpChange(Dictionary<string,object> arg)
     {
@@ -34,6 +37,11 @@ public class HpBarControler : MonoBehaviour {
         //Debug.Log("hpchange"+percent);
         //transform.localPosition = new Vector3(maxX * percent, -0.04f, 0);
         rect.anchoredPosition = new Vector2(maxX-maxX * percent, -0.04f);
+    }
+    public void MPChange(Dictionary<string,object> arg)
+    {
+        Debug.Log("type is " + arg["nowMp"].GetType());
+        mpText.text = (float)(arg["nowMp"])+"";
     }
     public void TakeDamage(Dictionary<string, object> arg)//这主要是伤害的浮动数字显示
     {
