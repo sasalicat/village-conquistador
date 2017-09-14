@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mis_bx_atk : Missile
+public class mis_fb_atk : Missile
 {
 
-    public float m_liveTime = 2;
-
+    public float m_liveTime = 0.5f;
     // Use this for initialization
     void Start()
     {
+        Speed = 40;
 
     }
 
@@ -17,7 +17,6 @@ public class mis_bx_atk : Missile
     void Update()
     {
 
-        transform.Translate(0, -Speed * Time.deltaTime, 0, Space.Self);
         m_liveTime -= Time.deltaTime;
         if (m_liveTime <= 0)
         {
@@ -32,12 +31,8 @@ public class mis_bx_atk : Missile
             //Debug.Log(other.name);
             //Debug.Log(" on trigger enter 2D");
             RoleState role = other.gameObject.GetComponent<RoleState>();
-            if (role != null && other.tag.CompareTo("Player") == 0)
-            {
-                other.transform.GetComponent<Controler>().addBuffByNo(3);
+            if (role != null)
                 role.TakeDamage(Damage);
-                
-            }
 
         }
     }

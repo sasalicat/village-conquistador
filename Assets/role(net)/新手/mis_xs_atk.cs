@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mis_bx_atk : Missile
+public class mis_xs_atk : Missile
 {
 
     public float m_liveTime = 2;
@@ -32,11 +32,10 @@ public class mis_bx_atk : Missile
             //Debug.Log(other.name);
             //Debug.Log(" on trigger enter 2D");
             RoleState role = other.gameObject.GetComponent<RoleState>();
-            if (role != null && other.tag.CompareTo("Player") == 0)
+            if (role != null)
             {
-                other.transform.GetComponent<Controler>().addBuffByNo(3);
                 role.TakeDamage(Damage);
-                
+
             }
 
         }

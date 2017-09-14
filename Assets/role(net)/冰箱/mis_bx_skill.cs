@@ -17,7 +17,6 @@ public class mis_bx_skill : Missile
     void Update()
     {
 
-        transform.Translate(0, -Speed * Time.deltaTime, 0, Space.Self);
         m_liveTime -= Time.deltaTime;
         if (m_liveTime <= 0)
         {
@@ -32,9 +31,9 @@ public class mis_bx_skill : Missile
             //Debug.Log(other.name);
             //Debug.Log(" on trigger enter 2D");
             RoleState role = other.gameObject.GetComponent<RoleState>();
-            if (role != null)
+            if (role != null && other.tag.CompareTo("Player") == 0)
             {
-                role.TakeDamage(Damage);
+                other.GetComponent<Controler>().distortionByNo(1);
 
             }
 
