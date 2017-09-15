@@ -526,11 +526,11 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                                 on_inteval(EventLine[0].Args);
                             }
                             eList.allReduceCD((float)EventLine[0].Args["interval"]);
-                            nextrecover -= Time.deltaTime;
+                            nextrecover -= (float)EventLine[0].Args["interval"];
                             if (nextrecover <= 0)
                             {
                                 state.recoverMP((int)unit.STAND_MP_RECOVER);
-                                nextrecover = RECOVER_INTERVAL;
+                                nextrecover = unit.RECOVER_MP_INTERVAL;
                             }
                             break;
                         }

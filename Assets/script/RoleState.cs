@@ -640,7 +640,7 @@ public class RoleState : MonoBehaviour {
         }
         get
         {
-            Debug.Log("nowState is" + nowState+"lengh"+ StateTable.Count+"  "+hasStart);
+            //Debug.Log("nowState is" + nowState+"lengh"+ StateTable.Count+"  "+hasStart);
             return nowState.canMove&&canMoveCount>0;
         }
     }

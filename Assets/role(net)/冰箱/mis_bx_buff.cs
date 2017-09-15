@@ -18,7 +18,7 @@ public class mis_bx_buff : Buff
     {
         Debug.Log("buffForTask onInit");
         //if(Repetitive <= )
-        if (Repetitive.Length <= 5)
+        if (Repetitive != null && Repetitive.Length <= 5)
         {
             role.speed = 0.9f * role.speed;
             

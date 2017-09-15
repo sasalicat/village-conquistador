@@ -45,6 +45,8 @@ public class trainingControler : MonoBehaviour,Controler {
     public bool leftIng = false;
     public bool downIng = false;
     public bool rightIng = false;
+    //恢复mp用变数
+    private float nextRecover = unit.RECOVER_MP_INTERVAL;
     
     
 
@@ -315,7 +317,7 @@ public class trainingControler : MonoBehaviour,Controler {
     private Vector3 getmousePos()
     {
         Vector3 mouse = Input.mousePosition;
-        mouse.z = 33;
+        mouse.z = 14;
         mouse = Camera.main.ScreenToWorldPoint(mouse);
         mouse.z = 0;
         return mouse;
@@ -469,6 +471,13 @@ public class trainingControler : MonoBehaviour,Controler {
                     //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
                 }
             }
+        }
+        eList.allReduceCD(Time.deltaTime);
+        nextRecover -= Time.deltaTime;
+        if (nextRecover <= 0)
+        {
+            state.recoverMP(unit.STAND_MP_RECOVER);
+            nextRecover = unit.RECOVER_MP_INTERVAL;
         }
     }
 
