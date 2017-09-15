@@ -490,7 +490,87 @@ public class RoleState : MonoBehaviour {
     protected state nowState;
     protected List<state> StateTable=new List<state>();
     public sbyte team;
-//真實屬性------------------------------------------------------
+    //属性
+    public int power;//力量 每1點加成1%物理攻擊
+    public int Power
+    {
+        set
+        {
+            power = value;
+        }
+        get
+        {
+            return power;
+        }
+    }
+    public int skill;//技巧 每1點加成1%特殊傷害
+    public int Skill
+    {
+        set
+        {
+            skill = value;
+        }
+        get
+        {
+            return skill;
+        }
+    }
+    public int physique;//體質
+    public int Physique
+    {
+        set
+        {
+            int newMax = value * unit.STAND_HP;
+            if (newMax > maxHp)//临时增加的体质回血
+            {
+                nowHp += newMax - maxHp;
+            }
+            else//如果新的最大血量小于现在血量,则强制现在血量变为新最大血量
+            {
+                if (newMax < nowHp)
+                {
+                    nowHp = newMax;
+                }
+            }
+            maxHp = newMax;
+        }
+    }
+    public int energyRecover;//蓄能 每1點增加1%每秒能量恢復
+    public int EnergyRecover
+    {
+        set
+        {
+            energyRecover = value;
+        }
+        get
+        {
+            return energyRecover;
+        }
+    }
+    public int accelerate;//加速 加成移動速度
+    public int Accelerate
+    {
+        set
+        {
+            accelerate = value;
+        }
+        get
+        {
+            return accelerate;
+        }
+    }
+    //隐藏属性-------------------------------------------------
+    public int stiffable;//造成硬直加成
+    public int Stiffable{
+        set { }
+    }
+    public int stiffReduce;//硬直減免
+    public int rechargeLifeRecover;//道具生命恢復加成
+    public int rechargeEnergyRecover;//道具能量恢復加成
+    //public int attackSpeed;//攻擊速度加成
+    public int damageReduce;//物理減傷比例
+    public int specialReduce;//技能減傷比例
+                             //真實屬性------------------------------------------------------
     public int maxHp;
     
     public int nowHp;
