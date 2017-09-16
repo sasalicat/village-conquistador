@@ -403,22 +403,22 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                 }
                 if (Input.GetKey(keySetting["up"]))
                 {
-                    changeV3.y += state.speed * Time.deltaTime;
+                    changeV3.y += state.RealSpeed * Time.deltaTime;
                     //on_keyup_ing();
                 }
                 if (Input.GetKey(keySetting["left"]))
                 {
-                    changeV3.x += state.speed * Time.deltaTime;
+                    changeV3.x += state.RealSpeed * Time.deltaTime;
                     //on_keyleft_ing();
                 }
                 if (Input.GetKey(keySetting["down"]))
                 {
-                    changeV3.y -= state.speed * Time.deltaTime;
+                    changeV3.y -= state.RealSpeed * Time.deltaTime;
                     //on_keydown_ing();
                 }
                 if (Input.GetKey(keySetting["right"]))
                 {
-                    changeV3.x -= state.speed * Time.deltaTime;
+                    changeV3.x -= state.RealSpeed * Time.deltaTime;
                     //on_keyright_ing();
                 }
                 if (Input.GetKeyUp(keySetting["up"]))

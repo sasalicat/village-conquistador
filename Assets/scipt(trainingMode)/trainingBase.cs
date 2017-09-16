@@ -361,19 +361,19 @@ public class trainingBase : MonoBehaviour,Controler {
             Vector3 changeV3 = new Vector3(0, 0, 0);
             if (leftIng)
             {
-                changeV3.x += state.speed * Time.deltaTime;
+                changeV3.x += state.RealSpeed * Time.deltaTime;
             }
             if (rightIng)
             {
-                changeV3.x -= state.speed * Time.deltaTime;
+                changeV3.x -= state.RealSpeed * Time.deltaTime;
             }
             if (upIng)
             {
-                changeV3.y += state.speed * Time.deltaTime;
+                changeV3.y += state.RealSpeed * Time.deltaTime;
             }
             if (downIng)
             {
-                changeV3.y -= state.speed * Time.deltaTime;
+                changeV3.y -= state.RealSpeed * Time.deltaTime;
             }
             transform.position += changeV3;
         }

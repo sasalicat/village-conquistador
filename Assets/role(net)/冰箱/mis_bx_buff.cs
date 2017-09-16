@@ -20,7 +20,8 @@ public class mis_bx_buff : Buff
         //if(Repetitive <= )
         if (Repetitive != null && Repetitive.Length <= 5)
         {
-            role.speed = 0.9f * role.speed;
+            Debug.Log("add buff");
+            role.SpeedScale -= 0.1f;
             
         }
         return true;

@@ -491,31 +491,29 @@ public class RoleState : MonoBehaviour {
     protected List<state> StateTable=new List<state>();
     public sbyte team;
     //属性
-    public int power;//力量 每1點加成1%物理攻擊
     public int Power
     {
         set
         {
-            power = value;
+            selfdata.power = value;
         }
         get
         {
-            return power;
+            return selfdata.power;
         }
     }
-    public int skill;//技巧 每1點加成1%特殊傷害
+    
     public int Skill
     {
         set
         {
-            skill = value;
+            selfdata.skill = value;
         }
         get
         {
-            return skill;
+            return selfdata.skill;
         }
     }
-    public int physique;//體質
     public int Physique
     {
         set
@@ -533,40 +531,97 @@ public class RoleState : MonoBehaviour {
                 }
             }
             maxHp = newMax;
+            selfdata.physique = value;
+        }
+        get
+        {
+            return selfdata.physique;
         }
     }
-    public int energyRecover;//蓄能 每1點增加1%每秒能量恢復
     public int EnergyRecover
     {
         set
         {
-            energyRecover = value;
+            selfdata.energyRecover = value;
         }
         get
         {
-            return energyRecover;
+            return selfdata.energyRecover;
         }
     }
-    public int accelerate;//加速 加成移動速度
     public int Accelerate
     {
         set
         {
-            accelerate = value;
+            selfdata.accelerate = value;
         }
         get
         {
-            return accelerate;
+            return selfdata.accelerate;
+        }
+    }
+    private float speedscale = 1;
+    public float SpeedScale//速度的倍率
+    {
+        set
+        {
+            speedscale = value;
+            realspeed = (unit.STAND_SPEED + unit.STAND_SPEED * (((float)selfdata.accelerate) / 100)) * speedscale;
+        }
+        get
+        {
+            return speedscale;
+        }
+    }
+    private float realspeed=unit.STAND_SPEED;
+    public float RealSpeed//contorler使用的角色真正速度
+    {
+        get
+        {
+            return realspeed;
         }
     }
     //隐藏属性-------------------------------------------------
-    public int stiffable;//造成硬直加成
     public int Stiffable{
-        set { }
+        set {
+            selfdata.stiffable=value;
+        }
+        get
+        {
+            return selfdata.stiffable;
+        }
     }
-    public int stiffReduce;//硬直減免
-    public int rechargeLifeRecover;//道具生命恢復加成
-    public int rechargeEnergyRecover;//道具能量恢復加成
+    public int stiffReduce//硬直減免
+    {
+        set
+        {
+            selfdata.stiffReduce = value;
+        }
+        get
+        {
+            return selfdata.stiffReduce;
+        }
+    }
+    public int rechargeLifeRecover{
+        set
+        {
+            selfdata.rechargeEnergyRecover = value;
+        }
+        get
+        {
+            return selfdata.rechargeEnergyRecover;
+        }
+    }
+    public int rechargeEnergyRecover {//道具能量恢復加成
+        set
+        {
+            selfdata.rechargeEnergyRecover=value;
+        }
+        get
+        {
+            return selfdata.rechargeEnergyRecover;
+        }
+    }
     //public int attackSpeed;//攻擊速度加成
     public int damageReduce;//物理減傷比例
     public int specialReduce;//技能減傷比例
@@ -592,7 +647,6 @@ public class RoleState : MonoBehaviour {
     public float nowStiff;//当前硬直时间
     public float nowConversely;//当前倒地时间
     public float energyRecover_Second;
-    public float speed;
     public float speedRate = 1;
     //實時狀態-----------------------------------------------------
     //狀態屬性
@@ -771,7 +825,7 @@ public class RoleState : MonoBehaviour {
         nowHp= maxHp;
         nowMp = 0;
         energyRecover_Second = unit.STAND_MP_RECOVER* (((float)selfdata.energyRecover) / 100);
-        speed = unit.STAND_SPEED + unit.STAND_SPEED * (((float)selfdata.accelerate) / 100);
+  
 
         StateTable.Add(new normal(this));
         StateTable.Add(new stiff(this));
