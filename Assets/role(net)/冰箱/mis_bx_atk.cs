@@ -36,7 +36,8 @@ public class mis_bx_atk : Missile
             {
                 other.transform.GetComponent<Controler>().addBuffByNo(3);
                 role.TakeDamage(Damage);
-                
+                Destroy(this.gameObject);
+
             }
 
         }

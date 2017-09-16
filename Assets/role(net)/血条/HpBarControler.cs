@@ -40,7 +40,7 @@ public class HpBarControler : MonoBehaviour {
     }
     public void MPChange(Dictionary<string,object> arg)
     {
-        Debug.Log("type is " + arg["nowMp"].GetType());
+        //Debug.Log("type is " + arg["nowMp"].GetType());
         mpText.text = (float)(arg["nowMp"])+"";
     }
     public void TakeDamage(Dictionary<string, object> arg)//这主要是伤害的浮动数字显示

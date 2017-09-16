@@ -89,7 +89,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1082974960330724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6a3b0e2ef4def1046b7b9d42606d2554, type: 2}
   m_CullingMode: 0
@@ -127,13 +127,13 @@ MonoBehaviour:
   selfdata: {fileID: 0}
   anima: {fileID: 0}
   team: 0
+  damageReduce: 0
+  specialReduce: 0
   maxHp: 0
   nowHp: 0
-  nowMp: 0
   nowStiff: 0
   nowConversely: 0
   energyRecover_Second: 0
-  speed: 0
   speedRate: 1
   roomNo: 0
   islocal: 0

@@ -22,9 +22,9 @@ public class mis_bx_buff : Buff
         {
             Debug.Log("add buff");
             role.SpeedScale -= 0.1f;
-            
+            return true;
         }
-        return true;
+        return false;
     }
 
     public override void onRemove(RoleState role)

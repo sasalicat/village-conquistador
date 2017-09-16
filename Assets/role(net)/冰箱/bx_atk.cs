@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bx_atk : MonoBehaviour, CDEquipment
 {
-
+    public float jishiqi = 0.5f;
     public const float CD = 0.5f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
@@ -49,6 +49,7 @@ public class bx_atk : MonoBehaviour, CDEquipment
     //實做CDEquipment介面----------------------------------------------
     public void setTime(float time)
     {
+        
         CDTime -= time;//減少CD時間
     }
     public bool CanUse

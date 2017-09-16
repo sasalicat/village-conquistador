@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bx_skill : MonoBehaviour, CDEquipment
 {
-
+    public float jishiqi = 0f;
     public const float CD = 5f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
@@ -49,6 +49,22 @@ public class bx_skill : MonoBehaviour, CDEquipment
     //實做CDEquipment介面----------------------------------------------
     public void setTime(float time)
     {
+        bool chengli = false;
+        if (jishiqi > 0)
+        {
+            chengli = true;
+        }
+        jishiqi -= time;
+
+
+        if (chengli && jishiqi <= 0)
+        {
+            selfState.canAction = true;
+            selfState.canMove = true;
+            selfState.canRota = true;
+
+            Debug.Log(selfState.canAction + "转向2");
+        }
         CDTime -= time;//減少CD時間
     }
     public bool CanUse
@@ -109,8 +125,11 @@ public class bx_skill : MonoBehaviour, CDEquipment
         CDTime = CD;//技能冷卻
         //Debug.Log("in trigger CDTime is" + CDTime);
         animator.SkillStart();
-        
 
+        selfState.canAction = false;
+        selfState.canMove = false;
+        selfState.canRota = false;
+        jishiqi = 0.5f;
     }
 
 

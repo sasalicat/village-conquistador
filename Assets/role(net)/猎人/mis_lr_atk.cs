@@ -38,6 +38,7 @@ public class mis_lr_atk : Missile {
                 juli = direction.magnitude;
                 Damage.num = (int)(25 + (float)juli * 0.75);
                 role.TakeDamage(Damage);
+                Destroy(this.gameObject);
             }
 
         }

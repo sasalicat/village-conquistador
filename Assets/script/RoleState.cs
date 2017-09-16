@@ -634,7 +634,7 @@ public class RoleState : MonoBehaviour {
         {
             Dictionary<string, object> Arg = new Dictionary<string, object>();
             Arg["nowMp"] = (float)value;
-            Debug.Log("controler is:" + control);
+           // Debug.Log("controler is:" + control);
             control.On_MP_Change(Arg);
             mpnum = value;
         }
@@ -798,14 +798,17 @@ public class RoleState : MonoBehaviour {
     {
         set
         {
+            Debug.Log(canActionCount + "canactioncount set start");
             if (value)
                 canActionCount++;
             else
                 canActionCount--;
+            Debug.Log(canActionCount + "canactioncount set");
         }
         get
         {
             return nowState.canAction&& canActionCount>0;
+            Debug.Log(canActionCount+"canactioncount");
         }
     }
     public int nowStateNo

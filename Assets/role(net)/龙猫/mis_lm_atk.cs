@@ -32,6 +32,8 @@ public class mis_lm_atk : Missile
             if (role != null)
             {
                 role.TakeDamage(Damage);
+                Destroy(this.gameObject);
+
             }
 
         }
