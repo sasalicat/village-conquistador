@@ -35,6 +35,7 @@ public class EquipmentList : MonoBehaviour {
         public CDEquipment addByName(string name)
         {
             Component newone = owner.gameObject.AddComponent(System.Type.GetType(name));
+            Debug.Log("名字："+name);
             NeedCast.Add(((CDEquipment)newone).Designated);
             passiveEquipments.Add((CDEquipment)newone);
             Debug.Log("In addByname:" + name);

@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -316,14 +316,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   skillIcon:
-  - {fileID: 21300000, guid: 34c17c277401f584a945c1c41a0fa745, type: 3}
-  - {fileID: 21300000, guid: 0156d8a6587856941a0c59d2b7ed7668, type: 3}
-  - {fileID: 21300000, guid: 0dcc103ecb7fe4d46adb52a021cbd987, type: 3}
-  - {fileID: 21300000, guid: 92ee6551a21a2e4418a4c3929e532a3f, type: 3}
-  - {fileID: 21300000, guid: e42152e115b94f1458af8ad6774473b0, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 21300000, guid: d1a7a963c53a593478e92cde5509a00d, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -496,9 +496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd6000c4a08a6a49bf88a677547458b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forDebug: 1
-  roleNo: 7
-  equipmentNoList: 2a2b
+  forDebug: 0
+  roleNo: 0
+  equipmentNoList: 1c00
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -2028,7 +2028,7 @@ MonoBehaviour:
   - porcelain
   - bone_shield
   - executioner
-  - jump_bomb
+  - saygoodbye
   - ImmortalDetermination
   - 
   - 
@@ -2113,7 +2113,7 @@ MonoBehaviour:
   - {fileID: 1225580510805068, guid: 9393a70c988972a4ba97389225b6d014, type: 2}
   - {fileID: 1650220541659682, guid: 255386f1f4ea7af4f820703aa7489e5e, type: 2}
   - {fileID: 1284182572439748, guid: cfed4805934a13e4888cd5e8f8ceecea, type: 2}
-  - {fileID: 1650220541659682, guid: 255386f1f4ea7af4f820703aa7489e5e, type: 2}
+  - {fileID: 1768008438277218, guid: fc864330ba7625b43a0c7c6dfcde0a8b, type: 2}
   - {fileID: 1650220541659682, guid: 255386f1f4ea7af4f820703aa7489e5e, type: 2}
   - {fileID: 1650220541659682, guid: 255386f1f4ea7af4f820703aa7489e5e, type: 2}
   - {fileID: 1892363341744938, guid: def5d3236f6751e46af0516804a9aa18, type: 2}

@@ -8,14 +8,13 @@ public class BuffImmortalDetermination : Buff
     {
         get
         {
-            return 10;
+            return 0;
         }
     }
 
-
     public override bool onInit(RoleState role, Buff[] Repetitive, MissileTable mis)
     {
-        Debug.Log("buffForTask onInit");
+        Debug.Log("buffForTask onInit!!!!!");
         if (Repetitive == null)
         {
             role.canBeKill = false;
@@ -27,15 +26,10 @@ public class BuffImmortalDetermination : Buff
     {
         role.canBeKill = true;
     }
+
     public override void onIntarvel(RoleState role, float timeBetween)
     {
         base.onIntarvel(role, timeBetween);
-        Debug.Log("buff ing");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        //Debug.Log("buff ing");
     }
 }

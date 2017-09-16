@@ -89,6 +89,7 @@ public class smoke_bomb : MonoBehaviour, CDEquipment
         newone.transform.up = mousePosition - origenPlayerPosition;
         //修改子弹物件携带的子弹脚本
         Missile missile = newone.GetComponent<Missile>();
+        Debug.Log("missile missile missile missile" + newone);
         missile.Creater = gameObject;
         //创建伤害物件
         int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
