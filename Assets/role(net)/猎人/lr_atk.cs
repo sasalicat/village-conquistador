@@ -52,6 +52,18 @@ public class lr_atk : MonoBehaviour, CDEquipment
     {
         CDTime -= time;//減少CD時間
     }
+    public float TimeLeft
+    {
+        get
+        {
+            return CDTime;
+        }
+
+        set
+        {
+            CDTime = value;
+        }
+    }
     public bool CanUse
     {
         get

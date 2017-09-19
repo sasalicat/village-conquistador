@@ -61,6 +61,17 @@ public class limitTask : MonoBehaviour,CDEquipment {
             index = value;
         }
     }
+    public float TimeLeft
+    {
+        get
+        {
+            return 0;
+        }
+
+        set
+        {
+        }
+    }
 
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {

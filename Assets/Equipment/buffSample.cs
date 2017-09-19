@@ -20,7 +20,17 @@ public class buffSample : MonoBehaviour,CDEquipment {
             return 0;
         }
     }
+    public float TimeLeft
+    {
+        get
+        {
+            return 0;
+        }
 
+        set
+        {
+        }
+    }
     public bool Designated
     {
         get

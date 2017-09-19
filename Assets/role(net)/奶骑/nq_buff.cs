@@ -71,7 +71,18 @@ public class nq_buff : MonoBehaviour, CDEquipment
     {
         CDTime -= time;
     }
+    public float TimeLeft
+    {
+        get
+        {
+            return CDTime;
+        }
 
+        set
+        {
+            CDTime = value;
+        }
+    }
     public void trigger(Dictionary<string, object> args)
     {
         ((GameObject)args["Traget"]).GetComponent<Controler>().addBuffByNo(1);

@@ -51,6 +51,18 @@ public class lm_skill : MonoBehaviour, CDEquipment
     {
         CDTime -= time;//減少CD時間
     }
+    public float TimeLeft
+    {
+        get
+        {
+            return CDTime;
+        }
+
+        set
+        {
+            CDTime = value;
+        }
+    }
     public bool CanUse
     {
         get

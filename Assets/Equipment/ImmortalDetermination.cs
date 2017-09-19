@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -91,6 +92,18 @@ public class ImmortalDetermination : MonoBehaviour, CDEquipment
         }
     }
 
+    public float TimeLeft
+    {
+        get
+        {
+            return CDTime;
+        }
+
+        set
+        {
+            CDTime = value;
+        }
+    }
 
     public void trigger(Dictionary<string, object> args)
     {

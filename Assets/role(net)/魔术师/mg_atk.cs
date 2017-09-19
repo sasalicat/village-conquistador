@@ -54,6 +54,18 @@ public class mg_atk : MonoBehaviour,CDEquipment
         //Debug.Log(CDTime + "left");
         CDTime -= time;//減少CD時間
     }
+    public float TimeLeft
+    {
+        get
+        {
+            return CDTime;
+        }
+
+        set
+        {
+            CDTime = value;
+        }
+    }
     public bool CanUse
     {
         get

@@ -60,6 +60,18 @@ public class bx_atk : MonoBehaviour, CDEquipment
             return (CDTime <= 0);//如果CDTime小於0代表技能可以使用
         }
     }
+    public float TimeLeft
+    {
+        get
+        {
+            return CDTime;
+        }
+
+        set
+        {
+            CDTime = value;
+        }
+    }
     public uint Consumption
     {
         get

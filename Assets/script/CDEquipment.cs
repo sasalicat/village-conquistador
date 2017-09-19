@@ -15,6 +15,11 @@ public interface CDEquipment:Equipment{//主動裝備都要繼承這個介面
     {
         get;
     }
+    float TimeLeft
+    {
+        set; 
+        get;
+    }
 
 
 }

@@ -68,7 +68,17 @@ public class obsSample : MonoBehaviour,CDEquipment {
     {
         
     }
+    public float TimeLeft
+    {
+        get
+        {
+            return 0;
+        }
 
+        set
+        {
+        }
+    }
     public void trigger(Dictionary<string, object> args)
     {
         NetManager.createObstacle(gameObject, transform.position, 1);

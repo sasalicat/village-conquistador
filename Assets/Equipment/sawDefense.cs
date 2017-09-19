@@ -20,7 +20,18 @@ public class sawDefense : MonoBehaviour,CDEquipment {
             return true;
         }
     }
+    public float TimeLeft
+    {
+        get
+        {
+            return CDTime;
+        }
 
+        set
+        {
+            CDTime = value;
+        }
+    }
     public uint Consumption
     {
         get
