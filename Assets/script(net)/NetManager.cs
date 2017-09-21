@@ -20,6 +20,7 @@ public class NetManager : MonoBehaviour ,Manager {
     public dataRegister register;
     public HpBarManager hpBarCreater;//手动拉取赋值
     public cameraFollowBy follow;//手动拉取赋值
+    public SkillBroad broad;//手動拉取賦值
     public List<dirPair> directionList=new List<dirPair>();
     public bool[] finishTable = new bool[MAX_NUM];
     public int intervals = 0;//累积的时间间隔触发次数
@@ -171,7 +172,7 @@ public class NetManager : MonoBehaviour ,Manager {
                 {
                     Debug.Log("objList[i]"+objList[i]);
                     EquipmentList elist = objList[i].GetComponent<EquipmentList>();
-                    if (e.id == KBEngineApp.app.player().id)
+                    if (e.id == KBEngineApp.app.player().id)//主角
                     {
                         NetPlayerControler control = objList[i].AddComponent<NetPlayerControler>();
                         objList[i].AddComponent<NetRoleState>();
@@ -188,6 +189,7 @@ public class NetManager : MonoBehaviour ,Manager {
                         objList[i].GetComponent<NetRoleState>().islocal = true;
 
                         follow.MainRole = objList[i];//使镜头跟随主角
+                        broad.mainRoleElist = objList[i].GetComponent<EquipmentList>();//設置技能顯示
                     }
                     else
                     {

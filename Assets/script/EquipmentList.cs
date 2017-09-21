@@ -56,7 +56,7 @@ public class EquipmentList : MonoBehaviour {
         }
     }
     private delegate void reduce(float time);
-
+    public delegate void on_ArmedHarness_change(ArmedHarness newArm);
 
     //主動裝備編號---------------------------------
     public const sbyte ATK = 0;
@@ -70,7 +70,20 @@ public class EquipmentList : MonoBehaviour {
     public List<Equipment> equipments=new List<Equipment>();
     //public List<CDEquipment> passiveEquipments = new List<CDEquipment>();
     //public List<bool> NeedCast = new List<bool>();
-    public ArmedHarness nowHarness=null;
+    private ArmedHarness nowarm = null;
+    public ArmedHarness nowHarness
+    {
+        set
+        {
+            nowarm = value;
+            if (on_AH_change!=null)
+            {
+                on_AH_change(nowarm);
+            }
+        }get{
+            return nowarm;
+        }
+    }
     private ArmedHarness origin = null;
     private reduce reduceLine;
     public EquipmentTable table;
@@ -81,6 +94,8 @@ public class EquipmentList : MonoBehaviour {
     private MissileTable misTable;
     //public Text text;
     private bool InitTime = true;
+    private ContortionData nowdata;
+    public on_ArmedHarness_change on_AH_change;
     public List<CDEquipment> passiveEquipments
     {
         get
@@ -99,12 +114,17 @@ public class EquipmentList : MonoBehaviour {
             nowHarness = new ArmedHarness(this, data.equipmentNos);
             nowHarness.initAll(misTable, state, anim);
             data.onInit(state);
+            nowdata = data;
+
         }
     }
     public void restoreArmedHarness()
     {
         nowHarness = origin;
+        nowdata.onAbate(state);
+        nowdata = null;
         origin = null;
+
     }
     void Start()
     {

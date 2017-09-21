@@ -498,7 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forDebug: 1
   roleNo: 2
-  equipmentNoList: 2c2d
+  equipmentNoList: 2c00
   winnerno: 0
 --- !u!1 &415577943
 GameObject:

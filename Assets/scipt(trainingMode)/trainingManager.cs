@@ -12,6 +12,7 @@ public class trainingManager : MonoBehaviour,Manager {
     public float nextInterval = 0.1f;
     public HpBarManager hpManage;
     public FloatingManager Floating;
+    public SkillBroad broad;//手動拉取賦值
 
     //暂时的陪练游戏物件
     public GameObject AttackOnly;
@@ -50,6 +51,7 @@ public class trainingManager : MonoBehaviour,Manager {
         elists[0].controler = control;
         roleObjList[0].SetActive(true);
         hpManage.CreateHpBar(roleObjList[0],0);
+        broad.mainRoleElist = roleObjList[0].GetComponent<EquipmentList>();//設置技能顯示
         //创建攻击陪练暂时先这样
         roleObjList[1] = Instantiate(AttackOnly, new Vector3(-10, 10, 0), this.transform.rotation);
         controlers[1] = roleObjList[1].GetComponent<trainingBase>();
