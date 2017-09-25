@@ -29,7 +29,7 @@ public class mis_bx_buff : Buff
 
     public override void onRemove(RoleState role)
     {
-        role.canMove = true;
+
     }
     public override void onIntarvel(RoleState role, float timeBetween)
     {

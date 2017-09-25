@@ -6,7 +6,7 @@ public class mis_bx_bx : ContortionData
 {
     public mis_bx_bx()
     {
-        this.equipmentNos = new List<sbyte> { 2, 3 };
+        this.equipmentNos = new List<sbyte> {  };
     }
 
     public override float Duration
