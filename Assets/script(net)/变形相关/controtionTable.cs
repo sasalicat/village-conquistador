@@ -10,6 +10,7 @@ public class controtionTable : MonoBehaviour {
         datas.Add(new controtionSample());
         datas.Add(new mis_bx_bx());
         datas.Add(new lang_bx());
+        datas.Add(new mg_bx());
 	}
 	
 	// Update is called once per frame

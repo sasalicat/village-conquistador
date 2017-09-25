@@ -17,8 +17,9 @@ public class mg_atk : MonoBehaviour,CDEquipment
     private RoleState selfState;
     public Text Label;
     getVector getVector;
+    private AnimatorTable animator;
 
-//實做Equipment介面-------------------------------------------------------
+    //實做Equipment介面-------------------------------------------------------
     public sbyte No
     {
         get
@@ -96,12 +97,15 @@ public class mg_atk : MonoBehaviour,CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
+        getVector = GameObject.Find("keyTabel").GetComponent<getVector>();
         Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
         //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
         Vector3 tragetPos =getVector.getOriginalInitPoint(origenPlayerPosition,mousePosition,new Vector3(0,-1,0));//獲得相對座標
         //制造子弹物件
-        GameObject newone= Instantiate(missilePraf, tragetPos, transform.rotation);
+        Vector3 direction = mousePosition - origenPlayerPosition;
+        GameObject newone = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
+        newone.transform.up = -direction;
         //修改子弹物件携带的子弹脚本
         Missile missile = newone.GetComponent<Missile>();
         missile.Creater = gameObject;
@@ -112,6 +116,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
 
         CDTime = CD;//技能冷卻
         Debug.Log("in trigger CDTime is" + CDTime);
+        animator.AttackStart();
     }
 
 
@@ -121,6 +126,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
         Debug.Log("魔术师扑克牌初始化 state:"+state);
         missilePraf = table.MissileList[0];
         this.selfState = state;
-        getVector= GameObject.Find("keyTabel").GetComponent<getVector>();
+        this.animator = anim;
+        
     }
 }
