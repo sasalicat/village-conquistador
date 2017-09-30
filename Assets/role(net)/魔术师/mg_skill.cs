@@ -84,7 +84,7 @@ public class mg_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return false;
+            return true;
         }
     }
 
