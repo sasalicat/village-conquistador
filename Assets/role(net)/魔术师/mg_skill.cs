@@ -97,7 +97,10 @@ public class mg_skill : MonoBehaviour, CDEquipment
     {
 
         animator.SkillStart();
-        ((GameObject)args["Traget"]).GetComponent<Controler>().distortionByNo(3);
+        if (((GameObject)args["Traget"]).GetComponent<RoleState>().team != selfState.team)
+        {
+            ((GameObject)args["Traget"]).GetComponent<Controler>().distortionByNo(3);
+        }
     }
 
 
