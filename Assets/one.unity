@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -293,16 +293,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headIcon:
+  - {fileID: 21300000, guid: 5edf04dd10a909c4f9c0de11672cbe1b, type: 3}
+  - {fileID: 21300000, guid: 51945d07a5d2c9c4fb06482ba70cdb7e, type: 3}
+  - {fileID: 21300000, guid: 71ba005b0a1f61546b87c236400ad229, type: 3}
+  - {fileID: 21300000, guid: cb34e3b1863ccef4d879ca50d743a0cb, type: 3}
+  - {fileID: 21300000, guid: e3a26cb15446bdd49bb99169a526699f, type: 3}
+  - {fileID: 21300000, guid: 92bb51b4a7328284696f83ffdaa7f69d, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: a8b4755e9f343444e917b455f7fa8a7b, type: 3}
+  - {fileID: 21300000, guid: dd6f7dc880bda9440b4deff15121d4ca, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -497,8 +497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forDebug: 1
-  roleNo: 10
-  equipmentNoList: 3031
+  roleNo: 2
+  equipmentNoList: 003231
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -1337,6 +1337,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 1335288713335860, guid: 4c86af6f55907ec488ba6e70feb1be5f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c86af6f55907ec488ba6e70feb1be5f, type: 2}
   m_IsPrefabParent: 0
@@ -1913,7 +1917,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1878559187541248, guid: a0a6446f1bc0e884e94786a644ab1276, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114613517439900950, guid: a0a6446f1bc0e884e94786a644ab1276,
         type: 2}
@@ -2024,6 +2028,10 @@ Prefab:
     - target: {fileID: 4608978524906018, guid: f095182d57891174598048b3685957c5, type: 2}
       propertyPath: m_RootOrder
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1573641928399166, guid: f095182d57891174598048b3685957c5, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f095182d57891174598048b3685957c5, type: 2}

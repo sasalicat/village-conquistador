@@ -36,6 +36,8 @@ public class trainingControler : MonoBehaviour,Controler {
     private EquipmentList eList;
     public RoleState state;
     public BuffControler buffcontrol;
+    public EquipmentTable table;
+    private controtionTable controtions;
 
     private Dictionary<string, KeyCode> keySetting;
     private int index;
@@ -329,6 +331,8 @@ public class trainingControler : MonoBehaviour,Controler {
         eList = GetComponent<EquipmentList>();
         action = GetComponent<AnimatorTable>();
         buffcontrol = GetComponent<BuffControler>();
+        table = temp.GetComponent<EquipmentTable>();
+        controtions = temp.GetComponent<controtionTable>();
         //添加控制器事件
         on_keyleft_down += onKeyLeftDown;
         on_keydown_down += onKeyDownDown;
@@ -476,7 +480,7 @@ public class trainingControler : MonoBehaviour,Controler {
         nextRecover -= Time.deltaTime;
         if (nextRecover <= 0)
         {
-            state.recoverMP(unit.STAND_MP_RECOVER);
+            state.recoverMP(Attribute.GetMpRecover(unit.STAND_MP_RECOVER, state.EnergyRecover));
             nextRecover = unit.RECOVER_MP_INTERVAL;
         }
     }
@@ -484,11 +488,32 @@ public class trainingControler : MonoBehaviour,Controler {
 
     public void addBuffByNo(sbyte no)
     {
-        throw new NotImplementedException();
+
+        buffcontrol.AddBuff(table.buffNameList[no]);
     }
 
     public void distortionByNo(sbyte no)
     {
-        throw new NotImplementedException();
+        if (no < 0)
+        {
+            action.restoreAnimator();
+            eList.restoreArmedHarness();
+        }
+        else
+        {
+            Debug.Log("收到变身请求");
+            RuntimeAnimatorController anim = controtions.animators[no];
+            action.controler = anim;
+            ContortionData data = controtions.datas[no];
+            eList.changeArmedHarness(data);
+            controtState state = gameObject.AddComponent<controtState>();
+            Debug.Log("Duration:" + data.Duration + "needRecord:" + (data.Duration > 0));
+            state.needRecord = data.Duration > 0;
+            state.TimeLeft = data.Duration;
+            state.nowNo = no;
+
+
+            //string typeName = controtions.dataNames[no];
+        }
     }
 }

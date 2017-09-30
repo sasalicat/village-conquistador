@@ -27,14 +27,17 @@ public class SkillBroad : MonoBehaviour {
     }
     public void changeAllLabel(EquipmentList.ArmedHarness arm)
     {
-        for(int i = 0; i < Lables.Length; i++)
+        Debug.Log("in changeAllLabel Label length is:" + Lables.Length);
+        for (int i = 0; i < Lables.Length; i++)
         {
-            if (Lables[i] != null)
+             if (Lables[i] != null)
             {
                 Destroy(Lables[i]);
             }
         }
-        for(int i = 0;i < arm.passiveEquipments.Count;i++)
+        Debug.Log("in changeAllLabel passive length is:" + arm.passiveEquipments.Count);
+
+        for (int i = 0;i < arm.passiveEquipments.Count;i++)
         {
 
             AddLabel(i);
@@ -46,6 +49,7 @@ public class SkillBroad : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         storage = GameObject.Find("Icons").GetComponent<IconStorage>();
+
     }
 	
 	// Update is called once per frame
@@ -55,6 +59,7 @@ public class SkillBroad : MonoBehaviour {
              changeAllLabel(mainRoleElist.nowHarness);
             first = false;
         }
+        //Debug.Log("nowHarness size:" + mainRoleElist.nowHarness.passiveEquipments.Count);
         for (int i= 0;i<controls.Length;i++)
         {
             if(controls[i]!=null)

@@ -6,7 +6,7 @@ using KBEngine;
 
 public class HallManager : MonoBehaviour {
     int num;
-    public string Nickname=null;
+    public static string Nickname=null;
     public Text numLabel;
     public Text NicknameLabel;
     public GameObject nameLable;
