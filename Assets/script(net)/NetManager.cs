@@ -190,6 +190,7 @@ public class NetManager : MonoBehaviour ,Manager {
 
                         follow.MainRole = objList[i];//使镜头跟随主角
                         broad.mainRoleElist = objList[i].GetComponent<EquipmentList>();//設置技能顯示
+                        elist.on_AH_change += broad.changeAllLabel;
                     }
                     else
                     {

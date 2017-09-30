@@ -460,7 +460,7 @@ public class NetControler : MonoBehaviour,KBControler{
                         nextrecover -= (float)EventLine[0].Args["interval"];
                         if (nextrecover <= 0)
                         {
-                            state.recoverMP((int)unit.STAND_MP_RECOVER);
+                            state.recoverMP(Attribute.GetMpRecover(unit.STAND_MP_RECOVER,state.EnergyRecover));
                             nextrecover = unit.RECOVER_MP_INTERVAL;
                         }
                         break;

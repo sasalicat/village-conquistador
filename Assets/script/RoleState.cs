@@ -566,7 +566,7 @@ public class RoleState : MonoBehaviour {
         set
         {
             speedscale = value;
-            realspeed = (unit.STAND_SPEED + unit.STAND_SPEED * (((float)selfdata.accelerate) / 100)) * speedscale;
+            realspeed = Attribute.getSpeedAfter(unit.STAND_SPEED,Accelerate) * speedscale;
         }
         get
         {
@@ -798,17 +798,17 @@ public class RoleState : MonoBehaviour {
     {
         set
         {
-            Debug.Log(canActionCount + "canactioncount set start");
+            //Debug.Log(canActionCount + "canactioncount set start");
             if (value)
                 canActionCount++;
             else
                 canActionCount--;
-            Debug.Log(canActionCount + "canactioncount set");
+            //Debug.Log(canActionCount + "canactioncount set");
         }
         get
         {
             return nowState.canAction&& canActionCount>0;
-            Debug.Log(canActionCount+"canactioncount");
+            //Debug.Log(canActionCount+"canactioncount");
         }
     }
     public int nowStateNo

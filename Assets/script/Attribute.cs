@@ -19,4 +19,12 @@ public class Attribute{
     {
         return num + ((int)((float)reduce / 100) * num);
     }
+    public static float GetMpRecover(float num,int energyRecover)
+    {
+        return num + ((float)energyRecover / 100) * num;
+    }
+    public static float getSpeedAfter(float num,int accelerate)
+    {
+        return num + ((float)accelerate / 100) * num;
+    }
 }
