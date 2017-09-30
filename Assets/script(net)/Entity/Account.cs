@@ -55,7 +55,7 @@
             }
             else
             {
-                hallManager.Nickname = nickname;
+                HallManager.Nickname = nickname;
             }
         }
         public void updateRoom(Dictionary<string,object> data)
