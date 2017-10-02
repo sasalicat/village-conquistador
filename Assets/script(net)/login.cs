@@ -10,6 +10,7 @@ using KBEngine;
 public class login : MonoBehaviour {
     public GameObject model;
     public Text inf;
+    public Text passward;
 	// Use this for initialization
 	void Start () {
         KBEngine.Event.registerOut("onConnectState",this, "onConnectState");
@@ -28,7 +29,7 @@ public class login : MonoBehaviour {
     {
         try
         {
-            KBEngine.Event.fireIn("login", inf.text, inf.text, System.Text.Encoding.UTF8.GetBytes("kbengine_unity3d_demo"));
+            KBEngine.Event.fireIn("login", inf.text, passward.text, System.Text.Encoding.UTF8.GetBytes("kbengine_unity3d_demo"));
         }
         catch (Exception e)
         {

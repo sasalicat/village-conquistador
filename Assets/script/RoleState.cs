@@ -518,7 +518,8 @@ public class RoleState : MonoBehaviour {
     {
         set
         {
-            int newMax = value * unit.STAND_HP;
+            int newMax =Attribute.getMaxHp(unit.STAND_HP,value);
+            //Debug.Log("in change Physique newMax is "+newMax);
             if (newMax > maxHp)//临时增加的体质回血
             {
                 nowHp += newMax - maxHp;
