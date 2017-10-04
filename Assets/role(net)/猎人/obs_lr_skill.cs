@@ -41,6 +41,7 @@ public class obs_lr_skill : ObstacleState
             ChangeColor();
             RoleState role = other.gameObject.GetComponent<RoleState>();
             role.TakeDamage(damage);
+            other.transform.GetComponent<Controler>().addBuffByNo(5);
 
         }
     }
