@@ -4069,6 +4069,8 @@ MonoBehaviour:
   - BuffImmortalDetermination
   - mis_bx_buff
   - lmbx_skill_buff
+  - lr_skill_buff
+  - lr_skill_buff_two
 --- !u!114 &1995136365
 MonoBehaviour:
   m_ObjectHideFlags: 0
