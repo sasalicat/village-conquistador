@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1007501565136412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.612654, y: -0.4619282, z: 12.758866}
+  m_LocalPosition: {x: -3.936271, y: 12.215815, z: 57.351562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -89,28 +89,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527050e27fa432e408ab6969d4d3c0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasStart: 0
   selfdata: {fileID: 0}
   anima: {fileID: 0}
+  team: 0
+  damageReduce: 0
+  specialReduce: 0
   maxHp: 0
   nowHp: 0
-  nowMp: 0
   nowStiff: 0
   nowConversely: 0
   energyRecover_Second: 0
-  speed: 0
-  immune_attack: 0
-  immune_skill: 0
-  nonlife: 0
-  fastened: 0
-  tools: 0
-  canBeExiled: 1
-  canBeStiff: 1
-  canBeConvesly: 1
-  canBeKill: 1
-  canBetreat: 1
-  conversely: 0
-  alive: 1
-  exiled: 1
+  speedRate: 1
+  Creater: {fileID: 0}
+  Kind: 0
+  nullCallTimes: 0
+  sbyteCalldatas: 
 --- !u!114 &114209797874590606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -173,7 +167,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: b17f2d6a328ea8c439d5f2badface989, type: 3}
+  m_Sprite: {fileID: 21300008, guid: a3feb00c349de064c85d07c13673d96e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
