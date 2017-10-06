@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -203,6 +203,10 @@ Prefab:
     - target: {fileID: 4532423158948174, guid: def5d3236f6751e46af0516804a9aa18, type: 2}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892363341744938, guid: def5d3236f6751e46af0516804a9aa18, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: def5d3236f6751e46af0516804a9aa18, type: 2}
@@ -662,7 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forDebug: 1
   roleNo: 5
-  equipmentNoList: 1112
+  equipmentNoList: 2b
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -4062,7 +4066,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  passiveList: 010001010101010101010101000000010100010101000000010000010100000000010100000000000101010101010101010101000000000000000000
+  passiveList: 010001010101010101010101000000010101010101000000010000010100000000010100000000000101010101010101010101000000000000000000
   buffNameList:
   - buffForTask
   - mis_nq_buff

@@ -16,6 +16,8 @@ public class bx_skill : MonoBehaviour, CDEquipment
     private RoleState selfState;
     private AnimatorTable animator;
 
+    Vector3 realdirection = new Vector3(0, 0, 55);
+
     //實做Equipment介面-------------------------------------------------------
     public sbyte No
     {
@@ -122,16 +124,16 @@ public class bx_skill : MonoBehaviour, CDEquipment
         //missilePraf.transform.forward = direction;
         //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
 
-        Vector3 realdirection = new Vector3(0, 0, -120);
-        GameObject newone = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
-        newone.transform.up = direction;
+        GameObject newone = Instantiate(missilePraf, tragetPos, this.transform.rotation);
+        Debug.Log("now`s up is" + newone.transform.up+"right is"+newone.transform.right+"forward is"+newone.transform.forward+"z is"+ newone.transform.forward.z);
+        newone.transform.eulerAngles = transform.eulerAngles + realdirection;
+
         //修改子弹物件携带的子弹脚本
         Missile missile = newone.GetComponent<Missile>();
         missile.Creater = gameObject;
-        //创建伤害物件
-        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
-        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
-        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+        //沒有傷害所以不要再複製了
+
+        missile.Damage = new damage(2, 0,0, false, false, gameObject);
 
 
         CDTime = CD;//技能冷卻
