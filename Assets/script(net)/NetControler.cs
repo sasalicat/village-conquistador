@@ -418,6 +418,7 @@ public class NetControler : MonoBehaviour,KBControler{
             eTrigger temp = eTriggerLine[0];
             //Label.text = "in eTrigger gameobj is"+ eList.equipments[temp.eIndex].ToString();
             Debug.Log("eindex is" + temp.eIndex);
+            state.nowMp -= ((CDEquipment)eList.equipments[temp.eIndex]).Consumption;
             eList.equipments[temp.eIndex].trigger(temp.Args);
 
             eTriggerLine.RemoveAt(0);

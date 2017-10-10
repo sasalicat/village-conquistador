@@ -509,6 +509,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
             {
                 eTrigger temp = eTriggerLine[0];
                 Debug.Log("netPlayerControler eIndex is"+temp.eIndex);
+                state.nowMp -= ((CDEquipment)eList.equipments[temp.eIndex]).Consumption;
                 eList.equipments[temp.eIndex].trigger(temp.Args);
               
                 eTriggerLine.RemoveAt(0);

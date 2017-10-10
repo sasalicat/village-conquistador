@@ -266,6 +266,7 @@ public class NetManager : MonoBehaviour ,Manager {
         {
             sbyte kind = (sbyte)e.getDefinedProperty("kind");
             GameObject newPoint = Instantiate(prafebTable.Supplies[kind], e.position, Quaternion.Euler(e.direction));
+            newPoint.GetComponent<supply>().beusedCB += ((Point)e).destoryself;
         }
     }
     public void PlayerInit(Entity e)

@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -584,7 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLevel: 0
   isMultiThreads: 1
-  ip: 140.134.26.31
+  ip: 127.0.0.1
   port: 20013
   clientType: 7
   persistentDataPath: Application.persistentDataPath
@@ -4029,6 +4029,9 @@ MonoBehaviour:
   - lmbx_skill_buff
   - lr_skill_buff
   - lr_skill_buff_two
+  - laji_buff
+  - xianyu_buff
+  - yao_buff
 --- !u!114 &1995136365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4114,6 +4117,10 @@ MonoBehaviour:
   - {fileID: 1699108556279174, guid: 4957e0f33cc075f48a66c656837c45b5, type: 2}
   Areas:
   - {fileID: 1708283513118796, guid: 81d83ce2cb9983d4d9480e5bc1aa9eaa, type: 2}
+  Supplies:
+  - {fileID: 1030464682430000, guid: 5a0bbbb3458411b4485f9dd386a0389f, type: 2}
+  - {fileID: 1291787070670680, guid: b4f21dfca2190874c88e9c6da8765eb6, type: 2}
+  - {fileID: 1560167845560176, guid: 7345a2f31a7986f4699c8c84568a76e1, type: 2}
 --- !u!114 &1995136368
 MonoBehaviour:
   m_ObjectHideFlags: 0

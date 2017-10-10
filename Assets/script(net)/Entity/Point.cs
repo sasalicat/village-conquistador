@@ -7,7 +7,10 @@
 
     public class Point : Entity
     {
-
+        public void destoryself(supply s)
+        {
+            cellCall("notifyAbate", new object[] { });
+        }
 
     }
 }

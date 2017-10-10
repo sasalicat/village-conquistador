@@ -311,6 +311,7 @@ public class trainingControler : MonoBehaviour,Controler {
                     args["PlayerPosition"] = transform.position;
                     args["MousePosition"] = mousePos;
                     args["randomPoint"] = UnityEngine.Random.Range(0,100);
+                    state.nowMp -= ((CDEquipment)eList.equipments[KeyCode]).Consumption;
                     eList.equipments[KeyCode].trigger(args);
                 }
             }
