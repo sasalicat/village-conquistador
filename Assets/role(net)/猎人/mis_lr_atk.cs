@@ -36,7 +36,7 @@ public class mis_lr_atk : Missile {
                 Vector3 zhujiao = Creater.transform.position;
                 Vector3 direction = fei - zhujiao;
                 juli = direction.magnitude;
-                Damage.num = (int)(25 + (float)juli * 0.75);
+                Damage.num = (int)(20 + (float)juli * 3);
                 role.TakeDamage(Damage);
                 Destroy(this.gameObject);
             }

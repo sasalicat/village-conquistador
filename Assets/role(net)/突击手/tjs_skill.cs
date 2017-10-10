@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class tjs_skill : MonoBehaviour, CDEquipment
 {
 
-    public const float CD = 0.5f;//0.5f;
+    public const float CD = 2f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
 
@@ -77,7 +77,7 @@ public class tjs_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;//因為是攻擊所以無消耗
+            return 15;//因為是攻擊所以無消耗
         }
     }
 
@@ -132,13 +132,14 @@ public class tjs_skill : MonoBehaviour, CDEquipment
         missile4.Creater = gameObject;
         missile5.Creater = gameObject;
         //创建伤害物件
-        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
-        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
-        missile1.Damage = new damage(1, num, stiff, false, false, gameObject);
-        missile2.Damage = new damage(1, num, stiff, false, false, gameObject);
-        missile3.Damage = new damage(1, num, stiff, false, false, gameObject);
-        missile4.Damage = new damage(1, num, stiff, false, false, gameObject);
-        missile5.Damage = new damage(1, num, stiff, false, false, gameObject);
+        unit u = this.GetComponent<unit>();
+        int num = Attribute.GetAttackDamageNum(30, u.power);
+        float stiff = Attribute.getRealStiff(0.1f, u.stiffable);
+        missile1.Damage = new damage(2, num, stiff, false, false, gameObject);
+        missile2.Damage = new damage(2, num, stiff, false, false, gameObject);
+        missile3.Damage = new damage(2, num, stiff, false, false, gameObject);
+        missile4.Damage = new damage(2, num, stiff, false, false, gameObject);
+        missile5.Damage = new damage(2, num, stiff, false, false, gameObject);
 
 
         CDTime = CD;//技能冷卻

@@ -27,4 +27,8 @@ public class Attribute{
     {
         return num + ((float)accelerate / 100) * num;
     }
+    public static float getRealStiff(float num, int stiffable)
+    {
+        return num + ((float)stiffable / 100) * num;
+    }
 }

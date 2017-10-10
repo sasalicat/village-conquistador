@@ -131,9 +131,10 @@ public class fb_atk : MonoBehaviour, CDEquipment
         Missile missile = newone.GetComponent<Missile>();
         missile.Creater = gameObject;
         //创建伤害物件
-        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
-        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
-        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+        unit u = this.GetComponent<unit>();
+        int num = Attribute.GetAttackDamageNum(200, u.power);
+        float stiff = Attribute.getRealStiff(1f, u.stiffable);
+        missile.Damage = new damage(2, num, stiff, false, false, gameObject);
 
 
         CDTime = CD;//技能冷卻

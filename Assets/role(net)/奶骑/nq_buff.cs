@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class nq_buff : MonoBehaviour, CDEquipment
 {
-    public const float CD = 5f;
+    public const float CD = 8f;
     public float CDTime = 0;
     const short selfMissileNo = 0;
     private GameObject missilePraf;
@@ -25,7 +25,7 @@ public class nq_buff : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 10;
         }
     }
 

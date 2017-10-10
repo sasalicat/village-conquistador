@@ -76,7 +76,7 @@ public class lang_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;//因為是攻擊所以無消耗
+            return 50;//因為是攻擊所以無消耗
         }
     }
 

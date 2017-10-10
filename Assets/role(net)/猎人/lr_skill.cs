@@ -6,7 +6,7 @@ using UnityEngine;
 public class lr_skill : MonoBehaviour, CDEquipment
 {
 
-    public const float CD = 0.5f;//0.5f;
+    public const float CD = 3f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
 
@@ -76,7 +76,7 @@ public class lr_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;//因為是攻擊所以無消耗
+            return 15;//因為是攻擊所以無消耗
         }
     }
 

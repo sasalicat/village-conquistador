@@ -13,7 +13,7 @@ public class mg_bx : ContortionData
     {
         get
         {
-            return 15;//5秒后变身结束
+            return 5;//5秒后变身结束
         }
     }
 

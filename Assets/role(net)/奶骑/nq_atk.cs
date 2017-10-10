@@ -6,7 +6,7 @@ using UnityEngine;
 public class nq_atk : MonoBehaviour, CDEquipment
 {
 
-    public const float CD = 0.5f;//0.5f;
+    public const float CD = 0f;//0.5f;
     public const int BaseSkill = 40;
     public const float BaseStiff = 0.25f;
 
@@ -76,7 +76,7 @@ public class nq_atk : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;//因為是攻擊所以無消耗
+            return 4;//因為是攻擊所以無消耗
         }
     }
 
@@ -111,7 +111,9 @@ public class nq_atk : MonoBehaviour, CDEquipment
         Missile missile = newone.GetComponent<Missile>();
         missile.Creater = gameObject;
         //创建伤害物件
-        int num = (int)(BaseSkill + BaseSkill * ((float)selfState.selfdata.skill / 100));
+        unit u = this.GetComponent<unit>();
+        int num = Attribute.GetAttackDamageNum(100, u.power);
+        
         missile.Damage = new damage(1, num, 0, false, false, gameObject);
 
 

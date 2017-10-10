@@ -13,7 +13,7 @@ public class lang_bx : ContortionData
     {
         get
         {
-            return 15;//5秒后变身结束
+            return 20;//5秒后变身结束
         }
     }
 
@@ -21,13 +21,15 @@ public class lang_bx : ContortionData
     {
         Debug.Log("controtionSample onAbate");
         role.canBeStiff = true;
-        role.Physique -= 100;
+        role.Physique -= 30;
+        role.Power -= 30;
     }
 
     public override void onInit(RoleState role)
     {
         Debug.Log("controtionSample onInit");
-        role.Physique += 100 ;
+        role.Physique += 30 ;
+        role.Power += 30;
         role.canBeStiff = false;
     }
 

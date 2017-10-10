@@ -40,6 +40,9 @@ public class obs_lr_skill : ObstacleState
             callMethodNull();
             ChangeColor();
             RoleState role = other.gameObject.GetComponent<RoleState>();
+            unit u = this.GetComponent<unit>();
+            int num = Attribute.GetAttackDamageNum(50, u.power);
+            damage = new damage(2, num, 0, false, false, gameObject);
             role.TakeDamage(damage);
             other.transform.GetComponent<Controler>().addBuffByNo(5);
 

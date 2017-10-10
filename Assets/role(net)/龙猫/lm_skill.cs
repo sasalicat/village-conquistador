@@ -5,7 +5,7 @@ using UnityEngine;
 public class lm_skill : MonoBehaviour, CDEquipment
 {
 
-    public const float CD = 0.5f;//0.5f;
+    public const float CD = 5f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
 
@@ -75,7 +75,7 @@ public class lm_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;//因為是攻擊所以無消耗
+            return 20;//因為是攻擊所以無消耗
         }
     }
 
@@ -111,9 +111,10 @@ public class lm_skill : MonoBehaviour, CDEquipment
         Missile missile = newone.GetComponent<Missile>();
         missile.Creater = gameObject;
         //创建伤害物件
-        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
-        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
-        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+        unit u = this.GetComponent<unit>();
+        int num = Attribute.GetAttackDamageNum(50, u.power);
+        float stiff = Attribute.getRealStiff(0.2f, u.stiffable);
+        missile.Damage = new damage(2, num, stiff, false, false, gameObject);
 
 
         CDTime = CD;//技能冷卻

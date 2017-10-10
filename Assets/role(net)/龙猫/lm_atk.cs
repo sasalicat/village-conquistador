@@ -5,7 +5,7 @@ using UnityEngine;
 public class lm_atk : MonoBehaviour, CDEquipment
 {
 
-    public const float CD = 0.5f;//0.5f;
+    public const float CD = 1.2f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
 
@@ -126,14 +126,15 @@ public class lm_atk : MonoBehaviour, CDEquipment
         missile3.Creater = gameObject;
 
         //创建伤害物件
-        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
-        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
-        missile1.Damage = new damage(1, num, stiff, false, false, gameObject);
-        missile2.Damage = new damage(1, num, stiff, false, false, gameObject);
-        missile3.Damage = new damage(1, num, stiff, false, false, gameObject);
+        unit u = this.GetComponent<unit>();
+        int num = Attribute.GetAttackDamageNum(40, u.power);
+        
+        missile1.Damage = new damage(1, num, 0, false, false, gameObject);
+        missile2.Damage = new damage(1, num, 0, false, false, gameObject);
+        missile3.Damage = new damage(1, num, 0, false, false, gameObject);
 
 
-
+        
         CDTime = CD;//技能冷卻
         //Debug.Log("in trigger CDTime is" + CDTime);
 

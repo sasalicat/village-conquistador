@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bx_atk : MonoBehaviour, CDEquipment
 {
-    public float jishiqi = 0.5f;
+    public float jishiqi = 1f;
     public const float CD = 0.5f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
@@ -113,8 +113,9 @@ public class bx_atk : MonoBehaviour, CDEquipment
         Missile missile = newone.GetComponent<Missile>();
         missile.Creater = gameObject;
         //创建伤害物件
-        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
-        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
+        unit u = this.GetComponent<unit>();
+        int num = Attribute.GetAttackDamageNum(60, u.power);
+        float stiff = Attribute.getRealStiff(0.2f, u.stiffable);
         missile.Damage = new damage(1, num, stiff, false, false, gameObject);
 
 

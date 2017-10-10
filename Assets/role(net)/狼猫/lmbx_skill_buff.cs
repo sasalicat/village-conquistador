@@ -9,7 +9,7 @@ public class lmbx_skill_buff : Buff
     {
         get
         {
-            return 10;
+            return 20;
         }
     }
 
