@@ -5,7 +5,7 @@ using UnityEngine;
 public class xs_skill : MonoBehaviour, CDEquipment
 {
 
-    public const float CD = 1f;//0.5f;
+    public const float CD = 5f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
 
@@ -56,7 +56,7 @@ public class xs_skill : MonoBehaviour, CDEquipment
         get
         {
             Debug.Log(" in can use CDTime is" + CDTime);
-            return (CDTime <= 0);//如果CDTime小於0代表技能可以使用
+            return (CDTime <= 0 && Consumption < selfState.nowMp);//如果CDTime小於0代表技能可以使用
         }
     }
     public float TimeLeft
@@ -75,7 +75,7 @@ public class xs_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;//因為是攻擊所以無消耗
+            return 10;//因為是攻擊所以無消耗
         }
     }
 
@@ -113,9 +113,9 @@ public class xs_skill : MonoBehaviour, CDEquipment
         missile.Creater = gameObject;
         //创建伤害物件
         unit u = this.GetComponent<unit>();
-        int num = Attribute.GetAttackDamageNum(75, u.power);
-        float stiff = Attribute.getRealStiff(0.5f, u.stiffable);
-        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+        int num = Attribute.GetAttackDamageNum(150, u.power);
+        float stiff = Attribute.getRealStiff(2f, u.stiffable);
+        missile.Damage = new damage(2, num, stiff, false, false, gameObject);
 
 
         CDTime = CD;//技能冷卻

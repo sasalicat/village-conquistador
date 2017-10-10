@@ -17,7 +17,7 @@ public class nq_buff : MonoBehaviour, CDEquipment
     {
         get
         {
-            return CDTime <=0;
+            return (CDTime <= 0 && Consumption < selfState.nowMp);
         }
     }
 

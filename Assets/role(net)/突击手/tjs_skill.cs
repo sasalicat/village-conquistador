@@ -58,7 +58,7 @@ public class tjs_skill : MonoBehaviour, CDEquipment
         get
         {
             Debug.Log(" in can use CDTime is" + CDTime);
-            return (CDTime <= 0);//如果CDTime小於0代表技能可以使用
+            return (CDTime <= 0 && Consumption < selfState.nowMp);//如果CDTime小於0代表技能可以使用
         }
     }
     public float TimeLeft
