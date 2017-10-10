@@ -6,6 +6,7 @@ public class PrabTabel : MonoBehaviour {
     public List<GameObject> table;
     public List<GameObject> Obstacles;
     public List<GameObject> Areas;
+    public List<GameObject> Supplies;
 	// Use this for initialization
 	void Start () {
 		

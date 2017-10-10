@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class porcelain : MonoBehaviour, CDEquipment
 {
-    public const float CD = 0.5f;//0.5f;  5f
+    public const float CD = 5f;//0.5f;  5f
     public const int BaseDamage = 0;
     public const float BaseStiff = 0f;
 

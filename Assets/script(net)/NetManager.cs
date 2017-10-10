@@ -262,6 +262,11 @@ public class NetManager : MonoBehaviour ,Manager {
             newArea.transform.localScale = new Vector3(radiu_f, radiu_f, 1);
             newArea.GetComponent<AreaControl>().e = e;
         }
+        else if(e is Point)
+        {
+            sbyte kind = (sbyte)e.getDefinedProperty("kind");
+            GameObject newPoint = Instantiate(prafebTable.Supplies[kind], e.position, Quaternion.Euler(e.direction));
+        }
     }
     public void PlayerInit(Entity e)
     {

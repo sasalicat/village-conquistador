@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class saygoodbye : MonoBehaviour, CDEquipment
 {
-    public const float CD = 0.5f;//0.5f;
+    public const float CD = 10f;//0.5f;
     public const int BaseDamage = 100;
     public const float BaseStiff = 4f;
 
