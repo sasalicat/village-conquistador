@@ -5,7 +5,7 @@ using UnityEngine;
 public class mis_bx_skill : Missile
 {
 
-    public float m_liveTime = 2;
+    public float m_liveTime = 1;
 
     // Use this for initialization
     void Start()
