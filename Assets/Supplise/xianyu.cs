@@ -22,17 +22,20 @@ public class xianyu : MonoBehaviour,supply {
     void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.eulerAngles += new Vector3(0, 0, 90 * Time.deltaTime);
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("鹹魚的觸發!!!");
         if (other.tag == "Player")
         {
             RoleState role = other.GetComponent<RoleState>();
-            if (beusedCB != null)
+            role.recoverMP(25);
+            if (beusedCB != null && other.GetComponent<NetPlayerControler>())
             {
                 beusedCB(this);
             }

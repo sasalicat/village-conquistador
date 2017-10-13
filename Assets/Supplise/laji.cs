@@ -12,15 +12,16 @@ public class laji : MonoBehaviour,supply {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        transform.eulerAngles += new Vector3(0, 0, 90 * Time.deltaTime);
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             RoleState role = other.GetComponent<RoleState>();
             role.BeenTreat(null, (int)(role.maxHp*0.1f));
-            if (beusedCB != null)
+            other.GetComponent<Controler>().addBuffByNo(7);
+            if (beusedCB != null && other.GetComponent<NetPlayerControler>())
             {
                 beusedCB(this);
             }

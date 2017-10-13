@@ -23,14 +23,15 @@ public class yao : MonoBehaviour,supply {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        transform.eulerAngles += new Vector3(0, 0, 90 * Time.deltaTime);
 	}
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
             RoleState role = other.GetComponent<RoleState>();
-            if (beusedCB != null)
+            other.GetComponent<Controler>().addBuffByNo(8);
+            if (beusedCB != null&&other.GetComponent<NetPlayerControler>())
             {
                 beusedCB(this);
             }

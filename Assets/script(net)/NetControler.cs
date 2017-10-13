@@ -609,7 +609,11 @@ public class NetControler : MonoBehaviour,KBControler{
 
     public void Role_onBeenTreat(GameObject treater, int num)
     {
-        if (treater.GetComponent<NetRoleState>().islocal)
+        if (treater == null)
+        {
+            return;
+        }
+        else if (treater.GetComponent<NetRoleState>().islocal)
         {
             Entity.cellCall("notify5", new object[] {treater.GetComponent<NetRoleState>().roomNo,num});
         }

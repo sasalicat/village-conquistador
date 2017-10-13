@@ -47,16 +47,25 @@ public class BuffControler : MonoBehaviour {
             }
         }
         Buff buff= (Buff)gameObject.AddComponent(Type.GetType(buffName));
-        buff.onInit(roleState, buffs,misTable);
-        for (int i = 0; i < buffInRole.Length; i++) {
-            Debug.Log("buff in role i:" + i);
-            if (buffInRole[i] == null)
+        bool remain=buff.onInit(roleState, buffs,misTable);
+        if (remain)
+        {
+            for (int i = 0; i < buffInRole.Length; i++)
             {
-                buffInRole[i] = buff;
-                buff.index = i;
-                break;
+                Debug.Log("buff in role i:" + i);
+                if (buffInRole[i] == null)//找到第一個空位
+                {
+                    buffInRole[i] = buff;
+                    buff.index = i;
+                    break;//記錄索引值後跳出回圈
+                }
             }
+            return buff;
         }
-        return buff;
+        else//不保留
+        {
+            Destroy(buff);//消除之前裝上去的buff,不觸發deleteself
+            return null;
+        }
     }
 }

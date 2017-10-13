@@ -769,7 +769,12 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
 
     public void Role_onBeenTreat(GameObject treater, int num)
     {//因为只有本机角色能真正治疗,所以对于本机角色来说不可能被别人治疗
-        if (treater.GetComponent<NetRoleState>().islocal)
+        Debug.Log("treater is " + treater);
+        if (treater==null)//治療者為null說明為道具治療
+        {
+            Entity.cellCall("notify5", new object[] { -1, num });
+        }
+        else if (treater.GetComponent<NetRoleState>().islocal)
         {
             Entity.cellCall("notify5", new object[] { treater.GetComponent<NetRoleState>().roomNo, num });
         }

@@ -267,6 +267,7 @@ public class NetManager : MonoBehaviour ,Manager {
             sbyte kind = (sbyte)e.getDefinedProperty("kind");
             GameObject newPoint = Instantiate(prafebTable.Supplies[kind], e.position, Quaternion.Euler(e.direction));
             newPoint.GetComponent<supply>().beusedCB += ((Point)e).destoryself;
+            e.renderObj = newPoint;
         }
     }
     public void PlayerInit(Entity e)
@@ -307,6 +308,10 @@ public class NetManager : MonoBehaviour ,Manager {
             }
         }
         return null;*/
+        if (roomNo < 0)
+        {
+            return null;
+        }
         return objList[roomNo];
     } 
     public void onLeaveWorld(Entity e)

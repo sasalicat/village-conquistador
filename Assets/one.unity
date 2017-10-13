@@ -620,7 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forDebug: 1
   roleNo: 5
-  equipmentNoList: 2b
+  equipmentNoList: 2b2829
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -4029,8 +4029,7 @@ MonoBehaviour:
   - lmbx_skill_buff
   - lr_skill_buff
   - lr_skill_buff_two
-  - laji_buff
-  - xianyu_buff
+  - lajibuff
   - yao_buff
 --- !u!114 &1995136365
 MonoBehaviour:
