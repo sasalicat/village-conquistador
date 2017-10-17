@@ -31,6 +31,10 @@ public class obs_lr_skill : ObstacleState
         {
             s.color = new Vector4(1, 1, 1, 0);
         }
+        if(jishiqi <= -14.5)
+        {
+            Destroy(this.gameObject);
+        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -40,9 +44,6 @@ public class obs_lr_skill : ObstacleState
             callMethodNull();
             ChangeColor();
             RoleState role = other.gameObject.GetComponent<RoleState>();
-            unit u = this.GetComponent<unit>();
-            int num = Attribute.GetAttackDamageNum(50, u.power);
-            damage = new damage(2, num, 0, false, false, gameObject);
             role.TakeDamage(damage);
             other.transform.GetComponent<Controler>().addBuffByNo(5);
 

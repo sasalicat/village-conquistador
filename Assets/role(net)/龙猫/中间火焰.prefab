@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4697014076456660}
   - component: {fileID: 212167193035214412}
   - component: {fileID: 114674573523997910}
+  - component: {fileID: 58975155018537366}
   m_Layer: 0
   m_Name: "\u4E2D\u95F4\u706B\u7130"
   m_TagString: Untagged
@@ -41,6 +42,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58975155018537366
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1023424050449680}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.15
 --- !u!114 &114674573523997910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 125151c676ab72d4eb5d562025122f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jishiqi: 2
+  jishiqi: 1
 --- !u!212 &212167193035214412
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -83,7 +98,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300032, guid: e538413b2e31e4a4f9ddadc071a03fbf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

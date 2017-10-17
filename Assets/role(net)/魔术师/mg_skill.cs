@@ -95,7 +95,7 @@ public class mg_skill : MonoBehaviour, CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
-
+        CDTime = CD;
         animator.SkillStart();
         if (((GameObject)args["Traget"]).GetComponent<RoleState>().team != selfState.team)
         {

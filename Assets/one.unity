@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -620,7 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forDebug: 1
   roleNo: 5
-  equipmentNoList: 2b2829
+  equipmentNoList: 1112
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -4083,8 +4083,9 @@ MonoBehaviour:
   - {fileID: 1892363341744938, guid: def5d3236f6751e46af0516804a9aa18, type: 2}
   - {fileID: 1663977188512488, guid: fbb585588f9744747945a80be2dbe37b, type: 2}
   - {fileID: 1501343982134512, guid: d2906dd0d9ebf6f4a95cde03dac0ba17, type: 2}
-  - {fileID: 1650220541659682, guid: 255386f1f4ea7af4f820703aa7489e5e, type: 2}
-  - {fileID: 1650220541659682, guid: 255386f1f4ea7af4f820703aa7489e5e, type: 2}
+  - {fileID: 1023424050449680, guid: 73bc9feecf7346248bf7f192038a070b, type: 2}
+  - {fileID: 1697202299173090, guid: 53e56c0c0de413242a4fa80d34dceada, type: 2}
+  - {fileID: 1969705309109898, guid: 2295a055612896543894e8b9adf8053e, type: 2}
 --- !u!114 &1995136367
 MonoBehaviour:
   m_ObjectHideFlags: 0

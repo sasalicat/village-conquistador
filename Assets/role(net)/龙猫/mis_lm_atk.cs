@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class mis_lm_atk : Missile
 {
-    public double jishiqi = 2f;
+    public double jishiqi = 1f;
     // Use this for initialization
     void Start()
     {
