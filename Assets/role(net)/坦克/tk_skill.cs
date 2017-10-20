@@ -104,12 +104,16 @@ public class tk_skill : MonoBehaviour, CDEquipment
         //GameObject newone = Instantiate(missilePraf, tragetPos, this.transform.rotation);
         //missilePraf.transform.forward = direction;
         //missilePraf.transform.eulerAngles = new Vector3(0, 0, missilePraf.transform.eulerAngles.z);
+
+        Controler controler = this.gameObject.GetComponent<Controler>();
         if (dunpai == null) {
             NetManager.createObstacle(gameObject, transform.position, 4);
             animator.SkillStart();
+            controler.skillLimit = new List<sbyte> { index };
         }
         else
         {
+            controler.skillLimit = null;
             Destroy(dunpai);
             animator.SkillEnd();    
         }

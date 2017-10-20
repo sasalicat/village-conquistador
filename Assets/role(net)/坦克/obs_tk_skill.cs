@@ -21,18 +21,18 @@ public class obs_tk_skill : ObstacleState
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (nowHp > 0)
-        {
 
-        }
-        else
-        {
-            callMethodNull();
-        }
     }
     public override void methodNull()
     {
         Destroy(this.gameObject);
+    }
+    private void OnDestroy()
+    {
+        AnimatorTable animatortable = this.transform.parent.gameObject.GetComponent<AnimatorTable>();
+        animatortable.SkillEnd();
+        Controler controler = this.transform.parent.gameObject.GetComponent<Controler>();
+        controler.skillLimit = null;
     }
 
 }

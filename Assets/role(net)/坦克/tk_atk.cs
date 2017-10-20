@@ -113,8 +113,7 @@ public class tk_atk : MonoBehaviour, CDEquipment
         //创建伤害物件
         unit u = this.GetComponent<unit>();
         int num = Attribute.GetAttackDamageNum(100, u.power);
-        float stiff = Attribute.getRealStiff(1f, u.stiffable);
-        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+        missile.Damage = new damage(1, num, 0, false, true, gameObject);
 
 
         CDTime = CD;//技能冷卻
