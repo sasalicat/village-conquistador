@@ -102,13 +102,17 @@
             Debug.Log("newlist:"+newlist+" length:"+newlist.Count);
             foreach(Dictionary<string,object> role in newlist)
             {
+                Debug.Log("在转化字典中 角色编号:" + (sbyte)role["kind"]);
+
                 List<object> elist = (List<object>)role["equipmentNos"];
+                
                 List<sbyte> newelist = new List<sbyte>();
                 foreach(sbyte no in elist)
                 {
                     newelist.Add(no);
+                    Debug.Log("装备编号:" + no);
                 }
-
+                Debug.Log("role kind" + (sbyte)role["kind"]);
                 list.Add(new RoleData((sbyte)role["kind"],newelist));
 
             }

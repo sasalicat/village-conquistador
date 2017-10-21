@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -619,8 +619,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forDebug: 1
-  roleNo: 3
-  equipmentNoList: 0809
+  roleNo: 1
+  equipmentNoList: 0235
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -4012,15 +4012,15 @@ MonoBehaviour:
   - lang_skill
   - mg_skill
   - 
+  - knifeshot
+  - spear
+  - trample
+  - sawAttack
+  - flameWave
+  - chillWave
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  passiveList: 010001010101010101010101000000010101010101000000010000010100000000010100000000000101010101010101010101000000000000000000
+  passiveList: 010001010101010101010101000000010101010101000000010000010100000000010100000000000101010101010101010101000101000000000000
   buffNameList:
   - buffForTask
   - mis_nq_buff
@@ -4086,6 +4086,8 @@ MonoBehaviour:
   - {fileID: 1023424050449680, guid: 73bc9feecf7346248bf7f192038a070b, type: 2}
   - {fileID: 1697202299173090, guid: 53e56c0c0de413242a4fa80d34dceada, type: 2}
   - {fileID: 1969705309109898, guid: 2295a055612896543894e8b9adf8053e, type: 2}
+  - {fileID: 1602923969652064, guid: 4cbd87acdc0501341b52ae2264e4f32e, type: 2}
+  - {fileID: 1870041471494430, guid: 8fdeaecc35f6d9745908cfdf542b5bd3, type: 2}
 --- !u!114 &1995136367
 MonoBehaviour:
   m_ObjectHideFlags: 0

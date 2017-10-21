@@ -323,5 +323,21 @@ public class NetManager : MonoBehaviour ,Manager {
             hpBarCreater.deleteHpBarWith(((GameObject)e.renderObj).GetComponent<NetRoleState>().roomNo);
         }
     }
-    
+    public void givefollow()//用来当主角死亡时,镜头追踪其他友方角色
+    {
+        int teamain = playerContorler.GetComponent<NetRoleState>().team;
+       for(int i=0;i<objList.Length;i++)
+        {
+
+            if (objList[i].GetComponent<NetRoleState>().team == teamain)
+            {
+                if (objList[i].GetComponent<KBControler>().Alive)
+                {
+                    follow.MainRole = objList[i];
+                    break;
+                }
+            }
+        }
+    }
+
 }

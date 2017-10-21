@@ -67,6 +67,7 @@ public class HallManager : MonoBehaviour {
     }
     public void askRandomRole()
     {
+        Debug.Log("ask random");
         ((Account)KBEngine.KBEngineApp.app.player()).baseCall("reRandomRole");
     }
    

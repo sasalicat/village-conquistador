@@ -36,6 +36,7 @@ public class NetControler : MonoBehaviour,KBControler{
     private string[] buffTable;
     private int index;
     private List<sbyte> limit;
+    private bool alive = true;
     //装备事件
     _on_trigger on_attack;
 
@@ -78,7 +79,13 @@ public class NetControler : MonoBehaviour,KBControler{
             entity = value;
         }
     }
-
+    public bool Alive//表示角色活着
+    {
+        get
+        {
+            return alive;
+        }
+    }
     public EquipmentList equipmentList
     {
         get

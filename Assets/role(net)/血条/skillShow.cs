@@ -8,6 +8,7 @@ public class skillShow : MonoBehaviour {
     public Image detailIcon;
     public Text detailStatement;
     public Text detailName;
+    public Text detailconsume;
     public IconStorage storage;
     public SkillStatements statement;
 
@@ -28,7 +29,7 @@ public class skillShow : MonoBehaviour {
             Debug.Log("statement Length is:" + statement.skillTexts.Length);
             detailStatement.text = statement.skillTexts[no].statement;
             detailName.text = statement.skillTexts[no].name;
-            
+            detailconsume.text = statement.skillTexts[no].consume;
             //detailSkill.transform.position=
         }
         else

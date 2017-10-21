@@ -14,6 +14,7 @@ public class RoleShowControl : MonoBehaviour {
     public Text detailStatement;
     public Image detailIcon;
     public Text detailName;
+    public Text detailCons;
 
     public SkillStatements statement;
 
@@ -54,6 +55,7 @@ public class RoleShowControl : MonoBehaviour {
                 show.detailName = detailName;
                 show.detailIcon = detailIcon;
                 show.detailStatement = detailStatement;
+                show.detailconsume = detailCons;
                 show.statement = statement;
                 Debug.Log("赋值show.statment"+show.statement+"self.statement"+statement);
             }
@@ -93,6 +95,7 @@ public class RoleShowControl : MonoBehaviour {
 
         detailIcon = skillDetail.transform.Find("Image").GetComponent<Image>();
         detailName = skillDetail.transform.Find("Name").GetComponent<Text>();
+        detailCons= skillDetail.transform.Find("consume").GetComponent<Text>();
         detailStatement = skillDetail.transform.Find("Statement").GetComponent<Text>();
         statement = GameObject.Find("keyTabel").GetComponent<SkillStatements>();
         if (!checkDataEqual(register.roleList))//有两种情况1.角色列表没有被打开过2.角色列表被打开过所以有item

@@ -39,6 +39,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private RuntimeAnimatorController originAnim;
     private int index;
     private List<sbyte> limit;
+    private bool alive = true;
 
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
@@ -74,6 +75,13 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     //新架構儲存觸發物件
 
     List<Equipment> onAttackLine=new List<Equipment>();
+    public bool Alive//表示角色活着
+    {
+        get
+        {
+            return alive;
+        }
+    }
     public Entity Entity
     {
         get
@@ -566,6 +574,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                             {
                                 Dictionary<string, object> diedArg = new Dictionary<string, object>();
                                 diedArg["Killer"] = (damage).damager;
+                                alive = false;
                                 Entity.cellCall("notifyDied", new object[] {(sbyte)0});
 
                             }

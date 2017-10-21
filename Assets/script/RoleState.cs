@@ -489,7 +489,7 @@ public class RoleState : MonoBehaviour {
     public AnimatorTable anima;
     protected state nowState;
     protected List<state> StateTable=new List<state>();
-    public sbyte team;
+    public sbyte team = 0;//0为中立单位
     //属性
     public int Power
     {
