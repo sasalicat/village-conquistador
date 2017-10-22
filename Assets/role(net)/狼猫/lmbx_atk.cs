@@ -100,7 +100,7 @@ public class lmbx_atk : MonoBehaviour, CDEquipment
         Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
         //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
-        Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, mousePosition, new Vector3(0, -2, 0));//獲得相對座標
+        Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, mousePosition, new Vector3(0, -4, 0));//獲得相對座標
         //制造子弹物件
         Vector3 direction = mousePosition - origenPlayerPosition;
         //GameObject newone = Instantiate(missilePraf, tragetPos, this.transform.rotation);

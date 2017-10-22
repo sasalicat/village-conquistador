@@ -98,6 +98,7 @@ public class lmbx_skill : MonoBehaviour, CDEquipment
 
         animator.SkillStart();
         this.transform.GetComponent<Controler>().addBuffByNo(4);
+        CDTime = CD;
     }
 
 
