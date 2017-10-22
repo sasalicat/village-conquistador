@@ -99,6 +99,7 @@ public class lang_skill : MonoBehaviour, CDEquipment
         animator.SkillStart();
         
         this.GetComponent<Controler>().distortionByNo(2);
+        
     }
 
 

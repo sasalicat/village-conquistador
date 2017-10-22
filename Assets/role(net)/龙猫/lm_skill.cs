@@ -116,7 +116,6 @@ public class lm_skill : MonoBehaviour, CDEquipment
         float stiff = Attribute.getRealStiff(0.2f, u.stiffable);
         missile.Damage = new damage(2, num, stiff, false, false, gameObject);
 
-
         CDTime = CD;//技能冷卻
         //Debug.Log("in trigger CDTime is" + CDTime);
         animator.AttackStart();

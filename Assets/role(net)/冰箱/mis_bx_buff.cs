@@ -9,7 +9,7 @@ public class mis_bx_buff : Buff
     {
         get
         {
-            return 5;
+            return 5;   
         }
     }
 

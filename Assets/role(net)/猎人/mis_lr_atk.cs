@@ -36,7 +36,8 @@ public class mis_lr_atk : Missile {
                 Vector3 zhujiao = Creater.transform.position;
                 Vector3 direction = fei - zhujiao;
                 juli = direction.magnitude;
-                Damage.num = (int)(20 + (float)juli * 3);
+                unit u = Creater.GetComponent<unit>();
+                Damage.num = (int)(Attribute.GetAttackDamageNum((int)(20 + juli * 3), u.power));
                 if (Damage.num >= 130)
                     Damage.num = 130;
                 role.TakeDamage(Damage);
