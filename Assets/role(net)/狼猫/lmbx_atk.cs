@@ -21,7 +21,7 @@ public class lmbx_atk : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 48;
         }
     }
 

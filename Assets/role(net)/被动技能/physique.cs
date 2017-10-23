@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class physique : MonoBehaviour
+public class physique : MonoBehaviour,CDEquipment
 {
     public float CDTime = 0;
     public sbyte index;
@@ -16,7 +17,7 @@ public class physique : MonoBehaviour
     {
         get
         {
-            return 0;
+            return 23;
         }
     }
 
@@ -95,5 +96,10 @@ public class physique : MonoBehaviour
         this.selfState = state;
         this.animator = anim;
         selfState.Physique += 40;
+    }
+
+    public void trigger(Dictionary<string, object> args)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -43,9 +43,13 @@ public class obs_lr_skill : ObstacleState
             qibiao = 2;
             callMethodNull();
             ChangeColor();
+            RoleState rolestate = Creater.GetComponent(typeof(RoleState)) as RoleState;
             RoleState role = other.gameObject.GetComponent<RoleState>();
-            role.TakeDamage(damage);
-            other.transform.GetComponent<Controler>().addBuffByNo(5);
+            if (rolestate.team != role.team)
+            {
+                role.TakeDamage(damage);
+                other.transform.GetComponent<Controler>().addBuffByNo(5);
+            }
 
         }
     }

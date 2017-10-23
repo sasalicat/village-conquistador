@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class physicalCrit : MonoBehaviour, Equipment
+public class skillCrit : MonoBehaviour, Equipment
 {
     public sbyte index;
     RoleState roleState;
@@ -13,7 +13,7 @@ public class physicalCrit : MonoBehaviour, Equipment
     {
         get
         {
-            return 32;
+            return 33;
         }
     }
 
@@ -46,9 +46,9 @@ public class physicalCrit : MonoBehaviour, Equipment
     public void trigger(Dictionary<string, object> args)
     {
         Debug.Log("GameObject~~~   " + gameObject);
-        Random random = (Random)args["randomPoint"];
+        int random = (int)args["randomPoint"];
         damage damage1 = (damage)args["Damage"];
-        if (damage1.kind == 1 )
+        if (damage1.kind == 2 && random <= 30)
         {
             damage1.num = 2 * damage1.num;
         }

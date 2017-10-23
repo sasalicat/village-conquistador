@@ -22,7 +22,7 @@ public class mg_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 50;
         }
     }
 

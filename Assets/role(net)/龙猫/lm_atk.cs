@@ -22,7 +22,7 @@ public class lm_atk : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 17;
         }
     }
 

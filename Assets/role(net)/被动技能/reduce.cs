@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class reduce : MonoBehaviour
+public class reduce : MonoBehaviour,CDEquipment
 {
     public float CDTime = 0;
     public sbyte index;
@@ -16,7 +17,7 @@ public class reduce : MonoBehaviour
     {
         get
         {
-            return 0;
+            return 51;
         }
     }
 
@@ -97,5 +98,10 @@ public class reduce : MonoBehaviour
         selfState.Physique += 20;
         selfState.damageReduce += 8;
         selfState.specialReduce += 8;
+    }
+
+    public void trigger(Dictionary<string, object> args)
+    {
+        throw new NotImplementedException();
     }
 }

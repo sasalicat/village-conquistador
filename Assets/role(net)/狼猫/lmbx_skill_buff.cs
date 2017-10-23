@@ -32,11 +32,13 @@ public class lmbx_skill_buff : Buff
     }
     public override void onIntarvel(RoleState role, float timeBetween)
     {
-        timeBetween = 1;
+        timeBetween = 1f;
         base.onIntarvel(role, timeBetween);
         //Debug.Log("buff ing");
         RoleState r = this.GetComponent<RoleState>();
         role.BeenTreat(this.gameObject, (int)(r.maxHp * 0.03));
+        
+        
     }
 
     // Update is called once per frame

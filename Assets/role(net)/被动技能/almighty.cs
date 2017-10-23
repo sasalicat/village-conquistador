@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class almighty : MonoBehaviour
+public class almighty : MonoBehaviour,CDEquipment
 {
     public float CDTime = 0;
     public sbyte index;
@@ -16,7 +17,7 @@ public class almighty : MonoBehaviour
     {
         get
         {
-            return 0;
+            return 29;
         }
     }
 
@@ -98,6 +99,11 @@ public class almighty : MonoBehaviour
         selfState.Power += 15;
         selfState.Skill += 15;
         selfState.Physique += 10;
+    }
+
+    public void trigger(Dictionary<string, object> args)
+    {
+        throw new NotImplementedException();
     }
 }
 

@@ -22,7 +22,7 @@ public class fb_atk : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 40;
         }
     }
 

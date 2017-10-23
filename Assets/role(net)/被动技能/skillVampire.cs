@@ -13,7 +13,7 @@ public class skillVampire : MonoBehaviour, Equipment
     {
         get
         {
-            return 0;
+            return 31;
         }
     }
 

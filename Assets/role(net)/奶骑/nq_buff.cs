@@ -49,7 +49,7 @@ public class nq_buff : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 33;
+            return 16;
         }
     }
 

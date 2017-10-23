@@ -31,7 +31,8 @@ public class mis_bx_skill : Missile
             //Debug.Log(other.name);
             //Debug.Log(" on trigger enter 2D");
             RoleState role = other.gameObject.GetComponent<RoleState>();
-            if (role != null && other.tag.CompareTo("Player") == 0)
+            RoleState rolestate = Creater.GetComponent(typeof(RoleState)) as RoleState;
+                if (role != null && other.tag.CompareTo("Player") == 0 && rolestate.team != role.team)
             {
                 other.GetComponent<Controler>().distortionByNo(1);
 

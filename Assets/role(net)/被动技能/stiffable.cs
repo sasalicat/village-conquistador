@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class stiffable : MonoBehaviour
+public class stiffable : MonoBehaviour,CDEquipment
 {
     public float CDTime = 0;
     public sbyte index;
@@ -16,7 +17,7 @@ public class stiffable : MonoBehaviour
     {
         get
         {
-            return 0;
+            return 34;
         }
     }
 
@@ -95,5 +96,10 @@ public class stiffable : MonoBehaviour
         this.selfState = state;
         this.animator = anim;
         selfState.Stiffable += 20;
+    }
+
+    public void trigger(Dictionary<string, object> args)
+    {
+        throw new NotImplementedException();
     }
 }

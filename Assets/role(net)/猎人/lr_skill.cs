@@ -22,7 +22,7 @@ public class lr_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 7;
         }
     }
 

@@ -13,7 +13,7 @@ public class physicalVampire : MonoBehaviour, Equipment
     {
         get
         {
-            return 0;
+            return 30;
         }
     }
 

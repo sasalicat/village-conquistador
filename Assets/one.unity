@@ -619,8 +619,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forDebug: 1
-  roleNo: 10
-  equipmentNoList: 3031
+  roleNo: 1
+  equipmentNoList: 02031516172425260000
   winnerno: 0
 --- !u!1 &415577943
 GameObject:
@@ -3981,25 +3981,25 @@ MonoBehaviour:
   - lm_skill
   - xwxz_atk
   - smoke_bomb
-  - 
-  - 
-  - 
+  - power
+  - skill
+  - physique
   - porcelain
   - bone_shield
   - executioner
   - saygoodbye
-  - ImmortalDetermination
-  - 
-  - 
-  - 
-  - 
-  - buffSample
-  - contortionSkillSample
-  - 
-  - 
-  - 
-  - 
-  - 
+  - accelerate
+  - almighty
+  - physicalVampire
+  - skillVampire
+  - physicalCrit
+  - skillCrit
+  - stiffable
+  - stiffReduce
+  - damageReduce
+  - specialReduce
+  - energyRecovery
+  - skillpower
   - fb_atk
   - fb_skill
   - bx_atk
@@ -4011,7 +4011,7 @@ MonoBehaviour:
   - lang_atk
   - lang_skill
   - mg_skill
-  - 
+  - reduce
   - knifeshot
   - spear
   - trample
@@ -4073,7 +4073,7 @@ MonoBehaviour:
   - {fileID: 1090376039140290, guid: 1e198abf3e716de4bb5de7fe737ab47e, type: 2}
   - {fileID: 1575805648889562, guid: b025a7be44d70994688840ecb8bc56a2, type: 2}
   - {fileID: 1094831508225238, guid: ef8fc3e860ab26f44b84ceaeea19f87f, type: 2}
-  - {fileID: 1286983657965488, guid: 4da67cbcca5d1a94abe8249b2221ee45, type: 2}
+  - {fileID: 1801790137030126, guid: f6aac24c65b893045bb15188038ba409, type: 2}
   - {fileID: 1225580510805068, guid: 9393a70c988972a4ba97389225b6d014, type: 2}
   - {fileID: 1650220541659682, guid: 255386f1f4ea7af4f820703aa7489e5e, type: 2}
   - {fileID: 1284182572439748, guid: cfed4805934a13e4888cd5e8f8ceecea, type: 2}

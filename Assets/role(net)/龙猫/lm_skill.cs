@@ -21,7 +21,7 @@ public class lm_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 18;
         }
     }
 

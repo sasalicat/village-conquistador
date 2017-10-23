@@ -22,7 +22,7 @@ public class lmbx_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 49;
         }
     }
 

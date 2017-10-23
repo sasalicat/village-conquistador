@@ -6,7 +6,7 @@ using UnityEngine;
 public class nq_atk : MonoBehaviour, CDEquipment
 {
 
-    public const float CD = 0f;//0.5f;
+    public const float CD = 1f;//0.5f;
     public const int BaseSkill = 40;
     public const float BaseStiff = 0.25f;
 
@@ -22,7 +22,7 @@ public class nq_atk : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 15;
         }
     }
 

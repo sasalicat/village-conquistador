@@ -21,7 +21,7 @@ public class xs_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 45;
         }
     }
 

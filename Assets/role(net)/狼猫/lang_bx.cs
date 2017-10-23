@@ -23,7 +23,7 @@ public class lang_bx : ContortionData
         role.canBeStiff = true;
         role.Physique -= 30;
         role.Power -= 30;
-
+        role.Accelerate -= 30;
         role.transform.localScale *= 0.5f;
     }
 
@@ -34,6 +34,7 @@ public class lang_bx : ContortionData
         role.Power += 30;
         role.canBeStiff = false;
         role.transform.localScale *= 2;
+        role.Accelerate += 30;
     }
 
 

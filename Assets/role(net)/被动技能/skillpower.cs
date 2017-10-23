@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class skillpower : MonoBehaviour
+public class skillpower : MonoBehaviour,CDEquipment
 {
     public float CDTime = 0;
     public sbyte index;
@@ -16,7 +17,7 @@ public class skillpower : MonoBehaviour
     {
         get
         {
-            return 0;
+            return 39;
         }
     }
 
@@ -96,5 +97,10 @@ public class skillpower : MonoBehaviour
         this.animator = anim;
         selfState.Power += 25;
         selfState.Skill += 25;
+    }
+
+    public void trigger(Dictionary<string, object> args)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class power : MonoBehaviour
+public class power : MonoBehaviour,CDEquipment
 {
     public float CDTime = 0;
     public sbyte index;
@@ -18,7 +18,7 @@ public class power : MonoBehaviour
     {
         get
         {
-            return 0;
+            return 21;
         }
     }
 
@@ -97,5 +97,10 @@ public class power : MonoBehaviour
         this.selfState = state;
         this.animator = anim;
         selfState.Power += 40;
+    }
+
+    public void trigger(Dictionary<string, object> args)
+    {
+        throw new NotImplementedException();
     }
 }

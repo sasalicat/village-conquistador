@@ -32,7 +32,6 @@ public class mis_nq_atk : Missile
         if (rolestate.team == role.team)
         {
                 role.BeenTreat(Creater, Damage.num);
-            Debug.Log("111111111111111111"+Damage.num);
 
         }
     }

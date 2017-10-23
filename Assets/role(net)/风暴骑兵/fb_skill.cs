@@ -22,7 +22,7 @@ public class fb_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 41;
         }
     }
 

@@ -32,7 +32,9 @@ public class mis_xs_atk : Missile
             //Debug.Log(other.name);
             //Debug.Log(" on trigger enter 2D");
             RoleState role = other.gameObject.GetComponent<RoleState>();
-            if (role != null)
+            RoleState rolestate = Creater.GetComponent(typeof(RoleState)) as RoleState;
+            if (role != null && rolestate.team != role.team)
+                if (role != null)
             {
                 role.TakeDamage(Damage);
                 Destroy(this.gameObject);
