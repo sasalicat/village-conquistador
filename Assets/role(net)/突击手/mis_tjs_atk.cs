@@ -21,7 +21,6 @@ public class mis_tjs_atk : Missile{
         if (zhuangtai == 1)
         {
             Speed = m_liveTime * 15;
-            Debug.Log(m_liveTime);
             m_liveTime -= Time.deltaTime;
 
             transform.Translate(0, Speed * Time.deltaTime, 0, Space.Self);

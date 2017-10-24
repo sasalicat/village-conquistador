@@ -46,9 +46,9 @@ public class physicalCrit : MonoBehaviour, Equipment
     public void trigger(Dictionary<string, object> args)
     {
         Debug.Log("GameObject~~~   " + gameObject);
-        Random random = (Random)args["randomPoint"];
+        sbyte random = (sbyte)args["randomPoint"];
         damage damage1 = (damage)args["Damage"];
-        if (damage1.kind == 1 )
+        if (damage1.kind == 1 && random <= 30)
         {
             damage1.num = 2 * damage1.num;
         }
