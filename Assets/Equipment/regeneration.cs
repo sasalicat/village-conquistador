@@ -46,7 +46,7 @@ public class regeneration : MonoBehaviour, Equipment
         float interval = (float)args["interval"];
         if ((time -= interval) <= 0)
         {
-            roleState.BeenTreat(this.gameObject,(int)(roleState.maxHp * 0.03));
+            roleState.BeenTreat(this.gameObject,25);
             time = 2;
         }
     }

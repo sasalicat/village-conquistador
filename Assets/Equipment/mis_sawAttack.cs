@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mis_sawDefense : Missile{
+public class mis_sawAttack : Missile
+{
 
     private float existTime = 0;
-  
-    
+
+
 
     // Use this for initialization
     void Start()
@@ -18,7 +18,7 @@ public class mis_sawDefense : Missile{
     // Update is called once per frame
     void Update()
     {
-        if (existTime > 0.75f)
+        if (existTime > 8f)
         {
             Destroy(gameObject);
         }
@@ -27,11 +27,10 @@ public class mis_sawDefense : Missile{
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player") {
+         RoleState role = other.gameObject.GetComponent<RoleState>();
+         if(role.team != Creater.GetComponent<RoleState>().team)
         {
-            RoleState role = other.gameObject.GetComponent<RoleState>();
-            if (role.team != Creater.GetComponent<RoleState>().team)
-            {
                 if (role != null)
                     role.TakeDamage(Damage);
             }

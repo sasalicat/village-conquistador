@@ -555,6 +555,7 @@ public class RoleState : MonoBehaviour {
         set
         {
             selfdata.accelerate = value;
+            realspeed = Attribute.getSpeedAfter(unit.STAND_SPEED, Accelerate) * speedscale;
         }
         get
         {
@@ -574,7 +575,7 @@ public class RoleState : MonoBehaviour {
             return speedscale;
         }
     }
-    private float realspeed=unit.STAND_SPEED;
+    public float realspeed=unit.STAND_SPEED;
     public float RealSpeed//contorler使用的角色真正速度
     {
         get
@@ -829,7 +830,7 @@ public class RoleState : MonoBehaviour {
         nowHp= maxHp;
         nowMp = 0;
         energyRecover_Second = unit.STAND_MP_RECOVER* (((float)selfdata.energyRecover) / 100);
-  
+        realspeed= Attribute.getSpeedAfter(unit.STAND_SPEED, Accelerate) * speedscale; 
 
         StateTable.Add(new normal(this));
         StateTable.Add(new stiff(this));

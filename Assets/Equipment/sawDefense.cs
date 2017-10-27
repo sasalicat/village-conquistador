@@ -6,7 +6,7 @@ using UnityEngine;
 public class sawDefense : MonoBehaviour,CDEquipment {
     public const int BaseDamage = 100;
     public const float BaseStiff = 0.5f;
-    public const float CD = 0.5f;
+    public const float CD = 2.5f;
     sbyte index;
     private float CDTime = 0;
     private RoleState state;
@@ -96,9 +96,9 @@ public class sawDefense : MonoBehaviour,CDEquipment {
     {
         if (CDTime<=0) {
             Vector3 pos = (Vector3)args["PlayerPosition"];
-            int realNum = (int)(BaseDamage + BaseDamage * (((float)state.selfdata.power) / 100));
-            float realStiff = BaseStiff + BaseStiff * (((float)state.selfdata.stiffable) / 100);
-            damage damage = new damage(2, realNum, realStiff, false, false, gameObject);
+            int realNum = Attribute.GetAttackDamageNum(BaseDamage,state.Power);
+            float realStiff = Attribute.getRealStiff(BaseStiff,state.Stiffable);
+            damage damage = new damage(1, realNum, realStiff, false, false, gameObject);
             GameObject newone = Instantiate(missile, pos, this.transform.rotation);
             Missile mis = newone.GetComponent<Missile>();
             mis.Damage = damage;

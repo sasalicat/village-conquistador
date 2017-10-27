@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class spear : MonoBehaviour,CDEquipment {
-    public const float CD = 5f;//0.5f;
-    public const int BaseDamage = 50;
-    public const float BaseStiff = 0.25f;
+public class sawAttack : MonoBehaviour, CDEquipment
+{
+    public const float CD = 12f;//0.5f;
+    public const int BaseDamage = 30;
+    public const float BaseStiff = 0.3f;
 
     public float CDTime = 0;
     public sbyte index;
@@ -111,8 +112,12 @@ public class spear : MonoBehaviour,CDEquipment {
         missile.Creater = gameObject;
         //创建伤害物件
         unit u = this.GetComponent<unit>();
-        missile.Damage = new damage(2, 0, 0, false, false, gameObject);
-
+        int num = Attribute.GetSpecialDamageNum(BaseDamage, u.skill);
+        float stiff = Attribute.getRealStiff(BaseStiff, u.stiffable);
+        missile.Damage = new damage(2, num, stiff, false, false, gameObject);
+        RotateAround rtad=newone.GetComponent<RotateAround>();
+        rtad.aroundPoint = transform;
+        newone.SetActive(true);
 
         CDTime = CD;//技能冷卻
         //Debug.Log("in trigger CDTime is" + CDTime);
@@ -125,7 +130,7 @@ public class spear : MonoBehaviour,CDEquipment {
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        missilePraf = table.MissileList[32];
+        missilePraf = table.MissileList[38];
         this.selfState = state;
         this.animator = anim;
     }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class spear : MonoBehaviour,CDEquipment {
-    public const float CD = 5f;//0.5f;
-    public const int BaseDamage = 50;
-    public const float BaseStiff = 0.25f;
+public class chillWave : MonoBehaviour, CDEquipment
+{
+    public const float CD = 8f;//0.5f;
+    public const int BaseDamage = 75;
+    public const float BaseStiff = 0.7f;
 
     public float CDTime = 0;
     public sbyte index;
@@ -65,7 +66,6 @@ public class spear : MonoBehaviour,CDEquipment {
     {
         get
         {
-            Debug.Log(" in can use CDTime is" + CDTime);
             return (CDTime <= 0 && selfState.nowMp >= Consumption);//如果CDTime小於0代表技能可以使用
         }
     }
@@ -111,8 +111,9 @@ public class spear : MonoBehaviour,CDEquipment {
         missile.Creater = gameObject;
         //创建伤害物件
         unit u = this.GetComponent<unit>();
-        missile.Damage = new damage(2, 0, 0, false, false, gameObject);
-
+        int num = Attribute.GetSpecialDamageNum(BaseDamage, u.skill);
+        float stiff = Attribute.getRealStiff(BaseStiff, u.stiffable);
+        missile.Damage = new damage(2, num, stiff, false, false, gameObject);
 
         CDTime = CD;//技能冷卻
         //Debug.Log("in trigger CDTime is" + CDTime);
@@ -125,8 +126,9 @@ public class spear : MonoBehaviour,CDEquipment {
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        missilePraf = table.MissileList[32];
+        missilePraf = table.MissileList[36];
         this.selfState = state;
         this.animator = anim;
     }
 }
+

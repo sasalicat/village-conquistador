@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -620,8 +620,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forDebug: 1
   roleNo: 1
-  equipmentNoList: 02032021000000000000
-  winnerno: 0
+  equipmentNoList: 3836370619
+  winnerno: 5
 --- !u!1 &415577943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,12 +1373,15 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 937051052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1517253005}
-  m_RootOrder: 2
+  m_Children:
+  - {fileID: 1193671117}
+  - {fileID: 943166360}
+  - {fileID: 1001171103}
+  m_Father: {fileID: 1616243431}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1447,12 +1450,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1616243431}
+  m_Father: {fileID: 937051053}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -18.4, y: -73.4}
+  m_AnchorMin: {x: 0.46855924, y: 0.25073022}
+  m_AnchorMax: {x: 0.46855924, y: 0.25073022}
+  m_AnchoredPosition: {x: 9.152428, y: 0.74243927}
   m_SizeDelta: {x: 160, y: 65.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &943166361
@@ -1732,13 +1735,13 @@ RectTransform:
   m_Children:
   - {fileID: 746573355}
   - {fileID: 315716194}
-  m_Father: {fileID: 1616243431}
+  m_Father: {fileID: 937051053}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.33432624, y: 0.41454706}
-  m_AnchorMax: {x: 0.61341846, y: 0.54839593}
-  m_AnchoredPosition: {x: 0.099998474, y: 0.5}
-  m_SizeDelta: {x: 4, y: -1.7999992}
+  m_AnchorMin: {x: 0.47570622, y: 0.4824047}
+  m_AnchorMax: {x: 0.47570622, y: 0.4824047}
+  m_AnchoredPosition: {x: 7.254631, y: 18.972427}
+  m_SizeDelta: {x: 200, y: 44.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1001171104
 MonoBehaviour:
@@ -2197,13 +2200,13 @@ RectTransform:
   m_Children:
   - {fileID: 194541258}
   - {fileID: 495802431}
-  m_Father: {fileID: 1616243431}
+  m_Father: {fileID: 937051053}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.33432624, y: 0.574}
-  m_AnchorMax: {x: 0.61341846, y: 0.70784897}
-  m_AnchoredPosition: {x: 0.099998474, y: -1}
-  m_SizeDelta: {x: 4, y: -1.7999992}
+  m_AnchorMin: {x: 0.47570622, y: 0.63100004}
+  m_AnchorMax: {x: 0.47570622, y: 0.63100004}
+  m_AnchoredPosition: {x: 7.206047, y: 42.0356}
+  m_SizeDelta: {x: 200, y: 44.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193671118
 MonoBehaviour:
@@ -2332,7 +2335,7 @@ RectTransform:
   m_Children:
   - {fileID: 2090947778}
   m_Father: {fileID: 1517253005}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2858,7 +2861,7 @@ RectTransform:
   - {fileID: 1349241395}
   - {fileID: 1566165643}
   m_Father: {fileID: 1517253005}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3023,7 +3026,6 @@ RectTransform:
   m_Children:
   - {fileID: 473587890}
   - {fileID: 415577944}
-  - {fileID: 937051053}
   - {fileID: 1236253217}
   - {fileID: 1616243431}
   - {fileID: 1489234451}
@@ -3356,11 +3358,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1193671117}
-  - {fileID: 943166360}
-  - {fileID: 1001171103}
+  - {fileID: 937051053}
   m_Father: {fileID: 1517253005}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4020,7 +4020,7 @@ MonoBehaviour:
   - chillWave
   - 
   - 
-  passiveList: 010001010101010101010101000000010101010101000000010000010000000000000000000000000101010101010101010101000101000000000000
+  passiveList: 010001010101010101010101000000010101010101000000010000010100000000000100000000000101010101010101010101000101010101010000
   buffNameList:
   - buffForTask
   - mis_nq_buff
@@ -4031,6 +4031,8 @@ MonoBehaviour:
   - lr_skill_buff_two
   - lajibuff
   - yao_buff
+  - flameBuff
+  - chillbuff
 --- !u!114 &1995136365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4088,6 +4090,13 @@ MonoBehaviour:
   - {fileID: 1969705309109898, guid: 2295a055612896543894e8b9adf8053e, type: 2}
   - {fileID: 1602923969652064, guid: 4cbd87acdc0501341b52ae2264e4f32e, type: 2}
   - {fileID: 1870041471494430, guid: 8fdeaecc35f6d9745908cfdf542b5bd3, type: 2}
+  - {fileID: 1580996765429112, guid: 850d647e38aa5514eb1fa5a1294705ab, type: 2}
+  - {fileID: 1325148217045596, guid: e3cfc3f0c55ad4744b14b0f81ce8694d, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
+  - {fileID: 1717626954473238, guid: 29e27987efaaa3b4785aa1c44144c990, type: 2}
+  - {fileID: 1912187183179368, guid: 100114f97d0764e48868a4e0c6bcffd3, type: 2}
+  - {fileID: 1169953526824120, guid: 928c999292499fb4e8a48bbc726e1b0a, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
 --- !u!114 &1995136367
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -441,17 +441,20 @@ public class NetControler : MonoBehaviour,KBControler{
                         {
                             on_take_damage(EventLine[0].Args);
                         }
-                        KBControler damageControler = damage.damager.GetComponent<KBControler>();
-                        if (damageControler.On_Cause_Damage != null)
+                        if (damage.damager != null)
                         {
-                            Dictionary<string, object> Arg = new Dictionary<string, object>();
-                            Arg["Damage"] = damage;
-                            Arg["PlayerPosition"] = EventLine[0].Args["DamagerPosition"];
-                            Arg["TragetPosition"] = EventLine[0].Args["PlayerPosition"];
-                            Arg["randomPoint"] = EventLine[0].Args["randomPoint"];
-                            Arg["Traget"] = this.gameObject;
-                            //Arg["Traget"]=
-                            damageControler.On_Cause_Damage(Arg);
+                            KBControler damageControler = damage.damager.GetComponent<KBControler>();
+                            if (damageControler.On_Cause_Damage != null)
+                            {
+                                Dictionary<string, object> Arg = new Dictionary<string, object>();
+                                Arg["Damage"] = damage;
+                                Arg["PlayerPosition"] = EventLine[0].Args["DamagerPosition"];
+                                Arg["TragetPosition"] = EventLine[0].Args["PlayerPosition"];
+                                Arg["randomPoint"] = EventLine[0].Args["randomPoint"];
+                                Arg["Traget"] = this.gameObject;
+                                //Arg["Traget"]=
+                                damageControler.On_Cause_Damage(Arg);
+                            }
                         }
                         state.realHurt((damage)EventLine[0].Args["Damage"]);
                         HpChangeHappen();

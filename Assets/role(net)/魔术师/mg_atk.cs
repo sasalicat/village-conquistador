@@ -112,6 +112,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
         missile.Creater = gameObject;
         //创建伤害物件
         unit u = this.GetComponent<unit>();
+
         int num = Attribute.GetAttackDamageNum(50, u.power);
         float stiff = Attribute.getRealStiff(0.3f, u.stiffable);
         missile.Damage = new damage(1, num,stiff,false,false,gameObject);

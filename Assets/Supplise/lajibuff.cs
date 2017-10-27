@@ -8,6 +8,7 @@ public class lajibuff : Buff
     const int everytreat=20;
     float treatInterval = 1;
     float nextTreat;
+    GameObject effection = null;
     public override float Duration
     {
         get
@@ -20,6 +21,8 @@ public class lajibuff : Buff
     {
         if(Repetitive == null)
         {
+            effection=Instantiate(misTable.MissileList[35],role.transform.position,role.transform.rotation);
+            effection.transform.parent = role.transform;
             return true;
         }
         if ( Repetitive.Length != 0)
@@ -32,6 +35,10 @@ public class lajibuff : Buff
 
     public override void onRemove(RoleState role)
     {
+        if (effection != null)
+        {
+            Destroy(effection);
+        }
     }
     public override void onIntarvel(RoleState role, float timeBetween)
     {

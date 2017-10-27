@@ -5,19 +5,19 @@ using UnityEngine;
 public class Attribute{
     public static int GetAttackDamageNum(int baseNum,int power)
     {
-        return baseNum + ((int)((float)power / 100) * baseNum);
+        return baseNum + (int)((power / 100f) * baseNum);
     }
     public static int GetSpecialDamageNum(int baseNum,int skill)
     {
-        return baseNum + ((int)((float)skill / 100) * baseNum);
+        return baseNum + (int)((skill / 100f) * baseNum);
     }
     public static int getMaxHp(int standHp,int physique)
     {
-        return standHp + ((int)((float)physique / 100) * standHp);
+        return standHp + (int)((physique / 100f) * standHp);
     }
     public static int ReduceAttackDamageNum(int num,int reduce)
     {
-        return num + ((int)((float)reduce / 100) * num);
+        return num + (int)((reduce / 100f) * num);
     }
     public static float GetMpRecover(float num,int energyRecover)
     {

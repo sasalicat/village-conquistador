@@ -6,9 +6,14 @@ using KBEngine;
 
 public class NetRoleState :RoleState {
     // Use this for initialization
+    public const float IMMUNE_TIME=1;
     public sbyte roomNo;
     public KBControler control;
     public bool islocal = false;
+    public float immuneTime = 0;
+    public SpriteRenderer render;
+    public Color nowcolor = new Color(1,1,1,1);
+    public readonly Color WRITER = new Color(1, 1, 1, 1);
      interface state_net :state
     {
         void hurt(damage damage);
@@ -19,7 +24,6 @@ public class NetRoleState :RoleState {
     {
 
         private NetRoleState role;
-
         public bool canRota
         {
             get
@@ -123,7 +127,19 @@ public class NetRoleState :RoleState {
 
         public void onUpdate()
         {
-            
+            bool before=role.immuneTime>0;
+            role.immuneTime -= Time.deltaTime;
+            if (before && role.immuneTime <= 0)
+            {
+                role.immune_attack = false;
+                role.immune_skill = false;
+                role.render.color = role.WRITER;
+            }
+            else if(role.immuneTime>0)//闪烁特效
+            {
+                role.nowcolor.a = role.immuneTime % 0.3f;
+                role.render.color = role.nowcolor;
+            }
         }
 
         public void treat(int num)
@@ -221,7 +237,19 @@ public class NetRoleState :RoleState {
             else {
                 role.nowStiff -= Time.deltaTime;
             }
-
+            bool before = role.immuneTime > 0;
+            role.immuneTime -= Time.deltaTime;
+            if (before && role.immuneTime <= 0)
+            {
+                role.immune_attack = false;
+                role.immune_skill = false;
+                role.render.color = role.WRITER;
+            }
+            else if (role.immuneTime > 0)//闪烁特效
+            {
+                role.nowcolor.a = role.immuneTime % 0.3f;
+                role.render.color = role.nowcolor;
+            }
         }
 
         public void takedamage(damage damage)
@@ -328,14 +356,30 @@ public class NetRoleState :RoleState {
 
         public void onUpdate()
         {
-            if (role.nowConversely <= 0)
+            if (role.nowConversely <= 0)//切回正常状态
             {
-                role.changeState(0);
+                role.changeState(RoleState.NORMAL_NO);
+                role.immuneTime = IMMUNE_TIME;
                 role.anima.ConverselyEnd();
+                role.immune_attack = true;
+                role.immune_skill = true;
             }
             else
             {
                 role.nowConversely -= Time.deltaTime;
+            }
+            bool before = role.immuneTime > 0;
+            role.immuneTime -= Time.deltaTime;
+            if (before && role.immuneTime <= 0)
+            {
+                role.immune_attack = false;
+                role.immune_skill = false;
+                role.render.color = role.WRITER;
+            }
+            else if (role.immuneTime > 0)//闪烁特效
+            {
+                role.nowcolor.a = role.immuneTime % 0.3f;
+                role.render.color = role.nowcolor;
             }
 
         }
@@ -453,6 +497,7 @@ public class NetRoleState :RoleState {
         control = GetComponent<KBControler>();
         //初始为normal
         nowState = StateTable[0];
+        render = GetComponent<SpriteRenderer>();
         //TakeDamage(new damage(1, 100, 1, true, false, gameObject));
         //Debug.Log("getComp:" + GetComponent<RoleState>());
     }

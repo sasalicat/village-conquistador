@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class trample : MonoBehaviour {
+public class trample : MonoBehaviour,CDEquipment {
 
     public const float CD = 2.5f;//0.5f;
     public const int BaseDamage = 50;
@@ -20,7 +20,7 @@ public class trample : MonoBehaviour {
     {
         get
         {
-            return 0;
+            return 54;
         }
     }
 
@@ -67,7 +67,7 @@ public class trample : MonoBehaviour {
         get
         {
             Debug.Log(" in can use CDTime is" + CDTime);
-            return (CDTime <= 0);//如果CDTime小於0代表技能可以使用
+            return (CDTime <= 0&&selfState.nowMp>=Consumption);//如果CDTime小於0代表技能可以使用
         }
     }
     public uint Consumption
@@ -128,7 +128,7 @@ public class trample : MonoBehaviour {
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        missilePraf = table.MissileList[5];
+        missilePraf = table.MissileList[37];
         this.selfState = state;
         this.animator = anim;
     }

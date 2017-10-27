@@ -237,19 +237,25 @@ public class NetManager : MonoBehaviour ,Manager {
             e.renderObj = newone;
             newone.GetComponent<ObstacleState>().entity = e;
             Debug.Log("obstacle" + newone.GetComponent<ObstacleState>());
+            ObstacleState obstate = newone.GetComponent<ObstacleState>();
             ((Obstacle)e).state = newone.GetComponent<ObstacleState>();
             int cno = (sbyte)e.getDefinedProperty("createrNo");
+            Debug.Log("hp`s type is:"+ e.getDefinedProperty("Hp").GetType());
+            obstate.maxHp = (Int16)e.getDefinedProperty("Hp");
+            obstate.nowHp = (Int16)e.getDefinedProperty("Hp");
             if (cno!= -1)
             {
-                newone.GetComponent<ObstacleState>().Kind = index;
+                
+                obstate.Kind = index;
+
                 if (cno == playerContorler.roomNo)
                 {
-                    newone.GetComponent<ObstacleState>().Creater = playerContorler.gameObject;
+                    obstate.Creater = playerContorler.gameObject;
                     playerContorler.gameObject.SendMessage("onCreateFinish", ((Obstacle)e).state,SendMessageOptions.DontRequireReceiver);
                 }
                 else
                 {
-                    newone.GetComponent<ObstacleState>().Creater = controlerList[cno].gameObject;
+                    obstate.Creater = controlerList[cno].gameObject;
                     controlerList[cno].gameObject.SendMessage("onCreateFinish", ((Obstacle)e).state, SendMessageOptions.DontRequireReceiver);
                 }
             }
@@ -284,11 +290,17 @@ public class NetManager : MonoBehaviour ,Manager {
     {
         ((Player)KBEngineApp.app.player()).baseCall("createMissile", new object[] { No, pos, rota });
     }
-    public static void createObstacle(GameObject creater,Vector3 position,sbyte kind)
+    public static void createObstacle(GameObject creater,Vector3 position,sbyte kind,short hp)
     {
         NetPlayerControler control = creater.GetComponent<NetPlayerControler>();
         if (control != null)
-           control.Entity.baseCall("createObstracle", new object[] { position, kind });
+           control.Entity.baseCall("createObstracle", new object[] { position, kind ,hp});
+    }
+    public static void createObstacle(GameObject creater, Vector3 position, sbyte kind)
+    {
+        NetPlayerControler control = creater.GetComponent<NetPlayerControler>();
+        if (control != null)
+            control.Entity.baseCall("createObstracle", new object[] { position, kind,(short)1000});
     }
     public static void SkillTrigger(sbyte eIndex,Vector3 pos,Vector3 mousePos)
     {

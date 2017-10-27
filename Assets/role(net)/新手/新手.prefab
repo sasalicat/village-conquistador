@@ -136,9 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d6392f596b68d438f3612873dd08f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 0
-  skill: 0
-  physique: 0
+  power: 30
+  skill: 30
+  physique: 40
   energyRecover: 0
   accelerate: 0
   stiffable: 0

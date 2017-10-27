@@ -14,7 +14,7 @@
         }
         public void methodNull()
         {
-            Debug.Log("method null id:"+this.id+" "+state.nowHp);
+            Debug.Log("method null id:"+this.id+"state is null?"+(state==null));
             state.nullCallTimes++;
             Debug.Log("times after:"+ state.nullCallTimes);
         }

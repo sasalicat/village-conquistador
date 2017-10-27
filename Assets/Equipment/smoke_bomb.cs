@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class smoke_bomb : MonoBehaviour, CDEquipment
 {
-    public const float CD = 5f;//4f;
+    public const float CD = 10f;//4f;
     public const int BaseDamage = 100;//80
     public const float BaseStiff = 0.5f;
 
