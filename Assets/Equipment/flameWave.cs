@@ -74,7 +74,7 @@ public class flameWave : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 10;
+            return 15;
         }
     }
 

@@ -24,6 +24,7 @@ public class register : MonoBehaviour {
         {
             KBEngine.Event.fireIn("createAccount", account.text, password.text, System.Text.Encoding.UTF8.GetBytes("guass"));
         }
+        itCancel();
     }
     public void itCancel()
     {
@@ -36,7 +37,7 @@ public class register : MonoBehaviour {
     public void onCreateAccountResult(UInt16 retcode, byte[] datas)
     {
         notice.SetActive(true);
-        Text label = notice.transform.Find("Text").GetComponent<Text>();
+        Text label = notice.transform.Find("背景/Text").GetComponent<Text>();
         if (retcode == 0)
         {
             label.text = "恭喜你註冊成功,然後呢?";

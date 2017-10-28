@@ -114,7 +114,9 @@ public class kniftShot : MonoBehaviour,CDEquipment {
             newone.transform.eulerAngles = new Vector3(0,0,-nowAngle+roleRotaZ+270);//和realAngle无关,+270是因为mouse和角色面向相反所以要+180但是飞刀图片自带90度转向
             Missile missile=newone.GetComponent<Missile>();
             missile.Creater = gameObject;
-            missile.Damage = new damage(1, 25, 0.3f, false, false, gameObject);
+            int num = Attribute.GetAttackDamageNum(25, state.Power);
+            float stiff = Attribute.getRealStiff(0.3f, state.Stiffable);
+            missile.Damage = new damage(1, num, stiff, false, false, gameObject);
             nowAngle += kniftIntervalAngle;
 
             anim.AttackStart();

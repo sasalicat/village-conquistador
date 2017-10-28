@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class spear : MonoBehaviour,CDEquipment {
     public const float CD = 5f;//0.5f;
-    public const int BaseDamage = 50;
-    public const float BaseStiff = 0.25f;
 
     public float CDTime = 0;
     public sbyte index;

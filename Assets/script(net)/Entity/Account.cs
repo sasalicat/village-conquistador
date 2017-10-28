@@ -95,7 +95,7 @@
         {
             roomManager.change = true;
         }
-        public void set_RoleList(List<object> newlist)
+        public void setRoleList(List<object> newlist)
         {
             Debug.Log("in set_RoleList<<<<<<<<");
             List<RoleData> list = new List<RoleData>();
