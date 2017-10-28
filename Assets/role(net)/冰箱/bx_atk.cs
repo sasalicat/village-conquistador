@@ -5,7 +5,7 @@ using UnityEngine;
 public class bx_atk : MonoBehaviour, CDEquipment
 {
     public float jishiqi = 1f   ;
-    public const float CD = 0.5f;//0.5f;
+    public const float CD = 1f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
 
@@ -21,7 +21,7 @@ public class bx_atk : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 42;
         }
     }
 

@@ -13,6 +13,7 @@ public class trainingManager : MonoBehaviour,Manager {
     public HpBarManager hpManage;
     public FloatingManager Floating;
     public SkillBroad broad;//手動拉取賦值
+    public GameObject leavePage;//手動拉取too
 
     //暂时的陪练游戏物件
     public GameObject AttackOnly;
@@ -100,6 +101,10 @@ public class trainingManager : MonoBehaviour,Manager {
                     break;
                 }
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            leavePage.SetActive(true);
         }
 	}
 }

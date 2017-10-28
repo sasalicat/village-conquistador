@@ -8,10 +8,12 @@ public class SkillStatements : MonoBehaviour {
     public class SkillText {
         public string name;
         public string statement;
-        public SkillText(string name,string statement)
+        public string consume;
+        public SkillText(string name,string statement,string consume)
         {
             this.name = name;
             this.statement = statement;
+            this.consume = consume;
         }
     }
 
@@ -28,8 +30,9 @@ public class SkillStatements : MonoBehaviour {
         {
             string name = node.Attributes["name"].Value;
             string statement = node.InnerText;
+            string consume = node.Attributes["cm"].Value;
             int index = int.Parse(node.Attributes["no"].Value);
-            skillTexts[index]=new SkillText(name, statement);
+            skillTexts[index]=new SkillText(name, statement,consume);
         }
 
         Debug.Log("在XML中有" + XmlDoc.GetElementsByTagName("skill").Count+"个单位");

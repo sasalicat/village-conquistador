@@ -58,6 +58,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26cc4264dd3c2343a12ea33d9d9e1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detailSkill: {fileID: 0}
+  detailIcon: {fileID: 0}
+  detailStatement: {fileID: 0}
+  detailName: {fileID: 0}
+  detailconsume: {fileID: 0}
+  storage: {fileID: 0}
+  statement: {fileID: 0}
+  no: 0
 --- !u!114 &114951061044710660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,7 +98,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 10000
 --- !u!222 &222739481819320346
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -112,6 +120,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: 0}
-  m_SizeDelta: {x: 1.35, y: 1.35}
+  m_AnchoredPosition: {x: 6.11, y: 0}
+  m_SizeDelta: {x: 3.57, y: 1.35}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -13,7 +13,7 @@ public class obs_protect_mask : ObstacleState{
         Debug.Log(timer_i + "秒");
         if (timer_i == 15)
         {
-            Destroy(this.gameObject);
+            this.DestoryObjInServer();
         }
     }
 

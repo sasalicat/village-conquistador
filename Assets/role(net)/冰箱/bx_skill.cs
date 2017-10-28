@@ -23,7 +23,7 @@ public class bx_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 43;
         }
     }
 

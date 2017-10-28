@@ -23,6 +23,8 @@ public class mis_bx_bx : ContortionData
         role.canAction = true;
         role.canMove = true;
         role.canRota = true;
+        role.immune_attack = false;
+        role.immune_skill = false;
     }
 
     public override void onInit(RoleState role)
@@ -30,6 +32,8 @@ public class mis_bx_bx : ContortionData
         role.canAction = false;
         role.canMove = false;
         role.canRota = false;
+        role.immune_attack = true;
+        role.immune_skill = true;
         Debug.Log("controtionSample onInit");
     }
 

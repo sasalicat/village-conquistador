@@ -24,7 +24,9 @@ public class hyy2_atk : Missile{
         if (other.gameObject != Creater && this.transform.position.z <= 0)
         {
             RoleState role = other.gameObject.GetComponent<RoleState>();
-            role.TakeDamage(Damage);
+            RoleState rolestate = Creater.GetComponent(typeof(RoleState)) as RoleState;
+            if (role != null && rolestate.team != role.team)
+                role.TakeDamage(Damage);
 
         }
     }

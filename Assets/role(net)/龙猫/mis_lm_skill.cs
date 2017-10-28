@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class mis_lm_skill : Missile
 {
-    public float hy_liveTime = 0.2f;
+    public float hy_liveTime = 0.1f;
     public float m_liveTime = 5;
     public MissileTable missletable;
     // Use this for initialization
@@ -22,7 +22,7 @@ public class mis_lm_skill : Missile
         Vector2 weizhi = this.transform.position;
         hy_liveTime -= Time.deltaTime;
         if (hy_liveTime <= 0) {
-            hy_liveTime = 0.2f;
+            hy_liveTime = 0.1f;
             GameObject newone = Instantiate(missletable.MissileList[15], Random.insideUnitCircle * 12 + weizhi, this.transform.rotation);
             Missile missile = newone.GetComponent<Missile>();
             missile.Creater = gameObject;

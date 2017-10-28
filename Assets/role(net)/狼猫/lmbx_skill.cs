@@ -22,7 +22,7 @@ public class lmbx_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 49;
         }
     }
 
@@ -98,6 +98,7 @@ public class lmbx_skill : MonoBehaviour, CDEquipment
 
         animator.SkillStart();
         this.transform.GetComponent<Controler>().addBuffByNo(4);
+        CDTime = CD;
     }
 
 

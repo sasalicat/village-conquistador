@@ -9,6 +9,11 @@ public interface KBControler : Controler{
         set;
         get;
     }
+     bool Alive//表示角色活着
+    {
+        get;
+
+    }
     void addOrder(Dictionary<string, object> item);
     void addTriggerOrder(sbyte eIndex,Dictionary<string,object> args);
     void addEvent(sbyte code, Dictionary<string, object> args);

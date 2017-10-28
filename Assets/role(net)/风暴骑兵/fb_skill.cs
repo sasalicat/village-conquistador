@@ -22,7 +22,7 @@ public class fb_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 41;
         }
     }
 
@@ -104,6 +104,7 @@ public class fb_skill : MonoBehaviour, CDEquipment
 
     public void trigger(Dictionary<string, object> args)
     {
+        CDTime = CD;
         atk = this.GetComponent(typeof(fb_atk)) as fb_atk;
         atk.CDTime = 0;
 

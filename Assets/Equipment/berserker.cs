@@ -50,11 +50,11 @@ public class berserker : MonoBehaviour,Equipment {
         if (isFist)
         {
             beforePercent = percent;
-            roleState.selfdata.power += (int)((1 - beforePercent) * 100);
+            roleState.Power += (int)((1 - beforePercent) * 100);
             isFist = false;
         }else
         {
-            roleState.selfdata.power += (int)((beforePercent - percent) * 100);
+            roleState.Power += (int)((beforePercent - percent) * 100);
             beforePercent = percent;
         }
         

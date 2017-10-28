@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mis_sawDefense : Missile
-{
+public class mis_sawDefense : Missile{
 
     private float existTime = 0;
   
@@ -28,11 +27,14 @@ public class mis_sawDefense : Missile
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject != Creater)
+        if (other.tag == "Player")
         {
             RoleState role = other.gameObject.GetComponent<RoleState>();
-            if(role!=null)
-                role.TakeDamage(Damage);
+            if (role.team != Creater.GetComponent<RoleState>().team)
+            {
+                if (role != null)
+                    role.TakeDamage(Damage);
+            }
         }
     }
 }

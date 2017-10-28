@@ -21,7 +21,6 @@ public class mis_tjs_atk : Missile{
         if (zhuangtai == 1)
         {
             Speed = m_liveTime * 15;
-            Debug.Log(m_liveTime);
             m_liveTime -= Time.deltaTime;
 
             transform.Translate(0, Speed * Time.deltaTime, 0, Space.Self);
@@ -49,7 +48,8 @@ public class mis_tjs_atk : Missile{
             //Debug.Log(other.name);
             //Debug.Log(" on trigger enter 2D");
             RoleState role = other.gameObject.GetComponent<RoleState>();
-            if (role != null)
+            RoleState rolestate = Creater.GetComponent(typeof(RoleState)) as RoleState;
+            if (role != null && rolestate.team != role.team)
                 role.TakeDamage(Damage);
 
         }

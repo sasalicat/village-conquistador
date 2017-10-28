@@ -55,7 +55,7 @@ public class protect_mask : MonoBehaviour, CDEquipment
         get
         {
             Debug.Log(" in can use CDTime is" + CDTime);
-            return (CDTime <= 0);//如果CDTime小於0代表技能可以使用
+            return (CDTime <= 0&&selfState.nowMp>= Consumption);//如果CDTime小於0代表技能可以使用
         }
     }
     public float TimeLeft
@@ -74,7 +74,7 @@ public class protect_mask : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;//因為是攻擊所以無消耗
+            return 20;
         }
     }
 
@@ -98,7 +98,7 @@ public class protect_mask : MonoBehaviour, CDEquipment
         Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, mousePosition, new Vector3(0, -1, 0));//獲得相對座標
 
         //用來創建障礙物
-        NetManager.createObstacle(gameObject, origenPlayerPosition, 3);
+        NetManager.createObstacle(gameObject, origenPlayerPosition, 3,300);
         anim.AttackStart();
 
         CDTime = CD;//技能冷卻
@@ -108,5 +108,6 @@ public class protect_mask : MonoBehaviour, CDEquipment
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         this.anim = anim;
+        selfState = state;
     }
 }

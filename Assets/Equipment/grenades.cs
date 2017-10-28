@@ -57,8 +57,7 @@ public class grenades : MonoBehaviour, CDEquipment
     {
         get
         {
-            Debug.Log(" in can use CDTime is" + CDTime);
-            return (CDTime <= 0);//如果CDTime小於0代表技能可以使用
+            return (CDTime <= 0);
         }
     }
     public float TimeLeft
@@ -77,7 +76,7 @@ public class grenades : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;//因為是攻擊所以無消耗
+            return 0;
         }
     }
 
@@ -106,9 +105,9 @@ public class grenades : MonoBehaviour, CDEquipment
         Missile missile = newone.GetComponent<Missile>();
         missile.Creater = gameObject;
         //创建伤害物件
-        int num = (int)(BaseDamage + BaseDamage * ((float)selfState.selfdata.power / 100));
-        float stiff = BaseStiff + BaseStiff * (((float)selfState.selfdata.stiffable) / 100);
-        missile.Damage = new damage(1, num, stiff, false, false, gameObject);
+        int num = Attribute.GetSpecialDamageNum(BaseDamage,selfState.Skill);
+        
+        missile.Damage = new damage(1, num, 0, true, true, gameObject);
 
         ((mis_grenades)missile).origenPlayerPosition = origenPlayerPosition;
         ((mis_grenades)missile).mousePosition = mousePosition;

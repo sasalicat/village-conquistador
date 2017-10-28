@@ -36,6 +36,7 @@ public class NetControler : MonoBehaviour,KBControler{
     private string[] buffTable;
     private int index;
     private List<sbyte> limit;
+    private bool alive = true;
     //装备事件
     _on_trigger on_attack;
 
@@ -78,7 +79,13 @@ public class NetControler : MonoBehaviour,KBControler{
             entity = value;
         }
     }
-
+    public bool Alive//表示角色活着
+    {
+        get
+        {
+            return alive;
+        }
+    }
     public EquipmentList equipmentList
     {
         get
@@ -434,17 +441,20 @@ public class NetControler : MonoBehaviour,KBControler{
                         {
                             on_take_damage(EventLine[0].Args);
                         }
-                        KBControler damageControler = damage.damager.GetComponent<KBControler>();
-                        if (damageControler.On_Cause_Damage != null)
+                        if (damage.damager != null)
                         {
-                            Dictionary<string, object> Arg = new Dictionary<string, object>();
-                            Arg["Damage"] = damage;
-                            Arg["PlayerPosition"] = EventLine[0].Args["DamagerPosition"];
-                            Arg["TragetPosition"] = EventLine[0].Args["PlayerPosition"];
-                            Arg["randomPoint"] = EventLine[0].Args["randomPoint"];
-                            Arg["Traget"] = this.gameObject;
-                            //Arg["Traget"]=
-                            damageControler.On_Cause_Damage(Arg);
+                            KBControler damageControler = damage.damager.GetComponent<KBControler>();
+                            if (damageControler.On_Cause_Damage != null)
+                            {
+                                Dictionary<string, object> Arg = new Dictionary<string, object>();
+                                Arg["Damage"] = damage;
+                                Arg["PlayerPosition"] = EventLine[0].Args["DamagerPosition"];
+                                Arg["TragetPosition"] = EventLine[0].Args["PlayerPosition"];
+                                Arg["randomPoint"] = EventLine[0].Args["randomPoint"];
+                                Arg["Traget"] = this.gameObject;
+                                //Arg["Traget"]=
+                                damageControler.On_Cause_Damage(Arg);
+                            }
                         }
                         state.realHurt((damage)EventLine[0].Args["Damage"]);
                         HpChangeHappen();

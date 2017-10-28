@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114992531686377538}
   - component: {fileID: 58316340235010054}
   - component: {fileID: 114639142304584834}
+  - component: {fileID: 50165147639395326}
   m_Layer: 0
   m_Name: "\u9632\u8B77\u7F69"
   m_TagString: Untagged
@@ -38,12 +39,32 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1178681234940520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.5298367, y: 2.089532, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50165147639395326
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178681234940520}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58316340235010054
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -57,7 +78,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.515
+  m_Radius: 5.5
 --- !u!95 &95240065314472052
 Animator:
   serializedVersion: 3
@@ -117,28 +138,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8cf9de620e16a46bfee619ea08be2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasStart: 0
   selfdata: {fileID: 0}
   anima: {fileID: 0}
+  team: 0
+  realspeed: 5
+  damageReduce: 0
+  specialReduce: 0
   maxHp: 0
   nowHp: 0
-  nowMp: 0
   nowStiff: 0
   nowConversely: 0
   energyRecover_Second: 0
-  speed: 0
-  immune_attack: 0
-  immune_skill: 0
-  nonlife: 0
-  fastened: 0
-  tools: 0
-  canBeExiled: 1
-  canBeStiff: 1
-  canBeConvesly: 1
-  canBeKill: 1
-  canBetreat: 1
-  conversely: 0
-  alive: 1
-  exiled: 1
+  speedRate: 1
   Creater: {fileID: 0}
   Kind: 0
   nullCallTimes: 0

@@ -24,7 +24,7 @@ public class tjs_attack : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 2;
         }
     }
 
@@ -122,7 +122,6 @@ public class tjs_attack : MonoBehaviour, CDEquipment
         CDTime = CD;//技能冷卻
         //Debug.Log("in trigger CDTime is" + CDTime);
         animator.AttackStart();
-
 
     }
 

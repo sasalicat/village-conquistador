@@ -22,7 +22,7 @@ public class lm_atk : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 17;
         }
     }
 
@@ -145,9 +145,9 @@ public class lm_atk : MonoBehaviour, CDEquipment
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        missilePraf = table.MissileList[21];
-        missilePraf2 = table.MissileList[22];
-        missilePraf3 = table.MissileList[23];
+        missilePraf = table.MissileList[28];
+        missilePraf2 = table.MissileList[29];
+        missilePraf3 = table.MissileList[30];
         this.selfState = state;
     }
 }

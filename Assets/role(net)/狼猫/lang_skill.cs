@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class lang_skill : MonoBehaviour, CDEquipment
 {
-    public const float CD = 5f;//0.5f;
+    public const float CD = 20f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
 
-    public float CDTime = 0;
+    public float CDTime = 20f;
     public sbyte index;
     const short selfMissileNo = 0;
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
@@ -22,7 +22,7 @@ public class lang_skill : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 47;
         }
     }
 
@@ -99,6 +99,7 @@ public class lang_skill : MonoBehaviour, CDEquipment
         animator.SkillStart();
         
         this.GetComponent<Controler>().distortionByNo(2);
+        
     }
 
 

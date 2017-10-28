@@ -7,7 +7,7 @@ using System;
 
 public class rush : MonoBehaviour, CDEquipment
 {
-    public const float CD = 0.5f;//0.5f;
+    public const float CD = 4f;//0.5f;
     public const int BaseDamage = 200;
     public const float BaseStiff = 4f;
 

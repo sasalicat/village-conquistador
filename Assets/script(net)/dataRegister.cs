@@ -33,6 +33,8 @@ public class dataRegister : MonoBehaviour {
                 rolelist = value;
                 if (onRoleListChange != null)//通知观察者资料更新
                 {
+                    Debug.Log("call on role list change");
+                    Debug.Log("skill 5 is" + rolelist[0].equipmentIdList[5]);
                     onRoleListChange(rolelist);
                 }
                 if (nowRoleIndex >= rolelist.Count)//如果选择index比角色列表还长,如果能够删除角色则可能发生

@@ -39,6 +39,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private RuntimeAnimatorController originAnim;
     private int index;
     private List<sbyte> limit;
+    private bool alive = true;
 
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
@@ -74,6 +75,13 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     //新架構儲存觸發物件
 
     List<Equipment> onAttackLine=new List<Equipment>();
+    public bool Alive//表示角色活着
+    {
+        get
+        {
+            return alive;
+        }
+    }
     public Entity Entity
     {
         get
@@ -547,17 +555,20 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                             {
                                 Debug.Log("takedamage null");
                             }
-                            KBControler damageControler=damage.damager.GetComponent<KBControler>();
-                            if (damageControler.On_Cause_Damage!=null)
+                            if (damage.damager != null)
                             {
-                                Dictionary<string, object> Arg = new Dictionary<string, object>();
-                                Arg["Damage"] = damage;
-                                Arg["PlayerPosition"] = EventLine[0].Args["DamagerPosition"];
-                                Arg["TragetPosition"] = EventLine[0].Args["PlayerPosition"];
-                                Arg["randomPoint"]= EventLine[0].Args["randomPoint"];
-                                Arg["Traget"] = this.gameObject;
-                                //Arg["Traget"]=
-                                damageControler.On_Cause_Damage(Arg);
+                                KBControler damageControler = damage.damager.GetComponent<KBControler>();
+                                if (damageControler.On_Cause_Damage != null)
+                                {
+                                    Dictionary<string, object> Arg = new Dictionary<string, object>();
+                                    Arg["Damage"] = damage;
+                                    Arg["PlayerPosition"] = EventLine[0].Args["DamagerPosition"];
+                                    Arg["TragetPosition"] = EventLine[0].Args["PlayerPosition"];
+                                    Arg["randomPoint"] = EventLine[0].Args["randomPoint"];
+                                    Arg["Traget"] = this.gameObject;
+                                    //Arg["Traget"]=
+                                    damageControler.On_Cause_Damage(Arg);
+                                }
                             }
                             state.realHurt(damage);
                             //触发血量变动事件
@@ -566,6 +577,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                             {
                                 Dictionary<string, object> diedArg = new Dictionary<string, object>();
                                 diedArg["Killer"] = (damage).damager;
+                                alive = false;
                                 Entity.cellCall("notifyDied", new object[] {(sbyte)0});
 
                             }
@@ -746,9 +758,16 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         short num = (short)damage.num;
         //处理成为毫秒用short形态传输节省流量:乘以1000后省去小数点后
         short stiffMilli = (short)(damage.stiffTime*1000);
+        sbyte damagerNo = -1;
+        Vector3 damagerPos = Vector3.zero;
+        if (damage.damager != null)
+        {
+            damagerNo = damage.damager.GetComponent<NetRoleState>().roomNo;
+            damagerPos=damage.damager.transform.position;
+        }
+        
 
-        sbyte damagerNo = damage.damager.GetComponent<NetRoleState>().roomNo;
-        Vector3 damagerPos = damage.damager.transform.position;
+        
         Debug.Log("player:" + player + " damage:" + damage);
         ((Player)KBEngineApp.app.player()).cellCall("notify4", new object[] { transform.position, transform.eulerAngles, damagerPos, damagerNo, kind, num, stiffMilli, damage.makeConversaly, damage.hitConversely });
 
