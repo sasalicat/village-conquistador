@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -4017,7 +4017,7 @@ MonoBehaviour:
   - chillWave
   - 
   - 
-  passiveList: 010001010100010101010101000000010101010101000000010000010100000000000100000000000101010101010101010101000101010101010000
+  passiveList: 010001010100010101010101000000010101010101000000010000010100000000000000000000000101010101010101010101000101010101010000
   buffNameList:
   - buffForTask
   - mis_nq_buff
