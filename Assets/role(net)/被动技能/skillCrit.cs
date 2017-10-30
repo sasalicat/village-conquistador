@@ -46,7 +46,7 @@ public class skillCrit : MonoBehaviour, Equipment
     public void trigger(Dictionary<string, object> args)
     {
         Debug.Log("GameObject~~~   " + gameObject);
-        int random = (int)args["randomPoint"];
+        sbyte random = (sbyte)args["randomPoint"];
         damage damage1 = (damage)args["Damage"];
         if (damage1.kind == 2 && random <= 30)
         {
