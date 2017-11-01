@@ -22,7 +22,7 @@ public class hyy_atk : Missile
             Destroy(this.gameObject);
             GameObject newone = Instantiate(missletable.MissileList[20], this.transform.position, this.transform.rotation);
             Missile missile = newone.GetComponent<Missile>();
-            missile.Creater = gameObject;
+            missile.Creater = this.Creater;
             missile.Damage = this.Damage;
         }
 

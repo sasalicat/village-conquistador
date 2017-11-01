@@ -128,10 +128,11 @@ public class lm_atk : MonoBehaviour, CDEquipment
         //创建伤害物件
         unit u = this.GetComponent<unit>();
         int num = Attribute.GetAttackDamageNum(40, u.power);
-        
-        missile1.Damage = new damage(1, num, 0, false, false, gameObject);
-        missile2.Damage = new damage(1, num, 0, false, false, gameObject);
-        missile3.Damage = new damage(1, num, 0, false, false, gameObject);
+        float stiff = Attribute.getRealStiff(0.2f, u.stiffable);
+
+        missile1.Damage = new damage(1, num, stiff, false, false, gameObject);
+        missile2.Damage = new damage(1, num, stiff, false, false, gameObject);
+        missile3.Damage = new damage(1, num, stiff, false, false, gameObject);
 
 
         
