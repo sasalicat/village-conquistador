@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class damageReduce : MonoBehaviour,CDEquipment
+public class damageReduce : MonoBehaviour,Equipment
 {
     public float CDTime = 0;
     public sbyte index;

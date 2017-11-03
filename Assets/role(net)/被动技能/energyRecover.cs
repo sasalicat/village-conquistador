@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class energyRecover : MonoBehaviour,CDEquipment
+public class energyRecover : MonoBehaviour,Equipment
 {
     public float CDTime = 0;
     public sbyte index;

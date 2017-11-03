@@ -121,7 +121,7 @@ public class xs_atk : MonoBehaviour, CDEquipment
         CDTime = CD;//技能冷卻
         //Debug.Log("in trigger CDTime is" + CDTime);
         animator.AttackStart();
-
+        
 
     }
 
@@ -129,8 +129,10 @@ public class xs_atk : MonoBehaviour, CDEquipment
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        missilePraf = table.MissileList[26];
+        missilePraf = table.MissileList[41];
         this.selfState = state;
         this.animator = anim;
+
+        missilePraf.transform.localScale *= 0.7f;
     }
 }

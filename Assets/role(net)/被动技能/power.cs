@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class power : MonoBehaviour,CDEquipment
+public class power : MonoBehaviour,Equipment
 {
     public float CDTime = 0;
     public sbyte index;

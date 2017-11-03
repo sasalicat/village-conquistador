@@ -114,6 +114,7 @@ MonoBehaviour:
   selfdata: {fileID: 0}
   anima: {fileID: 0}
   team: 0
+  realspeed: 5
   damageReduce: 0
   specialReduce: 0
   maxHp: 0
@@ -124,6 +125,9 @@ MonoBehaviour:
   speedRate: 1
   roomNo: 0
   islocal: 0
+  immuneTime: 0
+  render: {fileID: 0}
+  nowcolor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114107999035813282
 MonoBehaviour:
   m_ObjectHideFlags: 1
