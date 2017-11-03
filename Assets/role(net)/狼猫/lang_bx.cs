@@ -6,7 +6,7 @@ public class lang_bx : ContortionData
 {
     public lang_bx()
     {
-        this.equipmentNos = new List<sbyte> { 46, 47 };
+        this.equipmentNos = new List<sbyte> { 48, 49 };
     }
 
     public override float Duration

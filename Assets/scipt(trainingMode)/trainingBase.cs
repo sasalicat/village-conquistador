@@ -10,6 +10,7 @@ public class trainingBase : MonoBehaviour,Controler {
     _on_trigger on_Hp_change;
     _on_trigger on_cause_damage;
     _on_trigger on_mp_change;
+    _on_trigger on_active_skill;
 
     _on_skill_key_down on_left_down;
     _on_skill_key_down on_right_down;
@@ -197,6 +198,19 @@ public class trainingBase : MonoBehaviour,Controler {
         set
         {
             limit = value;
+        }
+    }
+
+    public _on_trigger On_Active_Skill
+    {
+        get
+        {
+            return on_active_skill;
+        }
+
+        set
+        {
+            on_active_skill = value;
         }
     }
 

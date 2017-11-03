@@ -1692,6 +1692,7 @@ MonoBehaviour:
   finishTable: 000000000000
   intervals: 0
   overFlag: 0
+  useBot: 0
 --- !u!114 &856139170
 MonoBehaviour:
   m_ObjectHideFlags: 0

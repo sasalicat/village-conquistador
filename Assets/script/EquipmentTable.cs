@@ -13,8 +13,9 @@ public class EquipmentTable : MonoBehaviour {
     public const sbyte ON_HP_CHANGE = 5;
     public const sbyte ON_CAUSE_DAMAGE = 6;
     public const sbyte NO_TRIGGER = 7;
-	// Use this for initialization
-	void Start () {
+    public const sbyte ON_ACTIVE_SKILL = 8;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

@@ -58,7 +58,6 @@ public class tjs_attack : MonoBehaviour, CDEquipment
     {
         get
         {
-            Debug.Log(" in can use CDTime is" + CDTime);
             return (CDTime <= 0);//如果CDTime小於0代表技能可以使用
         }
     }

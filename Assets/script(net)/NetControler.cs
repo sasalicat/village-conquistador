@@ -67,6 +67,7 @@ public class NetControler : MonoBehaviour,KBControler{
     _on_trigger on_Hp_change;
     _on_trigger on_cause_damage;
     _on_trigger on_mp_change;
+    _on_trigger on_active_skill;
     public Entity Entity
     {
         get
@@ -195,6 +196,18 @@ public class NetControler : MonoBehaviour,KBControler{
         }
     }
 
+    public _on_trigger On_Active_Skill
+    {
+        get
+        {
+            return on_active_skill;
+        }
+
+        set
+        {
+            on_active_skill = value;
+        }
+    }
     public _on_skill_key_down get_on_key1_down()
     {
         return on_key1_down;

@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a979b7f662629894684674abf982bf07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VectoryLabel: {fileID: 1667700797}
 --- !u!1 &1570885032
 GameObject:
   m_ObjectHideFlags: 0

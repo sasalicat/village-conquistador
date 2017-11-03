@@ -25,6 +25,7 @@ public class NetManager : MonoBehaviour ,Manager {
     public bool[] finishTable = new bool[MAX_NUM];
     public int intervals = 0;//累积的时间间隔触发次数
     public bool overFlag = false;//为true时执行页面切换
+    public bool useBot = false;
 
     private bool first = true;//第一个update的flag用于BaseCallonChangToWar
 
@@ -191,6 +192,11 @@ public class NetManager : MonoBehaviour ,Manager {
                         follow.MainRole = objList[i];//使镜头跟随主角
                         broad.mainRoleElist = objList[i].GetComponent<EquipmentList>();//設置技能顯示
                         elist.on_AH_change += broad.changeAllLabel;
+                        //增加机器人脚本
+                        if (useBot)
+                        {
+                            objList[i].AddComponent<AI_forTask>().manager=this;
+                        }
                     }
                     else
                     {
@@ -216,7 +222,9 @@ public class NetManager : MonoBehaviour ,Manager {
                     objList[i].GetComponent<NetRoleState>().team = register.PlayerInWar[i].team;
                     objList[i].transform.position = e.position;
                     objList[i].SetActive(true);
-                    hpBarCreater.CreateHpBar(objList[i],i);
+                    string name = register.PlayerInWar[i].name;
+                    string team = "队伍 " + register.PlayerInWar[i].team;
+                    hpBarCreater.CreateHpBar(objList[i],i,name,team);
 
                     finishTable[i] = true;
                     if (checkFinish())//如果本地段都全部完成则通知server本client已经完成加载

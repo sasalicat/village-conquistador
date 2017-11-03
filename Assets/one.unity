@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -618,9 +618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd6000c4a08a6a49bf88a677547458b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forDebug: 0
+  forDebug: 1
   roleNo: 5
-  equipmentNoList: 1112
+  equipmentNoList: 2c2d3a
   winnerno: 5
 --- !u!1 &415577943
 GameObject:
@@ -4009,15 +4009,15 @@ MonoBehaviour:
   - lmbx_skill
   - mg_skill
   - reduce
-  - knifeshot
+  - kniftShot
   - spear
   - trample
   - sawAttack
   - flameWave
   - chillWave
+  - probiliticBurn
   - 
-  - 
-  passiveList: 010001010100010101010101000000010101010101000000010000010100000000000000000000000101010101010101010101000101010101010000
+  passiveList: 010001010100010101010101000000010101010101000000010000010000000000000000000000000101010101010101010101000101010101010000
   buffNameList:
   - buffForTask
   - mis_nq_buff
@@ -4093,6 +4093,16 @@ MonoBehaviour:
   - {fileID: 1717626954473238, guid: 29e27987efaaa3b4785aa1c44144c990, type: 2}
   - {fileID: 1912187183179368, guid: 100114f97d0764e48868a4e0c6bcffd3, type: 2}
   - {fileID: 1169953526824120, guid: 928c999292499fb4e8a48bbc726e1b0a, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
+  - {fileID: 1519618964451002, guid: eab95f1c5fbc057479da42ccd5b28d83, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
+  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
   - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
 --- !u!114 &1995136367
 MonoBehaviour:

@@ -124,6 +124,7 @@ public class BorderState : RoleState,Controler {
         set;
         get;
     }
+
     public int Index
     {
         set;
@@ -134,6 +135,20 @@ public class BorderState : RoleState,Controler {
         get;
         set;
     }
+
+    public _on_trigger On_Active_Skill
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     void addBuffByNo(sbyte no)
     {
 

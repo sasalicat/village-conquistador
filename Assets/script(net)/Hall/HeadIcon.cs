@@ -21,7 +21,7 @@ public class HeadIcon : MonoBehaviour {
         register = GameObject.Find("client").GetComponent<dataRegister>();
         storage = GameObject.Find("Icons").GetComponent<IconStorage>();
         //Debug.Log("head:" + head + "storage:" + storage+"headIcon:"+storage.headIcon+"Icon:"+ storage.headIcon[register.roleNo]);
-        head.sprite = storage.headIcon[register.roleNo];
+        head.sprite = storage.headIcon[register.roleList[0].roleKind];
     }
 	
 	// Update is called once per frame

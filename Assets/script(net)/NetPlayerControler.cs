@@ -72,6 +72,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     _on_trigger on_Hp_change;
     _on_trigger on_cause_damage;
     _on_trigger on_mp_change;
+    _on_trigger on_active_skill;
     //新架構儲存觸發物件
 
     List<Equipment> onAttackLine=new List<Equipment>();
@@ -273,6 +274,19 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         set
         {
             limit = value;
+        }
+    }
+
+    public _on_trigger On_Active_Skill
+    {
+        get
+        {
+            return on_active_skill;
+        }
+
+        set
+        {
+            on_active_skill = value;
         }
     }
 

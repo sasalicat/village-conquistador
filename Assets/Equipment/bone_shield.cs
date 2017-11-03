@@ -49,7 +49,6 @@ public class bone_shield : MonoBehaviour, CDEquipment
     public void setTime(float time)
     {
         CDTime -= time;//減少CD時間
-        Debug.Log("時間："+CDTime+"  ~~~~~~~~~~~~~~");
         if (CDTime <= 0)
         {
             if(newone.Count < 5) { 

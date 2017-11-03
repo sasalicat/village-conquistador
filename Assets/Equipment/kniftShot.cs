@@ -82,7 +82,7 @@ public class kniftShot : MonoBehaviour,CDEquipment {
     public void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
          getVector= GameObject.Find("keyTabel").GetComponent<getVector>();
-        kniftPraf = table.MissileList[28];
+        kniftPraf = table.MissileList[31];
         this.state = state;
         this.anim = anim;
     }

@@ -45,7 +45,7 @@ public class flameBuff : Buff {
         nexthurt -= timeBetween;
         if (nexthurt < 0)
         {
-            role.TakeDamage(new damage(2,15,0,false,false,causer));
+            role.TakeDamage(new damage(2,15,0,false,false,null));
             nexthurt +=1;
         }
     }

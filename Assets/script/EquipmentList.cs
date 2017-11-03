@@ -290,6 +290,11 @@ public class EquipmentList : MonoBehaviour {
                         controler.On_Cause_Damage += ((Equipment)newone).trigger;
                         break;
                     }
+                case EquipmentTable.ON_ACTIVE_SKILL:
+                    {
+                        controler.On_Active_Skill += ((Equipment)newone).trigger;
+                        break;
+                    }
             }
         }
 

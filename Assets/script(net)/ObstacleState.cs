@@ -163,6 +163,20 @@ public class ObstacleState : RoleState,Controler {//相当于控制器和State�
         get;
         set;
     }
+
+    public _on_trigger On_Active_Skill
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     void addBuffByNo(sbyte no)
     {
 

@@ -76,6 +76,11 @@ public interface Controler
         set;
         get;
     }
+    _on_trigger On_Active_Skill
+    {
+        set;
+        get;
+    }
     int Index
     {
         set;
