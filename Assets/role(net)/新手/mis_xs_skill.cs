@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mis_xs_atk : Missile
+public class mis_xs_skill    : Missile
 {
 
     public float m_liveTime = 2;
@@ -10,7 +10,7 @@ public class mis_xs_atk : Missile
     // Use this for initialization
     void Start()
     {
-        this.transform.localScale *= 0.7f;
+
     }
 
     // Update is called once per frame

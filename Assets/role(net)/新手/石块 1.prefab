@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4635761134447722}
   - component: {fileID: 212370005407231102}
   - component: {fileID: 70801049448044458}
-  - component: {fileID: 114036189491892862}
+  - component: {fileID: 114194933233326748}
   m_Layer: 0
-  m_Name: "\u77F3\u5757"
+  m_Name: "\u77F3\u5757 1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 2.1200001, y: 2.25}
   m_Direction: 0
---- !u!114 &114036189491892862
+--- !u!114 &114194933233326748
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1663977188512488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 129b1f5d2e8a4ea4aa35b313a97dd4ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 27e0f51072301aa4a92c23fb3478c3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_liveTime: 2

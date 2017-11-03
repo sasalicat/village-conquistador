@@ -132,7 +132,5 @@ public class xs_atk : MonoBehaviour, CDEquipment
         missilePraf = table.MissileList[41];
         this.selfState = state;
         this.animator = anim;
-
-        missilePraf.transform.localScale *= 0.7f;
     }
 }
