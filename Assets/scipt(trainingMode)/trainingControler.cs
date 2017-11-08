@@ -11,6 +11,7 @@ public class trainingControler : MonoBehaviour,Controler {
     _on_trigger on_cause_damage;
     _on_trigger on_mp_change;
     _on_trigger on_active_skill;
+    _on_trigger after_take_damage;
 
     _on_skill_key_down on_left_down;
     _on_skill_key_down on_right_down;
@@ -218,6 +219,19 @@ public class trainingControler : MonoBehaviour,Controler {
         }
     }
 
+    public _on_trigger After_take_damage
+    {
+        get
+        {
+            return after_take_damage;
+        }
+
+        set
+        {
+            after_take_damage = value;
+        }
+    }
+
     public _on_skill_key_down get_on_key1_down()
     {
         return on_key1_down;
@@ -318,15 +332,16 @@ public class trainingControler : MonoBehaviour,Controler {
                      
                     }
                 }
-                else
-                {
-                    Debug.Log("do not need cast");
+
                     Dictionary<string, object> args = new Dictionary<string, object>();
                     args["PlayerPosition"] = transform.position;
                     args["MousePosition"] = mousePos;
                     args["randomPoint"] = UnityEngine.Random.Range(0,100);
                     state.nowMp -= ((CDEquipment)eList.equipments[KeyCode]).Consumption;
                     eList.equipments[KeyCode].trigger(args);
+                if (on_active_skill != null)
+                {
+                    on_active_skill(args);
                 }
             }
         }

@@ -27,7 +27,7 @@ public class HpBarControler : MonoBehaviour {
     {
         rect = hpline.GetComponent<RectTransform>();
         role.GetComponent<Controler>().On_Hp_Change += HpChange;
-        role.GetComponent<Controler>().On_Take_Damage += TakeDamage;
+        role.GetComponent<Controler>().After_take_damage += TakeDamage;
         role.GetComponent<Controler>().On_MP_Change += MPChange;
     }
     public void HpChange(Dictionary<string,object> arg)

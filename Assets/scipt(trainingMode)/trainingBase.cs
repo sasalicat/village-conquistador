@@ -11,6 +11,7 @@ public class trainingBase : MonoBehaviour,Controler {
     _on_trigger on_cause_damage;
     _on_trigger on_mp_change;
     _on_trigger on_active_skill;
+    _on_trigger after_take_damage;
 
     _on_skill_key_down on_left_down;
     _on_skill_key_down on_right_down;
@@ -211,6 +212,19 @@ public class trainingBase : MonoBehaviour,Controler {
         set
         {
             on_active_skill = value;
+        }
+    }
+
+    public _on_trigger After_take_damage
+    {
+        get
+        {
+            return after_take_damage;
+        }
+
+        set
+        {
+            after_take_damage = value;
         }
     }
 

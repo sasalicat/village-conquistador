@@ -177,6 +177,19 @@ public class ObstacleState : RoleState,Controler {//相当于控制器和State�
         }
     }
 
+    public _on_trigger After_take_damage
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     void addBuffByNo(sbyte no)
     {
 

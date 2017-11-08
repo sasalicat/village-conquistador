@@ -73,6 +73,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     _on_trigger on_cause_damage;
     _on_trigger on_mp_change;
     _on_trigger on_active_skill;
+    _on_trigger after_take_damage;
     //新架構儲存觸發物件
 
     List<Equipment> onAttackLine=new List<Equipment>();
@@ -287,6 +288,19 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         set
         {
             on_active_skill = value;
+        }
+    }
+
+    public _on_trigger After_take_damage
+    {
+        get
+        {
+            return after_take_damage;
+        }
+
+        set
+        {
+            after_take_damage = value;
         }
     }
 
@@ -533,7 +547,10 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                 Debug.Log("netPlayerControler eIndex is"+temp.eIndex);
                 state.nowMp -= ((CDEquipment)eList.equipments[temp.eIndex]).Consumption;
                 eList.equipments[temp.eIndex].trigger(temp.Args);
-              
+                if (on_active_skill != null)
+                {
+                    on_active_skill(temp.Args);
+                }
                 eTriggerLine.RemoveAt(0);
             }
             while (EventLine.Count > 0)
@@ -585,6 +602,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                                 }
                             }
                             state.realHurt(damage);
+                            after_take_damage(EventLine[0].Args);
                             //触发血量变动事件
                             HpChangeHappen();
                             if (state.nowHp<=0)

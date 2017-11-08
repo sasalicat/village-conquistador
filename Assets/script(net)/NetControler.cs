@@ -68,6 +68,7 @@ public class NetControler : MonoBehaviour,KBControler{
     _on_trigger on_cause_damage;
     _on_trigger on_mp_change;
     _on_trigger on_active_skill;
+    _on_trigger after_take_damage;
     public Entity Entity
     {
         get
@@ -208,6 +209,20 @@ public class NetControler : MonoBehaviour,KBControler{
             on_active_skill = value;
         }
     }
+
+    public _on_trigger After_take_damage
+    {
+        get
+        {
+            return after_take_damage;
+        }
+
+        set
+        {
+            after_take_damage = value;
+        }
+    }
+
     public _on_skill_key_down get_on_key1_down()
     {
         return on_key1_down;
@@ -440,7 +455,10 @@ public class NetControler : MonoBehaviour,KBControler{
             Debug.Log("eindex is" + temp.eIndex);
             state.nowMp -= ((CDEquipment)eList.equipments[temp.eIndex]).Consumption;
             eList.equipments[temp.eIndex].trigger(temp.Args);
-
+            if (on_active_skill != null)
+            {
+                on_active_skill(temp.Args);
+            }
             eTriggerLine.RemoveAt(0);
            
         }
@@ -470,6 +488,7 @@ public class NetControler : MonoBehaviour,KBControler{
                             }
                         }
                         state.realHurt((damage)EventLine[0].Args["Damage"]);
+                        after_take_damage(EventLine[0].Args);
                         HpChangeHappen();
                         break;
                     }

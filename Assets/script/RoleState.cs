@@ -119,6 +119,7 @@ public class RoleState : MonoBehaviour {
                 role.control.On_Cause_Damage(RoleState.CreateCauseDamageArg(role,damage));
             }
             hurt(damage);
+            role.control.After_take_damage(RoleState.CreateTakeDamageArg(role, damage));
             role.control.On_Hp_Change(RoleState.CreateChangeArg(role));
         }
         private void hurt(damage damage)
@@ -296,6 +297,7 @@ public class RoleState : MonoBehaviour {
                 role.control.On_Cause_Damage(RoleState.CreateCauseDamageArg(role, damage));
             }
             hurt(damage);
+            role.control.After_take_damage(RoleState.CreateTakeDamageArg(role, damage));
             role.control.On_Hp_Change(RoleState.CreateChangeArg(role));
         }
     }

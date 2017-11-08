@@ -149,6 +149,19 @@ public class BorderState : RoleState,Controler {
         }
     }
 
+    public _on_trigger After_take_damage
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     void addBuffByNo(sbyte no)
     {
 

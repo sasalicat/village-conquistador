@@ -81,6 +81,11 @@ public interface Controler
         set;
         get;
     }
+    _on_trigger After_take_damage
+    {
+        set;
+        get;
+    }
     int Index
     {
         set;

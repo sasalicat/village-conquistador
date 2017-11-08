@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
+using UnityEngine.UI;
 
 public class SkillStatements : MonoBehaviour {
+    public Text show;
     public SkillText[] skillTexts;
     public class SkillText {
         public string name;
@@ -23,6 +25,7 @@ public class SkillStatements : MonoBehaviour {
         skillTexts = new SkillText[skillnum];
 
         string url = Application.dataPath + "/SkillStatement.xml";
+        show.text = url;
         XmlDocument XmlDoc = new XmlDocument();
         XmlDoc.Load(url);
         XmlNodeList XMllist = XmlDoc.GetElementsByTagName("skill");
