@@ -389,16 +389,16 @@ public class RoleState : MonoBehaviour {
                 {
                     if (!role.immune_attack)
                     {
-                        damage.num -= (int)(damage.num * (((float)role.selfdata.damageReduce) / 100));
-                        damage.stiffTime -= (int)(damage.stiffTime * (((float)role.selfdata.stiffReduce) / 100));
+                        damage.num = Attribute.ReduceAttackDamageNum(damage.num, role.selfdata.damageReduce);
+                        damage.stiffTime= Attribute.ReduceStiff(damage.stiffTime, role.selfdata.stiffReduce);
                     }
                 }
                 else if (damage.kind == 2)
                 {
                     if (!role.immune_skill)
                     {
-                        damage.num -= (int)(damage.num * (((float)role.selfdata.specialReduce) / 100));
-                        damage.stiffTime -= (int)(damage.stiffTime * (((float)role.selfdata.stiffReduce) / 100));
+                        damage.num = Attribute.ReduceSpecialDamageNum(damage.num, role.selfdata.damageReduce);
+                        damage.stiffTime = Attribute.ReduceStiff(damage.stiffTime, role.selfdata.stiffReduce);
                     }
                 }
                 if (role.control.On_Take_Damage != null)

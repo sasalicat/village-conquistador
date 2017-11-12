@@ -136,17 +136,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d6392f596b68d438f3612873dd08f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 0
-  skill: 0
-  physique: 0
+  power: 30
+  skill: 15
+  physique: 25
   energyRecover: 0
   accelerate: 0
   stiffable: 0
   stiffReduce: 0
   rechargeLifeRecover: 0
   rechargeEnergyRecover: 0
-  damageReduce: 0
-  specialReduce: 0
+  damageReduce: 15
+  specialReduce: 15
   stiffTime: 0
   converselyTime: 0
   action: 1
@@ -171,6 +171,7 @@ MonoBehaviour:
   selfdata: {fileID: 0}
   anima: {fileID: 0}
   team: 0
+  realspeed: 8
   damageReduce: 0
   specialReduce: 0
   maxHp: 0
@@ -181,6 +182,9 @@ MonoBehaviour:
   speedRate: 1
   roomNo: 0
   islocal: 0
+  immuneTime: 0
+  render: {fileID: 0}
+  nowcolor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114619033449775520
 MonoBehaviour:
   m_ObjectHideFlags: 1

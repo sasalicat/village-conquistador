@@ -135,16 +135,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d6392f596b68d438f3612873dd08f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 0
-  skill: 0
-  physique: 0
+  power: 20
+  skill: 10
+  physique: 50
   energyRecover: 0
   accelerate: 0
   stiffable: 0
   stiffReduce: 0
   rechargeLifeRecover: 0
   rechargeEnergyRecover: 0
-  damageReduce: 0
+  damageReduce: 20
   specialReduce: 0
   stiffTime: 0
   converselyTime: 0

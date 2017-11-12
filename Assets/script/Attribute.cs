@@ -17,7 +17,15 @@ public class Attribute{
     }
     public static int ReduceAttackDamageNum(int num,int reduce)
     {
-        return num + (int)((reduce / 100f) * num);
+        return (int)(num * (100f/(reduce+100f)));
+    }
+    public static int ReduceSpecialDamageNum(int num, int reduce)
+    {
+        return (int)(num * (100f / (reduce + 100f)));
+    }
+    public static float ReduceStiff(float num, int reduce)
+    {
+        return num * (100f / (reduce + 100f));
     }
     public static float GetMpRecover(float num,int energyRecover)
     {
