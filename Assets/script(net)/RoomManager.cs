@@ -106,6 +106,7 @@ public class RoomManager : MonoBehaviour {
                 //更新本地存储的玩家资料
                 if ((sbyte)dataSingle["roleKind"] < 0)//移除玩家
                 {
+                    Debug.Log("移除玩家:roomno 為:" + (sbyte)dataSingle["roleRoomId"]);
                     register.PlayerInWar[(sbyte)dataSingle["roleRoomId"]] = null;
                 }
                 else

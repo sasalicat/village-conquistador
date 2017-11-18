@@ -5,7 +5,7 @@ using System.Xml;
 using UnityEngine.UI;
 
 public class SkillStatements : MonoBehaviour {
-    public Text show;
+    //public Text show;
     public SkillText[] skillTexts;
     public class SkillText {
         public string name;
@@ -25,7 +25,7 @@ public class SkillStatements : MonoBehaviour {
         skillTexts = new SkillText[skillnum];
 
         string url = Application.dataPath + "/SkillStatement.xml";
-        show.text = url;
+        //show.text = url;
         XmlDocument XmlDoc = new XmlDocument();
         XmlDoc.Load(url);
         XmlNodeList XMllist = XmlDoc.GetElementsByTagName("skill");
@@ -37,7 +37,6 @@ public class SkillStatements : MonoBehaviour {
             int index = int.Parse(node.Attributes["no"].Value);
             skillTexts[index]=new SkillText(name, statement,consume);
         }
-
         Debug.Log("在XML中有" + XmlDoc.GetElementsByTagName("skill").Count+"个单位");
 
     }

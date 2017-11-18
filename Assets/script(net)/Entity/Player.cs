@@ -140,5 +140,22 @@
             Arg["buttomState"] = buttoms;
             controler.addEvent(CodeTable.SYNCHRO, Arg);
         }
+        public void receiveLeave(sbyte no)
+        {
+            Debug.Log("receive Leave:no" + no+" >>>>>>>>>>>>>>>>>>>"+ manager.register.PlayerInWar[no].name);
+            manager.register.PlayerInWar[no] = null;
+            for(int i=0;i< manager.register.PlayerInWar.Length;i++)
+            {
+                if (manager.register.PlayerInWar[no] != null)
+                {
+                    Debug.Log("no" + no + "no null");
+                    Debug.Log(no + " manager.register.PlayerInWar:" + manager.register.PlayerInWar[no].name);
+                }
+                else
+                {
+                    Debug.Log("no" + no + "is null+size:"+ manager.register.PlayerInWar.Length);
+                }
+            }
+        }
     }
 }
