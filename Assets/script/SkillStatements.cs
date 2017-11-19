@@ -37,6 +37,7 @@ public class SkillStatements : MonoBehaviour {
             int index = int.Parse(node.Attributes["no"].Value);
             skillTexts[index]=new SkillText(name, statement,consume);
         }
+
         Debug.Log("在XML中有" + XmlDoc.GetElementsByTagName("skill").Count+"个单位");
 
     }
