@@ -9,10 +9,13 @@ public class HallManager : MonoBehaviour {
     public static string Nickname=null;
     public Text numLabel;
     public Text NicknameLabel;
+    public Image headIcon;
     public GameObject nameLable;
     public bool showNameLabel=false;
     public roomShow roomShowControl=null;
     public dataRegister register;
+    public bool roleChange = false;
+    private IconStorage icons;
     // Use this for initialization
     void Start () {
         ((Account)KBEngine.KBEngineApp.app.player()).hallManager = this;
@@ -28,7 +31,7 @@ public class HallManager : MonoBehaviour {
         ((Account)KBEngine.KBEngineApp.app.player()).baseCall("onHallReady");
         roomShowControl = transform.GetComponent<roomShow>();
         Account.PlayerInRoom=false;
-     
+        icons = GameObject.Find("Icons").GetComponent<IconStorage>();
     }
 	
 	// Update is called once per frame
@@ -41,6 +44,12 @@ public class HallManager : MonoBehaviour {
         if (Nickname != null)
         {
             NicknameLabel.text = Nickname;
+        }
+        if (roleChange)//當角色隨機完成時更換頭像
+        {
+            int index = register.roleList[0].roleKind;
+            headIcon.sprite = icons.headIcon[index];
+            roleChange = false;
         }
 	}
     public void setNum(int num)

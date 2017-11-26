@@ -120,6 +120,7 @@
             if (hallManager != null)
             {
                 hallManager.register.roleList=list;
+                hallManager.roleChange = true;
             } else if (roomManager!=null)
             {
                 roomManager.register.roleList = list;

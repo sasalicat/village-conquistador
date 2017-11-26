@@ -31,6 +31,7 @@ public class NetControler : MonoBehaviour,KBControler{
     private List<eTrigger> eTriggerLine=new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();
     public BuffControler buffcontrol;
+    public PhyCenter Phy;
     public Text Label;
     private float nextrecover = 0.5f;
     private string[] buffTable;
@@ -555,6 +556,17 @@ public class NetControler : MonoBehaviour,KBControler{
                         sbyte buttoms = (sbyte)EventLine[0].Args["buttomState"];
                         Vector3 pos= (Vector3)EventLine[0].Args["position"];
                         beenSynchro(pos, buttoms);
+                        break;
+                    }
+                case CodeTable.SHIFT:
+                    {
+                        Vector2 Loc = (Vector2)EventLine[0].Args["Location"];
+                        Vector2 startL = (Vector2)EventLine[0].Args["sLocation"];
+                        float time = (float)EventLine[0].Args["time"];
+                        transform.position = startL;
+                        Vector3 speed = new Vector3((Loc.x - startL.x) / time, (Loc.y - startL.y) / time, 0);
+
+                        Phy.startprocess(speed, time);
                         break;
                     }
             }

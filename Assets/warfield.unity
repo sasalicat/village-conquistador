@@ -644,6 +644,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1791985447734166, guid: 75bd5c9df60258540bc384a74cc7c9f1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75bd5c9df60258540bc384a74cc7c9f1, type: 2}
   m_IsPrefabParent: 0
@@ -1818,7 +1822,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 856139163}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4be88414bac8714a92e15c8413d5595, type: 3}
   m_Name: 

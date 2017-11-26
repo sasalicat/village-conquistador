@@ -11,7 +11,7 @@ public class debugRegister : MonoBehaviour {
         while (texts.Count>0)
         {
             Debug.Log("刪除:"+texts[0].text);
-            Destroy(texts[0]);
+            Destroy(texts[0].gameObject);
             texts.RemoveAt(0);
         }
         dataRegister register = GameObject.Find("client").GetComponent<dataRegister>();

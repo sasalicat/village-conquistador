@@ -33,4 +33,5 @@ public class CodeTable{
     public const sbyte ADD_BUFF = 27;
     public const sbyte CONTORTION = 28;
     public const sbyte SYNCHRO = 29;
+    public const sbyte SHIFT = 30;
 }

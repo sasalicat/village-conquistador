@@ -34,12 +34,16 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     private NetRoleState state;
     private BuffControler buffcontrol;
     private controtionTable controtions;
+    private PhyCenter Phy;
     private string[] buffTable;
     private float nextrecover = 0.5f;
     private RuntimeAnimatorController originAnim;
     private int index;
     private List<sbyte> limit;
     private bool alive = true;
+    //用於閃避的變數
+    private sbyte NextButtom = 0;
+    private float TimeBetween = 0;
 
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
@@ -394,6 +398,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     void Update()
     {
         timeInterval += Time.deltaTime;
+        TimeBetween += Time.deltaTime;//按鍵combo的記錄
         int nowz = (int)transform.eulerAngles.z;
         Vector3 mousePos = getmousePos();
         if (state.canRota) {
@@ -661,12 +666,39 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
                         {
                             break;
                         }
+                    case CodeTable.SHIFT:
+                        {
+                            Vector2 Loc= (Vector2)EventLine[0].Args["Location"];
+                            Vector2 startL=(Vector2)EventLine[0].Args["sLocation"];
+                            float time=(float)EventLine[0].Args["time"];
+                            transform.position = startL;
+                            Vector3 speed = new Vector3((Loc.x - startL.x) / time, (Loc.y - startL.y) / time, 0);
+
+                            Phy.startprocess(speed, time);
+                            break;
+                        }
                 }
                 EventLine.RemoveAt(0);
             }
         }
         //装备冷却------------------------------------------------------------
 
+    }
+    private void campareDodge(sbyte keyCode)
+    {//測試的時候先注解
+        /*
+        if (keyCode == NextButtom&& TimeBetween <= 0.5f) 
+        {
+            
+
+        }
+        TimeBetween = 0;
+        NextButtom = keyCode;
+        */
+    }
+    public void onShiftEnd()
+    {
+        
     }
     //基本控制的
     void onKeyUpDown()

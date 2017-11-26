@@ -15,6 +15,7 @@ public class RoleShowControl : MonoBehaviour {
     public Image detailIcon;
     public Text detailName;
     public Text detailCons;
+    public Image headIcon;
 
     public SkillStatements statement;
 

@@ -426,8 +426,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a8b4755e9f343444e917b455f7fa8a7b, type: 3}
   - {fileID: 21300000, guid: dd6f7dc880bda9440b4deff15121d4ca, type: 3}
   - {fileID: 21300000, guid: 4f5022b54dab23b49a3cd5c0ffb527c3, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 10722f1f945e4d94fb838e8fddff75f2, type: 3}
+  - {fileID: 21300000, guid: 7cea7ba17bf9d60439d92c801e1b67c1, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -444,8 +444,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 92ee6551a21a2e4418a4c3929e532a3f, type: 3}
   - {fileID: 21300000, guid: e42152e115b94f1458af8ad6774473b0, type: 3}
   - {fileID: 21300000, guid: 69f79bc372ea8eb40a163ca177bb883a, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: fd1092d5d4e26e14e80f0ddff4e51443, type: 3}
   - {fileID: 21300000, guid: d1a7a963c53a593478e92cde5509a00d, type: 3}
+  - {fileID: 21300000, guid: 15044cf2244ba334a93f5c397f2e3513, type: 3}
+  - {fileID: 21300000, guid: 0ad55803cfd1af64b873dc99222bfe0e, type: 3}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 773b12e907f871445906b8ff1952ecdd, type: 3}
+  - {fileID: 21300000, guid: 10722f1f945e4d94fb838e8fddff75f2, type: 3}
+  - {fileID: 21300000, guid: 7cea7ba17bf9d60439d92c801e1b67c1, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 11d398b789da47a4493cbaa011b68784, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -469,23 +482,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 7f9e24acabaf1174e87b0bd3aa012325, type: 3}
+  - {fileID: 21300000, guid: ce63af4b98b5b6247889c2dcec749216, type: 3}
+  - {fileID: 21300000, guid: bc617f6ce32d12748afa843f5df8cc82, type: 3}
+  - {fileID: 21300000, guid: 43a833eb9a95ba54d976de43d1f04ea1, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -540,7 +540,7 @@ MonoBehaviour:
   - {fileID: 0}
   readyIcon:
   - {fileID: 21300000, guid: 6d11455cb74f39d4ea17f610e3606660, type: 3}
-  - {fileID: 21300000, guid: 8904eae5ae3512841976979b1241c74c, type: 3}
+  - {fileID: 21300000, guid: 997bbe5e72404de49b25797b312ec415, type: 3}
 --- !u!4 &386828064
 Transform:
   m_ObjectHideFlags: 0
@@ -618,9 +618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd6000c4a08a6a49bf88a677547458b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forDebug: 0
+  forDebug: 1
   roleNo: 0
-  equipmentNoList: 00323b3c
+  equipmentNoList: 0002030607
   winnerno: 5
 --- !u!1 &415577943
 GameObject:
@@ -4116,7 +4116,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  passiveList: 01000101010001010100010100000001010101010100000001000001000000000000000000000000010101010101010101010100010101010101000000000000000000000000
+  passiveList: 01000101010101010100010100000001010101010100000001000001000000000000000000000000010101010101010101010100010101010101000000000000000000000000
   buffNameList:
   - buffForTask
   - mis_nq_buff
