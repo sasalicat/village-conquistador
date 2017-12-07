@@ -20,7 +20,7 @@ public class protect_mask : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 11;
         }
     }
 

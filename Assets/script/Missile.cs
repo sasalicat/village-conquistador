@@ -5,8 +5,9 @@ using UnityEngine;
 public class Missile:MonoBehaviour  {
     private GameObject creater;
     private damage damage;
-    private float speed = 20;
 
+    public const int STAND_FLY_SPEED=40;
+    private float speed = STAND_FLY_SPEED;
     public GameObject Creater
     {
         get

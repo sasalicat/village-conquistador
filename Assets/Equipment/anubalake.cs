@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class anubalake : MonoBehaviour, CDEquipment
 {
-    public const float CD = 0.5f;//0.5f;
+    public const float CD = 10;//0.5f;
     public const int BaseDamage = 200;
     public const float BaseStiff = 4f;
 
@@ -22,7 +22,7 @@ public class anubalake : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 0;
+            return 4;
         }
     }
 

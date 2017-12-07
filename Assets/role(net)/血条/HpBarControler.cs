@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HpBarControler : MonoBehaviour {
     public Transform role;
-    public const float maxX=3.55f;
+    public const float maxX=3.95f;
     RectTransform rect;
     public GameObject hpline;
     public GameObject hpBar;

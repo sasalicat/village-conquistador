@@ -78,4 +78,11 @@ public class dataRegister : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	}
+    public void initPlayerInWar()
+    {
+        for (int i = 0; i < PlayerInWar.Length; i++)
+        {
+            PlayerInWar[i] = null;
+        }
+    }
 }

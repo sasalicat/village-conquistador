@@ -76,7 +76,7 @@ public class nq_atk : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 4;//因為是攻擊所以無消耗
+            return 5;
         }
     }
 
@@ -112,7 +112,7 @@ public class nq_atk : MonoBehaviour, CDEquipment
         missile.Creater = gameObject;
         //创建伤害物件
         unit u = this.GetComponent<unit>();
-        int num = Attribute.GetAttackDamageNum(100, u.power);
+        int num = Attribute.GetSpecialDamageNum(80, u.power);
         
         missile.Damage = new damage(1, num, 0, false, false, gameObject);
 

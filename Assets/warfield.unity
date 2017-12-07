@@ -646,7 +646,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1791985447734166, guid: 75bd5c9df60258540bc384a74cc7c9f1, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75bd5c9df60258540bc384a74cc7c9f1, type: 2}
@@ -846,7 +846,7 @@ Prefab:
     - target: {fileID: 224863397142137742, guid: a97233bd893fb5847ac651162a630316,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224863397142137742, guid: a97233bd893fb5847ac651162a630316,
         type: 2}
@@ -1822,11 +1822,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 856139163}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4be88414bac8714a92e15c8413d5595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeLeft: 0.2
 --- !u!1001 &887899608
 Prefab:
   m_ObjectHideFlags: 0
@@ -2413,7 +2414,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 4ab922e9f20247248a95ef5c2dfde814, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2423,13 +2424,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1336850456}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 3.8, y: -6.3, z: 0}
-  m_LocalScale: {x: 719.2261, y: 1084.8534, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0.2, z: 0}
+  m_LocalScale: {x: 2.8678477, y: 2.666833, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1338308743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,7 +2492,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1350238987 stripped
 GameObject:

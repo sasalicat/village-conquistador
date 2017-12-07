@@ -63,7 +63,7 @@
             int roomid = (int)data["roomId"];
             Debug.Log("in update room id is" + roomid);
             
-                hallManager.roomShowControl.AddRoomReq((int)data["roomId"],(string)data["roomName"],((sbyte)data["playerNum"]));
+                hallManager.roomShowControl.AddRoomReq((int)data["roomId"],(string)data["roomName"],((sbyte)data["playerNum"]),(sbyte)data["gaming"]);
                 //addroom_fuction((string)data["roomName"], ((sbyte)data["playerNum"]).ToString());
             
            

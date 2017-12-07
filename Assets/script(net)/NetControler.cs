@@ -314,6 +314,7 @@ public class NetControler : MonoBehaviour,KBControler{
         codeLine = new List<Dictionary<string,object>>();
         state = GetComponent<NetRoleState>();
         buffcontrol = GetComponent<BuffControler>();
+        Phy = GetComponent<PhyCenter>();
         controtions = GameObject.Find("keyTabel").GetComponent<controtionTable>();
         buffTable = GameObject.Find("keyTabel").GetComponent<EquipmentTable>().buffNameList;
         //添加控制器事件

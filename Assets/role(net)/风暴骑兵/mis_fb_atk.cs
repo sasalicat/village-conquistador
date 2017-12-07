@@ -9,7 +9,6 @@ public class mis_fb_atk : Missile
     // Use this for initialization
     void Start()
     {
-        Speed = 40;
 
     }
 

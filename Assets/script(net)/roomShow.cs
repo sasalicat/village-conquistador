@@ -10,11 +10,14 @@ public class roomShow : MonoBehaviour {
         public string name;
         public sbyte playerNum;
         public int id;
-        public roomData(int id, string name,sbyte num)
+        public bool gaming;
+        public roomData(int id, string name,sbyte num,sbyte gaming)
         {
             this.id = id;
             this.name = name;
             this.playerNum = num;
+            Debug.Log("in RoomData init gamging is" + gaming);
+            this.gaming = (gaming >= 0);
         }
     };
     public GameObject single;
@@ -48,7 +51,7 @@ public class roomShow : MonoBehaviour {
             if (roomList[firstData.id]==null) {
                 Debug.Log("count is" + handleLine.Count + "0`s name is " + firstData.name);
                 if(firstData.playerNum>0)
-                    AddRoom(firstData.id,firstData.name, firstData.playerNum.ToString());
+                    AddRoom(firstData.id,firstData.name, firstData.playerNum.ToString(),firstData.gaming);
                 
                 
             }
@@ -67,9 +70,9 @@ public class roomShow : MonoBehaviour {
 
                 }
                 else { 
-                UpdateRoom_name(firstData.id, firstData.name);
-                UpdateRoom_personNum(firstData.id, firstData.playerNum.ToString());
-
+                    UpdateRoom_name(firstData.id, firstData.name);
+                    UpdateRoom_personNum(firstData.id, firstData.playerNum.ToString());
+                    UpdateRoom_gamestate(firstData.id, firstData.gaming);
                 }
             }
 
@@ -108,15 +111,15 @@ public class roomShow : MonoBehaviour {
     {
         createTable.SetActive(false);
     } 
-    public void AddRoomReq(int id,string name, sbyte num)
+    public void AddRoomReq(int id,string name, sbyte num,sbyte gaming)
     {
-        handleLine.Add(new roomData(id,name,num));
+        handleLine.Add(new roomData(id,name,num,gaming));
     }
     public void EnterTraining()
     {
         Application.LoadLevel("trainingspace");
     }
-    public void AddRoom(int id, string name,string num)
+    public void AddRoom(int id, string name,string num,bool gaming)
     {
         int initLocationIndex=-1;
         for(int i = 0; i < 20; i++)//用一個回圈檢索locationpoor找到第一個空位
@@ -130,12 +133,24 @@ public class roomShow : MonoBehaviour {
 
         }
         GameObject newRoom=Instantiate(single, this.transform.position, this.transform.rotation);
+        Debug.Log("in add room gaming is" + gaming);
+        if (gaming)
+        {
+            
+           newRoom.GetComponent<Image>().color= new Color(1, 1, 1, 0.5f);
+            
+            Debug.Log("real color is"+ newRoom.GetComponent<Image>().color);  
+        }
         newRoom.transform.parent = Content.transform;
         newRoom.GetComponent<RectTransform>().anchoredPosition3D=new Vector3(0,(initLocationIndex*-90)-45,0);
         newRoom.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 90);
         roomList[id] = newRoom;
-        newRoom.GetComponent<roomItem>().roomId=id;
-        newRoom.GetComponent<roomItem>().manager = manager;
+        //設定item的記錄數據
+        roomItem item = newRoom.GetComponent<roomItem>();
+        item.roomId=id;
+        item.manager = manager;
+        item.num = System.Int32.Parse(num);
+        item.gaming = gaming;
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(0,initLocationIndex * 90);
         GameObject nameObj= newRoom.transform.Find("RoomName").gameObject;
@@ -154,5 +169,16 @@ public class roomShow : MonoBehaviour {
     {
         GameObject numObj = roomList[id].transform.Find("PersonNum").gameObject;
         numObj.GetComponent<Text>().text = num;
+        roomList[id].GetComponent<roomItem>().num = System.Int32.Parse(num);
+    }
+    public void UpdateRoom_gamestate(int id,bool gaming)
+    {
+        
+        if (gaming)
+            roomList[id].GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+        else
+            roomList[id].GetComponent<Image>().color = Color.white;
+        roomList[id].GetComponent<roomItem>().gaming = gaming;
+        
     }
 }

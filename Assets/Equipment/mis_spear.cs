@@ -7,7 +7,7 @@ public class mis_spear : Missile {
     float disLeft = MAX_DISTANCE;
 	// Use this for initialization
 	void Start () {
-        Speed = 12;
+        Speed = STAND_FLY_SPEED*0.4f;
 	}
 	
 	// Update is called once per frame

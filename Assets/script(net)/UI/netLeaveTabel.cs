@@ -17,10 +17,7 @@ public class netLeaveTabel : MonoBehaviour {
     public void sureClick()
     {
         KBEngineApp.app.player().baseCall("compulsiveLeaveRoom",new object[] { });
-        for(int i = 0; i < register.PlayerInWar.Length; i++)
-        {
-            register.PlayerInWar[i] = null;
-        }
+        register.initPlayerInWar();
         Application.LoadLevel("Hall");
     }
     public void cancelClick()

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class lmbx_skill_buff : Buff
 {
+    GameObject moonToken;
     public double speed;
+    public float recoverleft=1;
     public override float Duration
     {
         get
@@ -16,6 +18,9 @@ public class lmbx_skill_buff : Buff
 
     public override bool onInit(RoleState role, Buff[] Repetitive, MissileTable mis)
     {
+        moonToken = Instantiate(mis.MissileList[43],role.transform);
+        moonToken.transform.localPosition = new Vector3(0, 1.25f, 0);
+        moonToken.transform.localScale = new Vector3(0.7f, 0.7f, 0);
         Debug.Log("buffForTask onInit");
         if (Repetitive == null)
         {
@@ -29,21 +34,21 @@ public class lmbx_skill_buff : Buff
     {
 
         role.Accelerate -= 30;
+        Destroy(moonToken);
     }
     public override void onIntarvel(RoleState role, float timeBetween)
     {
-        timeBetween = 1f;
+        recoverleft -= timeBetween;
+        RoleState r = this.GetComponent<RoleState>();
+        if (recoverleft <= 0)
+        {
+            role.BeenTreat(this.gameObject, (int)(r.maxHp * 0.03f));
+            recoverleft = 1;
+        }
         base.onIntarvel(role, timeBetween);
         //Debug.Log("buff ing");
-        RoleState r = this.GetComponent<RoleState>();
-        role.BeenTreat(this.gameObject, (int)(r.maxHp * 0.03));
-        
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
+
+
 }

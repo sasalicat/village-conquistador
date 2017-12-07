@@ -21,31 +21,36 @@ public class PhyCenter : MonoBehaviour {
     {
         if (process != null)//如果還有之前一個行程
         {
-            if (onMoveEnd != null)
-            {
-                onMoveEnd();
-            }
-            process = new moveProcess(speed, time);
+            processCancel();
         }
+        process = new moveProcess(speed, time);
     }
     public void processCancel()
     {
-        if (process.timeLeft <= 0)//時間結束
-        {
+
             if (onMoveEnd != null)
             {
                 onMoveEnd();
             }
             process = null;
-        }
+        
     }
 	// Update is called once per frame
 	protected void Update () {
-        process.timeLeft -= Time.deltaTime;
-        transform.position += process.speed * Time.deltaTime;
-        processCancel();
+        Debug.Log("in phycenter update");
+        if (process != null)
+        {
+            Debug.Log("process not null");
+            process.timeLeft -= Time.deltaTime;
+            transform.position += process.speed * Time.deltaTime;
+             if (process.timeLeft <= 0)//時間結束
+            {
+                processCancel();
+            }
+        }
+       
 	}
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         processCancel();
     }

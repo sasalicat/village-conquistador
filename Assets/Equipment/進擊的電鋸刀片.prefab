@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aroundPoint: {fileID: 0}
-  angularSpeed: 100
+  angularSpeed: 150
   aroundRadius: 10
   angled: 0
 --- !u!114 &114871553781779666

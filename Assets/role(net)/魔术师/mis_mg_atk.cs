@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class mis_mg_atk :Missile{
     private Vector3 vspeed;
-    public float livetime = 1;
+    public float livetime = 0.5f;
     public Animator animator;
     public bool xuanzhuan;
    
@@ -25,7 +25,7 @@ public class mis_mg_atk :Missile{
         {
             animator.SetBool("xuanzhuan", true);
         }
-        if(livetime <= -5)
+        if(livetime <= -8)
         {
             
             Destroy(this.gameObject);

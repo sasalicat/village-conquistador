@@ -3,7 +3,7 @@ using System.Collections;
 
 public class unit : MonoBehaviour {
     public const float STAND_CONVESLY_TIME = 1;//标准倒地时间
-    public const int STAND_HP = 1000;
+    public const int STAND_HP = 1000;//測試時用2000，正常1000
     public const float STAND_MP = 100;
     public const float STAND_MP_RECOVER = 2;
     public const float RECOVER_MP_INTERVAL = 0.5f;

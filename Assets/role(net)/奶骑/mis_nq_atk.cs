@@ -5,7 +5,7 @@ using UnityEngine;
 public class mis_nq_atk : Missile
 {
 
-    public float m_liveTime = 0.3f;
+    public float m_liveTime = 0.8f;
 
     public RoleState rolestate;
     // Use this for initialization

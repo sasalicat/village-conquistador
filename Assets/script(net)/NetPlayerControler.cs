@@ -6,6 +6,10 @@ using System;
 
 
 public class NetPlayerControler : MonoBehaviour,KBControler {
+    public const int STAND_DODGE_DISTANCE= 6;
+    public const float STAND_DODGE_TIME = 0.2f;
+    public const float COMBO_CLICK_MIN_INS = 0.5f;
+    public const float DODGE_CD = 4f;
     private class eTrigger//裝備觸發指令,eIndex為裝備的Index
     {
         public sbyte eIndex;
@@ -44,6 +48,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     //用於閃避的變數
     private sbyte NextButtom = 0;
     private float TimeBetween = 0;
+    private float dodgeCD =0;
 
     private List<eTrigger> eTriggerLine = new List<eTrigger>();
     private List<eTrigger> EventLine = new List<eTrigger>();//用於儲存服務器發過來的事件,為了節省腳本長度仍然使用eTrigger,使用eIndex來代表事件編號而非裝備索引
@@ -328,6 +333,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
         buffcontrol = GetComponent<BuffControler>();
         buffTable = temp.GetComponent<EquipmentTable>().buffNameList;
         controtions = temp.GetComponent<controtionTable>();
+        Phy = GetComponent<PhyCenter>();
         //添加控制器事件
         on_keyleft_down += onKeyLeftDown;
         on_keydown_down += onKeyDownDown;
@@ -399,6 +405,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         timeInterval += Time.deltaTime;
         TimeBetween += Time.deltaTime;//按鍵combo的記錄
+        dodgeCD -= Time.deltaTime;//閃避的冷卻時間
         int nowz = (int)transform.eulerAngles.z;
         Vector3 mousePos = getmousePos();
         if (state.canRota) {
@@ -686,15 +693,41 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     }
     private void campareDodge(sbyte keyCode)
     {//測試的時候先注解
-        /*
-        if (keyCode == NextButtom&& TimeBetween <= 0.5f) 
-        {
-            
 
+        if (state.nowStateNo==RoleState.NORMAL_NO&&keyCode == NextButtom && TimeBetween <= COMBO_CLICK_MIN_INS && dodgeCD <= 0) 
+        {
+            Vector3 pos = transform.position;
+            Vector2 distiny=new Vector2(10,10);
+            switch (NextButtom)
+            {
+                case 0://上
+                    {
+                        distiny=new Vector2(0,STAND_DODGE_DISTANCE);
+                        break;
+                    }
+                case 1://右
+                    {
+                        distiny = new Vector2(-STAND_DODGE_DISTANCE, 0);
+                        break;
+                    }
+                case 2://下
+                    {
+                        distiny = new Vector2(0, -STAND_DODGE_DISTANCE);
+                        break;
+                    }
+                case 3://左
+                    {
+                        distiny = new Vector2(STAND_DODGE_DISTANCE, 0);
+                        break;
+                    }
+            }
+            Vector2 origin = new Vector2(pos.x, pos.y);
+            player.cellCall("notifyShift", new object[] {origin,origin+distiny,STAND_DODGE_TIME });
+            dodgeCD += DODGE_CD;
         }
         TimeBetween = 0;
         NextButtom = keyCode;
-        */
+        
     }
     public void onShiftEnd()
     {
@@ -704,6 +737,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     void onKeyUpDown()
     {
         Vector3 position = transform.position;
+        campareDodge(0);
         player.cellCall("notify1", new object[] {new Vector2(position.x,position.y),CodeTable.KEYUP_DOWN});
         action.moveStart();
         upIng = true;
@@ -712,6 +746,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         //player.baseCall("notify1", new object[] { roomNo, CodeTable.KEYDOWN_DOWN });
         Vector3 position = transform.position;
+        campareDodge(2);
         player.cellCall("notify1", new object[] { new Vector2(position.x, position.y), CodeTable.KEYDOWN_DOWN });
         action.moveStart();
         downIng = true;
@@ -719,6 +754,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     void onKeyLeftDown()
     {
         Vector3 position = transform.position;
+        campareDodge(3);
         player.cellCall("notify1", new object[] { new Vector2(position.x, position.y), CodeTable.KEYLEFT_DOWN });
         action.moveStart();
         leftIng = true;
@@ -726,6 +762,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     void onKeyRightDown()
     {
         Vector3 position = transform.position;
+        campareDodge(1);
         player.cellCall("notify1", new object[] { new Vector2(position.x, position.y), CodeTable.KEYRIGHT_DOWN});
         action.moveStart();
         rightIng = true;

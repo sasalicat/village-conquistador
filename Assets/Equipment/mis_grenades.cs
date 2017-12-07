@@ -22,10 +22,10 @@ public class mis_grenades : Missile
 
         Vector3 position = (mousePosition - origenPlayerPosition) + origenPlayerPosition;
         
-        if ((mousePosition - origenPlayerPosition).magnitude < limitDistance)
-        {
+        //if ((mousePosition - origenPlayerPosition).magnitude < limitDistance)
+       // {
             transform.DOMove(mousePosition, 1f, false).OnComplete(() => getSkill2(mousePosition)).SetEase(Ease.OutQuart);
-        }
+        /*}
         else
         {
             //向量 = 終點 - 起始點
@@ -35,7 +35,7 @@ public class mis_grenades : Missile
             //終點 = 長度 * (終點 - 起始點).normalized + 起始點
             Vector3 destination = (limitDistance * (mousePosition - origenPlayerPosition).normalized) +origenPlayerPosition;
             transform.DOMove(destination, 1f, false).OnComplete(() => getSkill2(destination)).SetEase(Ease.OutQuart);
-        }
+        }*/
     }
 
     void getSkill2(Vector3 destination)

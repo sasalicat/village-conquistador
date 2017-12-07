@@ -169,7 +169,7 @@ public class NetManager : MonoBehaviour ,Manager {
             {//roomNo就是物件objList的索引值
                 Debug.Log(" i:" + i + "playerInWar: " + register.PlayerInWar[i]);
                 e.renderObj = objList[i];
-                if (e.id == register.PlayerInWar[i].entityId)
+                if (register.PlayerInWar[i]!=null&&e.id == register.PlayerInWar[i].entityId)
                 {
                     Debug.Log("objList[i]"+objList[i]);
                     EquipmentList elist = objList[i].GetComponent<EquipmentList>();

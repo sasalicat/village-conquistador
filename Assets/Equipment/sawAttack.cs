@@ -5,8 +5,8 @@ using UnityEngine;
 public class sawAttack : MonoBehaviour, CDEquipment
 {
     public const float CD = 12f;//0.5f;
-    public const int BaseDamage = 30;
-    public const float BaseStiff = 0.3f;
+    public const int BaseDamage = 60;
+    public const float BaseStiff = 0.5f;
 
     public float CDTime = 0;
     public sbyte index;
@@ -74,7 +74,7 @@ public class sawAttack : MonoBehaviour, CDEquipment
     {
         get
         {
-            return 10;
+            return 18;
         }
     }
 

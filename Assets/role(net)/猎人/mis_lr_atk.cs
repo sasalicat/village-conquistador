@@ -8,7 +8,7 @@ public class mis_lr_atk : Missile {
     public float juli;
     // Use this for initialization
     void Start () {
-        Speed = 40;
+        Speed = STAND_FLY_SPEED*1.25f;
 
 }
 	

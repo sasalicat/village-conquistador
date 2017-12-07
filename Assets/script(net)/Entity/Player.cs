@@ -102,6 +102,15 @@
             Arg["randomPoint"] = random;
             controler.addEvent(CodeTable.BEEN_TREAT, Arg);
         }
+        public void receiveShift(Vector2 ori,Vector2 dist,float time,sbyte random)
+        {
+            Dictionary<string, object> Arg = new Dictionary<string, object>();
+            Arg["Location"] = dist;
+            Arg["sLocation"] = ori;
+            Arg["time"] = time;
+            Arg["randomPoint"] = random;
+            controler.addEvent(CodeTable.SHIFT, Arg);
+        }
         public void getFinish(sbyte roomNo)
         {
             loadPage.finishLine.Add(roomNo);

@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f42bb88faad4e845ac0b3a25935a369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livetime: 1
+  livetime: 0.5
   animator: {fileID: 0}
   xuanzhuan: 0
 --- !u!212 &212230840741389052

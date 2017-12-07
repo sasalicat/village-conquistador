@@ -8,7 +8,7 @@ public class mis_lm_atk : Missile
     // Use this for initialization
     void Start()
     {
-        Speed = 15;
+        Speed = STAND_FLY_SPEED*0.7f;
     }
 
     // Update is called once per frame

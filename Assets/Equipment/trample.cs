@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class trample : MonoBehaviour,CDEquipment {
 
-    public const float CD = 2.5f;//0.5f;
+    public const float CD = 5f;//0.5f;
     public const int BaseDamage = 50;
-    public const float BaseStiff = 0.4f;
+    public const float BaseStiff = 1;
 
     public float CDTime = 0;
     public sbyte index;

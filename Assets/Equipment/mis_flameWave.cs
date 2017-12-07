@@ -10,7 +10,7 @@ public class mis_flameWave : Missile
     // Use this for initialization
     void Start()
     {
-        Speed = 16;
+        Speed = Missile.STAND_FLY_SPEED*0.7f;//標準速度的70%
     }
 
     // Update is called once per frame

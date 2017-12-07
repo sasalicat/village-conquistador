@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114193600834770494}
   - component: {fileID: 114731314185792688}
   - component: {fileID: 114906353181688976}
+  - component: {fileID: 114384031229566534}
   m_Layer: 0
   m_Name: "\u65B0\u624B"
   m_TagString: Player
@@ -125,6 +126,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   table: {fileID: 0}
   register: {fileID: 0}
+--- !u!114 &114384031229566534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1513503923988478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd2e3e196152ba045954adc9e2d10ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114731314185792688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,17 +148,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d6392f596b68d438f3612873dd08f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 30
-  skill: 30
-  physique: 40
+  power: 20
+  skill: 20
+  physique: 20
   energyRecover: 0
   accelerate: 0
   stiffable: 0
   stiffReduce: 0
   rechargeLifeRecover: 0
   rechargeEnergyRecover: 0
-  damageReduce: 0
-  specialReduce: 0
+  damageReduce: 20
+  specialReduce: 20
   stiffTime: 0
   converselyTime: 0
   action: 1

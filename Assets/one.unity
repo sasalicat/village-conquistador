@@ -486,9 +486,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ce63af4b98b5b6247889c2dcec749216, type: 3}
   - {fileID: 21300000, guid: bc617f6ce32d12748afa843f5df8cc82, type: 3}
   - {fileID: 21300000, guid: 43a833eb9a95ba54d976de43d1f04ea1, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: deefc3151aa5af042b5604c418cc44f0, type: 3}
+  - {fileID: 21300000, guid: 14907c0c3952b73468f1817a8ed55c06, type: 3}
+  - {fileID: 21300000, guid: e2a7289b4a421db4ca3625267cc635b8, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -618,9 +618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd6000c4a08a6a49bf88a677547458b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forDebug: 1
-  roleNo: 0
-  equipmentNoList: 0002030607
+  forDebug: 0
+  roleNo: 9
+  equipmentNoList: 0f2f38370a
   winnerno: 5
 --- !u!1 &415577943
 GameObject:
@@ -4116,7 +4116,7 @@ MonoBehaviour:
   - 
   - 
   - 
-  passiveList: 01000101010101010100010100000001010101010100000001000001000000000000000000000000010101010101010101010100010101010101000000000000000000000000
+  passiveList: 01000101010101010101010100000001010101010100000001000001000000000000000000000000010101010101010101010100010101010101000000000000000000000000
   buffNameList:
   - buffForTask
   - mis_nq_buff
@@ -4196,7 +4196,7 @@ MonoBehaviour:
   - {fileID: 1519618964451002, guid: eab95f1c5fbc057479da42ccd5b28d83, type: 2}
   - {fileID: 1663977188512488, guid: df2b1650fc4d6fd48a6286c98cead165, type: 2}
   - {fileID: 1059803988570428, guid: b28c08648b5c02147839924401db9b8d, type: 2}
-  - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
+  - {fileID: 1457881013074808, guid: f33a6d102e3e077478b5de3a5e92f24f, type: 2}
   - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
   - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
   - {fileID: 1099958814835356, guid: b12169f87b5dffb488a1d173b6f86275, type: 2}
@@ -4232,6 +4232,8 @@ MonoBehaviour:
   - {fileID: 1734511024712918, guid: fe894ad79601b054cb40bf48b38f4cd6, type: 2}
   - {fileID: 1178681234940520, guid: 7653a89b42c02c848ad6f86c36244e13, type: 2}
   - {fileID: 1699108556279174, guid: 4957e0f33cc075f48a66c656837c45b5, type: 2}
+  - {fileID: 1080097772704632, guid: c8f61573e622baa4399ae25e2e828386, type: 2}
+  - {fileID: 1187496834745922, guid: 17161daa96666ba43b29d7be9d6cf6a8, type: 2}
   Areas:
   - {fileID: 1708283513118796, guid: 81d83ce2cb9983d4d9480e5bc1aa9eaa, type: 2}
   Supplies:

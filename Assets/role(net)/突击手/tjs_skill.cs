@@ -133,7 +133,7 @@ public class tjs_skill : MonoBehaviour, CDEquipment
         missile5.Creater = gameObject;
         //创建伤害物件
         unit u = this.GetComponent<unit>();
-        int num = Attribute.GetAttackDamageNum(30, u.power);
+        int num = Attribute.GetAttackDamageNum(BaseDamage, u.power);
         float stiff = Attribute.getRealStiff(0.1f, u.stiffable);
         missile1.Damage = new damage(2, num, stiff, false, false, gameObject);
         missile2.Damage = new damage(2, num, stiff, false, false, gameObject);

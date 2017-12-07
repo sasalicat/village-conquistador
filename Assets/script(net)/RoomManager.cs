@@ -211,6 +211,7 @@ public class RoomManager : MonoBehaviour {
     {
         Debug.Log("离开房间按钮被点击了");
         ((Account)KBEngineApp.app.player()).baseCall("leaveRoom", new object[] {});
+        register.initPlayerInWar();
         Application.LoadLevel("Hall");
     }
 }
