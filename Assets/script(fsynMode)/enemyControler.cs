@@ -347,6 +347,24 @@ public class enemyControler : MonoBehaviour,KBControler {
         changeArg["NowHp"] = state.nowHp;
         on_Hp_change(changeArg);
     }
+    public bool equipmentReady(sbyte eindex)
+    {
+        if (eList.nowHarness.passiveEquipments.Count <= eindex)
+        {
+            return false;
+        }
+        else
+        {
+            if (eList.nowHarness.passiveEquipments[eindex].CanUse && limit != null && !limit.Contains(eindex))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     // Use this for initialization
     void Start()
     {
@@ -510,8 +528,9 @@ public class enemyControler : MonoBehaviour,KBControler {
             Dictionary<string, object> diedArg = new Dictionary<string, object>();
             diedArg["Killer"] = (damage).damager;
             alive = false;
-            Entity.cellCall("notifyDied", new object[] { (sbyte)0 });
-
+            var eff= gameObject.AddComponent<diedEffect>();
+            eff.onInit(3);
+            fsynManager_local.main.removeEnemy(Index);
         }
     }
     public void realBeTreat(Dictionary<string, object> Args)
@@ -532,7 +551,7 @@ public class enemyControler : MonoBehaviour,KBControler {
     {
         var action = GetComponent<AnimatorTable>();
         var eList = GetComponent<EquipmentList>();
-        var controtions = GetComponent<controtionTable>();
+        var controtions = controtionTable.main;
         if (no < 0)
         {
             action.restoreAnimator();

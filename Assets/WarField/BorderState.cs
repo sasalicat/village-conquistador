@@ -280,4 +280,9 @@ public class BorderState : RoleState,Controler {
     {
        
     }
+
+    public bool equipmentReady(sbyte eindex)
+    {
+        return false;
+    }
 }

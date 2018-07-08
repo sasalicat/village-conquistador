@@ -7,7 +7,7 @@ public class unit : MonoBehaviour {
     public const float STAND_MP = 100;
     public const float STAND_MP_RECOVER = 2;
     public const float RECOVER_MP_INTERVAL = 0.5f;
-    public const float STAND_SPEED = 8;
+    public const float STAND_SPEED = 12;
     //基本屬性
     public int power;//力量 每1點加成1%物理攻擊
     public int skill;//技巧 每1點加成1%特殊傷害

@@ -22,6 +22,10 @@ public class HpBarControler : MonoBehaviour {
         {
             transform.position = new Vector3(role.position.x, role.position.y+3, 0);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
 	}
     public void onGetRole()
     {

@@ -6,6 +6,7 @@ public class enemy_mis_flameWave : Missile {
     public const float MAX_DISTANCE = 30;
     float disLeft = MAX_DISTANCE;
     public int Buffno;//击中后会添加的buff编号
+    public float existTime = 2f;
     // Use this for initialization
     void Start()
     {
@@ -15,6 +16,11 @@ public class enemy_mis_flameWave : Missile {
     // Update is called once per frame
     void Update()
     {
+        existTime -= Time.deltaTime;
+        if (existTime <= 0)
+        {
+            Destroy(gameObject);
+        }
         transform.Translate(0, Speed * Time.deltaTime, 0);
         if (disLeft <= 0)
         {

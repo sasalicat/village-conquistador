@@ -97,4 +97,5 @@ public interface Controler
     }
     void addBuffByNo(sbyte no);
     void distortionByNo(sbyte no);
+    bool equipmentReady(sbyte eindex);
 }

@@ -308,4 +308,8 @@ public class ObstacleState : RoleState,Controler {//相当于控制器和State�
     {
         throw new NotImplementedException();
     }
+    public bool equipmentReady(sbyte eindex)
+    {
+        return false;
+    }
 }

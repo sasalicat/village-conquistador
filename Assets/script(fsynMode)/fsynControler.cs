@@ -275,6 +275,31 @@ public class fsynControler : MonoBehaviour, KBControler
     {
         return on_right_down;
     }
+    public bool equipmentReady(sbyte eindex)
+    {
+        if (eList.nowHarness.passiveEquipments.Count <= eindex)
+        {
+            //Debug.Log("装备准备好回传1:"+ eList.nowHarness.passiveEquipments.Count);
+            return false;
+        }
+        else
+        {
+            if (!eList.nowHarness.passiveEquipments[eindex].CanUse)
+            {
+                //Debug.Log("装备准备好回传2:");
+                return false;
+            }
+            else if(limit != null && limit.Contains(eindex))
+            {
+                //Debug.Log("装备准备好回传3:");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
     private void HpChangeHappen()
     {
         Dictionary<string, object> changeArg = new Dictionary<string, object>();
@@ -470,7 +495,7 @@ public class fsynControler : MonoBehaviour, KBControler
     {
         var action =GetComponent<AnimatorTable>();
         var eList = GetComponent<EquipmentList>();
-        var controtions = GetComponent<controtionTable>();
+        var controtions =  controtionTable.main;
         if (no < 0)
         {
             action.restoreAnimator();

@@ -312,6 +312,24 @@ public class trainingControler : MonoBehaviour,Controler {
     {
         return on_right_down;
     }
+    public bool equipmentReady(sbyte eindex)
+    {
+        if (eList.nowHarness.passiveEquipments.Count <= eindex)
+        {
+            return false;
+        }
+        else
+        {
+            if (eList.nowHarness.passiveEquipments[eindex].CanUse && limit != null && !limit.Contains(eindex))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     void onSkillKeyDown(Vector3 mousePos, sbyte KeyCode)
     {
         Debug.Log("enter key down keyCode:" + KeyCode);

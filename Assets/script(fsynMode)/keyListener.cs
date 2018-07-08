@@ -6,6 +6,7 @@ public class keyListener : MonoBehaviour {
     public static keyListener main;
     public NetRoleState state;
     public fsynControler controler;
+    public EquipmentList eList;
     private System.Random random;
     // Use this for initialization
     public void befFrameUpdate()
@@ -41,8 +42,6 @@ public class keyListener : MonoBehaviour {
 	void Update () {
         if (state != null)
         {
-            if (state.canMove)
-            {
                 if (Input.GetKeyDown(KeyRegister.main.keySetting["up"]))
                 {
                     onMoveButtom(CodeTable.KEYUP_DOWN);
@@ -77,151 +76,237 @@ public class keyListener : MonoBehaviour {
                 {
                     onMoveButtom(CodeTable.KEYRIGHT_UP);
                 }
-            }
+            
             if (state.canAction)
             {
                 var limit = controler.limit;
                 var mousePos=Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePos.z = 0;
                 int rpoint = random.Next(0, 99);
-                if (limit == null || limit.Contains(EquipmentList.PASSIVE1))
+                if (controler.equipmentReady(EquipmentList.PASSIVE1))
                 {
                     if (Input.GetKeyDown(KeyRegister.main.keySetting["key1"]))
                     {
-                        Dictionary<string, object> order = new Dictionary<string, object>();
-                        order["MousePosition"] = mousePos;
-                        order["PlayerPosition"] = controler.transform.position;
-                        order["randomPoint"] = rpoint;
-                        
-                        RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
-                        if (hit && (hit.collider.tag == "Player"))
+
+                        if (eList.nowHarness.passiveEquipments[EquipmentList.PASSIVE1].Designated)
                         {
-                            order["Traget"] = hit.transform.gameObject;
-                            order["TragetPosition"] = hit.transform.position;
+                            RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
+                            if (hit && (hit.collider.tag == "Player"))
+                            {
+                                Dictionary<string, object> order = new Dictionary<string, object>();
+                                order["MousePosition"] = mousePos;
+                                order["PlayerPosition"] = controler.transform.position;
+                                order["randomPoint"] = rpoint;
+                                order["Traget"] = hit.transform.gameObject;
+                                order["TragetPosition"] = hit.transform.position;
+                                order["code"] = CodeTable.KEY1_DOWN;
+                                Sender.main.addOrder(order);
+                            }
                         }
-                        order["code"] = CodeTable.KEY1_DOWN;
-                        Sender.main.addOrder(order);
+                        else
+                        {
+                            Dictionary<string, object> order = new Dictionary<string, object>();
+                            order["MousePosition"] = mousePos;
+                            order["PlayerPosition"] = controler.transform.position;
+                            order["randomPoint"] = rpoint;
+                            order["code"] = CodeTable.KEY1_DOWN;
+                            Sender.main.addOrder(order);
+                        }
+
                     }
                 }
-                if (limit == null || limit.Contains(EquipmentList.PASSIVE2))
+                if (controler.equipmentReady(EquipmentList.PASSIVE2))
                 {
                     if (Input.GetKeyDown(KeyRegister.main.keySetting["key2"]))
                     {
-                        Dictionary<string, object> order = new Dictionary<string, object>();
-                        order["MousePosition"] = mousePos;
-                        order["PlayerPosition"] = controler.transform.position;
-                        order["randomPoint"] = rpoint;
 
-                        RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
-                        if (hit && (hit.collider.tag == "Player"))
+                        if (eList.nowHarness.passiveEquipments[EquipmentList.PASSIVE2].Designated)
                         {
-                            order["Traget"] = hit.transform.gameObject;
-                            order["TragetPosition"] = hit.transform.position;
+                            RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
+                            if (hit && (hit.collider.tag == "Player"))
+                            {
+                                Dictionary<string, object> order = new Dictionary<string, object>();
+                                order["MousePosition"] = mousePos;
+                                order["PlayerPosition"] = controler.transform.position;
+                                order["randomPoint"] = rpoint;
+                                order["Traget"] = hit.transform.gameObject;
+                                order["TragetPosition"] = hit.transform.position;
+                                order["code"] = CodeTable.KEY2_DOWN;
+                                Sender.main.addOrder(order);
+                            }
                         }
-                        order["code"] = CodeTable.KEY2_DOWN;
-                        Sender.main.addOrder(order);
+                        else
+                        {
+                            Dictionary<string, object> order = new Dictionary<string, object>();
+                            order["MousePosition"] = mousePos;
+                            order["PlayerPosition"] = controler.transform.position;
+                            order["randomPoint"] = rpoint;
+                            order["code"] = CodeTable.KEY2_DOWN;
+                            Sender.main.addOrder(order);
+                        }
 
                     }
                 }
-                if (limit == null || limit.Contains(EquipmentList.PASSIVE3))
+                if (controler.equipmentReady(EquipmentList.PASSIVE3))
                 {
                     if (Input.GetKeyDown(KeyRegister.main.keySetting["key3"]))
                     {
-                        Dictionary<string, object> order = new Dictionary<string, object>();
-                        order["MousePosition"] = mousePos;
-                        order["PlayerPosition"] = controler.transform.position;
-                        order["randomPoint"] = rpoint;
 
-                        RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
-                        if (hit && (hit.collider.tag == "Player"))
+                        if (eList.nowHarness.passiveEquipments[EquipmentList.PASSIVE3].Designated)
                         {
-                            order["Traget"] = hit.transform.gameObject;
-                            order["TragetPosition"] = hit.transform.position;
+                            RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
+                            if (hit && (hit.collider.tag == "Player"))
+                            {
+                                Dictionary<string, object> order = new Dictionary<string, object>();
+                                order["MousePosition"] = mousePos;
+                                order["PlayerPosition"] = controler.transform.position;
+                                order["randomPoint"] = rpoint;
+                                order["Traget"] = hit.transform.gameObject;
+                                order["TragetPosition"] = hit.transform.position;
+                                order["code"] = CodeTable.KEY3_DOWN;
+                                Sender.main.addOrder(order);
+                            }
                         }
-                        order["code"] = CodeTable.KEY3_DOWN;
-                        Sender.main.addOrder(order);
+                        else
+                        {
+                            Dictionary<string, object> order = new Dictionary<string, object>();
+                            order["MousePosition"] = mousePos;
+                            order["PlayerPosition"] = controler.transform.position;
+                            order["randomPoint"] = rpoint;
+                            order["code"] = CodeTable.KEY3_DOWN;
+                            Sender.main.addOrder(order);
+                        }
                     }
                 }
-                if (limit == null || limit.Contains(EquipmentList.PASSIVE4))
+                if (controler.equipmentReady(EquipmentList.PASSIVE4))
                 {
                     if (Input.GetKeyDown(KeyRegister.main.keySetting["key4"]))
                     {
-                        Dictionary<string, object> order = new Dictionary<string, object>();
-                        order["MousePosition"] = mousePos;
-                        order["PlayerPosition"] = controler.transform.position;
-                        order["randomPoint"] = rpoint;
 
-                        RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
-                        if (hit && (hit.collider.tag == "Player"))
+                        if (eList.nowHarness.passiveEquipments[EquipmentList.PASSIVE4].Designated)
                         {
-                            order["Traget"] = hit.transform.gameObject;
-                            order["TragetPosition"] = hit.transform.position;
+                            RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
+                            if (hit && (hit.collider.tag == "Player"))
+                            {
+                                Dictionary<string, object> order = new Dictionary<string, object>();
+                                order["MousePosition"] = mousePos;
+                                order["PlayerPosition"] = controler.transform.position;
+                                order["randomPoint"] = rpoint;
+                                order["Traget"] = hit.transform.gameObject;
+                                order["TragetPosition"] = hit.transform.position;
+                                order["code"] = CodeTable.KEY4_DOWN;
+                                Sender.main.addOrder(order);
+                            }
                         }
-                        order["code"] = CodeTable.KEY4_DOWN;
-                        Sender.main.addOrder(order);
+                        else
+                        {
+                            Dictionary<string, object> order = new Dictionary<string, object>();
+                            order["MousePosition"] = mousePos;
+                            order["PlayerPosition"] = controler.transform.position;
+                            order["randomPoint"] = rpoint;
+                            order["code"] = CodeTable.KEY4_DOWN;
+                            Sender.main.addOrder(order);
+                        }
                     }
                 }
-                if (limit == null || limit.Contains(EquipmentList.PASSIVE5))
+                if (controler.equipmentReady(EquipmentList.PASSIVE5))
                 {
                     if (Input.GetKeyDown(KeyRegister.main.keySetting["key5"]))
                     {
-                        Dictionary<string, object> order = new Dictionary<string, object>();
-                        order["MousePosition"] = mousePos;
-                        order["PlayerPosition"] = controler.transform.position;
-                        order["randomPoint"] = rpoint;
 
-                        RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
-                        if (hit && (hit.collider.tag == "Player"))
+                        if (eList.nowHarness.passiveEquipments[EquipmentList.PASSIVE5].Designated)
                         {
-                            order["Traget"] = hit.transform.gameObject;
-                            order["TragetPosition"] = hit.transform.position;
+                            RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
+                            if (hit && (hit.collider.tag == "Player"))
+                            {
+                                Dictionary<string, object> order = new Dictionary<string, object>();
+                                order["MousePosition"] = mousePos;
+                                order["PlayerPosition"] = controler.transform.position;
+                                order["randomPoint"] = rpoint;
+                                order["Traget"] = hit.transform.gameObject;
+                                order["TragetPosition"] = hit.transform.position;
+                                order["code"] = CodeTable.KEY5_DOWN;
+                                Sender.main.addOrder(order);
+                            }
                         }
-                        order["code"] = CodeTable.KEY5_DOWN;
-                        Sender.main.addOrder(order);
+                        else
+                        {
+                            Dictionary<string, object> order = new Dictionary<string, object>();
+                            order["MousePosition"] = mousePos;
+                            order["PlayerPosition"] = controler.transform.position;
+                            order["randomPoint"] = rpoint;
+                            order["code"] = CodeTable.KEY5_DOWN;
+                            Sender.main.addOrder(order);
+                        }
                     }
                 }
                 //鼠標
-                if (limit == null || limit.Contains(EquipmentList.ATK))
+                if (controler.equipmentReady(EquipmentList.ATK))
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
                         Debug.Log("鼠標點擊生效!");
                         //Debug.Log("NetPlayerControler:position" + transform.position + "mouse Position" + mousePos);
-                        Dictionary<string, object> order = new Dictionary<string, object>();
-                        order["MousePosition"] = mousePos;
-                        order["PlayerPosition"] = controler.transform.position;
-                        order["randomPoint"] = rpoint;
-
-                        RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
-                        if (hit && (hit.collider.tag == "Player"))
+                       
+                        if (eList.nowHarness.passiveEquipments[EquipmentList.ATK].Designated)
                         {
-                            order["Traget"] = hit.transform.gameObject;
-                            order["TragetPosition"] = hit.transform.position;
+                            RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
+                            if (hit && (hit.collider.tag == "Player"))
+                            {
+                                Dictionary<string, object> order = new Dictionary<string, object>();
+                                order["MousePosition"] = mousePos;
+                                order["PlayerPosition"] = controler.transform.position;
+                                order["randomPoint"] = rpoint;
+                                order["Traget"] = hit.transform.gameObject;
+                                order["TragetPosition"] = hit.transform.position;
+                                order["code"] = CodeTable.MOUSE_LEFT_DOWN;
+                                Sender.main.addOrder(order);
+                            }
                         }
-                        order["code"] = CodeTable.MOUSE_LEFT_DOWN;
-                        Sender.main.addOrder(order);
+                        else
+                        {
+                            Dictionary<string, object> order = new Dictionary<string, object>();
+                            order["MousePosition"] = mousePos;
+                            order["PlayerPosition"] = controler.transform.position;
+                            order["randomPoint"] = rpoint;
+                            order["code"] = CodeTable.MOUSE_LEFT_DOWN;
+                            Sender.main.addOrder(order);
+                        }
                         //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
                     }
                 }
-                if (limit == null || limit.Contains(EquipmentList.SKILL))
+                if (controler.equipmentReady(EquipmentList.SKILL))
                 {
                     if (Input.GetMouseButtonDown(1))
                     {
 
                         //Debug.Log("NetPlayerControler:position" + transform.position + "mouse Position" + mousePos);
-                        Dictionary<string, object> order = new Dictionary<string, object>();
-                        order["MousePosition"] = mousePos;
-                        order["PlayerPosition"] = controler.transform.position;
-                        order["randomPoint"] = rpoint;
 
-                        RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
-                        if (hit && (hit.collider.tag == "Player"))
+                        if (eList.nowHarness.passiveEquipments[EquipmentList.SKILL].Designated)
                         {
-                            order["Traget"] = hit.transform.gameObject;
-                            order["TragetPosition"] = hit.transform.position;
+                            RaycastHit2D hit = Physics2D.Raycast(mousePos, transform.forward, 10);
+                            if (hit && (hit.collider.tag == "Player"))
+                            {
+                                Dictionary<string, object> order = new Dictionary<string, object>();
+                                order["MousePosition"] = mousePos;
+                                order["PlayerPosition"] = controler.transform.position;
+                                order["randomPoint"] = rpoint;
+                                order["Traget"] = hit.transform.gameObject;
+                                order["TragetPosition"] = hit.transform.position;
+                                order["code"] = CodeTable.MOUSE_RIGHT_DOWN;
+                                Sender.main.addOrder(order);
+                            }
+
                         }
-                        order["code"] = CodeTable.MOUSE_RIGHT_DOWN;
-                        Sender.main.addOrder(order);
+                        else
+                        {
+                            Dictionary<string, object> order = new Dictionary<string, object>();
+                            order["MousePosition"] = mousePos;
+                            order["PlayerPosition"] = controler.transform.position;
+                            order["randomPoint"] = rpoint;
+                            order["code"] = CodeTable.MOUSE_RIGHT_DOWN;
+                            Sender.main.addOrder(order);
+                        }
                         //Debug.Log("num" + on_left_down.GetInvocationList().Length + "after mousePos is" + mousePos);
                     }
                 }

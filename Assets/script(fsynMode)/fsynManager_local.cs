@@ -91,6 +91,7 @@ public class fsynManager_local : MonoBehaviour, Manager {
         {
             keyListener.main.state = state;
             keyListener.main.controler = controlList[rno];
+            keyListener.main.eList = equiplist;
         }
         playerPoors.Add(new OrderPoor(rno));
     }
@@ -120,7 +121,11 @@ public class fsynManager_local : MonoBehaviour, Manager {
         enemyList[rno] = nowRole;
 
     }
-	// Update is called once per frame
+	public void removeEnemy(int index)
+    {
+        enemyList.Remove(index);
+    }
+    // Update is called once per frame
 	void Update () {
         bool all = true;
 		foreach(OrderPoor poor in playerPoors)

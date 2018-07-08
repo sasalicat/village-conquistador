@@ -419,5 +419,22 @@ public class trainingBase : MonoBehaviour,Controler {
     {
 
     }
+
+    public bool equipmentReady(sbyte eindex)
+    {
+        if (eList.nowHarness.passiveEquipments.Count <= eindex) {
+            return false;
+        }
+        else {
+            if (eList.nowHarness.passiveEquipments[eindex].CanUse&&limit!=null&&!limit.Contains(eindex))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 }
 

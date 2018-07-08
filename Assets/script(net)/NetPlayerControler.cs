@@ -393,6 +393,24 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     {
         transform.position = entity.position;//在setActive时同步角色位置
     }
+    public bool equipmentReady(sbyte eindex)
+    {
+        if (eList.nowHarness.passiveEquipments.Count <= eindex)
+        {
+            return false;
+        }
+        else
+        {
+            if (eList.nowHarness.passiveEquipments[eindex].CanUse && limit != null && !limit.Contains(eindex))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     private void HpChangeHappen()
     {
         Dictionary<string, object> changeArg = new Dictionary<string, object>();

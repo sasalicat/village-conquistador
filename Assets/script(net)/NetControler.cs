@@ -304,7 +304,24 @@ public class NetControler : MonoBehaviour,KBControler{
     {
         return on_right_down;
     }
-
+    public bool equipmentReady(sbyte eindex)
+    {
+        if (eList.nowHarness.passiveEquipments.Count <= eindex)
+        {
+            return false;
+        }
+        else
+        {
+            if (eList.nowHarness.passiveEquipments[eindex].CanUse && limit != null && !limit.Contains(eindex))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     void Start()
     {
         //Label = GameObject.Find("Canvas/Text").GetComponent<Text>();
