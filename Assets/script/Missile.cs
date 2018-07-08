@@ -7,6 +7,7 @@ public class Missile:MonoBehaviour  {
     private damage damage;
 
     public const int STAND_FLY_SPEED=40;
+    public const int ENEMY_STAND_FLY_SPEED=15;
     private float speed = STAND_FLY_SPEED;
     public GameObject Creater
     {

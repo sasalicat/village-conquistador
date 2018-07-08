@@ -34,4 +34,6 @@ public class CodeTable{
     public const sbyte CONTORTION = 28;
     public const sbyte SYNCHRO = 29;
     public const sbyte SHIFT = 30;
+    public const sbyte FRAME_END = 31;
+    public const sbyte SET_MOUSE_POS = 32;
 }

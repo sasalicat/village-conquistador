@@ -70,7 +70,7 @@ public class NetRoleState :RoleState {
 
         public void takedamage(damage damage)
         {
-            Debug.Log("role takedamage role kind is"+damage.kind);
+            Debug.Log("role takedamage role kind is"+damage.kind+"causer"+damage.damager);
             if (damage.kind == 1)
             {
                 if (!role.immune_attack)
@@ -508,7 +508,7 @@ public class NetRoleState :RoleState {
 	}
     public override void  TakeDamage(damage damage)
     {
-        Debug.Log("net role state");
+        Debug.Log("net role state:"+gameObject.name);
         nowState.takedamage(damage);
     }
     public void realHurt(damage damage)

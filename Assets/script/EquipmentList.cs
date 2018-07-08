@@ -15,11 +15,13 @@ public class EquipmentList : MonoBehaviour {
 
         public ArmedHarness(EquipmentList owner)
         {
+            Debug.Log("創建新的武裝帶");
             this.owner = owner;
 
         }
         public ArmedHarness(EquipmentList owner,List<sbyte> EquipmentNo)
         {
+            Debug.Log("創建新的武裝帶");
             this.owner = owner;
             foreach(sbyte no in EquipmentNo){
                 addByName(owner.table.equipmentNameList[no]);
@@ -38,6 +40,7 @@ public class EquipmentList : MonoBehaviour {
             Debug.Log("名字："+name);
             NeedCast.Add(((CDEquipment)newone).Designated);
             passiveEquipments.Add((CDEquipment)newone);
+            Debug.Log("武裝帶有" + passiveEquipments.Count + "個裝備");
             Debug.Log("In addByname:" + name);
             owner.reduceLine += ((CDEquipment)newone).setTime;
             owner.equipments.Add((Equipment)newone);
@@ -46,6 +49,7 @@ public class EquipmentList : MonoBehaviour {
         }       
         public void removeAll()
         {
+            Debug.Log("清除所有主動裝備");
             foreach(CDEquipment equipment in passiveEquipments)
             {
                 owner.reduceLine -= equipment.setTime;
@@ -126,16 +130,18 @@ public class EquipmentList : MonoBehaviour {
         origin = null;
 
     }
-    void Start()
+    public void Start()
     {
+        Debug.Log("in elist find:" + GameObject.Find("keyTabel"));
         table = GameObject.Find("keyTabel").GetComponent<EquipmentTable>();
         register = GameObject.Find("client").GetComponent<dataRegister>();
-        nowHarness = new ArmedHarness(this);
+        if(nowHarness==null)
+            nowHarness = new ArmedHarness(this);
         misTable= GameObject.Find("keyTabel").GetComponent<MissileTable>();
         state = GetComponent<RoleState>();
         anim =GetComponent<AnimatorTable>();
         //text = GameObject.Find("Canvas/Text").GetComponent<Text>();
-        AddEquipments();
+        //AddEquipments();
         //text.text = "完成start";
         //Debug.Log("完成start");
 
@@ -225,13 +231,14 @@ public class EquipmentList : MonoBehaviour {
        
         //text.text += "+1";
     }
-    private void addByNo(int EquipmentNo)
+    public void addByNo(int EquipmentNo)
     {
         string typeName = table.equipmentNameList[EquipmentNo];
         Debug.Log("typeName" + typeName);
 
         if (table.passiveList[EquipmentNo])//主動道具
         {
+            Debug.Log("是主動技能");
             nowHarness.addByName(typeName);
         }
         else

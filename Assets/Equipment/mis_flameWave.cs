@@ -10,7 +10,7 @@ public class mis_flameWave : Missile
     // Use this for initialization
     void Start()
     {
-        Speed = Missile.STAND_FLY_SPEED*0.7f;//標準速度的70%
+        Speed = Missile.STAND_FLY_SPEED * 0.7f;//標準速度的70%
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class mis_flameWave : Missile
     {
         RoleState role = other.gameObject.GetComponent<RoleState>();
         if (role.team != Creater.GetComponent<RoleState>().team)
-        {  
+        {
             role.TakeDamage(Damage);
             if (role.tag == "Player")
             {

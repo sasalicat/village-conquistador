@@ -54,6 +54,7 @@ public class trainingManager : MonoBehaviour,Manager {
         hpManage.CreateHpBar(roleObjList[0],0,"你","");
         broad.mainRoleElist = roleObjList[0].GetComponent<EquipmentList>();//設置技能顯示
         roleObjList[0].GetComponent<EquipmentList>().on_AH_change += broad.changeAllLabel;
+        roleObjList[0].GetComponent<EquipmentList>().AddEquipments();
         //创建攻击陪练暂时先这样
         roleObjList[1] = Instantiate(AttackOnly, new Vector3(-10, 10, 0), this.transform.rotation);
         controlers[1] = roleObjList[1].GetComponent<trainingBase>();
@@ -61,6 +62,7 @@ public class trainingManager : MonoBehaviour,Manager {
         controlers[1].Index = 1;
         elists[1] = roleObjList[1].GetComponent<EquipmentList>();
         elists[1].controler = controlers[1];
+        elists[1].AddEquipments();
         roleObjList[1].SetActive(true);
         hpManage.CreateHpBar(roleObjList[1], 1,"你","");
 

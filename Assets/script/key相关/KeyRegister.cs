@@ -3,9 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyRegister : MonoBehaviour {
-    public Dictionary<string, KeyCode> keySetting;
+    public  Dictionary<string, KeyCode> keySetting;
+    public static KeyRegister main;
 	// Use this for initialization
+    void OnEnable()
+    {
+        if (main == null)
+        {
+            main = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 	void Start () {
+
         DontDestroyOnLoad(gameObject);
         keySetting = new Dictionary<string,KeyCode>();
         keySetting["up"] = KeyCode.W;

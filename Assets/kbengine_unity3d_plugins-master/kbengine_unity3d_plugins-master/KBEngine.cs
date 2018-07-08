@@ -86,7 +86,7 @@
 		
 		// 服务端与客户端的版本号以及协议MD5
 		public string serverVersion = "";
-		public string clientVersion = "0.9.0";
+		public string clientVersion = "1.1.0";
 		public string serverScriptVersion = "";
 		public string clientScriptVersion = "0.1.0";
 		public string serverProtocolMD5 = "";
@@ -180,7 +180,7 @@
 		{
 			Event.registerIn("createAccount", this, "createAccount");
 			Event.registerIn("login", this, "login");
-			Event.registerIn("reLoginBaseapp", this, "reLoginBaseapp");
+			Event.registerIn("reloginBaseapp", this, "reloginBaseapp");
 			Event.registerIn("resetPassword", this, "resetPassword");
 			Event.registerIn("bindAccountEmail", this, "bindAccountEmail");
 			Event.registerIn("newPassword", this, "newPassword");
@@ -313,7 +313,7 @@
 		*/
 		public void sendTick()
 		{
-			if(_networkInterface == null || !_networkInterface.valid())
+			if(_networkInterface == null || _networkInterface.connected == false)
 				return;
 
 			if(!loginappMessageImported_ && !baseappMessageImported_)
@@ -624,9 +624,12 @@
 			重登录到网关(baseapp)
 			一些移动类应用容易掉线，可以使用该功能快速的重新与服务端建立通信
 		*/
-		public void reLoginBaseapp()
+		public void reloginBaseapp()
 		{  
-			Event.fireAll("onReLoginBaseapp", new object[]{});
+			if(_networkInterface.valid())
+				return;
+
+			Event.fireAll("onReloginBaseapp", new object[]{});
 			_networkInterface.connectTo(baseappIP, baseappPort, onReConnectTo_baseapp_callback, null);
 		}
 
@@ -634,7 +637,7 @@
 		{
 			if(!success)
 			{
-				Dbg.ERROR_MSG(string.Format("KBEngine::reLoginBaseapp(): connect {0}:{1} is error!", ip, port));
+				Dbg.ERROR_MSG(string.Format("KBEngine::reloginBaseapp(): connect {0}:{1} is error!", ip, port));
 				return;
 			}
 			
@@ -642,7 +645,7 @@
 			Dbg.DEBUG_MSG(string.Format("KBEngine::relogin_baseapp(): connect {0}:{1} is successfully!", ip, port));
 
 			Bundle bundle = Bundle.createObject();
-			bundle.newMessage(Message.messages["Baseapp_reLoginBaseapp"]);
+			bundle.newMessage(Message.messages["Baseapp_reloginBaseapp"]);
 			bundle.writeString(username);
 			bundle.writeString(password);
 			bundle.writeUint64(entity_uuid);
@@ -904,7 +907,7 @@
 					
 					module.propertys[name] = savedata;
 					
-					if(ialiasID >= 0)
+					if(ialiasID != -1)
 					{
 						module.usePropertyDescrAlias = true;
 						module.idpropertys[(UInt16)ialiasID] = savedata;
@@ -954,7 +957,7 @@
 							
 					module.methods[name] = savedata;
 					
-					if(ialiasID >= 0)
+					if(ialiasID != -1)
 					{
 						module.useMethodDescrAlias = true;
 						module.idmethods[(UInt16)ialiasID] = savedata;
@@ -1395,20 +1398,20 @@
 		/*
 			重登录baseapp失败了
 		*/
-		public void Client_onReLoginBaseappFailed(UInt16 failedcode)
+		public void Client_onReloginBaseappFailed(UInt16 failedcode)
 		{
-			Dbg.ERROR_MSG("KBEngine::Client_onReLoginBaseappFailed: failedcode(" + failedcode + ")!");
-			Event.fireAll("onReLoginBaseappFailed", new object[]{failedcode});
+			Dbg.ERROR_MSG("KBEngine::Client_onReloginBaseappFailed: failedcode(" + failedcode + ")!");
+			Event.fireAll("onReloginBaseappFailed", new object[]{failedcode});
 		}
 		
 		/*
 			登录baseapp成功了
 		*/
-		public void Client_onReLoginBaseappSuccessfully(MemoryStream stream)
+		public void Client_onReloginBaseappSuccessfully(MemoryStream stream)
 		{
 			entity_uuid = stream.readUint64();
-			Dbg.DEBUG_MSG("KBEngine::Client_onReLoginBaseappSuccessfully: name(" + username + ")!");
-			Event.fireAll("onReLoginBaseappSuccessfully", new object[]{});
+			Dbg.DEBUG_MSG("KBEngine::Client_onReloginBaseappSuccessfully: name(" + username + ")!");
+			Event.fireAll("onReloginBaseappSuccessfully", new object[]{});
 		}
 
 		/*
@@ -1418,53 +1421,62 @@
 		{
 			Dbg.DEBUG_MSG("KBEngine::Client_onCreatedProxies: eid(" + eid + "), entityType(" + entityType + ")!");
 			
-			if(this.entities.ContainsKey(eid))
-			{
-				// Dbg.WARNING_MSG("KBEngine::Client_onCreatedProxies: eid(" + eid + ") has exist!");
-				Client_onEntityDestroyed(eid);
-			}
-				
 			entity_uuid = rndUUID;
 			entity_id = eid;
 			entity_type = entityType;
 			
-			ScriptModule module = null;
-			if(!EntityDef.moduledefs.TryGetValue(entityType, out module))
+			if(!this.entities.ContainsKey(eid))
 			{
-				Dbg.ERROR_MSG("KBEngine::Client_onCreatedProxies: not found module(" + entityType + ")!");
-				return;
-			}
-			
-			Type runclass = module.script;
-			if(runclass == null)
-				return;
-			
-			Entity entity = (Entity)Activator.CreateInstance(runclass);
-			entity.id = eid;
-			entity.className = entityType;
-			
-			entity.baseMailbox = new Mailbox();
-			entity.baseMailbox.id = eid;
-			entity.baseMailbox.className = entityType;
-			entity.baseMailbox.type = Mailbox.MAILBOX_TYPE.MAILBOX_TYPE_BASE;
+				ScriptModule module = null;
+				if(!EntityDef.moduledefs.TryGetValue(entityType, out module))
+				{
+					Dbg.ERROR_MSG("KBEngine::Client_onCreatedProxies: not found module(" + entityType + ")!");
+					return;
+				}
+				
+				Type runclass = module.script;
+				if(runclass == null)
+					return;
+				
+				Entity entity = (Entity)Activator.CreateInstance(runclass);
+				entity.id = eid;
+				entity.className = entityType;
+				
+				entity.baseMailbox = new Mailbox();
+				entity.baseMailbox.id = eid;
+				entity.baseMailbox.className = entityType;
+				entity.baseMailbox.type = Mailbox.MAILBOX_TYPE.MAILBOX_TYPE_BASE;
 
-			entities[eid] = entity;
-			
-			MemoryStream entityMessage = null;
-			_bufferedCreateEntityMessage.TryGetValue(eid, out entityMessage);
-			
-			if(entityMessage != null)
-			{
-				Client_onUpdatePropertys(entityMessage);
-				_bufferedCreateEntityMessage.Remove(eid);
-				entityMessage.reclaimObject();
+				entities[eid] = entity;
+				
+				MemoryStream entityMessage = null;
+				_bufferedCreateEntityMessage.TryGetValue(eid, out entityMessage);
+				
+				if(entityMessage != null)
+				{
+					Client_onUpdatePropertys(entityMessage);
+					_bufferedCreateEntityMessage.Remove(eid);
+					entityMessage.reclaimObject();
+				}
+				
+				entity.__init__();
+				entity.inited = true;
+				
+				if(_args.isOnInitCallPropertysSetMethods)
+					entity.callPropertysSetMethods();
 			}
-			
-			entity.__init__();
-			entity.inited = true;
-			
-			if(_args.isOnInitCallPropertysSetMethods)
-				entity.callPropertysSetMethods();
+			else
+			{
+				MemoryStream entityMessage = null;
+				_bufferedCreateEntityMessage.TryGetValue(eid, out entityMessage);
+				
+				if(entityMessage != null)
+				{
+					Client_onUpdatePropertys(entityMessage);
+					_bufferedCreateEntityMessage.Remove(eid);
+					entityMessage.reclaimObject();
+				}
+			}
 		}
 		
 		public Entity findEntity(Int32 entityID)
@@ -1951,8 +1963,8 @@
 				
 				if(z - System.Math.PI > 0.0)
 					z -= System.Math.PI * 2;
-                //Dbg.DEBUG_MSG(dirHasChanged + ":in upate player direction is" + x + "," + y + "," + z);
-                bundle.writeFloat((float)x);
+				
+				bundle.writeFloat((float)x);
 				bundle.writeFloat((float)y);
 				bundle.writeFloat((float)z);
 				bundle.writeUint8((Byte)(playerEntity.isOnGround == true ? 1 : 0));
@@ -1996,8 +2008,7 @@
 					
 					if(z - System.Math.PI > 0.0)
 						z -= System.Math.PI * 2;
-
-                    
+					
 					bundle.writeFloat((float)x);
 					bundle.writeFloat((float)y);
 					bundle.writeFloat((float)z);

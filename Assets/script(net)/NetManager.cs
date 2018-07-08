@@ -204,7 +204,7 @@ public class NetManager : MonoBehaviour ,Manager {
                         NetControler control = objList[i].AddComponent<NetControler>();
                         objList[i].AddComponent<NetRoleState>();
                         objList[i].GetComponent<EquipmentList>().controler = control;
-
+                        objList[i].GetComponent<EquipmentList>().AddEquipments();
                         elist.controler = control;
                         control.entity = e;
 

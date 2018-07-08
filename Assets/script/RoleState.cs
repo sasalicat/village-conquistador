@@ -633,7 +633,7 @@ public class RoleState : MonoBehaviour {
     public int maxHp;
     
     public int nowHp;
-    public float nowMp {
+    public virtual float nowMp {
         set
         {
             Dictionary<string, object> Arg = new Dictionary<string, object>();
