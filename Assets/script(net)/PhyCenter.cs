@@ -37,7 +37,7 @@ public class PhyCenter : MonoBehaviour {
     }
 	// Update is called once per frame
 	protected void Update () {
-        Debug.Log("in phycenter update");
+        //Debug.Log("in phycenter update");
         if (process != null)
         {
             Debug.Log("process not null");

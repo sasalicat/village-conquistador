@@ -72,7 +72,7 @@ public class mg_atk : MonoBehaviour,CDEquipment
     {
         get
         {
-            Debug.Log(" in can use CDTime is" + CDTime);
+            //Debug.Log(" in can use CDTime is" + CDTime);
             return (CDTime <= 0);//如果CDTime小於0代表技能可以使用
             //return true;
         }

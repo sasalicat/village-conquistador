@@ -5,6 +5,8 @@ using KBEngine;
 using System;
 
 public class enemyControler : MonoBehaviour,KBControler {
+    public delegate void withNothing();
+    public delegate void ObjAndData(GameObject obj,enemyInfo data,int level);
     private int index;
     public List<sbyte> limit;
     private bool alive = true;
@@ -14,11 +16,17 @@ public class enemyControler : MonoBehaviour,KBControler {
     private float nextrecover = unit.RECOVER_MP_INTERVAL;
     private NetRoleState state;
     public System.Random random;//因為要設置種子所以是public
+    
+    public enemyInfo edata;
+    public int level;
+    private bool notInit = true;
+
     private AnimatorTable anim;
     private bool lefting = false;
     private bool uping = false;
     private bool righting = false;
     private bool downing = false;
+    public ObjAndData onEnemyReady;
     _on_skill_key_down on_left_down;
     _on_skill_key_down on_right_down;
     _on_skill_key_down on_middle_down;
@@ -49,6 +57,7 @@ public class enemyControler : MonoBehaviour,KBControler {
     _on_trigger on_mp_change;
     _on_trigger on_active_skill;
     _on_trigger after_take_damage;
+    _on_trigger be_interrupt;
 
     public _on_trigger On_Take_Damage
     {
@@ -192,6 +201,20 @@ public class enemyControler : MonoBehaviour,KBControler {
             return alive;
         }
     }
+
+    public _on_trigger Be_Interrupt
+    {
+        get
+        {
+            return be_interrupt;
+        }
+
+        set
+        {
+            be_interrupt = value;
+        }
+    }
+
     public _on_skill_key_down get_on_key1_down()
     {
         return on_key1_down;
@@ -383,6 +406,17 @@ public class enemyControler : MonoBehaviour,KBControler {
         on_keyright_up += keyright_up;
         on_keyup_down += keyup_down;
         on_keyup_up += keyup_up;
+
+        Debug.Log("在enemy controler 的start完成");
+    }
+    void Update()
+    {
+        if (notInit)
+        {
+            Debug.Log("在enemycontrol中 " + onEnemyReady);
+            onEnemyReady(gameObject, edata, level);
+            notInit = false;
+        }
     }
     /*這裡不需要因為synManager在做這些事*/
     public void addOrder(Dictionary<string, object> item)
@@ -405,7 +439,12 @@ public class enemyControler : MonoBehaviour,KBControler {
         Dictionary<string, object> order = new Dictionary<string, object>();
         order["code"] = CodeTable.TAKE_DAMAGE;
         order["Damage"] = damage;
-        order["DamagerPosition"] = damage.damager.transform.position;
+        if (damage.damager == null)
+        {
+            order["DamagerPosition"] = null;
+        }
+        else
+            order["DamagerPosition"] = damage.damager.transform.position;
         order["PlayerPosition"] = transform.position;
         order["randomPoint"] = random.Next(0, 99);
         realTakeDamage(order);
@@ -467,7 +506,8 @@ public class enemyControler : MonoBehaviour,KBControler {
     }
     public void setDirection(Vector2 mousePos)
     {
-        transform.up = -(mousePos - (Vector2)transform.position);
+        if(state.canRota)
+            transform.up = -(mousePos - (Vector2)transform.position);
     }
     public void move(float interval)
     {
@@ -523,6 +563,10 @@ public class enemyControler : MonoBehaviour,KBControler {
         after_take_damage(Args);
         //触发血量变动事件
         HpChangeHappen();
+        if (damage.stiffTime > 0)
+        {
+            Be_Interrupt(new Dictionary<string, object>());
+        }
         if (state.nowHp <= 0)
         {
             Dictionary<string, object> diedArg = new Dictionary<string, object>();
@@ -569,7 +613,7 @@ public class enemyControler : MonoBehaviour,KBControler {
             state.needRecord = data.Duration > 0;
             state.TimeLeft = data.Duration;
             state.nowNo = (sbyte)no;
-
+            Be_Interrupt(new Dictionary<string, object>());
 
             //string typeName = controtions.dataNames[no];
         }

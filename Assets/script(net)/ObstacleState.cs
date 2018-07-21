@@ -189,7 +189,18 @@ public class ObstacleState : RoleState,Controler {//相当于控制器和State�
             throw new NotImplementedException();
         }
     }
+    public _on_trigger Be_Interrupt
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
 
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
     void addBuffByNo(sbyte no)
     {
 

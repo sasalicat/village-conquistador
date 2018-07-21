@@ -492,6 +492,7 @@ public class RoleState : MonoBehaviour {
     protected state nowState;
     protected List<state> StateTable=new List<state>();
     public sbyte team = 0;//0为中立单位
+
     //属性
     public int Power
     {
@@ -630,7 +631,22 @@ public class RoleState : MonoBehaviour {
     public int damageReduce;//物理減傷比例
     public int specialReduce;//技能減傷比例
                              //真實屬性------------------------------------------------------
-    public int maxHp;
+    private int maxhp;
+    public int maxHp
+    {
+        set
+        {
+            maxhp = value;
+            if (nowHp>maxhp)
+            {
+                nowHp = maxhp;
+            }
+        }
+        get
+        {
+            return maxhp;
+        }
+    }
     
     public int nowHp;
     public virtual float nowMp {

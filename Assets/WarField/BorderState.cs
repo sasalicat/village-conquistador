@@ -162,6 +162,19 @@ public class BorderState : RoleState,Controler {
         }
     }
 
+    public _on_trigger Be_Interrupt
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     void addBuffByNo(sbyte no)
     {
 

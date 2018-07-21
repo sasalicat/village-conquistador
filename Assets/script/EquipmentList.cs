@@ -153,7 +153,7 @@ public class EquipmentList : MonoBehaviour {
         {
             for(int i = 0; i < equipments.Count; i++)
             {
-                Debug.Log("");
+                Debug.Log(gameObject+"init裝備");
                 equipments[i].onInit(misTable,state,anim);
             }
             InitTime = false;

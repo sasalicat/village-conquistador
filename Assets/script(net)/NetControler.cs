@@ -70,6 +70,7 @@ public class NetControler : MonoBehaviour,KBControler{
     _on_trigger on_mp_change;
     _on_trigger on_active_skill;
     _on_trigger after_take_damage;
+    _on_trigger be_interrupt;
     public Entity Entity
     {
         get
@@ -223,7 +224,18 @@ public class NetControler : MonoBehaviour,KBControler{
             after_take_damage = value;
         }
     }
+    public _on_trigger Be_Interrupt
+    {
+        get
+        {
+            return be_interrupt;
+        }
 
+        set
+        {
+            be_interrupt = value;
+        }
+    }
     public _on_skill_key_down get_on_key1_down()
     {
         return on_key1_down;

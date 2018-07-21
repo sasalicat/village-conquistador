@@ -50,6 +50,7 @@ public class fsynControler : MonoBehaviour, KBControler
     _on_trigger on_mp_change;
     _on_trigger on_active_skill;
     _on_trigger after_take_damage;
+    _on_trigger be_interrupt;
 
     public _on_trigger On_Take_Damage
     {
@@ -172,7 +173,18 @@ public class fsynControler : MonoBehaviour, KBControler
             after_take_damage = value;
         }
     }
+    public _on_trigger Be_Interrupt
+    {
+        get
+        {
+            return be_interrupt;
+        }
 
+        set
+        {
+            be_interrupt = value;
+        }
+    }
     public Entity Entity
     {
         get
@@ -412,7 +424,8 @@ public class fsynControler : MonoBehaviour, KBControler
     }
     public void setDirection(Vector2 mousePos)
     {
-       transform.up=-( mousePos - (Vector2)transform.position);
+        if(state.canRota)
+            transform.up=-( mousePos - (Vector2)transform.position);
     }
     public void move(float interval)
     {
@@ -462,10 +475,23 @@ public class fsynControler : MonoBehaviour, KBControler
                 Arg["Traget"] = this.gameObject;
                 //Arg["Traget"]=
                 damageControler.On_Cause_Damage(Arg);
+                if (damage.equipIndex != -1)
+                {
+                    Equipment e=   damage.damager.GetComponent<EquipmentList>().equipments[damage.equipIndex];
+                    if (e.GetType().GetInterface("canBeAddition")!=null)
+                    {
+                        if(((canBeAddition)e).onCauseDamage!=null)
+                            ((canBeAddition)e).onCauseDamage(Arg);
+                    }
+                }
             }
         }
         state.realHurt(damage);
         after_take_damage(Args);
+        if (damage.stiffTime > 0)
+        {
+            Be_Interrupt(new Dictionary<string, object>());
+        }
         //触发血量变动事件
         HpChangeHappen();
         if (state.nowHp <= 0)
@@ -513,7 +539,7 @@ public class fsynControler : MonoBehaviour, KBControler
             state.needRecord = data.Duration > 0;
             state.TimeLeft = data.Duration;
             state.nowNo = (sbyte)no;
-
+            Be_Interrupt(new Dictionary<string, object>());
 
             //string typeName = controtions.dataNames[no];
         }
@@ -584,7 +610,7 @@ public class fsynControler : MonoBehaviour, KBControler
     }
     public void onMoveButtom(sbyte action)
     {
-        Debug.Log("onMoveButtom 被呼叫 action:" + action);
+        //Debug.Log("onMoveButtom 被呼叫 action:" + action);
         switch (action)
         {
             case CodeTable.KEYLEFT_DOWN:

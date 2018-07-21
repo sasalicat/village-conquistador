@@ -46,6 +46,11 @@ public interface Controler
     _on_keyleft_up get_on_keyleft_up();
     /*装备事件*/
 
+   _on_trigger Be_Interrupt
+    {
+        set;
+        get;
+    }
     _on_trigger On_Take_Damage
     {
         set;

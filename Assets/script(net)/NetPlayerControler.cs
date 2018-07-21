@@ -83,6 +83,7 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
     _on_trigger on_mp_change;
     _on_trigger on_active_skill;
     _on_trigger after_take_damage;
+    _on_trigger be_interrupt;
     //新架構儲存觸發物件
 
     List<Equipment> onAttackLine=new List<Equipment>();
@@ -312,7 +313,18 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
             after_take_damage = value;
         }
     }
+    public _on_trigger Be_Interrupt
+    {
+        get
+        {
+            return be_interrupt;
+        }
 
+        set
+        {
+            be_interrupt = value;
+        }
+    }
     private Vector3 getmousePos()
     {
         Vector3 mouse = Input.mousePosition;

@@ -95,17 +95,18 @@ public class fsynManager_local : MonoBehaviour, Manager {
         }
         playerPoors.Add(new OrderPoor(rno));
     }
-    public void createEnemy(int roleKind,List<int> eList, Vector2 pos,string AIname)
+    public GameObject createEnemy(int roleKind,List<int> eList, Vector2 pos,string name,string teamname,string AIname,enemyInfo info,int level)
     {
         int rno = enemyRecondNum++;
         GameObject nowRole = Instantiate(prabTable.table[roleKind], pos, transform.rotation);
         var controler = nowRole.AddComponent<enemyControler>();
+        //Debug.Log("添加enemystart完成");
         var state = nowRole.AddComponent<enemyState>();
         nowRole.SetActive(true);
         var equiplist = nowRole.GetComponent<EquipmentList>();
         equiplist.controler = controlList[rno];
         equiplist.Start();
-        hpBarCreater.CreateHpBar(nowRole, rno, "嘍啰", "你的末日");
+        hpBarCreater.CreateHpBar(nowRole, rno, name, teamname);
         foreach (int index in eList)
         {
             equiplist.addByNo(index);
@@ -119,9 +120,23 @@ public class fsynManager_local : MonoBehaviour, Manager {
         }
         nowRole.GetComponent<RoleState>().team = (sbyte)MAX_UNIT_NUM;
         enemyList[rno] = nowRole;
+        controler.edata = info;
+        controler.level = level;
+        controler.onEnemyReady += unitInit;
+        Debug.Log(controler + "的onEnemyReady:" + controler.onEnemyReady);
+        return nowRole;
 
     }
-	public void removeEnemy(int index)
+    public GameObject createEnemy(enemyInfoList.enemyRecord data,Vector2 pos)
+    {
+        return createEnemy(data.roleNo,data.eList, pos,data.name,data.teamName,data.AIname,data.attributes,data.level);
+    }
+    public void unitInit(GameObject obj,enemyInfo info,int level)
+    {
+        Debug.Log("触发unit init");
+        info.initUnit(obj.GetComponent<RoleState>(),level);
+    }
+    public void removeEnemy(int index)
     {
         enemyList.Remove(index);
     }
@@ -140,11 +155,11 @@ public class fsynManager_local : MonoBehaviour, Manager {
             foreach (OrderPoor poor in playerPoors)
 
             {
-                Debug.Log("poor length:" + poor.orders.Count);
+                //Debug.Log("poor length:" + poor.orders.Count);
                 while (poor.orders.Count > 0)
                 {
                     Dictionary<string, object> order = poor.orders[0];
-                    Debug.Log("code:"+ order["code"]+"type:"+order["code"].GetType());
+                    //Debug.Log("code:"+ order["code"]+"type:"+order["code"].GetType());
                     sbyte code = (sbyte)order["code"];
                     switch (code)
                     {
@@ -217,6 +232,7 @@ public class fsynManager_local : MonoBehaviour, Manager {
                 econtrol.takeInterval(arg);
                 econtrol.move(SINGLE_FRAME_TIME);
             }
+            Timer.main.callAllFunction(SINGLE_FRAME_TIME);
         }
 	}
 }

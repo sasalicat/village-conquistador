@@ -12,6 +12,7 @@ public class trainingControler : MonoBehaviour,Controler {
     _on_trigger on_mp_change;
     _on_trigger on_active_skill;
     _on_trigger after_take_damage;
+    _on_trigger be_interrupt;
 
     _on_skill_key_down on_left_down;
     _on_skill_key_down on_right_down;
@@ -51,8 +52,7 @@ public class trainingControler : MonoBehaviour,Controler {
     public bool rightIng = false;
     //恢复mp用变数
     private float nextRecover = unit.RECOVER_MP_INTERVAL;
-    
-    
+
 
     void onKeyUpDown()
     {
@@ -229,6 +229,19 @@ public class trainingControler : MonoBehaviour,Controler {
         set
         {
             after_take_damage = value;
+        }
+    }
+
+    public _on_trigger Be_Interrupt
+    {
+        get
+        {
+            return be_interrupt;
+        }
+
+        set
+        {
+            be_interrupt = value;
         }
     }
 

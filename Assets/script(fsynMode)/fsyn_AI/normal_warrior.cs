@@ -34,6 +34,7 @@ public class normal_warrior : MonoBehaviour,AI_fsyn {
     {
         if (traget)
         {
+            control.setDirection(traget.transform.position);
             transform.up = -(traget.transform.position - control.transform.position);
             if (((Vector2)traget.transform.position - (Vector2)transform.position).magnitude <= range)
             {

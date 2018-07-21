@@ -760,7 +760,6 @@ MonoBehaviour:
   realspeed: 5
   damageReduce: 0
   specialReduce: 0
-  maxHp: 0
   nowHp: 0
   nowStiff: 0
   nowConversely: 0
@@ -1437,7 +1436,6 @@ MonoBehaviour:
   realspeed: 5
   damageReduce: 0
   specialReduce: 0
-  maxHp: 0
   nowHp: 0
   nowStiff: 0
   nowConversely: 0
@@ -1703,6 +1701,7 @@ GameObject:
   - component: {fileID: 856139169}
   - component: {fileID: 856139170}
   - component: {fileID: 856139171}
+  - component: {fileID: 856139172}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1828,6 +1827,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLeft: 0.2
+--- !u!114 &856139172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 856139163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da8205aa9176a941972483c66fef52a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &887899608
 Prefab:
   m_ObjectHideFlags: 0
@@ -2711,7 +2721,6 @@ MonoBehaviour:
   realspeed: 5
   damageReduce: 0
   specialReduce: 0
-  maxHp: 0
   nowHp: 0
   nowStiff: 0
   nowConversely: 0
@@ -3369,7 +3378,6 @@ MonoBehaviour:
   realspeed: 5
   damageReduce: 0
   specialReduce: 0
-  maxHp: 0
   nowHp: 0
   nowStiff: 0
   nowConversely: 0
