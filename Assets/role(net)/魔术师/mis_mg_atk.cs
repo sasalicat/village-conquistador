@@ -17,7 +17,8 @@ public class mis_mg_atk :addibleMissile{
     }
     public void onMisUpdate(float time)
     {
-        Debug.Log("onMisUpdate 被呼叫time"+time);
+        //Debug.Log("up is:"+transform.up);
+        //Debug.Log("onMisUpdate 被呼叫time"+time);
         livetime -= time;
         if (livetime > 0)
         {
@@ -44,7 +45,7 @@ public class mis_mg_atk :addibleMissile{
             Debug.Log(" on trigger enter 2D");
             if (onHit!=null)
             {
-                onHit(other.gameObject);
+                onHit(other.gameObject,this);
             }
             RoleState role = other.gameObject.GetComponent<RoleState>();
             RoleState rolestate = Creater.GetComponent(typeof(RoleState)) as RoleState;

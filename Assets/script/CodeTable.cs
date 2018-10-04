@@ -36,4 +36,5 @@ public class CodeTable{
     public const sbyte SHIFT = 30;
     public const sbyte FRAME_END = 31;
     public const sbyte SET_MOUSE_POS = 32;
+    public const sbyte SET_MOVE_STATE = 33;
 }

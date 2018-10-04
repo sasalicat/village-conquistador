@@ -30,7 +30,8 @@ public abstract class PostOffice:MonoBehaviour  {
         if (frameTimeLeft <= 0)
         {
             //Debug.Log("send");
-            beforeFrameEnd();
+            if(beforeFrameEnd!=null)
+                beforeFrameEnd();
             updateFrame();
             frameTimeLeft = cycleTime;
         }

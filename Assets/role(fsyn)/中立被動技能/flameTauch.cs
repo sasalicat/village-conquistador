@@ -36,7 +36,7 @@ public class flameTauch : MonoBehaviour,Equipment {
             index = value;
         }
     }
-    public void onHitTraget(GameObject obj)
+    public void onHitTraget(GameObject obj,addibleMissile self)
     {
         var control= obj.GetComponent<Controler>();
         if (control!=null)

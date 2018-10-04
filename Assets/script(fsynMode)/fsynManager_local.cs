@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class fsynManager_local : MonoBehaviour, Manager {
-    private int MAX_UNIT_NUM = 10;
+    protected int MAX_UNIT_NUM = 10;
     public float SINGLE_FRAME_TIME = 0.03f;
     public static fsynManager_local main;
     public GameObject[] objList;
 
     public Dictionary<int,GameObject> enemyList;
-    private int enemyRecondNum = 0;
+    protected int enemyRecondNum = 0;
 
-    private fsynControler[] controlList;
-    private EquipmentTable eTable;
-    private PrabTabel prabTable;
+    protected fsynControler[] controlList;
+    protected EquipmentTable eTable;
+    protected PrabTabel prabTable;
     public sceneScript script;
     public HpBarManager hpBarCreater;//手动拉取赋值
-    List<OrderPoor> playerPoors;
+    protected List<OrderPoor> playerPoors;
     public class OrderPoor
     {
         public int unitNo;
@@ -30,6 +30,7 @@ public class fsynManager_local : MonoBehaviour, Manager {
     }
     public void addOrderFor(int playerNo,Dictionary<string,object> order)
     {
+        //Debug.Log("playerNo is:" + playerNo + "poorLength:" + playerPoors.Count);
         playerPoors[playerNo].orders.Add(order);
     }
     public GameObject[] getGameObjectList()
@@ -71,7 +72,7 @@ public class fsynManager_local : MonoBehaviour, Manager {
     {
         createMainRole(rno, roleKind, eList, pos, true);
     }
-    public void createMainRole(int rno, int roleKind, List<int> eList, Vector2 pos,bool mainrole)
+    public virtual void createMainRole(int rno, int roleKind, List<int> eList, Vector2 pos,bool mainrole)
     {
         GameObject nowRole = Instantiate(prabTable.table[roleKind], pos, transform.rotation);
         controlList[rno] = nowRole.AddComponent<fsynControler>();
@@ -95,7 +96,7 @@ public class fsynManager_local : MonoBehaviour, Manager {
         }
         playerPoors.Add(new OrderPoor(rno));
     }
-    public GameObject createEnemy(int roleKind,List<int> eList, Vector2 pos,string name,string teamname,string AIname,enemyInfo info,int level)
+    public virtual GameObject createEnemy(int roleKind,List<int> eList, Vector2 pos,string name,string teamname,string AIname,enemyInfo info,int level)
     {
         int rno = enemyRecondNum++;
         GameObject nowRole = Instantiate(prabTable.table[roleKind], pos, transform.rotation);
@@ -140,52 +141,34 @@ public class fsynManager_local : MonoBehaviour, Manager {
     {
         enemyList.Remove(index);
     }
-    // Update is called once per frame
-	void Update () {
-        bool all = true;
-		foreach(OrderPoor poor in playerPoors)
-        {
-            if (poor.orders.Count <= 0)
-            {
-                all = false;
-            }
-        }
-        //如果所有玩家的幀都收到
-        if (all) {
-            foreach (OrderPoor poor in playerPoors)
-
-            {
-                //Debug.Log("poor length:" + poor.orders.Count);
-                while (poor.orders.Count > 0)
-                {
-                    Dictionary<string, object> order = poor.orders[0];
-                    //Debug.Log("code:"+ order["code"]+"type:"+order["code"].GetType());
-                    sbyte code = (sbyte)order["code"];
+    protected virtual void handleOrder(fsynControler controler,Dictionary<string, object> order)
+    {
+        sbyte code = (sbyte)order["code"];
                     switch (code)
                     {
                         case CodeTable.ADD_BUFF:
                             {
-                                controlList[poor.unitNo].realAddBuff((sbyte)order["buffNo"]);
+                                controler.realAddBuff((sbyte)order["buffNo"]);
                                 break;
                             }
                         case CodeTable.CONTORTION:
                             {
-                                controlList[poor.unitNo].realControtions((int)order["distortionNo"]);
+                                controler.realControtions((int)order["distortionNo"]);
                                 break;
                             }
                         case CodeTable.TAKE_DAMAGE:
                             {
-                                controlList[poor.unitNo].realTakeDamage(order);
+                                controler.realTakeDamage(order);
                                 break;
                             }
                         case CodeTable.BEEN_TREAT:
                             {
-                                controlList[poor.unitNo].realBeTreat(order);
+                                controler.realBeTreat(order);
                                 break;
                             }
                         case CodeTable.INTERVAL:
                             {
-                                controlList[poor.unitNo].takeInterval(order);
+                               controler.takeInterval(order);
                                 break;
                             }
                         case CodeTable.KEYLEFT_DOWN:
@@ -197,27 +180,48 @@ public class fsynManager_local : MonoBehaviour, Manager {
                         case CodeTable.KEYDOWN_DOWN:
                         case CodeTable.KEYDOWN_UP:
                             {
-                                controlList[poor.unitNo].onMoveButtom((sbyte)code);
+                                controler.onMoveButtom((sbyte)code);
                                 break;
                             }
                         case CodeTable.FRAME_END:
                             {
-                                controlList[poor.unitNo].move(SINGLE_FRAME_TIME);
+                                controler.move(SINGLE_FRAME_TIME);
                                 break;
                             }
                         case CodeTable.SET_MOUSE_POS:
                             {
-                                controlList[poor.unitNo].setDirection((Vector2)order["mousePosition"]);
+                                controler.setDirection((Vector2)order["mousePosition"]);
                                 break;
                             }
                         case CodeTable.MOUSE_LEFT_DOWN: case CodeTable.MOUSE_RIGHT_DOWN: case CodeTable.KEY1_DOWN:
                         case CodeTable.KEY2_DOWN:case CodeTable.KEY3_DOWN:case CodeTable.KEY4_DOWN:
                         case CodeTable.KEY5_DOWN:
                             {
-                                controlList[poor.unitNo].onSkillButtom(code, order);
+                                controler.onSkillButtom(code, order);
                                 break;
                             }
                     }
+    }
+            // Update is called once per frame
+	protected virtual void Update () {
+        bool all = true;
+		foreach(OrderPoor poor in playerPoors)
+        {
+            if (poor.orders.Count <= 0)
+            {
+                all = false;
+            }
+        }
+        //如果所有玩家的幀都收到
+        if (all) {
+            foreach (OrderPoor poor in playerPoors)
+            {
+                //Debug.Log("poor length:" + poor.orders.Count);
+                while (poor.orders.Count > 0)
+                {
+                    Dictionary<string, object> order = poor.orders[0];
+                    //Debug.Log("code:"+ order["code"]+"type:"+order["code"].GetType());
+                    handleOrder(controlList[poor.unitNo], order);
                     poor.orders.RemoveAt(0);
                 }
                 //poor.orders.Clear();

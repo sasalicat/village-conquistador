@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class fsyn_mg_atk : add_skill_accum
 {
-    private additiondele.withPos be_used;
-    private additiondele.withaddMis aft_create_missile;
-    private additiondele.withDamage aft_cause_damage;
     //public new const float CD = 0.8f;//0.5f;
     public const int BaseDamage = 50;
     public const float BaseStiff = 0.25f;
@@ -21,6 +18,7 @@ public class fsyn_mg_atk : add_skill_accum
     public Text Label;
     getVector getVector;
     private AnimatorTable animator;
+    public GameObject testObj;
     public override float CD
     {
         get
@@ -103,12 +101,17 @@ public class fsyn_mg_atk : add_skill_accum
         getVector = GameObject.Find("keyTabel").GetComponent<getVector>();
         Vector3 origenPlayerPosition = (Vector3)args["PlayerPosition"];//施放技能時玩家位置
         Vector3 mousePosition = (Vector3)args["MousePosition"];//施放技能時鼠標點擊位置
+        //Instantiate(testObj, mousePosition,transform.rotation);
+        Vector3 relative = mousePosition - transform.position;
+        Debug.Log("In fsyn_trigger relative:("+relative.x+","+relative.y+")");
         //使用getOriginalInitPoint得到技能在client端创建物件的正确位置
         Vector3 tragetPos = getVector.getOriginalInitPoint(origenPlayerPosition, mousePosition, new Vector3(0, -1, 0));//獲得相對座標
+        relative = tragetPos - transform.position;
         //制造子弹物件
         Vector3 direction = mousePosition - origenPlayerPosition;
         GameObject newone = Instantiate(missilePraf, tragetPos, Quaternion.Euler(direction));
-        newone.transform.up = -direction;
+       // Debug.Log("direction 為"+direction);
+        newone.transform.up = -direction.normalized;
         //修改子弹物件携带的子弹脚本
         Missile missile = newone.GetComponent<Missile>();
         if(beUsed!=null)

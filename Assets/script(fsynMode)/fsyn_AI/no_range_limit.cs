@@ -77,8 +77,8 @@ public class no_range_limit : MonoBehaviour, AI_fsyn
                 control.get_on_keyright_up()();
                 righting = false;
             }
-            if (!elist.nowHarness.passiveEquipments[0].CanUse)
-            {
+            if (elist.nowHarness.passiveEquipments.Count==0|| !elist.nowHarness.passiveEquipments[0].CanUse)
+            {//被變身了就可能裝備欄為空
                 return;
             }
             virtualArg["MousePosition"] = traget.transform.position;

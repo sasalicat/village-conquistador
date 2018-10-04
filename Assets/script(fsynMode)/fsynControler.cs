@@ -8,18 +8,18 @@ public class fsynControler : MonoBehaviour, KBControler
 {
     private int index;
     public List<sbyte> limit;
-    private bool alive = true;
-    private EquipmentTable eTable;
-    private PrabTabel prabTable;
-    private EquipmentList eList;
-    private float nextrecover = unit.RECOVER_MP_INTERVAL;
-    private NetRoleState state;
-    private System.Random random;
-    private AnimatorTable anim;
-    private bool lefting=false;
-    private bool uping = false;
-    private bool righting = false;
-    private bool downing = false;
+    protected bool alive = true;
+    protected EquipmentTable eTable;
+    protected PrabTabel prabTable;
+    protected EquipmentList eList;
+    protected float nextrecover = unit.RECOVER_MP_INTERVAL;
+    protected NetRoleState state;
+    protected System.Random random;
+    protected AnimatorTable anim;
+    protected bool lefting=false;
+    protected bool uping = false;
+    protected bool righting = false;
+    protected bool downing = false;
     _on_skill_key_down on_left_down;
     _on_skill_key_down on_right_down;
     _on_skill_key_down on_middle_down;
@@ -374,7 +374,7 @@ public class fsynControler : MonoBehaviour, KBControler
         Dictionary<string, object> order = new Dictionary<string, object>();
         order["code"] = CodeTable.BEEN_TREAT;
         order["Treater"] = treater;
-        order["Num"] = num;
+        order["Num"] = (short)num;
         order["randomPoint"] = random.Next(0,99);
         ((Sender)PostOffice.main).addOrder(order);
     }
@@ -427,7 +427,7 @@ public class fsynControler : MonoBehaviour, KBControler
         if(state.canRota)
             transform.up=-( mousePos - (Vector2)transform.position);
     }
-    public void move(float interval)
+    public virtual void  move(float interval)
     {
         if (state.canMove)
         {
@@ -475,6 +475,7 @@ public class fsynControler : MonoBehaviour, KBControler
                 Arg["Traget"] = this.gameObject;
                 //Arg["Traget"]=
                 damageControler.On_Cause_Damage(Arg);
+                Debug.Log("equipIndex:"+damage.equipIndex);
                 if (damage.equipIndex != -1)
                 {
                     Equipment e=   damage.damager.GetComponent<EquipmentList>().equipments[damage.equipIndex];

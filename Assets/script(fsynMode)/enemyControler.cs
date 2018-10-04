@@ -455,7 +455,7 @@ public class enemyControler : MonoBehaviour,KBControler {
         Dictionary<string, object> order = new Dictionary<string, object>();
         order["code"] = CodeTable.BEEN_TREAT;
         order["Treater"] = treater;
-        order["Num"] = num;
+        order["Num"] = (short)num;
         order["randomPoint"] = random.Next(0, 99);
         realBeTreat(order);
     }
@@ -509,7 +509,7 @@ public class enemyControler : MonoBehaviour,KBControler {
         if(state.canRota)
             transform.up = -(mousePos - (Vector2)transform.position);
     }
-    public void move(float interval)
+    public virtual void move(float interval)
     {
         if (state.canMove)
         {
@@ -547,23 +547,33 @@ public class enemyControler : MonoBehaviour,KBControler {
         if (damage.damager != null)
         {
             KBControler damageControler = damage.damager.GetComponent<KBControler>();
+            Dictionary<string, object> Arg = new Dictionary<string, object>();
+            Arg["Damage"] = damage;
+            Arg["PlayerPosition"] = Args["DamagerPosition"];
+            Arg["TragetPosition"] = Args["PlayerPosition"];
+            Arg["randomPoint"] = Args["randomPoint"];
+            Arg["Traget"] = this.gameObject;
             if (damageControler.On_Cause_Damage != null)
             {
-                Dictionary<string, object> Arg = new Dictionary<string, object>();
-                Arg["Damage"] = damage;
-                Arg["PlayerPosition"] = Args["DamagerPosition"];
-                Arg["TragetPosition"] = Args["PlayerPosition"];
-                Arg["randomPoint"] = Args["randomPoint"];
-                Arg["Traget"] = this.gameObject;
-                //Arg["Traget"]=
                 damageControler.On_Cause_Damage(Arg);
+                
+            }
+            Debug.Log("enemy受傷equipIndex為:" + damage.equipIndex);
+            if (damage.equipIndex != -1)
+            {
+                Equipment e = damage.damager.GetComponent<EquipmentList>().equipments[damage.equipIndex];
+                if (e.GetType().GetInterface("canBeAddition") != null)
+                {
+                    if (((canBeAddition)e).onCauseDamage != null)
+                      ((canBeAddition)e).onCauseDamage(Arg);
+                }
             }
         }
         state.realHurt(damage);
         after_take_damage(Args);
         //触发血量变动事件
         HpChangeHappen();
-        if (damage.stiffTime > 0)
+        if (damage.stiffTime > 0&& be_interrupt!=null)
         {
             Be_Interrupt(new Dictionary<string, object>());
         }
@@ -613,7 +623,8 @@ public class enemyControler : MonoBehaviour,KBControler {
             state.needRecord = data.Duration > 0;
             state.TimeLeft = data.Duration;
             state.nowNo = (sbyte)no;
-            Be_Interrupt(new Dictionary<string, object>());
+            if(Be_Interrupt!=null)
+                Be_Interrupt(new Dictionary<string, object>());
 
             //string typeName = controtions.dataNames[no];
         }

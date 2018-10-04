@@ -49,6 +49,9 @@ public class HpBarControler : MonoBehaviour {
     }
     public void TakeDamage(Dictionary<string, object> arg)//这主要是伤害的浮动数字显示
     {
-        floating.createPrab(hpBar,((damage)arg["Damage"]).num);
+        if(((damage)arg["Damage"]).arg!=0)
+            floating.createPrab(hpBar, ((damage)arg["Damage"]).num, ((damage)arg["Damage"]).arg);
+        else
+            floating.createPrab(hpBar,((damage)arg["Damage"]).num);
     }
 }

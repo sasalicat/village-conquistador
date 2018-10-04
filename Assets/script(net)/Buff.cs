@@ -44,5 +44,4 @@ public abstract class  Buff :MonoBehaviour {
             timeLeft = Duration;
         }
     }
-	
 }
