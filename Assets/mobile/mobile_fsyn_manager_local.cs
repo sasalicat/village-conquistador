@@ -4,7 +4,36 @@ using UnityEngine;
 
 public class mobile_fsyn_manager_local : fsynManager_local {
 
-    public override void createMainRole(int rno, int roleKind, List<int> eList, Vector2 pos, bool mainrole)
+    private void sameAsPrafeb(GameObject newone,GameObject ItsPrafeb)
+    {
+        newone.transform.localPosition = ItsPrafeb.transform.position;
+        newone.transform.localScale = ItsPrafeb.transform.localScale;
+        newone.transform.localRotation = ItsPrafeb.transform.localRotation;
+
+    }
+    public virtual void createMainRole(skinRecord skin,List<int> eList,Vector2 pos,bool mainrole)
+    {
+        part_Table pTable = part_Table.main;
+        Debug.Log("創建了主要角色");
+        Debug.Log("pTable:" + pTable);
+        GameObject newRole = Instantiate(pTable.roleBase, pos, transform.rotation);
+        GameObject hand_left= Instantiate(pTable.leftHands[skin.leftHandNo],newRole.transform);
+        sameAsPrafeb(hand_left, pTable.leftHands[skin.leftHandNo]);
+
+        GameObject right_hand = Instantiate(pTable.rightHands[skin.rightHandNo],newRole.transform);
+        sameAsPrafeb(right_hand, pTable.rightHands[skin.rightHandNo]);
+
+        GameObject face = Instantiate(pTable.faces[skin.faceNo], newRole.transform);
+        sameAsPrafeb(face, pTable.faces[skin.faceNo]);
+
+        GameObject eyes = Instantiate(pTable.eyes[skin.eyesNo], face.transform);
+        sameAsPrafeb(eyes, pTable.eyes[skin.eyesNo]);
+
+        GameObject mouse = Instantiate(pTable.mouses[skin.mouseNo], face.transform);
+        Debug.Log("嘴預製體位置為:" + pTable.mouses[skin.mouseNo].transform.position);
+        sameAsPrafeb(mouse, pTable.mouses[skin.mouseNo]);
+    }
+    /*public override void createMainRole(int rno, int roleKind, List<int> eList, Vector2 pos, bool mainrole)
     {
         Debug.Log("~~~~~~~~~~~~~~~~~~~~~呼叫了moblie的 createmainrole~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         GameObject nowRole = Instantiate(prabTable.table[roleKind], pos, transform.rotation);
@@ -29,7 +58,7 @@ public class mobile_fsyn_manager_local : fsynManager_local {
         }
         playerPoors.Add(new OrderPoor(rno));
         Debug.Log("添加playerPoors后length為:" + playerPoors.Count);
-    }
+    }*/
     protected override void handleOrder(fsynControler controler, Dictionary<string, object> order)
     {
         sbyte code = (sbyte)order["code"];

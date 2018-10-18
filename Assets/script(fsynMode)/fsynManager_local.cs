@@ -65,7 +65,7 @@ public class fsynManager_local : MonoBehaviour, Manager {
         script = GetComponent<sceneScript>();
         playerPoors = new List<OrderPoor>();
         PostOffice.main.cycleTime = SINGLE_FRAME_TIME;
-
+        Debug.Log("呼叫了onstart");
         script.onStart(this);
     }
     public void createMainRole(int rno, int roleKind, List<int> eList, Vector2 pos)
