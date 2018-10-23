@@ -655,7 +655,8 @@ public class RoleState : MonoBehaviour {
             Dictionary<string, object> Arg = new Dictionary<string, object>();
             Arg["nowMp"] = (float)value;
            // Debug.Log("controler is:" + control);
-            control.On_MP_Change(Arg);
+           if(control.On_MP_Change!=null)
+                control.On_MP_Change(Arg);
             mpnum = value;
         }
         get

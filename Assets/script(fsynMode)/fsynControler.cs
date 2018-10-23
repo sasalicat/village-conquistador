@@ -422,7 +422,7 @@ public class fsynControler : MonoBehaviour, KBControler
         }
 
     }
-    public void setDirection(Vector2 mousePos)
+    public  virtual void setDirection(Vector2 mousePos)
     {
         if(state.canRota)
             transform.up=-( mousePos - (Vector2)transform.position);

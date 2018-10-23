@@ -14,7 +14,7 @@ public class mobile_pControler : fsynControler {
                 movestateCount += 1;
                 if (movestateCount == 1)//剛好等於1說明之前等於0,也就是之前處於不能移動的狀態
                 {
-                    anim.moveStart();
+                    ((Anim_Mobile)anim).WalkStart();
                 }
                 Debug.Log("移動意願為正 moveStateCount:" + movestateCount);
             }
@@ -23,7 +23,7 @@ public class mobile_pControler : fsynControler {
                 movestateCount -= 1;
                 if (movestateCount == 0)//上面的註解逆推就能知道
                 {
-                    anim.moveEnd();
+                    ((Anim_Mobile)anim).WalkEnd();
                 }
                 Debug.Log("移動意願為負 moveStateCount:" + movestateCount);
             }
@@ -34,9 +34,17 @@ public class mobile_pControler : fsynControler {
             return movestateCount > 0;
         }
     }
+    public override void setDirection(Vector2 mousePos)
+    {
+        if (state.canRota)
+        {
+            transform.up = -(mousePos - (Vector2)transform.position);
+            transform.Rotate(new Vector3(0,0,90));
+        }
+    }
     public override void move(float interval)
     {
         if(MoveWillingness)
-            transform.Translate(new Vector2(0, -1) * state.RealSpeed* interval);
+            transform.Translate(new Vector2(-1, 0) * state.RealSpeed* interval);
     }
 }

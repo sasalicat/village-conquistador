@@ -15,6 +15,8 @@ public class totalButtom : MonoBehaviour {
     public int enterNum = 0;
     public Text LeaveB;
     public int leaveNum = 0;
+    public GameObject AlignmentPraf;//手動拉取,準線
+    private GameObject realAlig=null;
     public void onEnter()
     {
         Debug.Log("點進入");
@@ -27,6 +29,17 @@ public class totalButtom : MonoBehaviour {
         enterNum++;
         enterB.text = enterNum+"";
         clicking = true;
+        GameObject role = ((mobile_fsyn_manager_local)mobile_fsyn_manager_local.main).mainRole;
+        if (realAlig == null)
+        {
+            realAlig = Instantiate(AlignmentPraf, role.transform.position, role.transform.rotation, role.transform);
+            realAlig.transform.Rotate(0,0,-90);
+            realAlig.transform.localScale = new Vector3(2, 3,1);
+        }
+        else
+        {
+            realAlig.SetActive(true);
+        }
     }
     public void onExit()
     {
@@ -40,6 +53,10 @@ public class totalButtom : MonoBehaviour {
             leaveNum++;
             LeaveB.text = leaveNum + "";
             clicking = false;
+            if (realAlig != null)
+            {
+                realAlig.SetActive(false);
+            }
         }
     }
     public void onClick()

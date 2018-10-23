@@ -8,7 +8,7 @@ public class AnimatorTable : MonoBehaviour {
     public sbyte controtionNo;
     public float controtTimeLeft = 0;
     // Use this for initialization
-    void Start () {
+    protected virtual void Start () {
         
         animator = GetComponent<Animator>();
       

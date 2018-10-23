@@ -10,6 +10,7 @@ public class part_Table : MonoBehaviour {
     public List<GameObject> eyes;
     public List<GameObject> leftHands;
     public List<GameObject> rightHands;
+    public List<GameObject> weapons;
 
     void OnEnable()
     {

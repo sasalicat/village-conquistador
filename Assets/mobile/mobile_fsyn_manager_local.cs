@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class mobile_fsyn_manager_local : fsynManager_local {
 
+    public GameObject mainRole;
     private void sameAsPrafeb(GameObject newone,GameObject ItsPrafeb)
     {
         newone.transform.localPosition = ItsPrafeb.transform.position;
@@ -11,7 +12,7 @@ public class mobile_fsyn_manager_local : fsynManager_local {
         newone.transform.localRotation = ItsPrafeb.transform.localRotation;
 
     }
-    public virtual void createMainRole(skinRecord skin,List<int> eList,Vector2 pos,bool mainrole)
+    public virtual void createMainRole(int rno, skinRecord skin,List<int> eList,Vector2 pos,bool mainrole)
     {
         part_Table pTable = part_Table.main;
         Debug.Log("創建了主要角色");
@@ -19,19 +20,65 @@ public class mobile_fsyn_manager_local : fsynManager_local {
         GameObject newRole = Instantiate(pTable.roleBase, pos, transform.rotation);
         GameObject hand_left= Instantiate(pTable.leftHands[skin.leftHandNo],newRole.transform);
         sameAsPrafeb(hand_left, pTable.leftHands[skin.leftHandNo]);
+        hand_left.SetActive(false);
+        hand_left.name = "left";
 
         GameObject right_hand = Instantiate(pTable.rightHands[skin.rightHandNo],newRole.transform);
         sameAsPrafeb(right_hand, pTable.rightHands[skin.rightHandNo]);
+        right_hand.SetActive(false);
+        right_hand.name = "right";
 
         GameObject face = Instantiate(pTable.faces[skin.faceNo], newRole.transform);
         sameAsPrafeb(face, pTable.faces[skin.faceNo]);
+        face.name = "face";
 
         GameObject eyes = Instantiate(pTable.eyes[skin.eyesNo], face.transform);
         sameAsPrafeb(eyes, pTable.eyes[skin.eyesNo]);
+        eyes.name = "eyes";
 
         GameObject mouse = Instantiate(pTable.mouses[skin.mouseNo], face.transform);
         Debug.Log("嘴預製體位置為:" + pTable.mouses[skin.mouseNo].transform.position);
         sameAsPrafeb(mouse, pTable.mouses[skin.mouseNo]);
+        mouse.name = "mouse";
+
+        GameObject weapon = Instantiate(pTable.weapons[skin.weaponNo], newRole.transform);
+        sameAsPrafeb(weapon, pTable.weapons[skin.weaponNo]);
+        weapon.name = "weapon";
+
+        Transform w_left = weapon.transform.Find("左手");
+        w_left.GetComponent<Animator>().runtimeAnimatorController = pTable.leftHands[skin.leftHandNo].GetComponent<Animator>().runtimeAnimatorController;
+        //sameAsPrafeb(w_left)
+        //w_left.localScale = pTable.leftHands[skin.leftHandNo].transform.localScale;
+
+        Transform w_right = weapon.transform.Find("右手");
+        w_right.GetComponent<Animator>().runtimeAnimatorController = pTable.rightHands[skin.rightHandNo].GetComponent<Animator>().runtimeAnimatorController;
+        //w_right.localScale = pTable.rightHands[skin.rightHandNo].transform.localScale;
+
+        newRole.AddComponent<Anim_Mobile>();//等到部件全部安裝完再安裝Anim_Mobile
+
+        fsynControler controler= newRole.AddComponent<mobile_pControler>();
+        controlList[rno] = controler;
+
+        controler.Index = rno;
+        var state = newRole.AddComponent<NetRoleState>();
+        newRole.SetActive(true);
+        var equiplist = newRole.GetComponent<EquipmentList>();
+        equiplist.controler = controlList[rno];
+        equiplist.Start();
+        foreach (int index in eList)
+        {
+            equiplist.addByNo(index);
+        }
+        objList[rno] = newRole;
+        if (mainrole)
+        {
+            mobileListener.main.state = state;
+            mobileListener.main.controler = controlList[rno];
+            mobileListener.main.eList = equiplist;
+            mainRole = newRole;
+        }
+
+        playerPoors.Add(new OrderPoor(rno));
     }
     /*public override void createMainRole(int rno, int roleKind, List<int> eList, Vector2 pos, bool mainrole)
     {

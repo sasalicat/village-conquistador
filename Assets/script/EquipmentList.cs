@@ -308,6 +308,7 @@ public class EquipmentList : MonoBehaviour {
     }
     public void allReduceCD(float time)
     {
-        reduceLine(time);
+        if(reduceLine!=null)
+            reduceLine(time);
     }
 }
