@@ -73,8 +73,11 @@ public class Anim_Mobile : AnimatorTable{
     public void actionEnd()
     {
         animator.SetInteger("actionNo",0);
-        onActionEnd();
-        onActionEnd = null;
+        if (onActionEnd != null)
+        {
+            onActionEnd();
+            onActionEnd = null;
+        }
     }
     public void expression(int exprNo)//切換角色的表情
     {
@@ -101,8 +104,7 @@ public class Anim_Mobile : AnimatorTable{
         weaponAnim.setAction(weapon_Anim.NORMAL);
         face.SetBool("walk",false);
     }
-
-    public void AttackStart(withNone callBack)//實際上動畫樹里並沒有attack,這裡在做的是讓武器動畫運作,并從武器那邊接收callback信號
+    public new void AttackStart()
     {
         if (!weapon.gameObject.active)
         {
@@ -110,12 +112,20 @@ public class Anim_Mobile : AnimatorTable{
         }
         weaponAnim.setAction(weapon_Anim.ATTACK);
         face.SetBool("walk", false);
+    }
+    public void AttackStart(withNone callBack)//實際上動畫樹里並沒有attack,這裡在做的是讓武器動畫運作,并從武器那邊接收callback信號
+    {
+        AttackStart();
         onActionEnd = callBack;
 
     }
     public void AttackEnd()
     {
-        actionEnd();
+        if (onActionEnd != null)
+        {
+            onActionEnd();
+            onActionEnd = null;
+        }
     }
     protected override void Start()
     {
@@ -126,6 +136,7 @@ public class Anim_Mobile : AnimatorTable{
         
         eyes = face.transform.Find("eyes").GetComponent<Animator>();
         weapon = transform.Find("weapon").GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         weaponAnim = weapon.GetComponent<weapon_Anim>();
     }
 }

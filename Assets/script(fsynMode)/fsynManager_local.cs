@@ -104,6 +104,7 @@ public class fsynManager_local : MonoBehaviour, Manager {
         //Debug.Log("添加enemystart完成");
         var state = nowRole.AddComponent<enemyState>();
         nowRole.SetActive(true);
+
         var equiplist = nowRole.GetComponent<EquipmentList>();
         equiplist.controler = controlList[rno];
         equiplist.Start();

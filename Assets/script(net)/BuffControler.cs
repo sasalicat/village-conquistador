@@ -11,6 +11,7 @@ public class BuffControler : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         roleState = GetComponent<RoleState>();
+        //Debug.Log("obj name is:" + gameObject.name);
         GetComponent<Controler>().On_Interval += Intarvel;
         misTable = GameObject.Find("keyTabel").GetComponent<MissileTable>();
 	}

@@ -14,7 +14,7 @@ public class enemyControler : MonoBehaviour,KBControler {
     private PrabTabel prabTable;
     private EquipmentList eList;
     private float nextrecover = unit.RECOVER_MP_INTERVAL;
-    private NetRoleState state;
+    protected NetRoleState state;
     public System.Random random;//因為要設置種子所以是public
     
     public enemyInfo edata;

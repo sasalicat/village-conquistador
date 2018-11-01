@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f1bad0e543bc28143aa213f473a976cb
-timeCreated: 1540303478
+timeCreated: 1540469319
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -86,12 +86,12 @@ TextureImporter:
       name: "\u7269\u4EF61_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 319
-        width: 148
-        height: 555
+        x: 64
+        y: 245
+        width: 157
+        height: 573
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -104,7 +104,7 @@ TextureImporter:
         width: 215
         height: 178
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -112,10 +112,10 @@ TextureImporter:
       name: "\u7269\u4EF61_2"
       rect:
         serializedVersion: 2
-        x: 966
-        y: 536
-        width: 361
-        height: 272
+        x: 1484
+        y: 568
+        width: 360
+        height: 286
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       name: "\u7269\u4EF61_3"
       rect:
         serializedVersion: 2
-        x: 183
-        y: 79
+        x: 300
+        y: 0
         width: 1014
         height: 532
       alignment: 0
@@ -138,12 +138,12 @@ TextureImporter:
       name: "\u7269\u4EF61_4"
       rect:
         serializedVersion: 2
-        x: 1379
-        y: 110
-        width: 590
-        height: 486
+        x: 1341
+        y: 23
+        width: 600
+        height: 494
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

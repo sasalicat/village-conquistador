@@ -8,6 +8,7 @@ public class sceneScript_mobile : sceneScript {
     {
         Debug.Log("sceneScript_mobile onstart 被呼叫");
         //base.onStart(manager);
-        ((mobile_fsyn_manager_local)manager).createMainRole(0,mainSkin,new List<int>{},Vector2.zero,true);
+        ((mobile_fsyn_manager_local)manager).createMainRole(0,mainSkin,new List<int>{0},Vector2.zero,true);
+        ((mobile_fsyn_manager_local)manager).createEnemy(0, new List<int> { 0 }, new Vector2(5, 5), "小混混", "你的末日", "normal_warrior", new enemy_lm_info(), 0);
     }
 }

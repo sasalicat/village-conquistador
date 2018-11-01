@@ -17,7 +17,7 @@ public class buttomTest : MonoBehaviour {
 	}
     public void onclick(int buttomCode)
     {
-        Debug.Log(name + "被點擊");
+        Debug.Log(name + "被點擊:"+ onButtomClick);
         //   text.text += name;
         if(onButtomClick != null)
             onButtomClick(buttomCode);

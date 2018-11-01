@@ -12,6 +12,38 @@ public class mobile_fsyn_manager_local : fsynManager_local {
         newone.transform.localRotation = ItsPrafeb.transform.localRotation;
 
     }
+    public override GameObject createEnemy(int roleKind, List<int> eList, Vector2 pos, string name, string teamname, string AIname, enemyInfo info, int level)
+    {
+        int rno = enemyRecondNum++;
+        GameObject nowRole = Instantiate(prabTable.table[roleKind], pos, transform.rotation);
+        var controler = nowRole.AddComponent<enemyControler>();
+        //Debug.Log("添加enemystart完成");
+        var state = nowRole.AddComponent<enemyState>();
+        nowRole.SetActive(true);
+
+        var equiplist = nowRole.GetComponent<EquipmentList>();
+        equiplist.controler = controlList[rno];
+        equiplist.Start();
+        //hpBarCreater.CreateHpBar(nowRole, rno, name, teamname);
+        foreach (int index in eList)
+        {
+            equiplist.addByNo(index);
+        }
+        controler.random = new System.Random(rno);
+        controler.Index = rno;
+        if (AIname != null)
+        {
+            var ai = nowRole.AddComponent(System.Type.GetType(AIname));
+            ((AI_fsyn)ai).onInit(controler);
+        }
+        nowRole.GetComponent<RoleState>().team = (sbyte)MAX_UNIT_NUM;
+        enemyList[rno] = nowRole;
+        controler.edata = info;
+        controler.level = level;
+        controler.onEnemyReady += unitInit;
+        Debug.Log(controler + "的onEnemyReady:" + controler.onEnemyReady);
+        return nowRole;
+    }
     public virtual void createMainRole(int rno, skinRecord skin,List<int> eList,Vector2 pos,bool mainrole)
     {
         part_Table pTable = part_Table.main;

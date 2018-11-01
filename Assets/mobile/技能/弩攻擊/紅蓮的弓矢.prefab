@@ -9,61 +9,57 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1591548119669172}
+  m_RootGameObject: {fileID: 1580485574023998}
   m_IsPrefabParent: 1
---- !u!1 &1591548119669172
+--- !u!1 &1580485574023998
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4735251102687146}
-  - component: {fileID: 212823229846463296}
-  - component: {fileID: 95677948360935578}
+  - component: {fileID: 4596637775188456}
+  - component: {fileID: 212038593474344268}
+  - component: {fileID: 114792874580999496}
   m_Layer: 0
-  m_Name: "\u81C92"
+  m_Name: "\u7D05\u84EE\u7684\u5F13\u77E2"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4735251102687146
+--- !u!4 &4596637775188456
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1591548119669172}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.57, y: 0.37, z: 0}
-  m_LocalScale: {x: 1.6, y: 1.6, z: 1}
+  m_GameObject: {fileID: 1580485574023998}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &95677948360935578
-Animator:
-  serializedVersion: 3
+--- !u!114 &114792874580999496
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1591548119669172}
+  m_GameObject: {fileID: 1580485574023998}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9e25b5988afcb51479b319e5d896a869, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!212 &212823229846463296
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7b552ba02b69a46a5d82476244cb7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vspeed: {x: 0, y: -1, z: 0}
+  livetime: 0.5
+--- !u!212 &212038593474344268
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1591548119669172}
+  m_GameObject: {fileID: 1580485574023998}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -89,7 +85,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b10b09f1a16f65d48b3329d1f44132cf, type: 3}
+  m_Sprite: {fileID: 21300032, guid: 6e378233bf9049b48974fe0042c7a454, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
