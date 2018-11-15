@@ -16,7 +16,7 @@ public class mobile_fsyn_manager_local : fsynManager_local {
     {
         int rno = enemyRecondNum++;
         GameObject nowRole = Instantiate(prabTable.table[roleKind], pos, transform.rotation);
-        var controler = nowRole.AddComponent<enemyControler>();
+        var controler = nowRole.AddComponent<enemyControler_mobile>();
         //Debug.Log("添加enemystart完成");
         var state = nowRole.AddComponent<enemyState>();
         nowRole.SetActive(true);

@@ -229,7 +229,9 @@ public class fsynManager_local : MonoBehaviour, Manager {
             }
             foreach(KeyValuePair<int,GameObject> pair in enemyList)
             {
+
                 var econtrol = pair.Value.GetComponent<enemyControler>();
+                Debug.Log("更新 econtroler:" + pair + " type:" + econtrol.GetType());
                 var ai = pair.Value.GetComponent<AI_fsyn>();
                 ai.onUpdate();
                 Dictionary<string, object> arg = new Dictionary<string, object>();

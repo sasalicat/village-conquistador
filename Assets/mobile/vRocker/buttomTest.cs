@@ -23,5 +23,9 @@ public class buttomTest : MonoBehaviour {
             onButtomClick(buttomCode);
 
     }
+    public void onup()
+    {
+        Debug.Log("子按鈕up_______");
+    }
 
 }

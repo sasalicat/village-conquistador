@@ -10,13 +10,13 @@ public class baseAtk : add_skill_accum
 
     public int power;
     public sbyte index;
-    const short selfMissileNo = 0;
+    protected int selfMissileNo = 0;
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
     private RoleState selfState;
     getVector getVector;
     private Anim_Mobile animator;
     public GameObject testObj;
-    public Vector3 misLocalPos = new Vector3(0, -1, 0);
+    protected Vector3 misLocalPos = new Vector3(0, -1, 0);
     public override float CD
     {
         get
@@ -135,8 +135,8 @@ public class baseAtk : add_skill_accum
     public override void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {
         //初始化赋值
-        Debug.Log("魔术师扑克牌初始化 state:" + state);
-        missilePraf = table.MissileList[0];
+// Debug.Log("魔术师扑克牌初始化 state:" + state);
+        missilePraf = table.MissileList[selfMissileNo];
         this.selfState = state;
         this.animator = (Anim_Mobile)anim;
 
