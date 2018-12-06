@@ -17,28 +17,60 @@ public class totalButtom : MonoBehaviour {
     public int leaveNum = 0;
     public GameObject AlignmentPraf;//手動拉取,準線
     private GameObject realAlig=null;
+    public void onDown()
+    {
+        Debug.Log("按鈕被按下");
+    }
+    public void onUp()
+    {
+        Debug.Log("按鈕被鬆開");
+    }
+    public void onSubExit()
+    {
+        if (clicking)
+        {
+
+        }
+        else
+        {
+            Dictionary<string, object> arg = new Dictionary<string, object>();
+            arg["code"] = CodeTable.SET_MOVE_STATE;
+            arg["state"] = true;
+            Sender.main.addOrder(arg);
+            leaveNum++;
+            LeaveB.text = leaveNum + "";
+            clicking = false;
+            if (realAlig != null)
+            {
+                realAlig.SetActive(false);
+            }
+        }
+    }
     public void onEnter()
     {
         Debug.Log("點進入");
         //text.text += "main";
         //text.text = "手指進入";
-        Dictionary<string, object> arg = new Dictionary<string, object>();
-        arg["code"] = CodeTable.SET_MOVE_STATE;
-        arg["state"] = false;
-        Sender.main.addOrder(arg);
-        enterNum++;
-        enterB.text = enterNum+"";
-        clicking = true;
-        GameObject role = ((mobile_fsyn_manager_local)mobile_fsyn_manager_local.main).mainRole;
-        if (realAlig == null)
+        if (!clicking)
         {
-            realAlig = Instantiate(AlignmentPraf, role.transform.position, role.transform.rotation, role.transform);
-            realAlig.transform.Rotate(0,0,-90);
-            realAlig.transform.localScale = new Vector3(2, 3,1);
-        }
-        else
-        {
-            realAlig.SetActive(true);
+            Dictionary<string, object> arg = new Dictionary<string, object>();
+            arg["code"] = CodeTable.SET_MOVE_STATE;
+            arg["state"] = false;
+            Sender.main.addOrder(arg);
+            enterNum++;
+            enterB.text = enterNum + "";
+            clicking = true;
+            GameObject role = ((mobile_fsyn_manager_local)mobile_fsyn_manager_local.main).mainRole;
+            if (realAlig == null)
+            {
+                realAlig = Instantiate(AlignmentPraf, role.transform.position, role.transform.rotation, role.transform);
+                realAlig.transform.Rotate(0, 0, -90);
+                realAlig.transform.localScale = new Vector3(2, 3, 1);
+            }
+            else
+            {
+                realAlig.SetActive(true);
+            }
         }
     }
     public void onExit()

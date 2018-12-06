@@ -28,7 +28,7 @@ public class mobileListener : MonoBehaviour {
         rocker.onRockerDragEnd += onRockerDragEnd;
         foreach(buttomTest skBut in skillButtoms)
         {
-            skBut.onButtomClick += onSkillButtomDown;
+            //skBut.onButtomClick += onSkillButtomDown;
         }
         random = new System.Random();
     }
