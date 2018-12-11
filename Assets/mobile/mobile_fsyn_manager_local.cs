@@ -108,6 +108,9 @@ public class mobile_fsyn_manager_local : fsynManager_local {
             mobileListener.main.controler = controlList[rno];
             mobileListener.main.eList = equiplist;
             mainRole = newRole;
+            turnTable.main.state= state;
+            turnTable.main.controler=controlList[rno];
+            turnTable.main.eList = equiplist;
         }
 
         playerPoors.Add(new OrderPoor(rno));

@@ -130,7 +130,10 @@ public class baseAtk : add_skill_accum
 
         animator.AttackStart();
     }
-
+    public override void onAccum(float time)
+    {
+        Debug.Log("onAccum 被呼叫");
+    }
 
     public override void onInit(MissileTable table, RoleState state, AnimatorTable anim)
     {

@@ -709,7 +709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &47
 GameObject:
   m_ObjectHideFlags: 0
@@ -4128,6 +4128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AlignmentPraf: {fileID: 1048927286168910, guid: 44b6c2ef46211e748a0008cec2777a21,
     type: 2}
+  state: {fileID: 0}
+  controler: {fileID: 0}
+  eList: {fileID: 0}
 --- !u!114 &240150968
 MonoBehaviour:
   m_ObjectHideFlags: 0
