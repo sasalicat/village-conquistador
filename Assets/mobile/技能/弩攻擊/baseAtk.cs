@@ -60,7 +60,7 @@ public class baseAtk : add_skill_accum
     {
         get
         {
-            //Debug.Log(" in can use CDTime is" + CDTime);
+            Debug.Log(">in can use CDTime is" + TimeLeft);
             return (TimeLeft <= 0);//如果CDTime小於0代表技能可以使用
             //return true;
         }
@@ -127,6 +127,7 @@ public class baseAtk : add_skill_accum
         missile.Damage = new damage(1, num, stiff, false, false, gameObject, selfIndex);
 
         TimeLeft = CD;//技能冷卻
+        Debug.Log("觸發技能Index為" + index);
 
         animator.AttackStart();
     }

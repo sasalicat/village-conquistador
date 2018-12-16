@@ -10,6 +10,9 @@ public class mobileListener : MonoBehaviour {
     public Rocker rocker;//手動拉取
     public buttomTest[] skillButtoms;//手動拉取 
     private System.Random random;
+    readonly Dictionary<int, sbyte> buttom2skillNo = new Dictionary<int, sbyte> { {CodeTable.MOUSE_LEFT_DOWN,EquipmentList.ATK }, {CodeTable.MOUSE_RIGHT_DOWN,EquipmentList.SKILL},
+        {CodeTable.KEY1_DOWN,EquipmentList.PASSIVE1}, { CodeTable.KEY2_DOWN,EquipmentList.PASSIVE2}, { CodeTable.KEY3_DOWN,EquipmentList.PASSIVE3}
+    };
     void OnEnable()
     {
         if (main == null)
@@ -58,16 +61,19 @@ public class mobileListener : MonoBehaviour {
     public void onSkillButtomDown(int buttomCode)
     {
         Debug.Log("Skill Buttom:"+buttomCode);
-        Dictionary<string, object> order = new Dictionary<string, object>();
-        Vector3 temp = rocker.LastRelativePos;
-        temp.y=-temp.y;
-        temp =  Quaternion.Euler(0,0,180)*temp;
-        //temp.x = -temp.x;
-        order["MousePosition"] = (controler.transform.position+ temp);
-        order["PlayerPosition"] = controler.transform.position;
-        order["randomPoint"] = random.Next(0,99);
-        order["code"] = (sbyte)buttomCode;
-        Sender.main.addOrder(order);
+        if (state.canAction && controler.equipmentReady(buttom2skillNo[buttomCode])) {
+            Debug.Log("角色能行動且技能" + buttom2skillNo[buttomCode] + "準備好了");
+            Dictionary<string, object> order = new Dictionary<string, object>();
+            Vector3 temp = rocker.LastRelativePos;
+            temp.y = -temp.y;
+            temp = Quaternion.Euler(0, 0, 180) * temp;
+            //temp.x = -temp.x;
+            order["MousePosition"] = (controler.transform.position + temp);
+            order["PlayerPosition"] = controler.transform.position;
+            order["randomPoint"] = random.Next(0, 99);
+            order["code"] = (sbyte)buttomCode;
+            Sender.main.addOrder(order);
+        }
     }
     // Update is called once per frame
     void Update () {

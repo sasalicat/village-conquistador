@@ -87,6 +87,7 @@ public abstract class skill_accum : MonoBehaviour, CDEquipment
     public void setTime(float time)
     {
         timeLeft -= time;
+// Debug.Log("設置時間之後timeLeft為:" + timeLeft);
     }
     public virtual void onAccum(float time)
     {
