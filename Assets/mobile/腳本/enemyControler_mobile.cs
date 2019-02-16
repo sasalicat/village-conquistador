@@ -7,7 +7,7 @@ public class enemyControler_mobile : enemyControler {
     public bool wantMove=false;
     public override void move(float interval)
     {
-        Debug.Log("+++++state:"+this.state.nowStateNo+" "+state.canMove);
+        //Debug.Log("+++++state:"+this.state.nowStateNo+" "+state.canMove);
         if (state.canMove && wantMove)
         {
             // transform.position = (Vector2)transform.position + direction.normalized * state.RealSpeed * interval;

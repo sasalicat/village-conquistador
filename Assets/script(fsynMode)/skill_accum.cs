@@ -10,7 +10,7 @@ public abstract class skill_accum : MonoBehaviour, CDEquipment
     protected MissileTable table;
     protected RoleState state;
     protected AnimatorTable anim;
-    private float accumLeft=0;
+    protected float accumLeft=0;
     private Dictionary<string, object> args;
     public abstract float CD
     {

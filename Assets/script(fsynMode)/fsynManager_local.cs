@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class fsynManager_local : MonoBehaviour, Manager {
+    public delegate void WithFloat(float arg);
     protected int MAX_UNIT_NUM = 10;
     public float SINGLE_FRAME_TIME = 0.03f;
     public static fsynManager_local main;
     public GameObject[] objList;
 
+    public WithFloat onFrameUpdateEnd;
     public Dictionary<int,GameObject> enemyList;
     protected int enemyRecondNum = 0;
 
@@ -187,6 +189,7 @@ public class fsynManager_local : MonoBehaviour, Manager {
                         case CodeTable.FRAME_END:
                             {
                                 controler.move(SINGLE_FRAME_TIME);
+                                onFrameUpdateEnd(SINGLE_FRAME_TIME);
                                 break;
                             }
                         case CodeTable.SET_MOUSE_POS:
@@ -231,7 +234,7 @@ public class fsynManager_local : MonoBehaviour, Manager {
             {
 
                 var econtrol = pair.Value.GetComponent<enemyControler>();
-                Debug.Log("更新 econtroler:" + pair + " type:" + econtrol.GetType());
+                //Debug.Log("更新 econtroler:" + pair + " type:" + econtrol.GetType());
                 var ai = pair.Value.GetComponent<AI_fsyn>();
                 ai.onUpdate();
                 Dictionary<string, object> arg = new Dictionary<string, object>();

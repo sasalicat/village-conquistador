@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212147266414055530}
   - component: {fileID: 95912948533006990}
   m_Layer: 0
-  m_Name: "\u81C92"
+  m_Name: face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 212267715140375692}
   - component: {fileID: 95649342501137028}
   m_Layer: 0
-  m_Name: "\u773C\u775B2"
+  m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,10 +56,10 @@ GameObject:
   - component: {fileID: 95968770682396278}
   - component: {fileID: 50795727038099496}
   - component: {fileID: 58211683263207140}
-  - component: {fileID: 114988635109586778}
   - component: {fileID: 114799802410116412}
   - component: {fileID: 114623129545264438}
   - component: {fileID: 114559322217781632}
+  - component: {fileID: 114894426323096830}
   m_Layer: 0
   m_Name: "\u6575\u4EBA1"
   m_TagString: Untagged
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 212100092545835736}
   - component: {fileID: 95217612046725570}
   m_Layer: 0
-  m_Name: "\u53F3\u624B2"
+  m_Name: "\u53F3\u624B"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 95600439596572696}
   - component: {fileID: 114525281920380518}
   m_Layer: 0
-  m_Name: "\u7403\u68D2"
+  m_Name: weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 212301434929773702}
   - component: {fileID: 95362783906228338}
   m_Layer: 0
-  m_Name: "\u5DE6\u624B2"
+  m_Name: "\u5DE6\u624B"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 212119994460105692}
   - component: {fileID: 95753557862568656}
   m_Layer: 0
-  m_Name: "\u56342"
+  m_Name: mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,7 +257,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1179558530825564}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2.93, y: 20.854103, z: -105.64844}
+  m_LocalPosition: {x: -16.260418, y: 10.111815, z: -19.298828}
   m_LocalScale: {x: 2.8678496, y: 2.6668348, z: 0}
   m_Children:
   - {fileID: 4818732765289304}
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roleState: {fileID: 0}
   misTable: {fileID: 0}
---- !u!114 &114988635109586778
+--- !u!114 &114894426323096830
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -572,7 +572,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1179558530825564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2e3e196152ba045954adc9e2d10ad0, type: 3}
+  m_Script: {fileID: 11500000, guid: f3c508436fd3d7147b35ec796673cd36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212100092545835736

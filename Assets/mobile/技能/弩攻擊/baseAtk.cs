@@ -9,7 +9,7 @@ public class baseAtk : add_skill_accum
     public const float BaseStiff = 0.25f;
 
     public int power;
-    public sbyte index;
+
     protected int selfMissileNo = 0;
     private GameObject missilePraf;//暫存總missileTable內得到的預設體
     private RoleState selfState;
@@ -21,7 +21,7 @@ public class baseAtk : add_skill_accum
     {
         get
         {
-            return 0.8f;
+            return 2f;
         }
     }
     //實做Equipment介面-------------------------------------------------------
@@ -33,18 +33,7 @@ public class baseAtk : add_skill_accum
         }
     }
 
-    public override sbyte selfIndex
-    {
-        get
-        {
-            return index;
-        }
 
-        set
-        {
-            index = value;
-        }
-    }
 
     public override sbyte Kind//本技能属于主动技能所以kind为 PASSIVE_SKILL
     {
@@ -60,7 +49,7 @@ public class baseAtk : add_skill_accum
     {
         get
         {
-            Debug.Log(">in can use CDTime is" + TimeLeft);
+            //Debug.Log(">in can use CDTime is" + TimeLeft);
             return (TimeLeft <= 0);//如果CDTime小於0代表技能可以使用
             //return true;
         }
@@ -123,11 +112,11 @@ public class baseAtk : add_skill_accum
         unit u = this.GetComponent<unit>();
 
         int num = Attribute.GetAttackDamageNum(50, u.power);
-        float stiff = Attribute.getRealStiff(0.3f, u.stiffable);
+        float stiff = Attribute.getRealStiff(0.5f, u.stiffable);
         missile.Damage = new damage(1, num, stiff, false, false, gameObject, selfIndex);
 
         TimeLeft = CD;//技能冷卻
-        Debug.Log("觸發技能Index為" + index);
+        Debug.Log("觸發技能Index為" + selfIndex);
 
         animator.AttackStart();
     }

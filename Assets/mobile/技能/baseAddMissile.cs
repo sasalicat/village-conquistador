@@ -8,7 +8,7 @@ public class baseAddMissile : addibleMissile {
     //public Animator animator;
    // public bool xuanzhuan;
 
-    void Start()
+    public virtual void Start()
     {
         //animator = this.GetComponent<Animator>();
         vspeed *= Speed;
@@ -42,16 +42,17 @@ public class baseAddMissile : addibleMissile {
             }
             RoleState role = other.gameObject.GetComponent<RoleState>();
             RoleState rolestate = Creater.GetComponent(typeof(RoleState)) as RoleState;
+            Controler hitter=role.GetComponent<Controler>();
             if (role != null && rolestate.team != role.team)
             {
                 role.TakeDamage(Damage);
-                AftHit();
+                AftHit(hitter);
                 Destroy(this.gameObject);
             }
 
         }
     }
-    public virtual void AftHit()
+    protected virtual void AftHit(Controler hitter)
     {
 
     }

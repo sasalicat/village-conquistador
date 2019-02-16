@@ -5,6 +5,7 @@ using UnityEngine;
 public class mobile_fsyn_manager_local : fsynManager_local {
 
     public GameObject mainRole;
+
     private void sameAsPrafeb(GameObject newone,GameObject ItsPrafeb)
     {
         newone.transform.localPosition = ItsPrafeb.transform.position;
@@ -36,6 +37,7 @@ public class mobile_fsyn_manager_local : fsynManager_local {
             var ai = nowRole.AddComponent(System.Type.GetType(AIname));
             ((AI_fsyn)ai).onInit(controler);
         }
+        nowRole.AddComponent<Anim_Mobile>();
         nowRole.GetComponent<RoleState>().team = (sbyte)MAX_UNIT_NUM;
         enemyList[rno] = nowRole;
         controler.edata = info;
@@ -50,15 +52,22 @@ public class mobile_fsyn_manager_local : fsynManager_local {
         Debug.Log("創建了主要角色");
         Debug.Log("pTable:" + pTable);
         GameObject newRole = Instantiate(pTable.roleBase, pos, transform.rotation);
-        GameObject hand_left= Instantiate(pTable.leftHands[skin.leftHandNo],newRole.transform);
+        /*GameObject hand_left= Instantiate(pTable.leftHands[skin.leftHandNo],newRole.transform);
         sameAsPrafeb(hand_left, pTable.leftHands[skin.leftHandNo]);
         hand_left.SetActive(false);
-        hand_left.name = "left";
-
-        GameObject right_hand = Instantiate(pTable.rightHands[skin.rightHandNo],newRole.transform);
+        hand_left.name = "左手";*/
+        GameObject hand_left = newRole.transform.Find("左手").gameObject;
+        sameAsPrafeb(hand_left, pTable.leftHands[skin.leftHandNo]);
+        hand_left.GetComponent<Animator>().runtimeAnimatorController = pTable.leftHands[skin.leftHandNo].GetComponent<Animator>().runtimeAnimatorController;
+        hand_left.SetActive(false);
+        /*GameObject right_hand = Instantiate(pTable.rightHands[skin.rightHandNo],newRole.transform);
         sameAsPrafeb(right_hand, pTable.rightHands[skin.rightHandNo]);
         right_hand.SetActive(false);
-        right_hand.name = "right";
+        right_hand.name = "右手";*/
+        GameObject hand_right = newRole.transform.Find("右手").gameObject;
+        sameAsPrafeb(hand_right, pTable.rightHands[skin.rightHandNo]);
+        hand_right.GetComponent<Animator>().runtimeAnimatorController = pTable.rightHands[skin.rightHandNo].GetComponent<Animator>().runtimeAnimatorController;
+        hand_right.SetActive(false);
 
         GameObject face = Instantiate(pTable.faces[skin.faceNo], newRole.transform);
         sameAsPrafeb(face, pTable.faces[skin.faceNo]);
@@ -174,6 +183,7 @@ public class mobile_fsyn_manager_local : fsynManager_local {
             case CodeTable.FRAME_END:
                 {
                     controler.move(SINGLE_FRAME_TIME);
+                    onFrameUpdateEnd(SINGLE_FRAME_TIME);
                     break;
                 }
             case CodeTable.SET_MOUSE_POS:

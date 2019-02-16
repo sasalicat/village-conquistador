@@ -103,4 +103,5 @@ public interface Controler
     void addBuffByNo(sbyte no);
     void distortionByNo(sbyte no);
     bool equipmentReady(sbyte eindex);
+    void beShift(Vector3 speed,float time);
 }

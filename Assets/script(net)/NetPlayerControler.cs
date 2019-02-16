@@ -977,4 +977,8 @@ public class NetPlayerControler : MonoBehaviour,KBControler {
             synchroPos();
         }
     }
+    public void beShift(Vector3 speed, float time)
+    {
+        throw new NotImplementedException();
+    }
 }

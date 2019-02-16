@@ -15,7 +15,7 @@ public class mis_nq_buff : Buff
     }
 
 
-    public override bool onInit(RoleState role, Buff[] Repetitive,MissileTable misTable)
+    public override bool onInit(RoleState role, Buff[] Repetitive,MissileTable misTable, Dictionary<string, object> args)
     {
         if (Repetitive == null)
         {

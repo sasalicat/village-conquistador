@@ -23,7 +23,7 @@ public class buff_tear_wound : Buff
         if(d.kind==damage.PHY_DAMAGE)
             d.num = ((int)(d.num * (1 + layer * 0.1f)));
     }
-    public override bool onInit(RoleState role, Buff[] Repetitive, MissileTable misTable)
+    public override bool onInit(RoleState role, Buff[] Repetitive, MissileTable misTable, Dictionary<string, object> args)
     {
         if (Repetitive != null)
         {

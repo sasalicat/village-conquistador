@@ -16,6 +16,7 @@ public class fsynControler : MonoBehaviour, KBControler
     protected NetRoleState state;
     protected System.Random random;
     protected AnimatorTable anim;
+    protected PhyCenter phy;
     protected bool lefting=false;
     protected bool uping = false;
     protected bool righting = false;
@@ -318,7 +319,8 @@ public class fsynControler : MonoBehaviour, KBControler
         float parcent = ((float)state.nowHp) / ((float)state.maxHp);
         changeArg["Percent"] = parcent;
         changeArg["NowHp"] = state.nowHp;
-        on_Hp_change(changeArg);
+        if(on_Hp_change !=null)
+            on_Hp_change(changeArg);
     }
     // Use this for initialization
     void Start()
@@ -488,10 +490,12 @@ public class fsynControler : MonoBehaviour, KBControler
             }
         }
         state.realHurt(damage);
-        after_take_damage(Args);
+        if(after_take_damage != null)
+            after_take_damage(Args);
         if (damage.stiffTime > 0)
         {
-            Be_Interrupt(new Dictionary<string, object>());
+            if(Be_Interrupt!=null)
+                Be_Interrupt(new Dictionary<string, object>());
         }
         //触发血量变动事件
         HpChangeHappen();
@@ -699,5 +703,13 @@ public class fsynControler : MonoBehaviour, KBControler
                     break;
                 }
         }
+    }
+    public void beShift(Vector3 speed, float time)
+    {
+        phy.startprocess(speed, time);
+    }
+    public void beShift(Vector3 speed, float time,PhyCenter.moveEnd callback)
+    {
+        phy.startprocess(speed, time,callback);
     }
 }

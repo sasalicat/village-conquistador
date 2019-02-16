@@ -577,4 +577,8 @@ public class trainingControler : MonoBehaviour,Controler {
             //string typeName = controtions.dataNames[no];
         }
     }
+    public void beShift(Vector3 speed, float time)
+    {
+        throw new NotImplementedException();
+    }
 }

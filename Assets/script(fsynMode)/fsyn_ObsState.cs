@@ -724,4 +724,8 @@ public class fsyn_ObsState : RoleState,Controler {
     {
         return false;
     }
+    public void beShift(Vector3 speed, float time)
+    {
+        throw new NotImplementedException();
+    }
 }

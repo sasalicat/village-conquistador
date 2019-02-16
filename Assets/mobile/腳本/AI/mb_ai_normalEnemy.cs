@@ -51,20 +51,20 @@ public class mb_ai_normalEnemy : MonoBehaviour, AI_fsyn
         else
         {
             control.wantMove = false;
-            Debug.Log("距離達到");
+            //Debug.Log("距離達到");
             virtualArg["MousePosition"] = traget.transform.position;
             virtualArg["PlayerPosition"] = control.transform.position;
             virtualArg["randomPoint"] = control.random.Next(0, 99);
             virtualArg["Traget"] = traget;
             virtualArg["TragetPosition"] = traget.transform.position;
-            print("e has " + elist.nowHarness.passiveEquipments.Count + "equipment");
+            //print("e has " + elist.nowHarness.passiveEquipments.Count + "equipment");
             foreach (CDEquipment e in elist.nowHarness.passiveEquipments)
             {
 
-                print("time left" + e.TimeLeft);
+                //print("time left" + e.TimeLeft);
                 if (e.CanUse)
                 {
-                    Debug.Log(e+"被觸發!");
+                    //Debug.Log(e+"被觸發!");
                     e.trigger(virtualArg);
                 }
             }

@@ -323,4 +323,8 @@ public class ObstacleState : RoleState,Controler {//相当于控制器和State�
     {
         return false;
     }
+    public void beShift(Vector3 speed, float time)
+    {
+        throw new NotImplementedException();
+    }
 }

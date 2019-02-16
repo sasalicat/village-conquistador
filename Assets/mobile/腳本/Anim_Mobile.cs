@@ -17,7 +17,8 @@ public class Anim_Mobile : AnimatorTable{
     public const int EXPR_ANGLE = 2;
 
     public const int ACTION_NORMAL = 0;
-    public const int ACTION_THROW = 1;
+    public const int ACTION_STIFF = 1;
+    public const int ACTION_THROW = 2;
     public const int ACTION_ATTACK = -1;
     public Animator lefthand;
     public Animator righthand;
@@ -28,6 +29,7 @@ public class Anim_Mobile : AnimatorTable{
     public withNone onActionEnd;
     public weapon_Anim weaponAnim;
 
+    public float stiffTime = 0;
 
     // Use this for initialization
     public void changeToL1()
@@ -70,8 +72,16 @@ public class Anim_Mobile : AnimatorTable{
         animator.SetInteger("actionNo",actionNo);
         Debug.Log("actionEnd");
     }
+    public void action(int actionNo)
+    {
+        switchWeaponFalse();
+        animator.SetInteger("actionNo", actionNo);
+        
+        //Debug.Log("actionEnd");
+    }
     public void actionEnd()
     {
+        switchWeaponTrue();
         animator.SetInteger("actionNo",0);
         if (onActionEnd != null)
         {
@@ -84,7 +94,19 @@ public class Anim_Mobile : AnimatorTable{
         eyes.SetInteger("exprNo", exprNo);
         mouse.SetInteger("exprNo", exprNo);
     }
-    public void switchWeapon(bool active)
+    public void switchWeaponFalse()
+    {
+        weapon.gameObject.SetActive(false);
+        lefthand.gameObject.SetActive(true);
+        righthand.gameObject.SetActive(true);
+    }
+    public void switchWeaponTrue()
+    {
+        weapon.gameObject.SetActive(true);
+        lefthand.gameObject.SetActive(false);
+        righthand.gameObject.SetActive(false);
+    }
+    private void switchWeapon(bool active)
     {
         weapon.gameObject.SetActive(active);
         lefthand.gameObject.SetActive(!active);
@@ -127,10 +149,43 @@ public class Anim_Mobile : AnimatorTable{
             onActionEnd = null;
         }
     }
+
+    public override void StiffStart()
+    {
+        Debug.Log("stiff 開始!!! 我是:"+name);
+        if (weapon.gameObject.active)
+        {
+            switchWeapon(false);
+        }
+        //damage d= (damage)args["Damage"];
+        //Timer.main.logInTimer(checkStiff);//計時把表情切回來
+        expression(1);//痛苦的表情
+        animator.SetInteger("actionNo", ACTION_STIFF);
+        //stiffTime = d.stiffTime;
+    }
+    public override void StiffEnd()
+    {
+        if (!weapon.gameObject.active)
+        {
+            switchWeapon(true);
+        }
+        Debug.Log("stiff 結束... 我是:" + name);
+        expression(0);
+        animator.SetInteger("actionNo", ACTION_NORMAL);
+    }
+    public void checkStiff(float time)
+    {
+        if (stiffTime <= 0) {
+            expression(0);
+        }
+        Timer.main.loginOutTimer(checkStiff);
+    }   
     protected override void Start()
     {
-        lefthand = transform.Find("left").GetComponent<Animator>();
-        righthand = transform.Find("right").GetComponent<Animator>();
+        base.Start();
+        Debug.Log(name+"de左手為:" + transform.Find("左手"));
+        lefthand = transform.Find("左手").GetComponent<Animator>();
+        righthand = transform.Find("右手").GetComponent<Animator>();
         face = transform.Find("face").GetComponent<Animator>();
         mouse = face.transform.Find("mouse").GetComponent<Animator>();
         
@@ -138,5 +193,8 @@ public class Anim_Mobile : AnimatorTable{
         weapon = transform.Find("weapon").GetComponent<Animator>();
         animator = GetComponent<Animator>();
         weaponAnim = weapon.GetComponent<weapon_Anim>();
+        //KBControler controler = GetComponent<KBControler>();
+        //controler.After_take_damage += StiffStart;
     }
+
 }

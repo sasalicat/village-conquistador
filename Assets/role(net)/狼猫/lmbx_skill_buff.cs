@@ -16,7 +16,7 @@ public class lmbx_skill_buff : Buff
     }
 
 
-    public override bool onInit(RoleState role, Buff[] Repetitive, MissileTable mis)
+    public override bool onInit(RoleState role, Buff[] Repetitive, MissileTable mis, Dictionary<string, object> args)
     {
         moonToken = Instantiate(mis.MissileList[43],role.transform);
         moonToken.transform.localPosition = new Vector3(0, 1.25f, 0);

@@ -75,7 +75,7 @@ public class turnTable : MonoBehaviour {
                         mobileListener.main.onSkillButtomDown(BUTTOM_CODE[i]);
                     }
                 }
-                Debug.Log("當前角度為:" + angle);
+                //Debug.Log("當前角度為:" + angle);
             }
             
 

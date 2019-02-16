@@ -14,7 +14,7 @@ public class buffForTask : Buff
     }
 
 
-    public override bool onInit(RoleState role, Buff[] Repetitive,MissileTable mis)
+    public override bool onInit(RoleState role, Buff[] Repetitive,MissileTable mis, Dictionary<string, object> args)
     {
         Debug.Log("buffForTask onInit");
         if (Repetitive == null)

@@ -763,4 +763,8 @@ public class NetControler : MonoBehaviour,KBControler{
             action.moveEnd();
         }
     }
+    public void beShift(Vector3 speed, float time)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -629,5 +629,8 @@ public class enemyControler : MonoBehaviour,KBControler {
             //string typeName = controtions.dataNames[no];
         }
     }
-
+    public void beShift(Vector3 speed, float time)
+    {
+        throw new NotImplementedException();
+    }
 }

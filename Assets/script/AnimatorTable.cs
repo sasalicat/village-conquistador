@@ -67,19 +67,19 @@ public class AnimatorTable : MonoBehaviour {
     {
         animator.SetBool("skill", false);
     }
-    public void StiffStart()
+    public virtual void StiffStart()
     {
         animator.SetBool("stiff",true);
     }
-    public void StiffEnd()
+    public virtual void StiffEnd()
     {
         animator.SetBool("stiff", false);
     }
-    public void ConverselyStart()
+    public virtual void ConverselyStart()
     {
         animator.SetBool("conversely", true);
     }
-    public void ConverselyEnd()
+    public virtual void ConverselyEnd()
     {
         animator.SetBool("conversely", false);
     }

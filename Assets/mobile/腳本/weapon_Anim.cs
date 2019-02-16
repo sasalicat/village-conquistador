@@ -21,7 +21,7 @@ public class weapon_Anim : MonoBehaviour {
     }
 
     public void setHand(int no) {
-        Debug.Log("設置手被呼叫:" + no);
+        //Debug.Log("設置手被呼叫:" + no);
         if (no < 3)
         {
             lefthand.SetInteger("handNo", no);

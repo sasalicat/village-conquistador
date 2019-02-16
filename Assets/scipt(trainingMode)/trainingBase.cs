@@ -450,5 +450,11 @@ public class trainingBase : MonoBehaviour,Controler {
             }
         }
     }
+
+
+    public void  beShift(Vector3 speed, float time)
+    {
+        throw new NotImplementedException();
+    }
 }
 

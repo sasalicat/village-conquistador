@@ -14,7 +14,7 @@ public class mis_bx_buff : Buff
     }
 
 
-    public override bool onInit(RoleState role, Buff[] Repetitive, MissileTable mis)
+    public override bool onInit(RoleState role, Buff[] Repetitive, MissileTable mis, Dictionary<string, object> args)
     {
         Debug.Log("buffForTask onInit");
 

@@ -9,6 +9,8 @@ public abstract class PostOffice:MonoBehaviour  {
     private float frameTimeLeft=0;
     public abstract void addOrder(Dictionary<string, object> order);
     public Empty beforeFrameEnd;
+    private int counter = 0;
+    private System.Diagnostics.Stopwatch now_watch = null;
     protected void OnEnable()
     {
         frameTimeLeft = cycleTime;
@@ -29,11 +31,19 @@ public abstract class PostOffice:MonoBehaviour  {
         //Debug.Log("in post office update:"+frameTimeLeft);
         if (frameTimeLeft <= 0)
         {
+            if (now_watch != null)
+            {
+                now_watch.Stop();
+                //Debug.Log("第"+counter+"幀 實際耗時:"+now_watch.Elapsed.TotalMilliseconds+"毫秒");
+            }
             //Debug.Log("send");
             if(beforeFrameEnd!=null)
                 beforeFrameEnd();
             updateFrame();
             frameTimeLeft = cycleTime;
+            now_watch = new System.Diagnostics.Stopwatch();
+            now_watch.Start();
+            counter++;
         }
        
     }
