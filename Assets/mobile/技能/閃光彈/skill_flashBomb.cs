@@ -13,7 +13,7 @@ public class skill_flashBomb : add_skill_accum {
     float time = 0;
     protected Vector3 misLocalPos = new Vector3(0, -1, 0);
     private GameObject phantom = null;
-    private
+    
     public override float AccumTime
     {
         get
@@ -84,7 +84,7 @@ public class skill_flashBomb : add_skill_accum {
         newone.transform.Rotate(new Vector3(0, 0, 90));
         newone.transform.localScale = new Vector2(1.2f, 1.2f);
         phantom = newone;
-        GameObject 
+        //GameObject 
     }
 
 }

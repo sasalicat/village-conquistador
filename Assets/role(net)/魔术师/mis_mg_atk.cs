@@ -15,6 +15,10 @@ public class mis_mg_atk :addibleMissile{
         vspeed = new Vector3(0, -Speed, 0);
         Timer.main.logInTimer(onMisUpdate);
     }
+    void Update()
+    {
+        onMisUpdate(Time.deltaTime);
+    }
     public void onMisUpdate(float time)
     {
         //Debug.Log("up is:"+transform.up);

@@ -25,6 +25,7 @@ public class mis_flameWave : Missile
     void OnTriggerEnter2D(Collider2D other)
     {
         RoleState role = other.gameObject.GetComponent<RoleState>();
+        Debug.LogWarning("name:" + other.name + "role:" + role + " creater name:"+Creater+"creater:"+ Creater.GetComponent<RoleState>());
         if (role.team != Creater.GetComponent<RoleState>().team)
         {
             role.TakeDamage(Damage);

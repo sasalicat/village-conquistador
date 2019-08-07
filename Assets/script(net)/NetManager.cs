@@ -82,7 +82,7 @@ public class NetManager : MonoBehaviour ,Manager {
             if (register.PlayerInWar[i] != null)//在這裡生成角色對應的gameobj
             {
                 int roleNo=register.PlayerInWar[i].role.roleKind;
-                Debug.Log("在NetManager Start i:"+i+"创建obj种类:"+roleNo);
+                Debug.LogWarning("在NetManager Start i:"+i+"创建obj种类:"+roleNo);
                 objList[i] =  (GameObject)Instantiate(prafebTable.table[roleNo], new Vector3(0,0,0),transform.rotation);
                 
 
@@ -203,8 +203,8 @@ public class NetManager : MonoBehaviour ,Manager {
 
                         NetControler control = objList[i].AddComponent<NetControler>();
                         objList[i].AddComponent<NetRoleState>();
-                        objList[i].GetComponent<EquipmentList>().controler = control;
-                        objList[i].GetComponent<EquipmentList>().AddEquipments();
+                        //objList[i].GetComponent<EquipmentList>().controler = control;
+                       // objList[i].GetComponent<EquipmentList>().AddEquipments();
                         elist.controler = control;
                         control.entity = e;
 
@@ -216,6 +216,7 @@ public class NetManager : MonoBehaviour ,Manager {
                         objList[i].GetComponent<NetRoleState>().control = control;
                         objList[i].GetComponent<NetRoleState>().islocal = false;
                     }
+
 
                     //orList[i] = new ObjAndRoomNo((sbyte)i,objList[i]); 
                     objList[i].GetComponent<NetRoleState>().roomNo = (sbyte)i;
@@ -232,7 +233,10 @@ public class NetManager : MonoBehaviour ,Manager {
                         ((Player)KBEngineApp.app.player()).baseCall("notifyFinish", new object[] { });
                     }
                     // Label.text = "elist control is:" + elist.controler.ToString();
-                    //elist.AddEquipments();
+                    for(int idx=0;idx<register.PlayerInWar.Length;idx++)
+                        Debug.LogWarning("PlayerInWar 索引值" + idx+":"+register.PlayerInWar[idx]);
+                    elist.Init();
+                    elist.AddEquipments();
                     //Label.text = "after add";
                     break;
                 }

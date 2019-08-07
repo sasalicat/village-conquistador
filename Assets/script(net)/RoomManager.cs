@@ -57,8 +57,8 @@ public class RoomManager : MonoBehaviour {
            // Debug.Log("item type is" + ((List<System.Object>)account.RoomInitData["list"])[0].GetType());
             List<System.Object> dataList = (List<System.Object>)account.RoomInitData["list"];
             selfRoomId = (sbyte)account.RoomInitData["selfRoomId"];
-           // Debug.Log("Yours own room id is:" + selfRoomId+"list length is"+dataList.Count);
-
+            // Debug.Log("Yours own room id is:" + selfRoomId+"list length is"+dataList.Count);
+            Debug.LogWarning("RoomInitData != null");
 
             for (int i = 0; i < dataList.Count; i++) {
                 Dictionary<string, object> data = (Dictionary<string, object>)dataList[i];
@@ -75,6 +75,7 @@ public class RoomManager : MonoBehaviour {
                 {
                     newlist.Add((sbyte)elist[index]);
                 }
+                Debug.LogWarning("register.PlayerInWar roleRoomId:" + (sbyte)data["roleRoomId"]);
                 register.PlayerInWar[(sbyte)data["roleRoomId"]] = new dataRegister.PlayerData((sbyte)data["roleKind"],newlist,(string)data["name"],selfRoomId== (sbyte)data["roleRoomId"],(sbyte)data["team"]);
                 //Debug.Log("player"+ (string)data["name"]);
 

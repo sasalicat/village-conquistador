@@ -81,6 +81,7 @@
         //房间内的函数
         public void InitRoomInfo(Dictionary<string,object> info)
         {
+            Debug.LogWarning("init room info!!!");
             this.RoomInitData = info;
         }
         public void UpdateRoomInfo(Dictionary<string, object> info)
@@ -89,6 +90,7 @@
         }
         public void AddARoomInfo(Dictionary<string, object> info)//由于python不能overload的悲剧产物
         {
+            Debug.LogWarning("add room info!!!");
             this.RoomChangeList.Add(info);
         }
         public void changeToWar()

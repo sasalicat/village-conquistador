@@ -130,16 +130,20 @@ public class EquipmentList : MonoBehaviour {
         origin = null;
 
     }
-    public void Start()
+    public void Init()
     {
         Debug.Log("in elist find:" + GameObject.Find("keyTabel"));
         table = GameObject.Find("keyTabel").GetComponent<EquipmentTable>();
         register = GameObject.Find("client").GetComponent<dataRegister>();
-        if(nowHarness==null)
+        if (nowHarness == null)
             nowHarness = new ArmedHarness(this);
-        misTable= GameObject.Find("keyTabel").GetComponent<MissileTable>();
+        misTable = GameObject.Find("keyTabel").GetComponent<MissileTable>();
         state = GetComponent<RoleState>();
-        anim =GetComponent<AnimatorTable>();
+        anim = GetComponent<AnimatorTable>();
+    }
+    public void Start()
+    {
+        Debug.LogWarning("EquipmentList Start()被呼叫");
         //text = GameObject.Find("Canvas/Text").GetComponent<Text>();
         //AddEquipments();
         //text.text = "完成start";
@@ -166,6 +170,7 @@ public class EquipmentList : MonoBehaviour {
         //text.text = "Player is:"+ controler.Entity.ToString();
         Debug.Log("空的" + controler);
         int selfNo = controler.Index;
+        Debug.LogWarning("register:" + register);
         List<sbyte> eList = register.PlayerInWar[selfNo].role.equipmentIdList;
         while (eList.Count > 0)
         {
